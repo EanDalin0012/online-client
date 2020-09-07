@@ -15,6 +15,7 @@ import { UserMng4200Component } from './user-mng4200/user-mng4200.component';
 import { UserMng5200Component } from './user-mng5200/user-mng5200.component';
 import { UserMng5100Component } from './user-mng5100/user-mng5100.component';
 import { UserMng5000Component } from './user-mng5000/user-mng5000.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 
 
@@ -34,7 +35,7 @@ import { UserMng5000Component } from './user-mng5000/user-mng5000.component';
     UserMng4200Component, 
     UserMng5200Component, 
     UserMng5100Component, 
-    UserMng5000Component
+    UserMng5000Component, UserManagementComponent
   ],
   imports: [
     CommonModule
