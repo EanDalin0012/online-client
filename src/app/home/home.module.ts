@@ -17,7 +17,7 @@ import { HomeComponent } from './home/home.component';
     Home1200Component, 
     Home2000Component, 
     Home2100Component, 
-    Home2200Component, HomeComponent
+    Home2200Component
   ],
   imports: [
     CommonModule

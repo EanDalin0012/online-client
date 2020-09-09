@@ -1,41 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserMng1000Component } from './user-mng1000/user-mng1000.component';
-import { UserMng1100Component } from './user-mng1100/user-mng1100.component';
-import { UserMng1200Component } from './user-mng1200/user-mng1200.component';
-import { UserMng2000Component } from './user-mng2000/user-mng2000.component';
-import { UserMng2100Component } from './user-mng2100/user-mng2100.component';
-import { UserMng2200Component } from './user-mng2200/user-mng2200.component';
-import { UserMng3200Component } from './user-mng3200/user-mng3200.component';
-import { UserMng3100Component } from './user-mng3100/user-mng3100.component';
-import { UserMng3000Component } from './user-mng3000/user-mng3000.component';
-import { UserMng4000Component } from './user-mng4000/user-mng4000.component';
-import { UserMng4100Component } from './user-mng4100/user-mng4100.component';
-import { UserMng4200Component } from './user-mng4200/user-mng4200.component';
-import { UserMng5200Component } from './user-mng5200/user-mng5200.component';
-import { UserMng5100Component } from './user-mng5100/user-mng5100.component';
-import { UserMng5000Component } from './user-mng5000/user-mng5000.component';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { UserMngAccComponent } from './user-mng-acc/user-mng-acc.component';
+import { UserMngAccEditComponent } from './user-mng-acc-edit/user-mng-acc-edit.component';
+import { UserMngUserInfoComponent } from './user-mng-user-info/user-mng-user-info.component';
+import { UserMngUserInfoEditComponent } from './user-mng-user-info-edit/user-mng-user-info-edit.component';
+import { UserMngUserInfoAddComponent } from './user-mng-user-info-add/user-mng-user-info-add.component';
+import { UserMngUserRoleComponent } from './user-mng-user-role/user-mng-user-role.component';
+import { UserMngUserRoleAddComponent } from './user-mng-user-role-add/user-mng-user-role-add.component';
+import { UserMngUserRoleEditComponent } from './user-mng-user-role-edit/user-mng-user-role-edit.component';
+import { UserMngAuthComponent } from './user-mng-auth/user-mng-auth.component';
+import { UserMngAuthAddComponent } from './user-mng-auth-add/user-mng-auth-add.component';
+import { UserMngAuthEditComponent } from './user-mng-auth-edit/user-mng-auth-edit.component';
+import { UserMngAuthRoleComponent } from './user-mng-auth-role/user-mng-auth-role.component';
 
 
 
 @NgModule({
   declarations: [
-    UserMng1000Component, 
-    UserMng1100Component, 
-    UserMng1200Component, 
-    UserMng2000Component, 
-    UserMng2100Component, 
-    UserMng2200Component, 
-    UserMng3200Component, 
-    UserMng3100Component, 
-    UserMng3000Component,
-    UserMng4000Component, 
-    UserMng4100Component, 
-    UserMng4200Component, 
-    UserMng5200Component, 
-    UserMng5100Component, 
-    UserMng5000Component, UserManagementComponent
+   UserManagementComponent,
+   UserMngAccComponent,
+   UserMngAccEditComponent,
+   UserMngUserInfoComponent,
+   UserMngUserInfoEditComponent,
+   UserMngUserInfoAddComponent,
+   UserMngUserRoleComponent,
+   UserMngUserRoleAddComponent,
+   UserMngUserRoleEditComponent,
+   UserMngAuthComponent,
+   UserMngAuthAddComponent,
+   UserMngAuthEditComponent,
+   UserMngAuthRoleComponent,
   ],
   imports: [
     CommonModule
