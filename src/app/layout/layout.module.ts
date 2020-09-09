@@ -10,7 +10,6 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
-    LayoutBlankComponent,
     HeaderComponent,
     FooterComponent,
     SettingsComponent,
@@ -18,6 +17,12 @@ import { SideNavComponent } from './side-nav/side-nav.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    SettingsComponent,
+    SideNavComponent
   ]
 })
 export class LayoutModule { }

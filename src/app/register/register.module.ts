@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegiComponent } from './regi/regi.component';
 import { RegiCateComponent } from './regi-cate/regi-cate.component';
 import { RegiCateAddComponent } from './regi-cate-add/regi-cate-add.component';
 import { RegiCateEditComponent } from './regi-cate-edit/regi-cate-edit.component';
@@ -18,7 +17,6 @@ import { RegiCustEditComponent } from './regi-cust-edit/regi-cust-edit.component
 
 @NgModule({
   declarations: [
-    RegiComponent,
     RegiCateComponent,
     RegiCateAddComponent,
     RegiCateEditComponent,

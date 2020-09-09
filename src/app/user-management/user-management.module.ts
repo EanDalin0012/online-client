@@ -18,7 +18,6 @@ import { UserMngAuthRoleComponent } from './user-mng-auth-role/user-mng-auth-rol
 
 @NgModule({
   declarations: [
-   UserManagementComponent,
    UserMngAccComponent,
    UserMngAccEditComponent,
    UserMngUserInfoComponent,

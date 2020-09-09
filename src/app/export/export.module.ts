@@ -5,7 +5,9 @@ import { ExportComponent } from './export/export.component';
 
 
 @NgModule({
-  declarations: [ExportComponent],
+  declarations: [
+    
+  ],
   imports: [
     CommonModule
   ]
