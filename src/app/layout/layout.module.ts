@@ -25,4 +25,4 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     SideNavComponent
   ]
 })
-export class LayoutModule { }
+export class MLayoutModule { }

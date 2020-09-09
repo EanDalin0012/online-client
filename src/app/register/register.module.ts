@@ -12,6 +12,7 @@ import { RegiVenEditComponent } from './regi-ven-edit/regi-ven-edit.component';
 import { RegiCustComponent } from './regi-cust/regi-cust.component';
 import { RegiCustAddComponent } from './regi-cust-add/regi-cust-add.component';
 import { RegiCustEditComponent } from './regi-cust-edit/regi-cust-edit.component';
+import { MShareModule } from '../share/mshare/mshare.module';
 
 
 
@@ -32,7 +33,7 @@ import { RegiCustEditComponent } from './regi-cust-edit/regi-cust-edit.component
   
   ],
   imports: [
-    CommonModule
+    MShareModule
   ]
 })
 export class RegisterModule { }

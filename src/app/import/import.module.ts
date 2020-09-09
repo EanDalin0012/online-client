@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImportProdComponent } from './import-prod/import-prod.component';
+import { MShareModule } from '../share/mshare/mshare.module';
 
 
 
@@ -9,7 +10,7 @@ import { ImportProdComponent } from './import-prod/import-prod.component';
     ImportProdComponent
   ],
   imports: [
-    CommonModule
+    MShareModule
   ]
 })
 export class ImportModule { }

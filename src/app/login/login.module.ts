@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { Login1000Component } from './login1000/login1000.component';
 import { LoginRoutingModule } from './login-routing.module';
+import { MShareModule } from '../share/mshare/mshare.module';
 
 
 
@@ -12,7 +13,8 @@ import { LoginRoutingModule } from './login-routing.module';
     Login1000Component],
   imports: [
     CommonModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    MShareModule
   ]
 })
 export class LoginModule { }
