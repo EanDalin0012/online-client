@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
   }
 
   onClickLogin() {
-    if(this.rememberMe === true) {
+    if(this.rememberMe) {
       Utils.setSecureStorage('UserID', this.userName)
     }
 
@@ -83,6 +83,16 @@ export class LoginComponent implements OnInit {
 
   toggleVisibility(e){
     alert(e.target.checked);
+  }
+
+  remember() {
+    this.rememberMe = !this.rememberMe;
+    console.log(this.rememberMe);
+    Utils.setSecureStorage('rememberMe', this.rememberMe);
+    Utils.removeSecureStorage('UserID');
+    if(this.rememberMe) {
+      Utils.setSecureStorage('UserID', this.userName)
+    }
   }
 
 }

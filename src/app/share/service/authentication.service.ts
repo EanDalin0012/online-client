@@ -69,8 +69,9 @@ export class AuthentcatiionService {
         if(_authorization.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
           Utils.setSecureStorage(LOCAL_STORAGE.Authorization, _authorization);
-              this.dataService.requestUserInfo(auth.username).then(_response =>{
+          this.dataService.requestUserInfo(auth.username).then(_response =>{
               Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, _response);
+              console.log(_response);
               this.router.navigate(['/main/home']);
           }); 
       }
