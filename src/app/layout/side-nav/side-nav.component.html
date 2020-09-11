@@ -168,6 +168,12 @@
                             <li (click)="onOpenPage('User1000')">
                                 <a [ngClass]="{current: path == 'user-account'}"><i class="fa fa-circle-o"></i>User Account</a>
                             </li>
+                            <li (click)="onOpenPage('User1000')">
+                                <a [ngClass]="{current: path == 'user-account'}"><i class="fa fa-circle-o"></i>User Role</a>
+                            </li>
+                            <li (click)="onOpenPage('User1000')">
+                                <a [ngClass]="{current: path == 'user-account'}"><i class="fa fa-circle-o"></i>Assign User Role</a>
+                            </li>
                         </ul>
 
                     </li>
@@ -215,41 +221,7 @@
                     <li><a href="pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-share"></i> <span>Multilevel</span>
-                    <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                    <li class="treeview">
 
-                        <a href="#"><i class="fa fa-circle-o"></i> Level One
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                            <li class="treeview">
-                                <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Setting</a></li>
-                </ul>
-            </li>
             <li class="treeview" [ngClass]="[class === 'RegisterUser' ? 'active': 'active111111']">
                 <a href="#">
                     <i class="fa fa-table"></i>

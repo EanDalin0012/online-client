@@ -12,16 +12,13 @@ declare var $;
 })
 export class LoginComponent implements OnInit {
 
-  userName: string;
+  user_name: string;
   password: string;
-  rememberMe: boolean = false;
-  theCheckbox= false;
-  accountLocked =true;
+  remember_me: boolean = false;
+
   @ViewChild('passwordElement') passwordElement: ElementRef;
 
   constructor(
-    private router: Router,
-    private serverService: ServerService,
     private authentcatiionService: AuthentcatiionService
   ) {
   }
@@ -35,9 +32,9 @@ export class LoginComponent implements OnInit {
         increaseArea: '20%' /* optional */
       });
     });
-    this.rememberMe = Utils.getSecureStorage('rememberMe');
-    if(this.rememberMe === true) {
-      this.userName = Utils.getSecureStorage('UserID');
+    this.remember_me = Utils.getSecureStorage('rememberMe');
+    if(this.remember_me === true) {
+      this.user_name = Utils.getSecureStorage('UserID');
     }
   }
 
@@ -46,21 +43,21 @@ export class LoginComponent implements OnInit {
   }
 
   onClickLogin() {
-    if(this.rememberMe) {
-      Utils.setSecureStorage('UserID', this.userName)
+    if(this.remember_me) {
+      Utils.setSecureStorage('UserID', this.user_name)
     }
 
     const authenticationObj: AuthentcatiionRequest = {
-      username: this.userName,
+      username: this.user_name,
       password: this.password
     };
     this.authentcatiionService.login(authenticationObj);
   }
 
   enterLoginHandler(event: any) {
-    if (event.keyCode === 13 && this.userName !== '' && this.password !== '') {
+    if (event.keyCode === 13 && this.user_name !== '' && this.password !== '') {
       this.onClickLogin();
-    } else if (event.keyCode === 13 && this.userName !== '') {
+    } else if (event.keyCode === 13 && this.user_name !== '') {
       this.passwordElement.nativeElement.focus();
     }
   }
@@ -74,10 +71,10 @@ export class LoginComponent implements OnInit {
   
   clickRememberMe() {
     alert();
-    console.log(this.userName);
-    if(this.userName !== '') {
-      Utils.setSecureStorage('rememberMe', this.rememberMe);
-      Utils.setSecureStorage('UserID', this.userName)
+    console.log(this.user_name);
+    if(this.user_name !== '') {
+      Utils.setSecureStorage('rememberMe', this.remember_me);
+      Utils.setSecureStorage('UserID', this.user_name)
     }
   }
 
@@ -86,12 +83,12 @@ export class LoginComponent implements OnInit {
   }
 
   remember() {
-    this.rememberMe = !this.rememberMe;
-    console.log(this.rememberMe);
-    Utils.setSecureStorage('rememberMe', this.rememberMe);
+    this.remember_me = !this.remember_me;
+    console.log(this.remember_me);
+    Utils.setSecureStorage('rememberMe', this.remember_me);
     Utils.removeSecureStorage('UserID');
-    if(this.rememberMe) {
-      Utils.setSecureStorage('UserID', this.userName)
+    if(this.remember_me) {
+      Utils.setSecureStorage('UserID', this.user_name)
     }
   }
 

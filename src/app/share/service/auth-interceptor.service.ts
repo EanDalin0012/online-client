@@ -1,8 +1,7 @@
-
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Injectable, NgZone } from '@angular/core';
-import { HttpErrorResponse, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse  } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse  } from '@angular/common/http';
 import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -12,7 +11,6 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/timeout';
 import * as $ from 'jquery';
 import { finalize } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 import { environment } from 'src/environments/environment';
 import { LOCAL_STORAGE, AES_INFO } from '../constants/common.const';
 import { ModalService } from './modal.service';
@@ -28,7 +26,6 @@ export class AuthInterceptor implements HttpInterceptor {
   private longtimeApis = ['MAN1006'];
 
  constructor(
-    private authService: AuthService,
     private translate: TranslateService,
     private router: Router,
     private zone: NgZone,
@@ -99,7 +96,7 @@ export class AuthInterceptor implements HttpInterceptor {
         $('div.loading').addClass('none') ;
       })
     )
-    .catch((error: HttpErrorResponse) => {
+    .catch((error) => {
       console.log('error', error);
 
       $('div.loading').addClass('none');
