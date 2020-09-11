@@ -13,6 +13,7 @@ import { RegiCustComponent } from './regi-cust/regi-cust.component';
 import { RegiCustAddComponent } from './regi-cust-add/regi-cust-add.component';
 import { RegiCustEditComponent } from './regi-cust-edit/regi-cust-edit.component';
 import { MShareModule } from '../share/mshare/mshare.module';
+import { RegisterRoutingModule } from './register-routing.module';
 
 
 
@@ -33,7 +34,8 @@ import { MShareModule } from '../share/mshare/mshare.module';
   
   ],
   imports: [
-    MShareModule
+    MShareModule,
+    RegisterRoutingModule
   ]
 })
 export class RegisterModule { }

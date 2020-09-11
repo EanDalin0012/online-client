@@ -13,6 +13,8 @@ import { UserMngAuthComponent } from './user-mng-auth/user-mng-auth.component';
 import { UserMngAuthAddComponent } from './user-mng-auth-add/user-mng-auth-add.component';
 import { UserMngAuthEditComponent } from './user-mng-auth-edit/user-mng-auth-edit.component';
 import { UserMngAuthRoleComponent } from './user-mng-auth-role/user-mng-auth-role.component';
+import { UserManagementRoutingModule } from './user-management-routing.module';
+import { MShareModule } from '../share/mshare/mshare.module';
 
 
 
@@ -32,7 +34,9 @@ import { UserMngAuthRoleComponent } from './user-mng-auth-role/user-mng-auth-rol
    UserMngAuthRoleComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    UserManagementRoutingModule,
+    MShareModule
   ]
 })
 export class UserManagementModule { }
