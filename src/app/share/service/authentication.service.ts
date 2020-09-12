@@ -59,7 +59,7 @@ export class AuthentcatiionService {
     const formData = new FormData();
     formData.append('client_id', 'spring-security-oauth2-read-write-client');
     formData.append('grant_type', 'password');
-    formData.append('user_name', auth.user_name);
+    formData.append('username', auth.user_name);
     formData.append('password', auth.password);
 
     this.httpClient.post(uri, formData, {

@@ -145,7 +145,7 @@ export class ServerService {
       this.httpClient.get(uri, {headers}).subscribe(rest => {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
-        resolve(rest)
+        resolve(rest);
       });
     });
   }

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserMngAccComponent } from './user-mng-acc/user-mng-acc.component';
 
 
 const routes: Routes = [
-  // {path: '', component: Home1000Component},
+  {path: '', component: UserMngAccComponent
+},
 ];
 
 @NgModule({
