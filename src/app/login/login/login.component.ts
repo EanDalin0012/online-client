@@ -55,21 +55,7 @@ export class LoginComponent implements OnInit {
       user_name: this.user_name,
       password: this.password
     };
-    this.authentcatiionService.login(authenticationObj).then(response =>{
-      const _authorization = response as any;
-      console.log('_authorization', _authorization);
-      if(_authorization.access_token) {
-      Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
-      Utils.setSecureStorage(LOCAL_STORAGE.Authorization, _authorization);
-      this.dataService.requestUserInfo(this.user_name).then(_response => {
-        if(_response) {
-          Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, _response);
-          this.router.navigate(['/main/home']);
-          console.log(_response);
-        }
-      }); 
-  }
-    });
+    this.authentcatiionService.login(authenticationObj);
   }
 
   enterLoginHandler(event: any) {

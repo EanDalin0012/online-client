@@ -68,7 +68,7 @@ export class SideNavComponent implements OnInit {
   }
   setVisitList(path: string) {
     // console.log(path);
-    // 일부 URL Path가 common.const의 값과 달라서 변환처리
+    // URL Path common.const
     switch (path) {
       case 'accountinquirydeposit':
         path = 'accountinquiry';

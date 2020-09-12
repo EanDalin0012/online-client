@@ -46,15 +46,6 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // const url = (window.location.href).split('/');
-    // console.log('url', url);
-  //  if (url[3] === 'singin') {
-  //    alert(1);
-  //     Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
-  //     Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
-  //   }
-
-    // tslint:disable-next-line:prefer-for-of
     for ( let idx = 0 ; idx < this.longtimeApis.length ; idx++ ) {
       if ( req.url.indexOf(this.longtimeApis[idx]) > 0 ){
         environment.production ? (() => '')() : console.log('timeout sec changed.');
