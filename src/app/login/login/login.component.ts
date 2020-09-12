@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
         increaseArea: '20%' /* optional */
       });
     });
-    this.remember_me = Utils.getSecureStorage('rememberMe');
+    this.remember_me = Utils.getSecureStorage('remember_me');
     if(this.remember_me === true) {
-      this.user_name = Utils.getSecureStorage('UserID');
+      this.user_name = Utils.getSecureStorage('user_id');
     }
   }
 
@@ -44,11 +44,11 @@ export class LoginComponent implements OnInit {
 
   onClickLogin() {
     if(this.remember_me) {
-      Utils.setSecureStorage('UserID', this.user_name)
+      Utils.setSecureStorage('user_id', this.user_name)
     }
 
     const authenticationObj: AuthentcatiionRequest = {
-      username: this.user_name,
+      user_name: this.user_name,
       password: this.password
     };
     this.authentcatiionService.login(authenticationObj);
@@ -70,25 +70,18 @@ export class LoginComponent implements OnInit {
   }
   
   clickRememberMe() {
-    alert();
-    console.log(this.user_name);
     if(this.user_name !== '') {
-      Utils.setSecureStorage('rememberMe', this.remember_me);
-      Utils.setSecureStorage('UserID', this.user_name)
+      Utils.setSecureStorage('remember_me', this.remember_me);
+      Utils.setSecureStorage('user_id', this.user_name)
     }
-  }
-
-  toggleVisibility(e){
-    alert(e.target.checked);
   }
 
   remember() {
     this.remember_me = !this.remember_me;
-    console.log(this.remember_me);
-    Utils.setSecureStorage('rememberMe', this.remember_me);
-    Utils.removeSecureStorage('UserID');
+    Utils.setSecureStorage('remember_me', this.remember_me);
+    Utils.removeSecureStorage('user_id');
     if(this.remember_me) {
-      Utils.setSecureStorage('UserID', this.user_name)
+      Utils.setSecureStorage('user_id', this.user_name)
     }
   }
 

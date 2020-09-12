@@ -26,7 +26,7 @@ export class AuthentcatiionService {
 
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
 
-    if(!auth.username || auth.username === null) {
+    if(!auth.user_name || auth.user_name === null) {
       this.modalService.alert({
         content: this.translate.instant('COMMON.MESSAGE.InValid_User_Name'),
         btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
@@ -41,7 +41,7 @@ export class AuthentcatiionService {
   
     if (!basicAuth) {
       credentail = {
-        Username: 'spring-security-oauth2-read-write-client',
+        User_name: 'spring-security-oauth2-read-write-client',
         password: 'spring-security-oauth2-read-write-client-password1234'
       };
     } else {
@@ -50,7 +50,7 @@ export class AuthentcatiionService {
 
     const api = '/oauth/token';
     const uri = this.bizserverUrl + api;
-    const btoa = 'Basic ' + window.btoa(credentail.Username + ':' + credentail.password);
+    const btoa = 'Basic ' + window.btoa(credentail.User_name + ':' + credentail.password);
 
     const httpOptionsObj = {
       "Authorization": btoa
@@ -59,7 +59,7 @@ export class AuthentcatiionService {
     const formData = new FormData();
     formData.append('client_id', 'spring-security-oauth2-read-write-client');
     formData.append('grant_type', 'password');
-    formData.append('username', auth.username);
+    formData.append('user_name', auth.user_name);
     formData.append('password', auth.password);
 
     this.httpClient.post(uri, formData, {
@@ -69,7 +69,7 @@ export class AuthentcatiionService {
         if(_authorization.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
           Utils.setSecureStorage(LOCAL_STORAGE.Authorization, _authorization);
-          this.dataService.requestUserInfo(auth.username).then(_response =>{
+          this.dataService.requestUserInfo(auth.user_name).then(_response =>{
               Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, _response);
               console.log(_response);
               this.router.navigate(['/main/home']);
@@ -81,13 +81,13 @@ export class AuthentcatiionService {
 
 
 export interface BasicAuth {
-  Username: string;
+  User_name: string;
   password: string;
 }
 
 export interface AuthentcatiionRequest {
   grant_type?: string;
-  username: string;
+  user_name: string;
   password: string;
   client_id?: string;
 }
