@@ -105,7 +105,7 @@ export class RequestDataService {
 
   requestUserInfo(user_name: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const api = '/api/user/load_user?user_name=admin';
+      const api = '/api/user/load_user';
       const obj = {
         'user_name': user_name
       }

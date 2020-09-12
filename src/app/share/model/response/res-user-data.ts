@@ -1,4 +1,4 @@
-import { UserInfo } from '../model/class-user-info';
+import { UserInfo } from '../model/user-info';
 
 class Body{
     

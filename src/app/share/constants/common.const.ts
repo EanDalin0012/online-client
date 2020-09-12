@@ -49,6 +49,10 @@ export enum BTN_ROLES {
     ACTIVE    = 'ACTIVE'
 
 }
+export enum Reponse_Status {
+  Y = 'Y',
+  N = 'N'
+}
 
 export enum LOCAL_STORAGE {
     DEVICE_INFO     = 'deviceInfo',

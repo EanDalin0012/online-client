@@ -29,7 +29,6 @@ export class ServerService {
     private router: Router,
     private translate: TranslateService
   ) {
-    // this.bizserverUrl = environment.bizMOBServer + '/bizmob.iocare/';
     this.bizserverUrl = environment.bizMOBServer;
   }
 

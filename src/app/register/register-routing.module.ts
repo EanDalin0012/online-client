@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { RegiCateComponent } from './regi-cate/regi-cate.component';
 
 
 const routes: Routes = [
-  // {path: '', component: Home1000Component},
+   {path: '', component: RegiCateComponent},
 ];
 
 @NgModule({

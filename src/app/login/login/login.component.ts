@@ -1,9 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthentcatiionRequest, AuthentcatiionService } from 'src/app/share/service/authentication.service';
-import { ServerService } from 'src/app/share/service/server.service';
 import { Utils } from 'src/app/share/utils/utils.static';
-import { LOCAL_STORAGE } from '../../share/constants/common.const';
 import { RequestDataService } from '../../share/service/get-data.service';
 declare var $;
 

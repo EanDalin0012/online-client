@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../../share/service/server.service';
-import { UserAccountRequest } from '../../share/model/request/classtr-req-user-account';
-import { UserAccountRespnonse } from '../../share/model/response/classtr-res-user-account';
+import { UserAccountRequest } from '../../share/model/request/req-user-account';
+import { UserAccountRespnonse } from '../../share/model/response/res-user-account';
 import { BTN_ROLES } from '../../share/constants/common.const';
 
 @Component({
