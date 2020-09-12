@@ -43,7 +43,7 @@ export class UserMngAccComponent implements OnInit {
   public selectedCallback = (args) => args.dataItem;
   public selectableSettings: SelectableSettings;
   public skip = 0;
-  public pageSize = 3;
+  public pageSize = 10;
   public mySelection: any[] = [];
   // end gride
 

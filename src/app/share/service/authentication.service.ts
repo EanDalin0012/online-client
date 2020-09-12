@@ -1,13 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ModalService } from './modal.service';
-import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
-import { RequestDataService } from './get-data.service';
-import { Utils } from '../utils/utils.static';
-import { LOCAL_STORAGE } from '../constants/common.const';
+import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as $ from 'jquery';
+import { environment } from '../../../environments/environment';
+import { ModalService } from './modal.service';
 
 @Injectable({
   providedIn: 'root'

@@ -80,7 +80,7 @@ export class ServerService {
             callback: _res => {
               Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
               Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
-              this.router.navigate(['/singin']);
+              this.router.navigate(['/login']);
             }
           });
           return;
@@ -91,7 +91,8 @@ export class ServerService {
           'Authorization': 'Bearer '+access_token
         };
         const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
-        const uri = this.bizserverUrl + api+'?user_id='+user_info.id;
+        const lang = Utils.getSecureStorage(localStorage.I18N);
+        const uri = this.bizserverUrl + api+'?userId='+user_info.id +'&lang='+lang;
         this.data = this.httpClient.post(uri, JSON.stringify(TrClass), {
           headers: new HttpHeaders(httpOptionsObj)
         }).subscribe(
@@ -121,29 +122,28 @@ export class ServerService {
 
   public HTTPget(api, obj?: any): Promise<any> {
     return new Promise((resolve, reject) =>{
-      // $('div.loading').addClass('none');
       $('div.loading').removeClass('none');
       $('body').removeClass('loaded');
-
-      const uri = this.bizserverUrl + api;
+      const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+      const lang = Utils.getSecureStorage(localStorage.I18N);
+      const uri = this.bizserverUrl + api + '?userId='+userInfo.id +'&lang='+lang;
     
       let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      
       const access_token = authorization.access_token;
   
-      if (!access_token) {
-        this.modalService.alert({
-          content: 'fadfadf',
-          btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
-          callback: _res => {
+      // if (!access_token) {
+      //   this.modalService.alert({
+      //     content: 'fadfadf',
+      //     btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
+      //     callback: _res => {
 
-          }
-        });
-        return;
-      }
-  
+      //     }
+      //   });
+      //   return;
+      // }
       const headers = { 
-        'Authorization': 'Bearer ' + access_token,
-        'user_id': '3'
+        'Authorization': 'Bearer ' + access_token
       }
       this.httpClient.get(uri, {headers}).subscribe(rest => {
         $('body').addClass('loaded');
