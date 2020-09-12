@@ -7,6 +7,7 @@ import { RequestDataService } from './get-data.service';
 import { Utils } from '../utils/utils.static';
 import { LOCAL_STORAGE } from '../constants/common.const';
 import { TranslateService } from '@ngx-translate/core';
+import * as $ from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,14 @@ export class AuthentcatiionService {
   constructor(
     private httpClient: HttpClient,
     private modalService: ModalService,
-    private router: Router,
-    private dataService: RequestDataService,
     private translate: TranslateService
   ) {
     this.bizserverUrl = environment.bizMOBServer;
   }
 
-  public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
+  public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth): Promise<any> {
+    return new Promise(resovle =>{
+      $('div.loading').removeClass('none');
 
     if(!auth.user_name || auth.user_name === null) {
       this.modalService.alert({
@@ -65,16 +66,11 @@ export class AuthentcatiionService {
     this.httpClient.post(uri, formData, {
       headers: new HttpHeaders(httpOptionsObj)
     }).subscribe(_auth => {
-        const _authorization = _auth as any;
-        if(_authorization.access_token) {
-          Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
-          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, _authorization);
-          this.dataService.requestUserInfo(auth.user_name).then(_response =>{
-              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, _response);
-              console.log(_response);
-              this.router.navigate(['/main/home']);
-          }); 
-      }
+      $('div.loading').addClass('none');
+      resovle(_auth);
+    });
+
+
     });
   }
 }

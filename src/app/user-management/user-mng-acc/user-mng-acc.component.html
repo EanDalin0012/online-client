@@ -2,9 +2,12 @@
     <div class="page_title">
         <div class="breadcrumb">
             <div class="page_navi">
-                <span>{{'COMMON.LABEL.REGISTER' | translate}}</span>
+                <span>{{'UserMngAcc.LABEL.Tittle1' | translate}}</span>
             </div>
-            <h1><span>{{'Home7000.LABEL.MAIN_CATEGORY_INQUIRY' | translate}}</span></h1>
+            <div class="page_navi">
+                <span>{{'UserMngAcc.LABEL.Tittle2' | translate}}</span>
+            </div>
+            <h1><span>{{'UserMngAcc.LABEL.Tittle3' | translate}}</span></h1>
         </div>
 
     </div>
@@ -33,10 +36,11 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)"> {{'COMMON.BUTTON.EXPORT_EXCEL' | translate}}</button>
+                            <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
+                                {{'COMMON.LABEL.Download_Excel' | translate}}</button>
                             <button kendoGridPDFCommand class="pdf export" type="button" icon="file-pdf" style="float:right; width: 165px;">
-                    <span>{{'COMMON.BUTTON.EXPORT_PDF' | translate}}</span>
-                  </button>
+                                <span>{{'COMMON.LABEL.Download_Pdf' | translate}}</span>
+                            </button>
                         </div>
                     </div>
                 </ng-template>
@@ -49,17 +53,17 @@
                     </ng-template>
                 </kendo-grid-column>
 
-                <kendo-grid-column width="150" class="subj" field="user_name" title="{{'User1000.LABEL.User_Name' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="enabled" title="{{'User1000.LABEL.Enabled' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="account_locked" title="{{'User1000.LABEL.Account_Locked' | translate}}">
+                <kendo-grid-column width="150" class="subj" field="user_name" title="{{'UserMngAcc.LABEL.User_Name' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj" field="enabled" title="{{'UserMngAcc.LABEL.Enabled' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj" field="account_locked" title="{{'UserMngAcc.LABEL.Account_Locked' | translate}}">
                     <!--  <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                         <span>{{dataItem.account_locked}}</span>
                         <button type="button" tabindex=-1 class="btn_edit01 float-right" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
                     </ng-template> -->
 
                 </kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="credentials_expired" title="{{'User1000.LABEL.Credentials_Expired' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="account_expired" title="{{'User1000.LABEL.Account_Expired' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj" field="credentials_expired" title="{{'UserMngAcc.LABEL.Credentials_Expired' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj" field="account_expired" title="{{'UserMngAcc.LABEL.Account_Expired' | translate}}"></kendo-grid-column>
 
                 <kendo-grid-column width="100" class="cen" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -68,14 +72,43 @@
                 </kendo-grid-column>
 
                 <!-- pdf -->
-                <kendo-grid-pdf fileName="user-lock-information.pdf" [allPages]="true">
+                <!-- <kendo-grid-pdf fileName="user-lock-information.pdf" [allPages]="true">
                     <kendo-grid-pdf-margin top="1cm" left="1cm" right="1cm" bottom="1cm"></kendo-grid-pdf-margin>
+
+                    <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
+                        <div class="page-template">
+                            <div class="header">
+                                <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+                                Multi-page grid with automatic page breaking
+                            </div>
+                            <div class="footer">
+                                Page {{ pageNum }} of {{ totalPages }}
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </kendo-grid-pdf> -->
+
+                <kendo-grid-pdf fileName="Products.pdf" [allPages]="true" paperSize="A3" [repeatHeaders]="true" [landscape]="true">
+                    <kendo-grid-pdf-margin top="2cm" left="1cm" right="1cm" bottom="2cm"></kendo-grid-pdf-margin>
+                    <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
+                        <div class="page-template">
+                            <div class="header">
+                                <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+                            </div>
+                            <div class="footer">
+                                Page {{ pageNum }} of {{ totalPages }}
+                            </div>
+                        </div>
+                    </ng-template>
                 </kendo-grid-pdf>
+
                 <!-- excele -->
                 <kendo-excelexport [data]="data" fileName="main-category.xlsx" #excelexport>
-                    <kendo-excelexport-column field="id" title="{{'Register1000.LABEL.PRODUCT_ID' | translate}}"></kendo-excelexport-column>
-                    <kendo-excelexport-column field="user_name" title="{{'Home9000.LABEL.PRODUCT_NAME' | translate}}" [width]="350"></kendo-excelexport-column>
-                    <kendo-excelexport-column field="enabled" title="{{'Home8000.LABEL.DESCRIPTION' | translate}}" [width]="350"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="id" title="{{'UserMngAcc.LABEL.User_Name' | translate}}">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="user_name" title="{{'UserMngAcc.LABEL.Enabled' | translate}}" [width]="350"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="enabled" title="{{'UserMngAcc.LABEL.Account_Locked' | translate}}" [width]="350"></kendo-excelexport-column>
                 </kendo-excelexport>
 
             </kendo-grid>

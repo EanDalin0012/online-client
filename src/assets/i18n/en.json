@@ -13,7 +13,9 @@
             "CREATE_DATE": "Create Date",
             "MODIFY_DATE": "Modify Date",
             "PAGE_OF_TOTAL": "Page {{ pageNum }} of {{ totalPages }}",
-            "ID": "ID"
+            "ID": "ID",
+            "Download_Excel": "Download Excel",
+            "Download_Pdf": "Download PDF"
         },
         "BUTTON": {
             "BACK": "Back",
@@ -255,6 +257,18 @@
         "LABEL": {
             "Tittle1": "User Management",
             "Tittle2": "User"
+        }
+    },
+    "UserMngAcc": {
+        "LABEL": {
+            "Tittle1": "User Management",
+            "Tittle2": "User",
+            "Tittle3": "User Account",
+            "User_Name": "User Name",
+            "Enabled": "Enable",
+            "Account_Locked": "Account Lock",
+            "Credentials_Expired": "Credentials Expired",
+            "Account_Expired": "Account Expired"
         }
     }
 }

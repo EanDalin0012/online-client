@@ -4,7 +4,7 @@ import { UserMngAccComponent } from './user-mng-acc/user-mng-acc.component';
 
 
 const routes: Routes = [
-  {path: '', component: UserMngAccComponent
+  {path: 'user-account', component: UserMngAccComponent
 },
 ];
 

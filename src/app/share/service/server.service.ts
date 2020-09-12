@@ -90,8 +90,8 @@ export class ServerService {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+access_token
         };
-
-        const uri = this.bizserverUrl + api;
+        const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+        const uri = this.bizserverUrl + api+'?user_id='+user_info.id;
         this.data = this.httpClient.post(uri, JSON.stringify(TrClass), {
           headers: new HttpHeaders(httpOptionsObj)
         }).subscribe(
@@ -141,7 +141,10 @@ export class ServerService {
         return;
       }
   
-      const headers = { 'Authorization': 'Bearer ' + access_token }
+      const headers = { 
+        'Authorization': 'Bearer ' + access_token,
+        'user_id': '3'
+      }
       this.httpClient.get(uri, {headers}).subscribe(rest => {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');

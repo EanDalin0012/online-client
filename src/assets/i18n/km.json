@@ -3,8 +3,8 @@
         "LABEL": {
             "SORT": "តម្រៀប",
             "ALL": "All",
-            "NO": "No",
-            "ITEMS": "{{value}} Item(s)",
+            "NO": "លេខ",
+            "ITEMS": "{{value}} ធាតុ",
             "SELECT_ROW_FOR_DELETE": "Please select row for delete items.",
             "ADD_NEW": "បន្តែមថ្មី",
             "HOME": "Home",
@@ -20,7 +20,7 @@
             "CLOSE": "Close",
             "REGISTER": "Register",
             "SAVE": "Save",
-            "EDIT": "edit",
+            "EDIT": "កែប្រែ",
             "UPDATE": "Update",
             "CONFIRME": "Confirme",
             "YES": "Yes",
@@ -249,6 +249,18 @@
             "Account_Lock": "Account Lock",
             "Credentials_Expired": "Credentials Expired",
             "Account_Expired": "Account Expired"
+        }
+    },
+    "UserMngAcc": {
+        "LABEL": {
+            "Tittle1": "ការគ្រប់គ្រងអ្នកប្រើប្រាស់",
+            "Tittle2": "អ្នក​ប្រើ",
+            "Tittle3": "គណនី​អ្នកប្រើប្រាស់",
+            "User_Name": "ឈ្មោះ​អ្នកប្រើប្រាស់",
+            "Enabled": "បើកដំណើរការ",
+            "Account_Locked": "ចាក់សោគណនី",
+            "Credentials_Expired": "លិខិតបញ្ជាក់បានផុតកំណត់",
+            "Account_Expired": "គណនីបានផុតកំណត់"
         }
     }
 }

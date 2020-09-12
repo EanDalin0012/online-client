@@ -140,7 +140,8 @@ export enum URLCODE {
   'Import1100'         = 'import-product',
 
   'User1000'         = 'user-account',
-  'User2000'         = 'user-info'
+  'User2000'         = 'user-info',
+  'UserMngAcc'       = 'user-account'
 }
 
 export enum CURRENCY_CODE {

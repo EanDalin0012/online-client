@@ -113,7 +113,7 @@ body {
 }
 
 html {
-    font: normal 16px 'Noto Sans', 'Noto Sans Khmer', 'Verdana', 'Geneva', 'Tahoma', 'sans-serif';
+    font: normal 16px 'Noto Sans', 'Noto Sans Khmer', 'Verdana', 'Geneva', 'Tahoma', 'sans-serif', 'Khmer', cursive;
 }
 
 body {
@@ -1479,6 +1479,7 @@ iframe {
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    background-size: 5%;
 }
 
 .loading strong {
@@ -6084,4 +6085,8 @@ kendo-upload div:nth-child(0) {
 .far,
 .fas {
     font-family: "FontAwesome" !important;
+}
+
+.k-grid {
+    font-family: 'Noto Sans', 'Noto Sans Khmer', 'Verdana', 'Geneva', 'Tahoma', 'sans-serif', 'Khmer', cursive;
 }

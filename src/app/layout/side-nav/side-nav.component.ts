@@ -37,7 +37,7 @@ export class SideNavComponent implements OnInit {
       if (message !== '') {
         setTimeout(() => {
           this.path = message;
-          console.log(message);
+          console.log('message', message);
           this.setVisitList(message);
         });
       }
@@ -113,8 +113,8 @@ export class SideNavComponent implements OnInit {
         url += `home/${URLCODE[urlCode]}`;
         break;
       case 'User1000': // setting
-      case 'User2000': // setting
-        url += `user-management/${URLCODE[urlCode]}`;
+      case 'UserMngAcc': // setting
+        url += `user-mng/${URLCODE[urlCode]}`;
         break;
     }
     this.router.navigate([url]);

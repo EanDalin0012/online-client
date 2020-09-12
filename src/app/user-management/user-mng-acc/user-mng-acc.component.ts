@@ -43,7 +43,7 @@ export class UserMngAccComponent implements OnInit {
   public selectedCallback = (args) => args.dataItem;
   public selectableSettings: SelectableSettings;
   public skip = 0;
-  public pageSize = 10;
+  public pageSize = 3;
   public mySelection: any[] = [];
   // end gride
 
@@ -66,6 +66,7 @@ export class UserMngAccComponent implements OnInit {
 
   ngOnInit(): void {
     const url = (window.location.href).split('/');
+    console.log(url);
     this.dataService.visitMessage(url[5]);
     this.inquiry();
   }
