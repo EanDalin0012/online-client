@@ -62,6 +62,7 @@ export class ServerService {
           callback: () => {
             $('kendo-dialog').remove();
             Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
+            Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
             this.router.navigate(['/login']);
           }
         });
