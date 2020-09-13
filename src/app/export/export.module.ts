@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MShareModule } from '../share/mshare/mshare.module';
+import { ExportRoutingModule } from './export-routing.module';
 
 
 
@@ -8,7 +9,8 @@ import { MShareModule } from '../share/mshare/mshare.module';
 
   ],
   imports: [
-    MShareModule
+    MShareModule,
+    ExportRoutingModule
   ]
 })
 export class ExportModule { }

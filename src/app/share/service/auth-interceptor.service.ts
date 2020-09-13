@@ -57,11 +57,11 @@ export class AuthInterceptor implements HttpInterceptor {
     // console.log('new headers', clonedRequest.headers.keys());
     return next.handle(req).timeout(this.timeoutmillsec)
     .map(event => {
-      let apiname = req.url.split(environment.bizServer.context)[1];
+      // let apiname = req.url.split(environment.bizServer.context)[1];
 
-      if (!apiname){
-        apiname = req.url;
-      }
+      // if (!apiname){
+      //   apiname = req.url;
+      // }
 
       if (environment.encryptionUse) {
         const aesInfo: any = Utils.getSecureStorage(AES_INFO.STORE) || {};
@@ -75,7 +75,7 @@ export class AuthInterceptor implements HttpInterceptor {
       }
 
       if (event instanceof HttpResponse){
-        environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
+        // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
         environment.production ? (() => '')() : console.log(event.body);
       }
       // "CBK_SES_001"
