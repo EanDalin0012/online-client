@@ -8,9 +8,13 @@ import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { ModalService } from '../../share/service/modal.service';
 import { RegiCateAddComponent } from '../regi-cate-add/regi-cate-add.component';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { BTN_ROLES, STATUS, Reponse_Status } from '../../share/constants/common.const';
 import { DataService } from '../../share/service/data.service';
 import { RegiCateEditComponent } from '../regi-cate-edit/regi-cate-edit.component';
+import { Title } from '@angular/platform-browser';
+import { ObjIdModel } from '../../share/model/model/obj-id';
+import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
+import { ResponseDataModel } from '../../share/model/response/res-data';
 
 @Component({
   selector: 'app-regi-cate',
@@ -50,13 +54,18 @@ public mySelection: any[] = [];
 // start declear variable
 totalRecord = 0;
 category_list = new Array<CategoryModel>();
+obj_Id_model_list = new Array<ObjIdModel>();
 public data  = Array<CategoryModel>();;
 
   constructor(
     private service: ServerService,
     private modalService: ModalService,
-    private dataService: DataService
-  ) { }
+    private dataService: DataService,
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('Category');
+    this.setSelectableSettings();
+   }
 
   ngOnInit(): void {
     const url = (window.location.href).split('/');
@@ -188,6 +197,75 @@ public data  = Array<CategoryModel>();;
             this.inquiry();
           }
         }
+      }
+    });
+  }
+
+  delete() {
+    if(this.mySelection.length > 0) {
+      let name = '';
+      let i = 0;
+      this.mySelection.forEach(element => {
+          const mainCategoryName = this.getNameById(element);
+          if (mainCategoryName !== '') {
+            if (i === this.mySelection.length - 1) {
+              name += mainCategoryName;
+            } else {
+              name += mainCategoryName  + ', ';
+            }
+          }
+
+          this.obj_Id_model_list.push({
+            id: Number(element)
+          });
+          
+          ++i;
+      });
+            
+      this.modalService.confirm({
+        title: 'Delete Item(s)',
+        content: 'Your select item(s) is: '+name,
+        lBtn: {btnText: 'Close'},
+        rBtn: {btnText: 'Confirm'},
+        modalClass: ['pop-confirm-btn'],
+        callback: response =>{
+          console.log('response', response);
+          if(response.text = 'Confirm') {
+            this.doDelete();
+          }
+        }
+      });
+    } else {
+      this.modalService.alert({
+        title: 'Delete Item(s)',
+        content: '<h2>Please select Item(s) that you want to delete.</h2>',
+        btnText: 'Confirm',
+        callback: response =>{
+          
+        }
+      });
+    }
+  }
+
+  getNameById(val: number): string {
+    let name = '';
+    this.category_list.forEach(element => {
+      if (element.id === val) {
+        name = element.name ; // + '(' + element.id + ')';
+      }
+    });
+    return name;
+  }
+
+  doDelete() {
+    const trReq = new ObjIdDeleteRequest();
+    trReq.body = this.obj_Id_model_list;
+
+    const api = '/api/category/delete';
+    this.service.HTTPRequest(api, trReq).then(resp => {
+      const response   = resp as ResponseDataModel;
+      if (response.body.status === Reponse_Status.Y) {
+       this.inquiry();
       }
     });
   }

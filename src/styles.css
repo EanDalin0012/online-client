@@ -6090,3 +6090,48 @@ kendo-upload div:nth-child(0) {
 .k-grid {
     font-family: 'Noto Sans', 'Noto Sans Khmer', 'Verdana', 'Geneva', 'Tahoma', 'sans-serif', 'Khmer', cursive;
 }
+
+.addAlertCender div kendo-dialog-actions button.k-button {
+    display: inline-block !important;
+    min-height: 40px !important;
+    padding: 8px 20px !important;
+    font-weight: 500 !important;
+    font-size: .9375rem !important;
+    color: #000 !important;
+    background: #ffffff !important;
+    border-radius: 50px !important;
+    border: none !important;
+    float: right !important;
+    border: 1px solid #0077ffd4 !important;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 28%) !important;
+}
+
+.k-dialog-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    min-width: 25%;
+    float: left;
+    margin-left: 35%;
+    width: auto !important;
+    height: 100%;
+    overflow: auto;
+}
+
+.k-dialog .k-dialog-buttongroup {
+    padding: 15px 0px 26px 85px !important;
+}
+
+.pop-confirm-btn>div kendo-dialog-actions>button:nth-child(2) {
+    border: 1px solid #0077ffd4 !important;
+    font-weight: bolder;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 28%) !important;
+    background-color: #ffffff00 !important;
+    color: #000000 !important;
+}
+
+.pop-confirm-btn>div kendo-dialog-actions>button:nth-child(1) {
+    border: 1px solid red !important;
+    color: red !important;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 28%) !important;
+}

@@ -1,0 +1,12 @@
+.profile {
+    box-shadow: 0 3px 5px rgb(0 0 0 / 28%) !important;
+}
+
+.btn {
+    border: 1px solid #0077ffd4 !important;
+    font-weight: bolder;
+    box-shadow: 0 0px 5px rgb(0 0 0 / 28%) !important;
+    background-color: #ffffff00 !important;
+    color: #000000 !important;
+    border-radius: 5px;
+}
