@@ -145,7 +145,8 @@ export enum URLCODE {
 
   'User1000'         = 'user-account',
   'User2000'         = 'user-info',
-  'UserMngAcc'       = 'user-account'
+  'UserMngAcc'       = 'user-account',
+  'RegiCate'         = 'category'
 }
 
 export enum CURRENCY_CODE {

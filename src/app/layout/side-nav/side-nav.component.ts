@@ -103,8 +103,8 @@ export class SideNavComponent implements OnInit {
       case 'Register2000':
       case 'Register3000':
       case 'Register4000':
-      case 'Register5000':
-        url += `register/${urlCode[urlCode]}`;
+      case 'RegiCate':
+        url += `register/${URLCODE[urlCode]}`;
         break;
       case 'Import1000':
         url += `imports/${URLCODE[urlCode]}`; // 'imports/' + ${URLCODE[urlCode]} // URLCODE.Register5000;

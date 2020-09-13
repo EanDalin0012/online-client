@@ -1,1 +1,49 @@
-<p>regi-cate-edit works!</p>
+<div class="contentsWrap">
+    <div class="container01">
+        <div class="web_container">
+            <!-- header -->
+            <div class="pop_header">
+                <h1>{{'RegiCateAdd.Label.Tittle' | translate}}</h1>
+                <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
+            </div>
+            <!-- //header -->
+            <div class="web_Wrap">
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>{{'RegiCateAdd.Label.Name' | translate}}</label>
+                        <input type="text" [ngClass]="category_name? 'active-input' : ''" class="form-control" [(ngModel)]="category_name" placeholder="{{'RegiCateAdd.Holder.Enter_Category_Name' | translate}}">
+
+                        <div class="in_box">
+                            <button type="button" [ngClass]="category_name? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group form-group-last col-md-12">
+                        <label>{{'RegiCate.LABEL.Description' | translate}}</label>
+                        <input type="text" [ngClass]="description? 'active-input' : ''" [(ngModel)]="description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control">
+                        <div class="in_box">
+                            <button type="button" [ngClass]="description? 'btn_del' : ''" (click)="onClickBtndescription()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="c_btn">
+            <div class="add-close  btn-css margin-right-btn-clos" (click)="close()">
+                <span>{{'COMMON.BUTTON.CLOSE' | translate}}</span>
+            </div>
+            <div class="iam-btn-container mbr_introContent" style="display: inline-block;">
+                <button class="iam-button save" (click)="btnRegister()">{{'COMMON.BUTTON.SAVE' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,38 +2,39 @@
     "COMMON": {
         "LABEL": {
             "SORT": "តម្រៀប",
-            "ALL": "All",
+            "ALL": "ទាំងអស់",
             "NO": "លេខ",
             "ITEMS": "{{value}} ធាតុ",
             "SELECT_ROW_FOR_DELETE": "Please select row for delete items.",
             "ADD_NEW": "បន្តែមថ្មី",
             "HOME": "Home",
-            "INFORMATION": "Information",
-            "REGISTER": "Register",
-            "CREATE_DATE": "Create Date",
-            "MODIFY_DATE": "Modify Date",
+            "INFORMATION": "ព័ត៌មាន",
+            "REGISTER": "ចុះឈ្មោះ",
+            "CREATE_DATE": "បង្កើតនៅថ្ងៃទី",
+            "Create_By": "បង្កើតដោយ",
+            "MODIFY_DATE": "កែប្រែនៅថ្ងៃទី",
             "PAGE_OF_TOTAL": "Page {{ pageNum }} of {{ totalPages }}",
             "ID": "ID"
         },
         "BUTTON": {
-            "BACK": "Back",
-            "CLOSE": "Close",
-            "REGISTER": "Register",
-            "SAVE": "Save",
+            "BACK": "ត្រឡប់ក្រោយ",
+            "CLOSE": "បិទ",
+            "REGISTER": "ចុះឈ្មោះ",
+            "SAVE": "រក្សាទុក",
             "EDIT": "កែប្រែ",
-            "UPDATE": "Update",
-            "CONFIRME": "Confirme",
-            "YES": "Yes",
-            "NO": "No",
-            "DELETE": "Delete",
-            "ADD_NEW": "Add New",
-            "EXPORT_PDF": "Export to PDF",
-            "EXPORT_EXCEL": "Export to Excel",
+            "UPDATE": "កែប្រែ",
+            "CONFIRME": "យល់ព្រម",
+            "YES": "បាទ",
+            "NO": "ទេ",
+            "DELETE": "លុប",
+            "ADD_NEW": "បន្ដែមថ្មី",
+            "EXPORT_PDF": "ទាញយក PDF",
+            "EXPORT_EXCEL": "ទាញយក Excel",
             "ADD_IMG": "add img"
         },
         "MESSAGE": {
-            "INVALID_EMAIL": "Invalid Email",
-            "InValid_User_Name": "Invalid use name"
+            "INVALID_EMAIL": "អ៊ីមែលមិនត្រឹមត្រូវ",
+            "InValid_User_Name": "ឈ្មោះប្រើប្រាស់មិនត្រឹមត្រូវ"
         }
     },
     "Home2000": {
@@ -261,6 +262,28 @@
             "Account_Locked": "ចាក់សោគណនី",
             "Credentials_Expired": "លិខិតបញ្ជាក់បានផុតកំណត់",
             "Account_Expired": "គណនីបានផុតកំណត់"
+        }
+    },
+    "Registerr": {
+        "LABEL": {
+            "Register": "ចុះឈ្មោះ"
+        }
+    },
+    "RegiCate": {
+        "LABEL": {
+            "Tittle": "ប្រភេទ",
+            "Name": "ឈ្មោះ",
+            "Description": "ការពិពណ៌នា"
+        }
+    },
+    "RegiCateAdd": {
+        "Label": {
+            "Tittle": "បន្ថែមប្រភេទថ្មី",
+            "Name": "ឈ្មោះ"
+        },
+        "Holder": {
+            "Enter_Category_Name": "បញ្ចូលឈ្មោះប្រភេទ",
+            "Enter_Description": "បញ្ចូលការពិពណ៌នា"
         }
     }
 }

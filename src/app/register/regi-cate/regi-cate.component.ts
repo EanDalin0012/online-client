@@ -6,6 +6,11 @@ import { CategoryModel } from '../../share/model/model/category';
 import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
+import { ModalService } from '../../share/service/modal.service';
+import { RegiCateAddComponent } from '../regi-cate-add/regi-cate-add.component';
+import { BTN_ROLES } from '../../share/constants/common.const';
+import { DataService } from '../../share/service/data.service';
+import { RegiCateEditComponent } from '../regi-cate-edit/regi-cate-edit.component';
 
 @Component({
   selector: 'app-regi-cate',
@@ -44,13 +49,18 @@ public mySelection: any[] = [];
 
 // start declear variable
 totalRecord = 0;
-categoryList = new Array<CategoryModel>();
-  
+category_list = new Array<CategoryModel>();
+public data  = Array<CategoryModel>();;
+
   constructor(
-    private service: ServerService
+    private service: ServerService,
+    private modalService: ModalService,
+    private dataService: DataService
   ) { }
 
   ngOnInit(): void {
+    const url = (window.location.href).split('/');
+    this.dataService.visitMessage(url[5]);
     this.inquiry();
   }
 
@@ -60,7 +70,9 @@ categoryList = new Array<CategoryModel>();
     this.service.HTTPget(api).then(resp => {
       const response   = resp as CategoryReponseModel;
       if (response) {
-        this.categoryList = response.body;
+        this.category_list = response.body;
+        this.data          = response.body;
+        this.loadingData(this.category_list);
       }
     });
   }
@@ -74,10 +86,12 @@ categoryList = new Array<CategoryModel>();
   }
 
   loadingData(data) {
-    this.gridView = {
-      data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
-      total: data.length
-    };
+    if (data) {
+      this.gridView = {
+        data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
+        total: data.length
+      };
+    }
     this.totalRecord = data.length;
   }
 
@@ -116,5 +130,68 @@ categoryList = new Array<CategoryModel>();
     this.loadData();
   }
   // end gride function
+
+  // declear function
+  searchChange(event) {
+    if (event) {
+      console.log(event.target.value);
+      const resultSearch  = this.category_list.filter( data => data.name.toLowerCase().includes(event.target.value));
+      this.totalRecord    = resultSearch.length;
+      this.loadingData(resultSearch);
+    }
+  }
+  
+  deleteTextSearch() {
+    this.search = undefined;
+    this.loadingData(this.category_list);
+  }
+  
+  public excelExportExcel(component) {
+    const options = component.workbookOptions();
+    const rows = options.sheets[0].rows;
+
+    let altIdx = 0;
+    rows.forEach((row) => {
+        if (row.type === 'data') {
+            if (altIdx % 2 !== 0) {
+                row.cells.forEach((cell) => {
+                    cell.background = '#aabbcc';
+                });
+            }
+            altIdx++;
+        }
+    });
+
+    component.save(options);
+  }
+
+  edit(dataItems) {
+    this.modalService.open({
+      content: RegiCateEditComponent,
+      message: dataItems,
+      callback: _response => {
+        if(_response) {
+          if(_response && _response.close === BTN_ROLES.EDIT) {
+            this.inquiry();
+          }
+        }
+      }
+    });
+  }
+
+  add() {
+    this.modalService.open({
+      content: RegiCateAddComponent,
+      callback: _response => {
+        if(_response) {
+          if(_response && _response.close === BTN_ROLES.SAVE) {
+            this.inquiry();
+          }
+        }
+      }
+    });
+  }
+
+  // end declear function
 
 }

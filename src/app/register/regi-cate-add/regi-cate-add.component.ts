@@ -5,8 +5,9 @@ import { ServerService } from '../../share/service/server.service';
 import { ModalService } from '../../share/service/modal.service';
 import { Utils } from '../../share/utils/utils.static';
 import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
-import { MainCategoryRequest } from '../../share/model/request/req-main-category';
+import { CategoryRequestModel } from '../../share/model/request/req-main-category';
 import { ResponseDataModel } from '../../share/model/response/res-data';
+import { CategoryModel } from '../../share/model/model/category';
 
 @Component({
   selector: 'app-regi-cate-add',
@@ -17,8 +18,8 @@ export class RegiCateAddComponent implements OnInit {
 
   modal;
   typeList: any[] = [];
-  mainCategory: MainCategory;
-  mainCategoryName: string;
+  categoryModel: CategoryModel;
+  category_name: string;
   description: string;
 
   translateTxt: any;
@@ -37,12 +38,10 @@ export class RegiCateAddComponent implements OnInit {
   btnRegister() {
     if ( this.isValid() === true) {
       const userInfo                = Utils.getUserInfo();
-      const trReq                   = new MainCategoryRequest();
-      trReq.body.name   = this.mainCategoryName;
+      const trReq                   = new CategoryRequestModel();
+      trReq.body.name               = this.category_name;
       trReq.body.description        = this.description;
-      trReq.body.createBy           = userInfo.id;
-      trReq.body.modifyBy           = userInfo.id;
-      const api = '/api/main/category/save';
+      const api = '/api/category/save';
       this.serverService.HTTPRequest(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {
@@ -53,8 +52,8 @@ export class RegiCateAddComponent implements OnInit {
 }
 
 private isValid(): boolean {
-  if (!this.mainCategoryName || this.mainCategoryName && this.mainCategoryName.trim() === ''
-      || this.mainCategoryName && this.mainCategoryName === null) {
+  if (!this.category_name || this.category_name && this.category_name.trim() === ''
+      || this.category_name && this.category_name === null) {
         const bool = this.modalService.messageAlert(this.translateTxt.MESSAGE_ERROR.MAIN_CATEGORY_REQUEIRED);
         return bool;
   } else {
@@ -67,7 +66,7 @@ private isValid(): boolean {
   }
 
   onClickBtnMainCategoryName() {
-      this.mainCategoryName = undefined;
+      this.category_name = undefined;
   }
 
   onClickBtndescription() {

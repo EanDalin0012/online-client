@@ -126,7 +126,7 @@
                 </ul>
             </li>
 
-            <li class="treeview" [ngClass]="{active: path == 'product' || path == 'company'
+            <li class="treeview" [ngClass]="{active: path == 'category' || path == 'company'
                               || path == 'main-category' || path == 'sub-category'
                               || path == 'supplier'}">
                 <a href="#">
@@ -138,8 +138,7 @@
                 <ul class="treeview-menu">
                     <li (click)="onOpenPage('Register3000')"><a [ngClass]="{current: path == 'company'}"><i class="fa fa-circle-o"></i>Company</a></li>
                     <li (click)="onOpenPage('Register5000')"><a [ngClass]="{current: path == 'product'}"><i class="fa fa-circle-o"></i>Product</a></li>
-                    <li (click)="onOpenPage('Register1000')"><a [ngClass]="{current: path == 'main-category'}"><i class="fa fa-circle-o"></i>Main Category</a></li>
-                    <li (click)="onOpenPage('Register2000')"><a [ngClass]="{current: path == 'sub-category'}"><i class="fa fa-circle-o"></i>Sub Category</a></li>
+                    <li (click)="onOpenPage('RegiCate')"><a [ngClass]="{current: path == 'category'}"><i class="fa fa-circle-o"></i>Category</a></li>
                     <li (click)="onOpenPage('Register4000')"><a [ngClass]="{current: path == 'supplier'}"><i class="fa fa-circle-o"></i>Supplier Info</a></li>
                     <li><a><i class="fa fa-circle-o"></i> Data tables</a></li>
                 </ul>

@@ -11,6 +11,7 @@
             "INFORMATION": "Information",
             "REGISTER": "Register",
             "CREATE_DATE": "Create Date",
+            "Create_By": "Create By",
             "MODIFY_DATE": "Modify Date",
             "PAGE_OF_TOTAL": "Page {{ pageNum }} of {{ totalPages }}",
             "ID": "ID",
@@ -269,6 +270,28 @@
             "Account_Locked": "Account Lock",
             "Credentials_Expired": "Credentials Expired",
             "Account_Expired": "Account Expired"
+        }
+    },
+    "Registerr": {
+        "LABEL": {
+            "Register": "Register"
+        }
+    },
+    "RegiCate": {
+        "LABEL": {
+            "Tittle": "Categories",
+            "Name": "Name",
+            "Description": "Description"
+        }
+    },
+    "RegiCateAdd": {
+        "Label": {
+            "Tittle": "Add New Category",
+            "Name": "Name"
+        },
+        "Holder": {
+            "Enter_Category_Name": "Enter category name",
+            "Enter_Description": "Enter description"
         }
     }
 }

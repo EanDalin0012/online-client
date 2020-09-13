@@ -4,7 +4,7 @@ import { RegiCateComponent } from './regi-cate/regi-cate.component';
 
 
 const routes: Routes = [
-   {path: '', component: RegiCateComponent},
+   {path: 'category', component: RegiCateComponent},
 ];
 
 @NgModule({

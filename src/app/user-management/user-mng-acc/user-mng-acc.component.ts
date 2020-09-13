@@ -66,7 +66,6 @@ export class UserMngAccComponent implements OnInit {
 
   ngOnInit(): void {
     const url = (window.location.href).split('/');
-    console.log(url);
     this.dataService.visitMessage(url[5]);
     this.inquiry();
   }
@@ -89,7 +88,6 @@ export class UserMngAccComponent implements OnInit {
   }
 
   edit(dataItems) {
-    console.log(dataItems);
     this.modalService.open({
       content: UserMngAccEditComponent,
       message: dataItems,

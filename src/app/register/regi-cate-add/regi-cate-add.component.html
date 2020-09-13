@@ -3,7 +3,7 @@
         <div class="web_container">
             <!-- header -->
             <div class="pop_header">
-                <h1>{{'Register1100.LABEL.TITLE' | translate}}</h1>
+                <h1>{{'RegiCateAdd.Label.Tittle' | translate}}</h1>
                 <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
             </div>
             <!-- //header -->
@@ -11,11 +11,11 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label>{{'Register1100.LABEL.MAIN_CATEGORY_NAME' | translate}}</label>
-                        <input type="text" [ngClass]="mainCategoryName? 'active-input' : ''" class="form-control" [(ngModel)]="mainCategoryName" placeholder="{{'Register1100.HOLDER.PLEASE_ENTER_SUPLIER_NAME' | translate}}">
+                        <label>{{'RegiCateAdd.Label.Name' | translate}}</label>
+                        <input type="text" [ngClass]="category_name? 'active-input' : ''" class="form-control" [(ngModel)]="category_name" placeholder="{{'RegiCateAdd.Holder.Enter_Category_Name' | translate}}">
 
                         <div class="in_box">
-                            <button type="button" [ngClass]="mainCategoryName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                            <button type="button" [ngClass]="category_name? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                         </div>
 
                     </div>
@@ -23,8 +23,8 @@
 
                 <div class="form-row">
                     <div class="form-group form-group-last col-md-12">
-                        <label>{{'Home2100.LABEL.DESCRIPTION' | translate}}</label>
-                        <input type="text" [ngClass]="description? 'active-input' : ''" [(ngModel)]="description" placeholder="{{'Home2100.PLACE_HOLDER.ENTER_DESCRIPTION' | translate}}" class="form-control">
+                        <label>{{'RegiCate.LABEL.Description' | translate}}</label>
+                        <input type="text" [ngClass]="description? 'active-input' : ''" [(ngModel)]="description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control">
                         <div class="in_box">
                             <button type="button" [ngClass]="description? 'btn_del' : ''" (click)="onClickBtndescription()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
                         </div>

@@ -89,31 +89,7 @@ export class AuthInterceptor implements HttpInterceptor {
     )
     .catch((error) => {
       console.log('error', error);
-
-      $('div.loading').addClass('none');
-      environment.production ? (() => '')() : console.log(req.url + ' reqeusting failed. ' );
-      // console.log("Http Response Error");
-      // console.log(error);
-      let httpErrorCode;
-      // if (error instanceof HttpErrorResponse) {
-      if (error.status){
-        httpErrorCode = error.status;
-      } else {
-        httpErrorCode = '999999';
-      }
-
-
-      console.log(error.status + ' : ' + error.statusText);
-      environment.production ? (() => '')() : console.log(error.name + ' : ' + error.message);
-
-      // if (error.status >= 400 && error.status < 500) {
-      //     this.zone.run(() =>  this.router.navigate(['/error403']));
-      //   } else if (error.status >= 500 && error.status < 500) {
-      //     this.zone.run(() =>  this.router.navigate(['/error404']));
-      //   } else {
-      //     this.zone.run(() => this.router.navigate(['/neterror']));
-      //   }
-      if (error && error.status === 401) {
+      if ( Number(error.status) === 401) {
         this.modalService.alert({
           // tslint:disable-next-line:max-line-length
           title: error.error.error,
@@ -123,7 +99,8 @@ export class AuthInterceptor implements HttpInterceptor {
           callback: (res) => {
           }
         });
-      } else if (error && error.error.status === 500) {
+      }
+      if (error && error.error.status === 500) {
         this.modalService.alert({
           // tslint:disable-next-line:max-line-length
           content:  'message :<span class="message-alert">' + String(error.error.message).substr(0, 150) + '</span> <br/>status: <span class= "message-alert">' + error.error.status + '</span',
@@ -133,7 +110,8 @@ export class AuthInterceptor implements HttpInterceptor {
             return false;
           }
         });
-      } else if (error && error.status === 0) {
+      }
+      if (error && error.status === 0) {
           this.modalService.alert({
             content:  'message : <span>Connection faile</span> status: ' + error.statusText,
             modalClass: [''],
@@ -143,6 +121,18 @@ export class AuthInterceptor implements HttpInterceptor {
             }
           });
       }
+      environment.production ? (() => '')() : console.log(req.url + ' reqeusting failed. ' );
+      let httpErrorCode;
+      if (error.status){
+        httpErrorCode = error.status;
+      } else {
+        httpErrorCode = '999999';
+      }
+
+
+      console.log(typeof error.status + ' : ' + error.statusText);
+      environment.production ? (() => '')() : console.log(error.name + ' : ' + error.message);
+
       return Observable.of(new HttpResponse({body: { header: {result: false, resultCode: httpErrorCode }, body: {}} }));
     }) as any;
   }

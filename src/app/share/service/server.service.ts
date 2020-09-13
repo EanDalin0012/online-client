@@ -84,7 +84,7 @@ export class ServerService {
           });
           return;
         }
-
+        
         const httpOptionsObj = {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+access_token
@@ -96,20 +96,13 @@ export class ServerService {
           headers: new HttpHeaders(httpOptionsObj)
         }).subscribe(
           res => {
-            console.log('data dta', this.data);
             const newAesInfo: any = Utils.getSecureStorage(AES_INFO.STORE) || {};
             newAesInfo.timestamp = new Date().getTime();
             Utils.setSecureStorage(AES_INFO.STORE, newAesInfo);
             $('body').addClass('loaded');
-            $('div.loading').removeClass('none');
+            $('div.loading').addClass('none');
             const result = res as any;
             resolve(res);
-            // change application convention of throw from api
-            // if (this.checkResponse(result.header) === true) {
-            //   resolve(res);
-            // } else {
-            //   resolve(result.header);
-            // }
         }, error => {
           console.log(error);
         });
