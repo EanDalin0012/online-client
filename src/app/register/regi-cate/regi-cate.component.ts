@@ -56,6 +56,7 @@ totalRecord = 0;
 category_list = new Array<CategoryModel>();
 obj_Id_model_list = new Array<ObjIdModel>();
 public data  = Array<CategoryModel>();;
+menu = '';
 
   constructor(
     private service: ServerService,
@@ -66,7 +67,7 @@ public data  = Array<CategoryModel>();;
     this.titleService.setTitle('Category');
     this.setSelectableSettings();
    }
-
+  
   ngOnInit(): void {
     const url = (window.location.href).split('/');
     this.dataService.visitMessage(url[5]);
@@ -227,7 +228,7 @@ public data  = Array<CategoryModel>();;
         content: 'Your select item(s) is: '+name,
         lBtn: {btnText: 'Close'},
         rBtn: {btnText: 'Confirm'},
-        modalClass: ['pop-confirm-btn'],
+        modalClass: ['pop-confirm-btn dialog-confirm'],
         callback: response =>{
           console.log('response', response);
           if(response.text = 'Confirm') {
@@ -270,6 +271,15 @@ public data  = Array<CategoryModel>();;
     });
   }
 
+  menue() {
+    this.menu = data;
+  }
+
   // end declear function
 
 }
+
+const data = '<div class="m"><table class=" table02 tmenue "><tbody><tr>'
++ '<th scope=" row "></th></tr><tr>'
++ '<th scope="row "></th></tr></tbody>'
++' </table>  </div>';

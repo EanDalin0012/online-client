@@ -18,6 +18,9 @@ import { MShareModule } from '../share/mshare/mshare.module';
 import { UserMngClientDetailsComponent } from './user-mng-client-details/user-mng-client-details.component';
 import { UserMngClientDetailsAddComponent } from './user-mng-client-details-add/user-mng-client-details-add.component';
 import { UserMngClientDetailsEditComponent } from './user-mng-client-details-edit/user-mng-client-details-edit.component';
+import { UserMngUserInfoAddFormComponent } from './user-mng-user-info-add-form/user-mng-user-info-add-form.component';
+import { UserMngUserInfoAddImageComponent } from './user-mng-user-info-add-image/user-mng-user-info-add-image.component';
+import { UserMngUserInfoAddAccountComponent } from './user-mng-user-info-add-account/user-mng-user-info-add-account.component';
 
 
 
@@ -38,11 +41,19 @@ import { UserMngClientDetailsEditComponent } from './user-mng-client-details-edi
    UserMngClientDetailsComponent,
    UserMngClientDetailsAddComponent,
    UserMngClientDetailsEditComponent,
+   UserMngUserInfoAddFormComponent,
+   UserMngUserInfoAddImageComponent,
+   UserMngUserInfoAddAccountComponent,
   ],
   imports: [
     CommonModule,
     UserManagementRoutingModule,
     MShareModule
+  ],
+  exports: [
+    UserMngUserInfoAddFormComponent,
+    UserMngUserInfoAddImageComponent,
+    UserMngUserInfoAddAccountComponent,
   ]
 })
 export class UserManagementModule { }
