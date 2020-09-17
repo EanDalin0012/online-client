@@ -4,6 +4,7 @@ export class VendorModel extends commonModel {
     name: String;
     contact: string;
     email: string;
-    address: string;
+    address: String;
     description: string;
+    other_contact: string;
 }

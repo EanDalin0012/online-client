@@ -24,7 +24,7 @@ export function createTranslateLoader(http: HttpClient) {
     LayoutBlankComponent,
     LayoutComponent,
     Error404Component,
-    Error405Component,
+    Error405Component
   ],
   imports: [
     AppRoutingModule,

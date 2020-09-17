@@ -1,0 +1,28 @@
+<ng-container>
+    <div class="web_Wrap">
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label>{{'RegiCateAdd.Label.Name' | translate}}</label>
+                <input type="text" [ngClass]="first_name? 'active-input' : ''" class="form-control" [(ngModel)]="first_name" placeholder="{{'RegiCateAdd.Holder.Enter_Category_Name' | translate}}">
+
+                <div class="in_box">
+                    <button type="button" [ngClass]="first_name? 'btn_del' : ''" (click)="btnTextDelete()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group form-group-last col-md-12">
+                <label>{{'RegiCate.LABEL.Description' | translate}}</label>
+                <input type="text" [ngClass]="last_name? 'active-input' : ''" [(ngModel)]="last_name" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control">
+                <div class="in_box">
+                    <button type="button" [ngClass]="last_name? 'btn_del' : ''" (click)="btnTextDelete()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</ng-container>

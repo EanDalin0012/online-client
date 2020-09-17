@@ -127,7 +127,7 @@
             </li>
 
             <li class="treeview" [ngClass]="{active: path == 'category' || path == 'company'
-                              || path == 'main-category' || path == 'sub-category'
+                              || path == 'main-category' || path == 'sub-category' || path === 'vendor'
                               || path == 'supplier'}">
                 <a href="#">
                     <i class="fa fa-table"></i> <span>Register</span>
@@ -136,11 +136,24 @@
           </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li (click)="onOpenPage('Register3000')"><a [ngClass]="{current: path == 'company'}"><i class="fa fa-circle-o"></i>Company</a></li>
-                    <li (click)="onOpenPage('Register5000')"><a [ngClass]="{current: path == 'product'}"><i class="fa fa-circle-o"></i>Product</a></li>
-                    <li (click)="onOpenPage('RegiCate')"><a [ngClass]="{current: path == 'category'}"><i class="fa fa-circle-o"></i>Category</a></li>
-                    <li (click)="onOpenPage('Register4000')"><a [ngClass]="{current: path == 'supplier'}"><i class="fa fa-circle-o"></i>Supplier Info</a></li>
-                    <li><a><i class="fa fa-circle-o"></i> Data tables</a></li>
+                    <li (click)="onOpenPage('Register3000')">
+                        <a [ngClass]="{current: path == 'company'}"><i class="fa fa-circle-o"></i>Company</a>
+                    </li>
+                    <li (click)="onOpenPage('Register5000')">
+                        <a [ngClass]="{current: path == 'product'}"><i class="fa fa-circle-o"></i>Product</a>
+                    </li>
+                    <li (click)="onOpenPage('RegiCate')">
+                        <a [ngClass]="{current: path == 'category'}"><i class="fa fa-circle-o"></i>Category</a>
+                    </li>
+                    <li (click)="onOpenPage('Vendor')">
+                        <a [ngClass]="{current: path == 'vendor'}"><i class="fa fa-circle-o"></i>Vendor</a>
+                    </li>
+                    <li (click)="onOpenPage('Register4000')">
+                        <a [ngClass]="{current: path == 'supplier'}"><i class="fa fa-circle-o"></i>Supplier Info</a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-circle-o"></i> Data tables</a>
+                    </li>
                 </ul>
             </li>
 

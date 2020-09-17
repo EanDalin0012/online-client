@@ -12,6 +12,7 @@ import { VendorResponseModel } from '../../share/model/response/res-vendor';
 import { RegiVenAddComponent } from '../regi-ven-add/regi-ven-add.component';
 import { BTN_ROLES } from '../../share/constants/common.const';
 import { RegiVenEditComponent } from '../regi-ven-edit/regi-ven-edit.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-regi-ven',
@@ -58,9 +59,10 @@ data = new Array<VendorModel>();
     private service: ServerService,
     private modalService: ModalService,
     private dataService: DataService,
-    private titleService: Title
+    private titleService: Title,
+    private translateService: TranslateService
   ) { 
-    this.titleService.setTitle('Category');
+    this.titleService.setTitle('Vendor');
     this.setSelectableSettings();
   }
 
@@ -93,6 +95,7 @@ data = new Array<VendorModel>();
       content: RegiVenAddComponent,
       callback: response =>{
         if(response.close === BTN_ROLES.SAVE) {
+          this.modalService.showNotificationService(this.translateService.instant('RegiVen.Message.Vendor_Save_Success'));
           this.inquiry();
         }
       }
@@ -105,6 +108,7 @@ data = new Array<VendorModel>();
       message: dataItems,
       callback: response =>{
         if(response.close === BTN_ROLES.EDIT) {
+          this.modalService.showNotificationService(this.translateService.instant('RegiVen.Message.Vendor_Update_Success'));
           this.inquiry();
         }
       }

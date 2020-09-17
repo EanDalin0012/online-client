@@ -14,6 +14,8 @@ import { RegiCustAddComponent } from './regi-cust-add/regi-cust-add.component';
 import { RegiCustEditComponent } from './regi-cust-edit/regi-cust-edit.component';
 import { MShareModule } from '../share/mshare/mshare.module';
 import { RegisterRoutingModule } from './register-routing.module';
+import { RegiVenAddFormComponent } from './regi-ven-add-form/regi-ven-add-form.component';
+import { RegiVenAddFormAddressComponent } from './regi-ven-add-form-address/regi-ven-add-form-address.component';
 
 
 
@@ -30,12 +32,18 @@ import { RegisterRoutingModule } from './register-routing.module';
     RegiVenEditComponent,
     RegiCustComponent,
     RegiCustAddComponent,
-    RegiCustEditComponent
+    RegiCustEditComponent,
+    RegiVenAddFormComponent,
+    RegiVenAddFormAddressComponent
   
   ],
   imports: [
     MShareModule,
     RegisterRoutingModule
+  ],
+  exports: [
+    RegiVenAddFormComponent,
+    RegiVenAddFormAddressComponent
   ]
 })
 export class RegisterModule { }

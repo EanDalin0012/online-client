@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { DialogService, DialogRef, DialogCloseResult } from '@progress/kendo-angular-dialog';
+import { TranslateService } from '@ngx-translate/core';
+import { DialogCloseResult, DialogRef, DialogService } from '@progress/kendo-angular-dialog';
+import { NotificationService } from '@progress/kendo-angular-notification';
 import * as $ from 'jquery';
+import { ModalDataService } from '../component/modal.service';
+import { ModalComponent } from '../component/modal/modal.component';
+import { MODAL_STORE_KEY } from '../constants/common.const';
 import { Store } from '../model/model/store-model';
 import { MShareModule } from '../mshare/mshare.module';
-import { MODAL_STORE_KEY } from '../constants/common.const';
-import { ModalDataService } from '../component/modal.service';
-import { ModalComponent } from '../component/modal/modal.component'
-import { TranslateService } from '@ngx-translate/core';
-import { NotificationService } from '@progress/kendo-angular-notification';
 
 @Injectable({
   providedIn: MShareModule
@@ -224,15 +224,22 @@ export class ModalService {
     });
   }
 
-  showNotificationService() {
-    this.notificationService.show({
-      content: 'Your data has been saved. Time for tea!',
-      cssClass: 'button-notification',
-      animation: { type: 'slide', duration: 400 },
-      position: { horizontal: 'center', vertical: 'bottom' },
-      type: { style: 'success', icon: true },
-      closable: false
-    });
+  showNotificationService(content: string, duration?: number) {
+    let time = 400;
+    if(duration) {
+      time = duration;
+    }
+    if(content) {
+      this.notificationService.show({
+        content: content,
+        cssClass: 'button-notification',
+        animation: { type: 'slide', duration: time },
+        position: { horizontal: 'center', vertical: 'bottom' },
+        type: { style: 'success', icon: true },
+        closable: false
+      });
+    }
+   
   }
 
   closeAllDialog() {
@@ -246,8 +253,9 @@ export class ModalService {
     }
   }
 
-  messageAlert(msg: string): boolean {
+  messageAlert(msg: string, title?: string): boolean {
     this.alert({
+      title: title,
       content: msg,
       btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
       modalClass: ['message-alert testing'],

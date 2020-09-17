@@ -9,7 +9,6 @@ import { GridModule, PDFModule } from '@progress/kendo-angular-grid';
 import { LayoutModule } from '@progress/kendo-angular-layout';
 import { SortableModule } from '@progress/kendo-angular-sortable';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
@@ -20,10 +19,14 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { UploadModule } from '@progress/kendo-angular-upload';
 import { ModalComponent } from '../component/modal/modal.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+import { PhoneNumberPipe } from '../pipe/phone-number.pipe';
+import { DateFormatPipe } from '../pipe/date-format.pipe';
 
 @NgModule({
   declarations: [
-    ModalComponent
+    ModalComponent,
+    PhoneNumberPipe,
+    DateFormatPipe,
   ],
   imports: [
     CommonModule
@@ -50,6 +53,8 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
     DateInputsModule,
     ButtonsModule,
     ProgressBarModule,
+    PhoneNumberPipe,
+    DateFormatPipe
   ],
   entryComponents: [
     ModalComponent,

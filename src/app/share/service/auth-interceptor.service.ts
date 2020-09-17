@@ -91,12 +91,12 @@ export class AuthInterceptor implements HttpInterceptor {
       console.log('error', error);
       if ( Number(error.status) === 401) {
         this.modalService.alert({
-          // tslint:disable-next-line:max-line-length
           title: error.error.error,
           content:  '<p>'+ error.error.error_description+'</p>',
           modalClass: [''],
           btnText: 'Confirm',
           callback: (res) => {
+            
           }
         });
       }
