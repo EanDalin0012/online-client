@@ -1,10 +1,10 @@
 import { commonModel } from './common-model';
 export class VendorModel extends commonModel {
     id: number;
-    name: String;
+    name: string;
     contact: string;
     email: string;
-    address: String;
+    address: string;
     description: string;
     other_contact: string;
 }

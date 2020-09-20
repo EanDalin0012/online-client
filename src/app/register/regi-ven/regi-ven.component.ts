@@ -10,9 +10,12 @@ import { Title } from '@angular/platform-browser';
 import { RequestDataModel } from '../../share/model/request/req-data';
 import { VendorResponseModel } from '../../share/model/response/res-vendor';
 import { RegiVenAddComponent } from '../regi-ven-add/regi-ven-add.component';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
 import { RegiVenEditComponent } from '../regi-ven-edit/regi-ven-edit.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
+import { ObjIdModel } from '../../share/model/model/obj-id';
+import { ResponseDataModel } from '../../share/model/response/res-data';
 
 @Component({
   selector: 'app-regi-ven',
@@ -54,6 +57,7 @@ public mySelection: any[] = [];
 vendor_list = new Array<VendorModel>();
 totalRecord: number;
 data = new Array<VendorModel>();
+obj_Id_model_list = new Array<ObjIdModel>();
 
   constructor(
     private service: ServerService,
@@ -85,9 +89,74 @@ data = new Array<VendorModel>();
       }
     });
   }
-
   delete() {
+    if(this.mySelection.length > 0) {
+      let name = '';
+      let i = 0;
+      this.mySelection.forEach(element => {
+          const mainCategoryName = this.getNameById(element);
+          if (mainCategoryName !== '') {
+            if (i === this.mySelection.length - 1) {
+              name += mainCategoryName;
+            } else {
+              name += mainCategoryName  + ', ';
+            }
+          }
 
+          this.obj_Id_model_list.push({
+            id: Number(element)
+          });
+          
+          ++i;
+      });
+            
+      this.modalService.confirm({
+        title: 'Delete Item(s)',
+        content: 'Your select item(s) is: '+name,
+        lBtn: {btnText: 'Close'},
+        rBtn: {btnText: 'Confirm'},
+        modalClass: ['pop-confirm-btn dialog-confirm'],
+        callback: response =>{
+          console.log('response', response);
+          if(response.text = 'Confirm') {
+            this.doDelete();
+          }
+        }
+      });
+    } else {
+      this.modalService.alert({
+        title: this.translateService.instant('COMMON.LABEL.Delete_Items'),
+        content: '<h2>'+this.translateService.instant('COMMON.LABEL.Please_Select_Item_You_Delete')+'</h2>',
+        btnText: this.translateService.instant('COMMON.BUTTON.CONFIRME'),
+        callback: response =>{
+          
+        }
+      });
+    }
+  }
+
+  getNameById(val: number): string {
+    let name = '';
+    this.vendor_list.forEach(element => {
+      if (element.id === val) {
+        name = element.name ; // + '(' + element.id + ')';
+      }
+    });
+    return name;
+  }
+
+  doDelete() {
+    const trReq = new ObjIdDeleteRequest();
+    trReq.body = this.obj_Id_model_list;
+
+    const api = '/api/vendor/delete';
+    this.service.HTTPRequest(api, trReq).then(resp => {
+      const response   = resp as ResponseDataModel;
+      if (response.body.status === Reponse_Status.Y) {
+        this.modalService.showNotificationService(this.translateService.instant('RegiVen.Message.Vendor_Delete_Success'));
+        this.inquiry();
+      }
+    });
   }
 
   add() {
@@ -118,7 +187,6 @@ data = new Array<VendorModel>();
 
   searchChange(event) {
     if (event) {
-      console.log(event.target.value);
       const resultSearch  = this.vendor_list.filter( data => data.name.toLowerCase().includes(event.target.value));
       this.totalRecord    = resultSearch.length;
       this.loadingData(resultSearch);

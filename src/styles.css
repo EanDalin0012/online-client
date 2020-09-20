@@ -5609,7 +5609,7 @@ div.in_box button {
 }
 
 kendo-notification-container div {
-    right: 8px !important;
+    /* right: 8px !important; */
     left: 79% !important;
     align-items: end !important;
     top: -41px;

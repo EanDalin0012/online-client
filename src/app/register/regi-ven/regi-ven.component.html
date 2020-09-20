@@ -80,7 +80,8 @@
                     </ng-template>
                 </kendo-grid-column>
 
-                <kendo-grid-pdf fileName="categories.pdf" [allPages]="true" paperSize="A3" [repeatHeaders]="true" [landscape]="true">
+                <kendo-grid-pdf fileName="Vendor.pdf" [allPages]="true" paperSize="A2" [repeatHeaders]="true" [landscape]="true">
+
                     <kendo-grid-pdf-margin top="2cm" left="1cm" right="1cm" bottom="2cm"></kendo-grid-pdf-margin>
                     <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
                         <div class="page-template">
@@ -95,9 +96,15 @@
                 </kendo-grid-pdf>
 
                 <!-- excele -->
-                <kendo-excelexport [data]="data" fileName="categories.xlsx" #excelexport>
+                <kendo-excelexport [data]="data" fileName="Vendor.xlsx" #excelexport>
                     <kendo-excelexport-column field="id" title="{{'COMMON.LABEL.NO' | translate}}"></kendo-excelexport-column>
                     <kendo-excelexport-column field="name" title="{{'RegiCate.LABEL.Name' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="contact" title="{{'RegiCate.LABEL.Contact' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="other_contact" title="{{'RegiCate.LABEL.Other_Contact' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="email" title="{{'RegiCate.LABEL.Email' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="address" title="{{'RegiCate.LABEL.Address' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="description" title="{{'RegiCate.LABEL.Description' | translate}}"></kendo-excelexport-column>
+
                     <kendo-excelexport-column field="description" title="{{'RegiCate.LABEL.Description' | translate}}" [width]="350"></kendo-excelexport-column>
                 </kendo-excelexport>
 

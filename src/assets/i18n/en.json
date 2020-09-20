@@ -16,7 +16,9 @@
             "PAGE_OF_TOTAL": "Page {{ pageNum }} of {{ totalPages }}",
             "ID": "ID",
             "Download_Excel": "Download Excel",
-            "Download_Pdf": "Download PDF"
+            "Download_Pdf": "Download PDF",
+            "Delete_Items": "Delete Item(s)",
+            "Please_Select_Item_You_Delete": "Please select Item(s) that you want to delete."
         },
         "BUTTON": {
             "BACK": "Back",
@@ -310,13 +312,14 @@
         },
         "Message": {
             "Vendor_Save_Success": "Vendor Save Success",
-            "Vendor_Update_Success": "Vendor Update Success"
+            "Vendor_Update_Success": "Vendor Update Success",
+            "Vendor_Delete_Success": "Vendor Delete Success"
         }
     },
     "RegiVenAdd": {
         "Label": {
             "Tittle": "Add New Vendor",
-            "Tittle1": "Edit New Vendor",
+            "Tittle1": "Update Vendor",
             "Name": "Name",
             "Contact": "Contact",
             "Email": "Email",

@@ -285,5 +285,43 @@
             "Enter_Category_Name": "បញ្ចូលឈ្មោះប្រភេទ",
             "Enter_Description": "បញ្ចូលការពិពណ៌នា"
         }
+    },
+    "RegiVen": {
+        "LABEL": {
+            "Tittle": "Categories",
+            "Name": "Name",
+            "Description": "Description",
+            "Contact": "Contact",
+            "Other_Contact": "Other Contact",
+            "Email": "Email",
+            "Address": "Address"
+        },
+        "Message": {
+            "Vendor_Save_Success": "Vendor Save Success",
+            "Vendor_Update_Success": "Vendor Update Success",
+            "Vendor_Delete_Success": "Vendor Delete Success"
+        }
+    },
+    "RegiVenAdd": {
+        "Label": {
+            "Tittle": "Add New Vendor",
+            "Tittle1": "Update Vendor",
+            "Name": "Name",
+            "Contact": "Contact",
+            "Email": "Email",
+            "Address": "Address",
+            "Other_Contact": "Other Contact"
+        },
+        "Holder": {
+            "Please_Enter_Vendor_Name": "Please enter vendor name",
+            "Please_Enter_Vendor_Contact": "Please enter vendor contact",
+            "Pleas_Enter_vendor_Address": "Please enter vendor address",
+            "Please_Enter_Vendor_Email": "Please enter vendor email",
+            "Please_Enter_Vendor_Other_Contact": "Please enter vendor other contact"
+        },
+        "Message": {
+            "Vendor_Name_Empty": "Vendor name is not allow empty",
+            "Vendor_Contact_Empty": "Vendor contact is not allow empty"
+        }
     }
 }

@@ -7,9 +7,9 @@
                 <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
             </div>
             <!-- //header -->
-            <div class="web_Wrap">
+            <div class="web_Wrap" style="white-space: normal;">
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">{{'RegiVenAdd.Label.Name'| translate}} :</label>
                         <input type="text" [ngClass]="vendorModel.name? 'active-input' : ''" [(ngModel)]="vendorModel.name" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Name' | translate}}" class="form-control">
@@ -20,24 +20,39 @@
 
                     <div class="form-group col-md-6">
                         <label>{{'RegiVenAdd.Label.Contact'| translate}} :</label>
-                        <input type="text" #subCate [ngClass]="vendorModel.contact ? 'active-input' : ''" class="form-control" [(ngModel)]="vendorModel.contact" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Contact' | translate}}">
+                        <input type="text" (input)="inputContact($event)" [ngClass]="contact ? 'active-input' : ''" class="form-control" [(ngModel)]="contact" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Contact' | translate}}">
 
                         <div class="in_box">
-                            <button (click)="btnX('contact')" [ngClass]="vendorModel.contact ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                            <button (click)="btnX('contact')" [ngClass]="contact ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">{{'RegiVenAdd.Label.Email'| translate}} :</label>
-                        <input type="text" [ngClass]="vendorModel.email? 'active-input' : ''" [(ngModel)]="vendorModel.email" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Email' | translate}}" class="form-control">
+                        <label for="inputPassword4">{{'RegiVenAdd.Label.Other_Contact'| translate}} :</label>
+
+                        <input type="text" (input)="inputOtherContact($event)" [ngClass]="other_contact ? 'active-input' : ''" class="form-control" [(ngModel)]="other_contact" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Other_Contact' | translate}}">
+
                         <div class="in_box">
-                            <button (click)="btnX('email')" [ngClass]="vendorModel.email ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                            <button (click)="btnX('other_contact')" [ngClass]="other_contact ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
+                        <label>{{'RegiVenAdd.Label.Email'| translate}} :</label>
+                        <input type="text" [ngClass]="vendorModel.email ? 'active-input' : ''" class="form-control" [(ngModel)]="vendorModel.email" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Email' | translate}}">
+
+                        <div class="in_box">
+                            <button (click)="btnX('address')" [ngClass]="vendorModel.email ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="form-group col-md-12">
                         <label>{{'RegiVenAdd.Label.Address'| translate}} :</label>
                         <input type="text" #subCate [ngClass]="vendorModel.address ? 'active-input' : ''" class="form-control" [(ngModel)]="vendorModel.address" placeholder="{{'RegiVenAdd.Holder.Pleas_Enter_vendor_Address' | translate}}">
 
@@ -48,8 +63,9 @@
                 </div>
 
 
+
                 <div class="form-row">
-                    <div class="form-group form-group-last col-md-12">
+                    <div class="form-group form-group-last">
                         <label>{{'RegiCate.LABEL.Description' | translate}}</label>
                         <input type="text" [ngClass]="vendorModel.description? 'active-input' : ''" [(ngModel)]="vendorModel.description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control">
                         <div class="in_box">
@@ -70,7 +86,7 @@
                 <span>{{'COMMON.BUTTON.CLOSE' | translate}}</span>
             </div>
             <div class="iam-btn-container mbr_introContent" style="display: inline-block;">
-                <button class="iam-button save" (click)="btnRegister()">{{'COMMON.BUTTON.SAVE' | translate}}</button>
+                <button class="iam-button save" (click)="btnRegister()">{{'COMMON.BUTTON.UPDATE' | translate}}</button>
             </div>
         </div>
     </div>
