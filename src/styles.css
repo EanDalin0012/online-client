@@ -134,7 +134,7 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-    background: #6649b8;
+    background: #646c74b8;
 }
 
 img {
@@ -310,10 +310,6 @@ input[type=radio]+*:before {
     vertical-align: middle;
 }
 
-input[type=checkbox]+span:before {
-    background: url("assets/images/checkbox.png") no-repeat left top;
-}
-
 input[type=checkbox],
 .checkbox01 {
     margin-right: 6px;
@@ -325,26 +321,12 @@ input[type=checkbox]:checked+*:before {
     background-position: left bottom;
 }
 
-input[type=checkbox].w,
-input[type=checkbox].w+*:before {
-    background-image: url("assets/images/checkbox_w.png");
-}
-
-input[type=radio]+span:before {
-    background: url("assets/images/radio_off.png") no-repeat left center;
-}
-
 input[type=radio] {
     width: 24px;
     height: 24px;
     margin-right: 6px;
     vertical-align: middle;
-    background: url("assets/images/radio_off.png") no-repeat left center;
-}
-
-input[type=radio]:checked,
-input[type=radio]:checked+*:before {
-    background-image: url("assets/images/radio_on.png");
+    /* background: url("assets/images/radio_off.png") no-repeat left center; */
 }
 
 input:checked+span {
@@ -375,17 +357,6 @@ input[type=tel]:only-child,
     width: 100%;
     border-bottom: 2px solid #3f496d;
 }
-
-
-/* input[type=text],
-input[type=password],
-input[type=search],
-input[type=number],
-input[type=email],
-input[type=tel],
-.k-dropdown {
-    border-bottom: 2px solid #3f496d !important;
-} */
 
 input::-ms-input-placeholder,
 input::-moz-placeholder {
@@ -476,16 +447,12 @@ label.txt_hide input+*:before {
 }
 
 .k-checkbox-label::before {
-    background: url("assets/images/checkbox.png") no-repeat left top;
+    /* background: url("assets/images/checkbox.png") no-repeat left top; */
     cursor: pointer;
 }
 
 .k-checkbox:checked+.k-checkbox-label::before {
     background-position: left bottom;
-}
-
-.k-radio-label::before {
-    background: url("assets/images/radio_off.png") no-repeat left center;
 }
 
 .k-checkbox-label::after,
@@ -868,9 +835,6 @@ kendo-pdf-export {
     white-space: nowrap;
 }
 
-
-/*.noimg {background:url("../images/bg_noimg.png") no-repeat center center;}*/
-
 .prd_img {
     position: relative;
 }
@@ -878,9 +842,6 @@ kendo-pdf-export {
 .noimg img {
     display: none !important;
 }
-
-
-/*.new {display:inline-block; width:20px; height:20px; margin-left:3px; text-indent:-9999em; vertical-align:middle; background:url("../images/ico_new01.png") no-repeat left center; border-radius:50%; white-space:nowrap; overflow:hidden;}*/
 
 .prewrap {
     white-space: pre-wrap;
@@ -1006,16 +967,6 @@ kendo-pdf-export {
     border-radius: 6px;
 }
 
-.btn_util_setting {
-    width: 50px;
-    background: url("assets/images/ico_setting.png") no-repeat center center;
-}
-
-.btn_util_logout {
-    width: 40px;
-    background: url("assets/images/ico_logout.png") no-repeat center center;
-}
-
 .change_lang {
     position: relative;
     padding: 0 19px 0 21px;
@@ -1033,22 +984,6 @@ kendo-pdf-export {
     background: none;
 }
 
-
-/*.change_lang .cur:before {content:""; position:absolute; left:0; top:50%; width:22px; height:20px; margin-top:-10px; background:url("assets/images/ico_lang_flag_eng.png") no-repeat left center;}*/
-
-
-/* .change_lang .cur:after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 50%;
-    width: 10px;
-    height: 10px;
-    margin-top: -5px;
-    background: url("assets/images/ico_lang_arrow.png") no-repeat right center;
-    transition: all .3s linear;
-} */
-
 .change_lang .cur button {
     position: absolute;
     left: 0;
@@ -1059,11 +994,6 @@ kendo-pdf-export {
     opacity: 0;
     z-index: 2;
 }
-
-
-/*.change_lang .eng:before {background-image:url("assets/images/ico_lang_flag_eng.png");}
-.change_lang .china:before {background-image:url("assets/images/ico_lang_flag_china.png");}
-.change_lang .khmer:before {background-image:url("assets/images/ico_lang_flag_khmer.png");}*/
 
 .lang_list {
     position: absolute;
@@ -1113,9 +1043,6 @@ kendo-pdf-export {
     background-repeat: no-repeat;
     background-position: left center;
 }
-
-
-/*.lang_list label {display:block; padding-left:22px; cursor:pointer;}*/
 
 .lang_list label {
     display: block;
@@ -1326,14 +1253,6 @@ iframe {
     background: url("assets/images/ico_facebook.png") no-repeat right center;
 }
 
-.copyrightWrap select {
-    height: 30px;
-    padding: 5px 25px 5px 13px;
-    font-size: .875rem;
-    background: #eff2f5 url("assets/images/select_arrow_family.gif") no-repeat right center;
-    border-radius: 4px;
-}
-
 
 /*** contents area ***/
 
@@ -1395,12 +1314,6 @@ iframe {
     color: #0e1d4a;
 }
 
-.btn_livechat {
-    position: relative;
-    padding: 0 16px 0 30px;
-    background: url("assets/images/btn_livechat.png") no-repeat 5px center;
-}
-
 .btn_livechat:after {
     content: "";
     position: absolute;
@@ -1410,11 +1323,6 @@ iframe {
     height: 16px;
     margin-top: -8px;
     background: #c5cbd7;
-}
-
-.btn_guide {
-    padding: 0 22px 0 37px;
-    background: url("assets/images/ico_guide01.png") no-repeat 15px center;
 }
 
 .btn_livechat.fix {
@@ -1432,18 +1340,6 @@ iframe {
     display: none;
 }
 
-
-/* .btn_top {
-    position: fixed;
-    right: 5px;
-    bottom: 123px;
-    width: 66px;
-    height: 67px;
-    text-indent: -999em;
-    background: url("assets/images/btn_top.png") no-repeat center center;
-    z-index: 100;
-} */
-
 .container01 {
     margin: 10px 0;
     padding: 25px 24px;
@@ -1451,9 +1347,6 @@ iframe {
     border-radius: 4px;
     box-shadow: 0 3px 5px rgba(197, 197, 197, .45);
 }
-
-
-/* .web_container {max-width:1204px; margin:0 auto;} */
 
 .loading {
     position: fixed;
@@ -1664,14 +1557,6 @@ body>.loading {
     border-color: #bcb6ad;
 }
 
-.btn02.ico.pdf {
-    background: url("assets/images/ico_file_pdf.png") no-repeat 16px center;
-}
-
-.btn02.ico.print {
-    background: url("assets/images/ico_print.png") no-repeat 14px center;
-}
-
 .btn03 {
     display: inline-block;
     min-width: 5em;
@@ -1776,14 +1661,6 @@ button.add_user {
     background: url("assets/images/btn_del03.png") no-repeat center center;
 }
 
-.btn_add01 {
-    height: 30px;
-    padding: 0 5px 0 35px;
-    font-size: .75rem;
-    color: #696f79;
-    background: url("assets/images/btn_add01.png") no-repeat 5px center;
-}
-
 .btn_add_fav {
     width: 20px;
     height: 30px;
@@ -1843,18 +1720,6 @@ button.add_user {
     border-left: 1px solid #eae8e5;
 }
 
-.btn_filedown.excel {
-    background: url("assets/images/ico_file_excel.png") no-repeat 12px center;
-}
-
-.btn_filedown.excel_up {
-    background: url("assets/images/ico_file_excel_up.png") no-repeat 12px center;
-}
-
-.btn_filedown.pdf {
-    background: url("assets/images/ico_file_pdf.png") no-repeat 12px center;
-}
-
 .btn_filedown:disabled {
     opacity: .3;
 }
@@ -1897,27 +1762,12 @@ button.add_user {
     float: right;
 }
 
-.btn_write01 {
-    padding: 5px 5px 5px 36px;
-    font-size: .875rem;
-    color: #7a6d5c;
-    background: url("assets/images/ico_write01.png") no-repeat 11px center;
-}
-
-.btn_search01 {
-    width: 30px;
-    height: 30px;
-    text-indent: -999em;
-    background: url("assets/images/btn_search01.png") no-repeat center center;
-}
-
 .btn_search02 {
     min-width: 116px;
     height: 40px;
     padding: 5px 20px 5px 42px;
     font-weight: 700;
     font-size: 1rem;
-    background: #514432 url("assets/images/btn_search02.png") no-repeat 17px center;
 }
 
 .btn_popclose {
@@ -1969,7 +1819,7 @@ button.add_user {
     right: auto;
     width: 32px;
     height: 40px;
-    background: url("assets/images/btn_search01.png") no-repeat center center
+    /* background: url("assets/images/btn_search01.png") no-repeat center center */
 }
 
 .k-list-filter .k-i-search:before {
@@ -2041,24 +1891,8 @@ button.add_user {
     margin-top: 0;
 }
 
-.contset_box {
-    padding: 24px 24px 19px;
-    color: #fff;
-    background: #7a6d5c url("assets/images/bg_pattern01.gif") no-repeat right bottom;
-}
-
 .contset_box label input+* {
     opacity: 1;
-}
-
-input[type=radio],
-.contset_box input[type=radio]+*:before {
-    background-image: url("assets/images/radio_off_w.png");
-}
-
-input[type=radio]:checked,
-.contset_box input[type=radio]:checked+*:before {
-    background-image: url("assets/images/radio_on_w.png");
 }
 
 .contset_box select {
@@ -2435,16 +2269,6 @@ input[type=radio]:checked,
 .step01 li strong {
     font-weight: 700;
     color: #7a6d5c;
-}
-
-.step01 li:after {
-    content: "";
-    position: absolute;
-    left: 100%;
-    top: 0;
-    width: 14px;
-    height: 100%;
-    background: url("assets/images/step01_next.png") no-repeat center top;
 }
 
 .step01 li:last-child:after {
@@ -3568,18 +3392,6 @@ table .subj {
     background: url("assets/images/ico_error01.png") no-repeat left center;
 }
 
-.msgbox02 {
-    padding: 110px 20px 20px;
-    font-size: 1.25rem;
-    color: #7a6d5c;
-    text-align: center;
-    background: url("assets/images/ico_msg_success.png") no-repeat center 41px;
-}
-
-.msgbox02 strong {
-    font-weight: 700;
-}
-
 
 /********** Etc style **********/
 
@@ -3867,28 +3679,6 @@ table .subj {
     font-size: .9375rem;
     font-weight: normal;
     opacity: .8;
-}
-
-.summary_calculation .sign {
-    width: 32px;
-    height: 32px;
-    margin: 0 8px 0 18px;
-    padding: 0;
-    text-indent: -999em;
-    background: url("assets/images/ico_calculat_plus.png") no-repeat center center;
-}
-
-.summary_calculation .sign.equal {
-    margin-left: 43px;
-    background-image: url("assets/images/ico_calculat_equal.png");
-}
-
-.summary_calculation .result dd {
-    font-size: 1.125rem;
-}
-
-.summary_calculation .result dd strong {
-    font-weight: 700;
 }
 
 
@@ -4366,9 +4156,6 @@ input.inp_cal:focus {
     cursor: pointer;
 }
 
-
-/*.inp_box_period:only-child {display:block;}*/
-
 .inp_box_period kendo-daterange {
     display: block;
 }
@@ -4723,24 +4510,6 @@ input.inp_cal:focus {
     border-radius: 4px;
 }
 
-.attfile_drop .k-dropzone .k-dropzone-hint {
-    display: block;
-    position: absolute;
-    left: 10px;
-    top: 28px;
-    right: 10px;
-    margin: 0;
-    padding-top: 45px;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1rem;
-    color: #0e1d4a;
-    text-align: center;
-    background: url("assets/images/ico_file_upload.png") no-repeat center top;
-    visibility: visible;
-    opacity: 1;
-}
-
 .attfile_drop .k-dropzone .ng-star-inserted {
     display: none;
 }
@@ -4971,9 +4740,6 @@ input.inp_cal:focus {
     max-width: inherit;
 }
 
-
-/*.nofoot .pop_cont {max-height:550px;}*/
-
 .pop_footer {
     position: absolute;
     left: 25px;
@@ -5043,9 +4809,6 @@ input.inp_cal:focus {
     margin: 0 !important;
 }
 
-
-/* .max_pop .k-dialog {width:90%; width:calc(100% - 128px);} */
-
 .max_pop .popWrap01 {
     width: 1140px;
 }
@@ -5098,16 +4861,6 @@ input.inp_cal:focus {
 
 .layerpopWrap.k-dialog-wrapper .k-content .popWrap01 {
     margin: 0;
-}
-
-@media screen and (min-height:800px) {
-    /*.pop_cont {max-height:600px;}
-	.nofoot .pop_cont {max-height:685px;}*/
-}
-
-@media screen and (min-height:900px) {
-    /*.pop_cont {max-height:700px;}
-	.nofoot .pop_cont {max-height:785px;}*/
 }
 
 
@@ -5367,14 +5120,6 @@ input.inp_cal:focus {
     color: #ffffff;
 }
 
-.daterangepicker .drp-calendar .table-condensed tbody tr td.start-date {
-    background: #F5F4F2 url("assets/images/bg_start_date.png") center left no-repeat;
-}
-
-.daterangepicker .drp-calendar .table-condensed tbody tr td.end-date {
-    background: #F5F4F2 url("assets/images/bg_end_date.png") center right no-repeat;
-}
-
 .daterangepicker .drp-calendar .table-condensed tbody tr td.in-range:hover {
     background-color: #F5F4F2;
 }
@@ -5521,24 +5266,6 @@ input.inp_cal:focus {
     }
 }
 
-.ico_RFT {
-    position: absolute;
-    right: 10px;
-    background: url("assets/images/tag_Realtime.svg") center no-repeat;
-    text-indent: -9999999px;
-    width: 48px;
-    height: 18px;
-}
-
-.ico_RFT.selected {
-    top: 50%;
-    margin-top: -9px;
-    right: 36px;
-}
-
-
-/* add by ed */
-
 kendo-dropdownlist {
     width: 100% !important;
     border-bottom: 1px solid #afa79d !important;
@@ -5609,7 +5336,6 @@ div.in_box button {
 }
 
 kendo-notification-container div {
-    /* right: 8px !important; */
     left: 79% !important;
     align-items: end !important;
     top: -41px;
@@ -5620,12 +5346,6 @@ kendo-notification-container div {
     padding: 5px 5px 5px 20px;
     background: url("assets/images/60740.svg") no-repeat 2px center;
     background-size: 25px;
-}
-
-.btn_view {
-    padding: 5px 5px 5px 20px;
-    background: url("assets/images/view.png") no-repeat 2px center;
-    background-size: 20px;
 }
 
 .current {
@@ -5831,7 +5551,6 @@ kendo-dialog:focus {
     width: 90%;
     float: left;
     margin-left: 5%;
-    /* min-width: 1140px; */
     height: 100%;
     overflow: auto;
 }
@@ -5870,38 +5589,11 @@ kendo-dialog:focus {
 }
 
 .web_container {
-    margin-top: 35px;
+    margin-top: 30px;
 }
-
-
-/* kendo-dialog.message-alert{
-  align-items: center !important;
-    margin: auto;
-    width: 100%;
-    padding: 10px;
-}
-kendo-dialog.testing {
-  margin: auto;
-  width: 100%;
-  padding: 10px;
-}
-
-.testing kendo-dialog.k-dialog {
-  align-items: center !important;
-  margin: auto;
-  padding: 10px;
-} */
-
-
-/* .testing div:nth-child(2) {
-  min-width: 20%;
-    width: auto;
-    margin: auto;
-} */
 
 .addAlertCender div:nth-child(2) {
     margin: auto;
-    /*  min-width: 175px; */
     width: auto;
 }
 
@@ -5979,13 +5671,6 @@ kendo-dialog.testing {
     color: #575757;
 }
 
-
-/* .email {
-  background-image: url("assets/images/icon-excel.svg") !important;
-  background-size: 15%;
-  background-position-x: 3px;
-} */
-
 .uploadi-img ul.k-upload-files {
     position: relative !important;
 }
@@ -6045,7 +5730,7 @@ kendo-upload div:nth-child(0) {
 }
 
 .contentsWrap::-webkit-scrollbar-thumb {
-    background: #6649b8;
+    background: #444;
 }
 
 .contentsWrap::-webkit-scrollbar {
@@ -6142,4 +5827,25 @@ kendo-upload div:nth-child(0) {
 
 .k-maskedtextbox {
     width: 100%;
+}
+
+.upload-img {
+    width: 20% !important;
+}
+
+.contentsWrap01 {
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
+.overflow>ul.k-upload-files {
+    overflow: hidden;
+}
+
+kendo-dialog {
+    overflow: hidden !important;
+}
+
+.contentsWrap {
+    max-height: 85vh;
 }

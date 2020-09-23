@@ -147,7 +147,8 @@ export enum URLCODE {
   'User2000'         = 'user-info',
   'UserMngAcc'       = 'user-account',
   'RegiCate'         = 'category',
-  'Vendor'           = 'vendor'
+  'Vendor'           = 'vendor',
+  'RegiPro'          = 'product'
 }
 
 export enum CURRENCY_CODE {

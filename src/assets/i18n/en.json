@@ -337,5 +337,18 @@
             "Vendor_Name_Empty": "Vendor name is not allow empty",
             "Vendor_Contact_Empty": "Vendor contact is not allow empty"
         }
+    },
+    "RegiPro": {
+        "Label": {
+            "Tittle": "Product",
+            "Product_Name": "Product Name",
+            "Category_Name": "Category Name"
+        },
+        "Message": {
+            "Pro_Save_Success": "Product Save Success",
+            "Pro_Update_Success": "Product Update Success",
+            "Pro_Delete_Success": "Product Delete Success"
+        }
+
     }
 }

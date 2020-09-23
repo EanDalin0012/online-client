@@ -101,7 +101,7 @@ export class SideNavComponent implements OnInit {
     switch (urlCode) {
       case 'Register1000':
       case 'Register2000':
-      case 'Register3000':
+      case 'RegiPro':
       case 'Vendor':
       case 'RegiCate':
         url += `register/${URLCODE[urlCode]}`;

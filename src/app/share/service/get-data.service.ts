@@ -1,18 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ServerService } from './server.service';
-/* import { MainCategory } from '../Class/class-main-category';
-import { SubCategory } from '../Class/class-sub-category';
-import { ServerService } from './server.service';
-import { Company } from '../Class/class-company';
-import { Supplier } from '../Class/class-suplier';
-import { RequestData } from '../class-tr/classtr-req-data';
-import { MainCategoryList } from '../class-tr/classtr-main-category-list';
-import { SubCategoryList } from '../class-tr/classtr-sub-category-list';
-import { SupplierList } from '../class-tr/classtr-res-supplier-list';
-import { CompanyList } from '../class-tr/classtr-company-list';
-import { Product } from '../class/class-product';
-import { ProductResponse } from '../class-tr/classtr-res-product';
-import { UserInfoRequest } from '../class-tr/classtr-user-info-req'; */
+import { CategoryReponseModel } from '../model/response/res-category';
+import { RequestDataModel } from '../model/request/req-data';
+import { CategoryModel } from '../model/model/category';
 
 
 @Injectable({
@@ -25,21 +15,21 @@ export class RequestDataService {
     private serverService: ServerService
     ) {}
 
-    /* inquiryMainCategory(): Promise<MainCategory[]> {
-    return new Promise(resovle => {
-      const trReq = new RequestData();
-      const api = '/api/main_category/getList';
-      this.serverService.HTTPRequest(api, trReq).then(rest => {
-        const response = rest as MainCategoryList;
-        if ( this.serverService.checkResponse(rest.header) === true) {
-          resovle(response.body);
+    inquiryCategory(): Promise<CategoryModel[]> {
+      return new Promise( (resolve, reject) => {
+      const trReq = new RequestDataModel();
+      const api = '/api/category/list';
+      this.serverService.HTTPget(api).then(resp => {
+        const response   = resp as CategoryReponseModel;
+        if (response) {
+          resolve(response.body);
         } else {
-          resovle([]);
+          resolve([]);
         }
       });
     });
   }
-
+/* 
   inquirySubCategoryList(): Promise<SubCategory[]> {
     return new Promise( (resovle) => {
       const trReq = new RequestData();

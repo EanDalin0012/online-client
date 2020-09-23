@@ -11,6 +11,11 @@ import { RequestDataModel } from '../../share/model/request/req-data';
 import { ProductModelResponse } from '../../share/model/response/res-product';
 import { ProductModel } from '../../share/model/model/product';
 import { ObjIdModel } from '../../share/model/model/obj-id';
+import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
+import { ResponseDataModel } from '../../share/model/response/res-data';
+import { Reponse_Status, BTN_ROLES } from '../../share/constants/common.const';
+import { RegiProAddComponent } from '../regi-pro-add/regi-pro-add.component';
+import { RegiProEditComponent } from '../regi-pro-edit/regi-pro-edit.component';
 
 @Component({
   selector: 'app-regi-pro',
@@ -89,7 +94,114 @@ obj_Id_model_list = new Array<ObjIdModel>();
     });
   }
 
+  edit(dataItems) {
+    this.modalService.open({
+      content: RegiProEditComponent,
+      message: dataItems,
+      callback: response =>{
+        if(response.close === BTN_ROLES.EDIT) {
+          this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Update_Success'));
+          this.inquiry();
+        }
+      }
+    });
+  }
 
+  deleteTextSearch() {
+    this.search = undefined;
+    this.loadingData(this.product_list);
+  }
+
+  searchChange(event) {
+    if (event) {
+      const resultSearch  = this.product_list.filter( data => data.name.toLowerCase().includes(event.target.value));
+      this.totalRecord    = resultSearch.length;
+      this.loadingData(resultSearch);
+    }
+  }
+
+  add() {
+      this.modalService.open({
+        content: RegiProAddComponent,
+        callback: response =>{
+          if(response.close === BTN_ROLES.SAVE) {
+            this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Save_Success'));
+            this.inquiry();
+          }
+        }
+      });
+  }
+
+  delete() {
+    if(this.mySelection.length > 0) {
+      let name = '';
+      let i = 0;
+      this.mySelection.forEach(element => {
+          const mainCategoryName = this.getNameById(element);
+          if (mainCategoryName !== '') {
+            if (i === this.mySelection.length - 1) {
+              name += mainCategoryName;
+            } else {
+              name += mainCategoryName  + ', ';
+            }
+          }
+
+          this.obj_Id_model_list.push({
+            id: Number(element)
+          });
+          
+          ++i;
+      });
+            
+      this.modalService.confirm({
+        title: 'Delete Item(s)',
+        content: 'Your select item(s) is: '+name,
+        lBtn: {btnText: 'Close'},
+        rBtn: {btnText: 'Confirm'},
+        modalClass: ['pop-confirm-btn dialog-confirm'],
+        callback: response =>{
+          console.log('response', response);
+          if(response.text = 'Confirm') {
+            this.doDelete();
+          }
+        }
+      });
+    } else {
+      this.modalService.alert({
+        title: this.translateService.instant('COMMON.LABEL.Delete_Items'),
+        content: '<h2>'+this.translateService.instant('COMMON.LABEL.Please_Select_Item_You_Delete')+'</h2>',
+        btnText: this.translateService.instant('COMMON.BUTTON.CONFIRME'),
+        callback: response =>{
+          
+        }
+      });
+    }
+  }
+
+  getNameById(val: number): string {
+    let name = '';
+    this.product_list.forEach(element => {
+      if (element.id === val) {
+        name = element.name ; // + '(' + element.id + ')';
+      }
+    });
+    return name;
+  }
+
+  doDelete() {
+    const trReq = new ObjIdDeleteRequest();
+    trReq.body = this.obj_Id_model_list;
+
+    const api = '/api/vendor/delete';
+    this.service.HTTPRequest(api, trReq).then(resp => {
+      const response   = resp as ResponseDataModel;
+      if (response.body.status === Reponse_Status.Y) {
+        this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Update_Success'));
+        this.inquiry();
+      }
+    });
+  }
+  // end declear function 
 
   // Declear function gride
   public setSelectableSettings() {
@@ -142,6 +254,25 @@ obj_Id_model_list = new Array<ObjIdModel>();
   public sortChange(sort: SortDescriptor[]): void {
     this.sort = sort;
     this.loadData();
+  }
+
+  public excelExportExcel(component) {
+    const options = component.workbookOptions();
+    const rows = options.sheets[0].rows;
+
+    let altIdx = 0;
+    rows.forEach((row) => {
+        if (row.type === 'data') {
+            if (altIdx % 2 !== 0) {
+                row.cells.forEach((cell) => {
+                    cell.background = '#aabbcc';
+                });
+            }
+            altIdx++;
+        }
+    });
+
+    component.save(options);
   }
   // end gride function
 
