@@ -48,7 +48,7 @@ export class UserMngAccEditComponent implements OnInit {
     trReq.body.id                 = this.id;
     console.log(trReq);
     const api = '/api/user/account/update'
-    this.service.HTTPRequest(api, trReq).then(resp => {
+    this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as UserAccountRespnonse;
       if (response.body.isSuccessYN === 'Y') {
         this.modal.close({close: BTN_ROLES.EDIT});

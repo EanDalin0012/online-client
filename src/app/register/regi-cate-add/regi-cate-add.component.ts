@@ -42,7 +42,7 @@ export class RegiCateAddComponent implements OnInit {
       trReq.body.name               = this.category_name;
       trReq.body.description        = this.description;
       const api = '/api/category/save';
-      this.serverService.HTTPRequest(api, trReq).then(response => {
+      this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {
           this.modal.close( {close: BTN_ROLES.SAVE});

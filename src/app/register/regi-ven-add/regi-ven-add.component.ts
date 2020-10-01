@@ -38,7 +38,7 @@ export class RegiVenAddComponent implements OnInit {
       trReq.body                    = this.vendorModel;
       console.log(trReq);
       const api = '/api/vendor/save';
-      this.serverService.HTTPRequest(api, trReq).then(response => {
+      this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {
           this.modal.close( {close: BTN_ROLES.SAVE});

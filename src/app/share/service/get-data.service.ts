@@ -19,7 +19,7 @@ export class RequestDataService {
       return new Promise( (resolve, reject) => {
       const trReq = new RequestDataModel();
       const api = '/api/category/list';
-      this.serverService.HTTPget(api).then(resp => {
+      this.serverService.HTTPGet(api).then(resp => {
         const response   = resp as CategoryReponseModel;
         if (response) {
           resolve(response.body);
@@ -99,7 +99,7 @@ export class RequestDataService {
       const obj = {
         'user_name': user_name
       }
-      this.serverService.HTTPget(api, obj).then(_res => {
+      this.serverService.HTTPGet(api, obj).then(_res => {
         const response = _res as any;
         console.log('user info', _res);
         resolve(response.body);

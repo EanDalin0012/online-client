@@ -84,7 +84,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
    inquiry() {
     const trReq = new RequestDataModel();
     const api = '/api/product/list';
-    this.service.HTTPget(api).then(resp => {
+    this.service.HTTPGet(api).then(resp => {
       const response   = resp as ProductModelResponse;
       if (response) {
         this.product_list = response.body;
@@ -193,7 +193,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     trReq.body = this.obj_Id_model_list;
 
     const api = '/api/vendor/delete';
-    this.service.HTTPRequest(api, trReq).then(resp => {
+    this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
       if (response.body.status === Reponse_Status.Y) {
         this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Update_Success'));

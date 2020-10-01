@@ -50,14 +50,12 @@
                 <div class="form-row">
                     <div class="form-group form-group-last col-md-10">
                         <label>{{'Home2100.LABEL.DESCRIPTION' | translate}}</label>
-                        <kendo-upload class="uploadi-img overflow" [autoUpload]="false" [saveUrl]="uploadSaveUrl" [multiple]="false" [removeUrl]="uploadRemoveUrl" [restrictions]="uploadRestrictions" (select)="onSelect($event)" (clear)="onClear($event)" [chunkable]="chunkSettings"
-                            (remove)="onRemove($event)" (success)="successEventHandler($event)" (upload)="uploadEventHandler($event)">
-                            <!-- </kendo-upload> -->
-                            <!-- <kendo-upload-messages select="Add images"></kendo-upload-messages> -->
+                        <kendo-upload class="uploadi-img" [autoUpload]="false" [saveUrl]="uploadSaveUrl" [removeUrl]="uploadRemoveUrl" [restrictions]="uploadRestrictions" (select)="selectEventHandler($event)" (clear)="clearEventHandler($event)" (remove)="removeEventHandler($event)"
+                            (complete)="completeEventHandler($event)" (upload)="uploadEventHandler($event)" [ngModel]="imagePreviews">
                         </kendo-upload>
                         <!-- <button type="button" tabindex="-1" class="btn04 rcen_btn" [disabled]="uploadbtn" id="upload" ><span>{{'HOM3200.LABEL.UPLOAD' | translate}}</span></button> Upload -->
 
-                        <img class="upload-img" *ngIf="imagePreviews" [src]="imagePreviews.src" />
+                        <img *ngFor="let image of imagePreviews" [src]="image.src" alt="image preview" style="width: 200px; margin: 10px;" />
                     </div>
 
                 </div>

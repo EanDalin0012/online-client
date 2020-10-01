@@ -7,6 +7,7 @@ import { AES_INFO, LOCAL_STORAGE } from '../constants/common.const';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { UploadEvent } from '@progress/kendo-angular-upload';
 
 
 @Injectable({
@@ -32,20 +33,20 @@ export class ServerService {
     this.bizserverUrl = environment.bizMOBServer;
   }
 
-  public HTTPGet(api): Promise<any> {
-   return new Promise((resolve, reject) => {
-    $('div.loading').addClass('none');
+  // public HTTPGet(api): Promise<any> {
+  //  return new Promise((resolve, reject) => {
+  //   $('div.loading').addClass('none');
 
-    const uri = this.bizserverUrl + api;
-    this.httpClient.get(uri, this.httpOptions).subscribe(rest => {
-      resolve(rest);
-      $('div.loading').removeClass('none');
-    });
+  //   const uri = this.bizserverUrl + api;
+  //   this.httpClient.get(uri, this.httpOptions).subscribe(rest => {
+  //     resolve(rest);
+  //     $('div.loading').removeClass('none');
+  //   });
 
-   });
-  }
+  //  });
+  // }
 
-  public HTTPRequest(api, TrClass: any): Promise<any> {
+  public HTTPPost(api, TrClass: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const aesInfo: any = Utils.getSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME) || {};
       console.log(aesInfo.timestamp);
@@ -113,7 +114,78 @@ export class ServerService {
    }
 
 
-  public HTTPget(api, obj?: any): Promise<any> {
+   
+  public HTTPRequestFile(api, uploadEvent: UploadEvent): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const aesInfo: any = Utils.getSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME) || {};
+      console.log(aesInfo.timestamp);
+      if (aesInfo && new Date().getTime() - aesInfo.timestamp > environment.autoLogoutTime) {
+
+        if (this.modal) {
+          this.modal.close();
+        }
+
+        this.modalService.alert({
+          content: 'For security reason, sessions end after 10 minutes of inactivity.\n' +
+            'Your are required to sign in if  you wish to continue to use our services.\n' +
+            'Thank you for using.',
+          callback: () => {
+            $('kendo-dialog').remove();
+            Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
+            Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
+            this.router.navigate(['/login']);
+          }
+        });
+      } else {
+        // $('div.loading').addClass('none');
+        $('div.loading').removeClass('none');
+        $('body').removeClass('loaded');
+        
+        let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+        const access_token = authorization.access_token;
+        if (!access_token) {
+          this.modalService.alert({
+            content: '',
+            btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
+            callback: _res => {
+              Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
+              Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
+              this.router.navigate(['/login']);
+            }
+          });
+          return;
+        }
+        
+        const httpOptionsObj = {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+access_token
+        };
+        const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+        const lang = Utils.getSecureStorage(localStorage.I18N);
+        
+        const uri = this.bizserverUrl + api+'?userId='+user_info.id +'&lang='+lang+'&file='+uploadEvent.files[0].rawFile;
+        const formData = new FormData();
+
+        this.data = this.httpClient.post(uri, formData, {
+          headers: new HttpHeaders(httpOptionsObj)
+        }).subscribe(
+          res => {
+            const newAesInfo: any = Utils.getSecureStorage(AES_INFO.STORE) || {};
+            newAesInfo.timestamp = new Date().getTime();
+            Utils.setSecureStorage(AES_INFO.STORE, newAesInfo);
+            $('body').addClass('loaded');
+            $('div.loading').addClass('none');
+            const result = res as any;
+            resolve(res);
+        }, error => {
+          console.log(error);
+        });
+      }
+
+    });
+   }
+
+  public HTTPGet(api, obj?: any): Promise<any> {
     return new Promise((resolve, reject) =>{
       $('div.loading').removeClass('none');
       $('body').removeClass('loaded');

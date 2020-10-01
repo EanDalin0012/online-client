@@ -76,7 +76,7 @@ export class UserMngAccComponent implements OnInit {
   inquiry() {
     const trReq = new UserDataRequest();
     const api = '/api/user/account/list';
-    this.service.HTTPget(api).then(resp => {
+    this.service.HTTPGet(api).then(resp => {
       const response   = resp as UserDataResponse;
       if (response) {
         this.userInfoList =  response.body.items;
