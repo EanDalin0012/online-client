@@ -148,7 +148,8 @@ export enum URLCODE {
   'UserMngAcc'       = 'user-account',
   'RegiCate'         = 'category',
   'Vendor'           = 'vendor',
-  'RegiPro'          = 'product'
+  'RegiPro'          = 'product',
+  'Set-Price-Product' = 'set-price-product'
 }
 
 export enum CURRENCY_CODE {

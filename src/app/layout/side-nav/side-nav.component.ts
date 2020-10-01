@@ -113,7 +113,8 @@ export class SideNavComponent implements OnInit {
         url += `home/${URLCODE[urlCode]}`;
         break;
       case 'User1000': // setting
-      case 'UserMngAcc': // setting
+      case 'UserMngAcc': // setting Set-Price-Product
+      case 'Set-Price-Product':
         url += `user-mng/${URLCODE[urlCode]}`;
         break;
     }

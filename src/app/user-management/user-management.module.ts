@@ -21,6 +21,10 @@ import { UserMngClientDetailsEditComponent } from './user-mng-client-details-edi
 import { UserMngUserInfoAddFormComponent } from './user-mng-user-info-add-form/user-mng-user-info-add-form.component';
 import { UserMngUserInfoAddImageComponent } from './user-mng-user-info-add-image/user-mng-user-info-add-image.component';
 import { UserMngUserInfoAddAccountComponent } from './user-mng-user-info-add-account/user-mng-user-info-add-account.component';
+import { SetPriceProductComponent } from './set-price-product/set-price-product.component';
+import { SetPriceProductAddComponent } from './set-price-product-add/set-price-product-add.component';
+import { SetPriceProductEditComponent } from './set-price-product-edit/set-price-product-edit.component';
+import { SetPriceProductViewComponent } from './set-price-product-view/set-price-product-view.component';
 
 
 
@@ -44,6 +48,10 @@ import { UserMngUserInfoAddAccountComponent } from './user-mng-user-info-add-acc
    UserMngUserInfoAddFormComponent,
    UserMngUserInfoAddImageComponent,
    UserMngUserInfoAddAccountComponent,
+   SetPriceProductComponent,
+   SetPriceProductAddComponent,
+   SetPriceProductEditComponent,
+   SetPriceProductViewComponent,
   ],
   imports: [
     CommonModule,

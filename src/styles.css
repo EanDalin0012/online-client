@@ -5849,3 +5849,15 @@ kendo-dialog {
 .contentsWrap {
     max-height: 85vh;
 }
+
+.k-virtual-content::-webkit-scrollbar-thumb {
+    background: #646c74b8;
+}
+
+.k-virtual-content::-webkit-scrollbar {
+    width: 0.25rem;
+}
+
+kendo-grid {
+    max-height: 570px;
+}

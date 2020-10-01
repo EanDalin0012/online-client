@@ -1,0 +1,139 @@
+<div class="contentsWrap contentsWrap01">
+    <div class="page_title">
+        <div class="breadcrumb">
+            <div class="page_navi">
+                <span>Management</span>
+            </div>
+            <div class="page_navi">
+                <span>Product</span>
+            </div>
+            <h1><span>Set Price Product</span></h1>
+        </div>
+
+    </div>
+
+    <div class="container01">
+
+        <div class="col-md-12" style="margin-bottom: 15px; padding: 0px;">
+            <strong>{{'COMMON.LABEL.ITEMS' | translate: {'value': totalRecord} }}</strong>
+        </div>
+
+        <div>
+
+            <kendo-grid scrollable="virtual" [data]="gridView" [selectable]="selectableSettings" [sortable]="true" [sort]="sort" (sortChange)="sortChange($event)" [pageSize]="pageSize" [rowClass]="rowCallback" [skip]="skip" [kendoGridBinding]="list" [pageable]="{
+            buttonCount: buttonCount,
+            info: info,
+            type: type,
+            pageSizes: pageSizes,
+            previousNext: previousNext}" [height]="height" kendoGridSelectBy="id" [scrollable]="'true'" (pageChange)="pageChange($event)" class="table01 overflow-x" [selectedKeys]="mySelection">
+                <ng-template kendoGridToolbarTemplate>
+                    <div class="form-row" style="width: 100%; border-left: none !important;">
+                        <div class="form-group col-md-8">
+                            <input type="text" style="height: 34px;" [ngClass]="search? 'active-input' : ''" class="form-control" [(ngModel)]="search" (input)="searchChange($event)" placeholder="Please enter suplier name...">
+                            <div class="in_box">
+                                <button type="button" style="top: 5px;" [ngClass]="search? 'btn_del' : ''" (click)="deleteTextSearch()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
+                                {{'COMMON.LABEL.Download_Excel' | translate}}</button>
+                            <button kendoGridPDFCommand class="pdf export" type="button" icon="file-pdf" style="float:right; width: 165px;">
+                                <span>{{'COMMON.LABEL.Download_Pdf' | translate}}</span>
+                            </button>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <kendo-grid-checkbox-column class="cen" [width]="45" [resizable]="false" [columnMenu]="true" showSelectAll="true"></kendo-grid-checkbox-column>
+
+                <kendo-grid-column width="50" class="cen" [sortable]="false" field="no" title="{{'COMMON.LABEL.NO' | translate}}">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <p>{{rowIndex + 1}}</p>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column width="190" class="subj" field="name" title="Product Name"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj" field="price" title="Price">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <span>{{dataItem.price}}</span>
+                        <span>{{dataItem.currency}}</span>
+                    </ng-template>
+
+                </kendo-grid-column>
+                <kendo-grid-column width="190" class="subj" field="discount" title="Discount %">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <span>{{dataItem.sale_price_after_discount}}</span>
+                        <span>%</span>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column width="190" class="subj" field="sale_price_after_discount" title="After Discount Price">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <span>{{dataItem.sale_price_after_discount}}</span>
+                        <span>{{dataItem.currency}}</span>
+                    </ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-column width="100" class="cen" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <button type="button" tabindex=-1 class="btn_edit01" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column width="150" class="cen" [sortable]="false" field="create_by" title="Created By"></kendo-grid-column>
+                <kendo-grid-column width="150" class="cen" [sortable]="false" field="modify_by" title="Modified By"></kendo-grid-column>
+
+                <!-- pdf -->
+                <!-- <kendo-grid-pdf fileName="user-lock-information.pdf" [allPages]="true">
+                    <kendo-grid-pdf-margin top="1cm" left="1cm" right="1cm" bottom="1cm"></kendo-grid-pdf-margin>
+
+                    <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
+                        <div class="page-template">
+                            <div class="header">
+                                <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+                                Multi-page grid with automatic page breaking
+                            </div>
+                            <div class="footer">
+                                Page {{ pageNum }} of {{ totalPages }}
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </kendo-grid-pdf> -->
+
+                <kendo-grid-pdf fileName="Products.pdf" [allPages]="true" paperSize="A3" [repeatHeaders]="true" [landscape]="true">
+                    <kendo-grid-pdf-margin top="2cm" left="1cm" right="1cm" bottom="2cm"></kendo-grid-pdf-margin>
+                    <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
+                        <div class="page-template">
+                            <div class="header">
+                                <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+                            </div>
+                            <div class="footer">
+                                Page {{ pageNum }} of {{ totalPages }}
+                            </div>
+                        </div>
+                    </ng-template>
+                </kendo-grid-pdf>
+
+                <!-- excele -->
+                <kendo-excelexport [data]="data" fileName="main-category.xlsx" #excelexport>
+                    <kendo-excelexport-column field="id" title="{{'UserMngAcc.LABEL.User_Name' | translate}}">
+                    </kendo-excelexport-column>
+                    <kendo-excelexport-column field="user_name" title="{{'UserMngAcc.LABEL.Enabled' | translate}}" [width]="350"></kendo-excelexport-column>
+                    <kendo-excelexport-column field="enabled" title="{{'UserMngAcc.LABEL.Account_Locked' | translate}}" [width]="350"></kendo-excelexport-column>
+                </kendo-excelexport>
+
+            </kendo-grid>
+        </div>
+
+        <!--  <div class="table_control">
+            <div class="btn_area">
+                <button type="button" tabindex=-1 class="btn03 r" (click)="delete()"><span>{{'COMMON.BUTTON.DELETE' | translate}}</span></button>
+            </div>
+        </div> -->
+        <!-- <div class="c_btn">
+            <div class="add-btn btn-css" (click)="Resgister()">
+                <span>{{'COMMON.LABEL.ADD_NEW' | translate}}</span>
+            </div>
+        </div> -->
+    </div>
+</div>
