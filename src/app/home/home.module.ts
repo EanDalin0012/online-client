@@ -9,6 +9,7 @@ import { Home2200Component } from './home2200/home2200.component';
 import { HomeComponent } from './home/home.component';
 import { MShareModule } from '../share/mshare/mshare.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { CkeditorComponent } from './ckeditor/ckeditor.component';
 
 
 
@@ -19,7 +20,7 @@ import { HomeRoutingModule } from './home-routing.module';
     Home1200Component, 
     Home2000Component, 
     Home2100Component, 
-    Home2200Component
+    Home2200Component, CkeditorComponent
   ],
   imports: [
     HomeRoutingModule,

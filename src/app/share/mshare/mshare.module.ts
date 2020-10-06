@@ -1,5 +1,4 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -21,6 +20,7 @@ import { ModalComponent } from '../component/modal/modal.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { PhoneNumberPipe } from '../pipe/phone-number.pipe';
 import { DateFormatPipe } from '../pipe/date-format.pipe';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,8 @@ import { DateFormatPipe } from '../pipe/date-format.pipe';
     ButtonsModule,
     ProgressBarModule,
     PhoneNumberPipe,
-    DateFormatPipe
+    DateFormatPipe,
+    CKEditorModule
   ],
   entryComponents: [
     ModalComponent,

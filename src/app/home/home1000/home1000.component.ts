@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { DataService } from 'src/app/share/service/data.service';
 import { Country, CountryData } from './data';
+import { CryptoJS } from 'crypto-js';
 
 @Component({
   selector: 'app-home1000',
@@ -46,6 +47,7 @@ export class Home1000Component implements OnInit {
     console.log(url);
     this.dataService.visitMessage(url[5]);
     this.countryList = CountryData;
+    this.encrypt();
   }
 
   setBankName(country) {
@@ -54,6 +56,12 @@ export class Home1000Component implements OnInit {
 
   countryClass() {
 
+  }
+
+  encrypt() {
+    var encrypted = CryptoJS.AES.encrypt("Message", "Secret Passphrase");
+    var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
+    console.log(encrypted, decrypted);
   }
 
 }
