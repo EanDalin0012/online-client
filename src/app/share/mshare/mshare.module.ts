@@ -20,7 +20,6 @@ import { ModalComponent } from '../component/modal/modal.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { PhoneNumberPipe } from '../pipe/phone-number.pipe';
 import { DateFormatPipe } from '../pipe/date-format.pipe';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -54,8 +53,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ButtonsModule,
     ProgressBarModule,
     PhoneNumberPipe,
-    DateFormatPipe,
-    CKEditorModule
+    DateFormatPipe
   ],
   entryComponents: [
     ModalComponent,

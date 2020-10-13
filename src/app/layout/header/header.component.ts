@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit {
   langCode          = this.translate.currentLang;
   langData          = {
     en: { class: "eng", text: "English"},
-    km: { class: "khmer", text: "ខ្មែរ"},
-    zh: { class: "china", text: "中文"},
+    kh: { class: "khmer", text: "ខ្មែរ"},
+    ch: { class: "china", text: "中文"},
   };
   constructor(
     private translate: TranslateService,
@@ -30,8 +30,9 @@ export class HeaderComponent implements OnInit {
 
   onChangeLanguage(code: string) {
     this.langCode = code;
+    console.log(this.langCode, localStorage.I18N, code);
+    Utils.setSecureStorage(LOCAL_STORAGE.I18N, this.langCode );
     this.translate.use( this.langCode );
-    Utils.setSecureStorage( localStorage.I18N, this.langCode );
   }
 
   signOUt() {

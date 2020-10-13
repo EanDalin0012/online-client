@@ -100,17 +100,6 @@ export class AuthInterceptor implements HttpInterceptor {
           }
         });
       }
-      if (error && error.error.status === 500) {
-        this.modalService.alert({
-          // tslint:disable-next-line:max-line-length
-          content:  'message :<span class="message-alert">' + String(error.error.message).substr(0, 150) + '</span> <br/>status: <span class= "message-alert">' + error.error.status + '</span',
-          modalClass: ['pop_confirm'],
-          btnText: 'Confirm',
-          callback: (res) => {
-            return false;
-          }
-        });
-      }
       if (error && error.status === 0) {
           this.modalService.alert({
             content:  'message : <span>Connection faile</span> status: ' + error.statusText,

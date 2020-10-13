@@ -81,6 +81,7 @@ menu = '';
       const response   = resp as CategoryReponseModel;
       if (response) {
         this.category_list = response.body;
+        console.log('', this.category_list);
         this.data          = response.body;
         this.loadingData(this.category_list);
       }

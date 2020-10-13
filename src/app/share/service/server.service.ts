@@ -33,19 +33,6 @@ export class ServerService {
     this.bizserverUrl = environment.bizMOBServer;
   }
 
-  // public HTTPGet(api): Promise<any> {
-  //  return new Promise((resolve, reject) => {
-  //   $('div.loading').addClass('none');
-
-  //   const uri = this.bizserverUrl + api;
-  //   this.httpClient.get(uri, this.httpOptions).subscribe(rest => {
-  //     resolve(rest);
-  //     $('div.loading').removeClass('none');
-  //   });
-
-  //  });
-  // }
-
   public HTTPPost(api, TrClass: any): Promise<any> {
     return new Promise((resolve, reject) => {
       const aesInfo: any = Utils.getSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME) || {};
@@ -92,7 +79,7 @@ export class ServerService {
           'Authorization': 'Bearer '+access_token
         };
         const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
-        const lang = Utils.getSecureStorage(localStorage.I18N);
+        const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
         const uri = this.bizserverUrl + api+'?userId='+user_info.id +'&lang='+lang;
         this.data = this.httpClient.post(uri, JSON.stringify(TrClass), {
           headers: new HttpHeaders(httpOptionsObj)
@@ -104,7 +91,14 @@ export class ServerService {
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
             const result = res as any;
-            resolve(res);
+            if(result.error != null) {
+              console.log(result.error.message);
+              this.message(result.error.message);
+              reject();
+            } else {
+              resolve(result.body);
+            }
+            
         }, error => {
           console.log(error);
         });
@@ -176,7 +170,11 @@ export class ServerService {
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
             const result = res as any;
-            resolve(res);
+            if(result.error !== null) {
+              console.log(result.error.message);
+              this.message(result.error.message);
+            }
+            resolve(result.body);
         }, error => {
           console.log(error);
         });
@@ -213,8 +211,26 @@ export class ServerService {
       this.httpClient.get(uri, {headers}).subscribe(rest => {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
-        resolve(rest);
+        const result = rest as any;
+        console.log(result);
+        if(result.error != null) {
+          this.message(result.error.message);
+        } else {
+          resolve(result);
+        }
       });
+    });
+  }
+
+  private message(message: string) {
+    this.modalService.alert({
+      // tslint:disable-next-line:max-line-length
+      content:  '<h2>'+message+'</h2>',
+      modalClass: ['pop_confirm'],
+      btnText: 'Confirm',
+      callback: (res) => {
+        return false;
+      }
     });
   }
   
