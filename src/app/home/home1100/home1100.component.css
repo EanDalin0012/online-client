@@ -1,0 +1,15 @@
+.k-upload .k-action-buttons .k-upload-selected {
+    margin-top: 7px;
+    width: 200px;
+    border-color: #008cff !important;
+    background-image: none;
+    background-size: 15% !important;
+    background-position-x: 3px;
+    background-repeat: no-repeat !important;
+    background-position-x: 5px !important;
+    background-position-y: 5px !important;
+}
+
+.k-upload .k-action-buttons .k-clear-selected {
+    display: block;
+}

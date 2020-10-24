@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.password = 'admin123';
     $('body').addClass('hold-transition login-page');
     $(() => {
       $('input').iCheck({

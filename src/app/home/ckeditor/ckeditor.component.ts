@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CkeditorComponent implements OnInit {
 
-
+  config: {
+    customConfig: '../../../../assets/ckeditor/ckeditor.js'
+  }
 
   constructor() { }
 

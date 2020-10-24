@@ -57,22 +57,16 @@ export class AuthInterceptor implements HttpInterceptor {
     // console.log('new headers', clonedRequest.headers.keys());
     return next.handle(req).timeout(this.timeoutmillsec)
     .map(event => {
-      // let apiname = req.url.split(environment.bizServer.context)[1];
+      // if (environment.encryptionUse) {
+      //   const aesInfo: any = Utils.getSecureStorage(AES_INFO.STORE) || {};
+      //   if (event instanceof HttpResponse) {
+      //     event = event.clone({ body: {
+      //       header: event.body.header,
+      //       body: JSON.parse(this.decrypt(event.body.body, aesInfo.aesKey))
+      //     }});
+      //   }
 
-      // if (!apiname){
-      //   apiname = req.url;
       // }
-
-      if (environment.encryptionUse) {
-        const aesInfo: any = Utils.getSecureStorage(AES_INFO.STORE) || {};
-        if (event instanceof HttpResponse) {
-          event = event.clone({ body: {
-            header: event.body.header,
-            body: JSON.parse(this.decrypt(event.body.body, aesInfo.aesKey))
-          }});
-        }
-
-      }
 
       if (event instanceof HttpResponse){
         // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);

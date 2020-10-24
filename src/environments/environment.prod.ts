@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   // SIT
-  bizMOBServer : 'http://192.168.2.47:8080/onlinecode',
+  bizMOBServer : 'http://localhost:8080',
 
   // Auto Logout Time (min * sec * millsec)
   autoLogoutTime: 10 * 60 * 1000,
@@ -11,7 +11,7 @@ export const environment = {
 
     // SIT
  bizServer : {
-   server : 'http://192.168.2.47:8080/onlinecode',
+   server : 'http://localhost:8080',
    port : '8080'
  },
 };

@@ -51,13 +51,24 @@
                     <div class="form-group form-group-last col-md-10">
                         <label>{{'Home2100.LABEL.DESCRIPTION' | translate}}</label>
                         <kendo-upload class="uploadi-img" [autoUpload]="false" [saveUrl]="uploadSaveUrl" [removeUrl]="uploadRemoveUrl" [restrictions]="uploadRestrictions" (select)="selectEventHandler($event)" (clear)="clearEventHandler($event)" (remove)="removeEventHandler($event)"
-                            (complete)="completeEventHandler($event)" (upload)="uploadEventHandler($event)" [ngModel]="imagePreviews">
+                            (complete)="completeEventHandler($event)" (upload)="uploadEventHandler($event)">
                         </kendo-upload>
                         <!-- <button type="button" tabindex="-1" class="btn04 rcen_btn" [disabled]="uploadbtn" id="upload" ><span>{{'HOM3200.LABEL.UPLOAD' | translate}}</span></button> Upload -->
 
                         <img *ngFor="let image of imagePreviews" [src]="image.src" alt="image preview" style="width: 200px; margin: 10px;" />
                     </div>
 
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group form-group-last col-md-10">
+                        <input
+                        type="file"
+                        [multiple]="true"
+                        class="upload__input"
+                        (change)="uploadFiles($event)"
+                    />
+                        </div>
                 </div>
 
             </div>

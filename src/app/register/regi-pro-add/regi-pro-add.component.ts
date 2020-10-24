@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ChunkSettings, FileInfo, FileRestrictions, RemoveEvent, SelectEvent, SuccessEvent, UploadEvent } from '@progress/kendo-angular-upload';
+import { ChunkSettings, FileInfo, FileRestrictions, FileState, RemoveEvent, SelectEvent, SuccessEvent, UploadEvent } from '@progress/kendo-angular-upload';
 
 import { environment } from 'src/environments/environment';
 import { ProductModel } from '../../share/model/model/product';
@@ -9,12 +9,12 @@ import { ModalService } from '../../share/service/modal.service';
 import { RequestDataService } from '../../share/service/get-data.service';
 import { ProductModelRequest } from '../../share/model/request/req-product';
 import { ResponseDataModel } from '../../share/model/response/res-data';
-import { Reponse_Status, BTN_ROLES, LOGO_FILE_EXT, LOCAL_STORAGE } from '../../share/constants/common.const';
+import { Reponse_Status, BTN_ROLES, LOGO_FILE_EXT, LOCAL_STORAGE, AES_INFO } from '../../share/constants/common.const';
 import { CategoryModel } from '../../share/model/model/category';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { FileRequestModel } from '../../share/model/request/req-file';
 import { Utils } from '../../share/utils/utils.static';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-regi-pro-add',
   templateUrl: './regi-pro-add.component.html',
@@ -85,11 +85,12 @@ export class RegiProAddComponent implements OnInit {
     private serverService: ServerService,
     private translate: TranslateService,
     private modalService: ModalService,
-    private dataService: RequestDataService
+    private dataService: RequestDataService,
+    private httpClient: HttpClient,
   ) { }
 
   ngOnInit() {
-    this.uploadSaveUrl = environment.bizMOBServer + '/file/api/upload';
+    this.uploadSaveUrl = environment.bizMOBServer + '/api/mobile/upload';
     this.uploadRemoveUrl = environment.bizMOBServer + '/api/file/removeUrl';
     this.valuePrimitiveMainCategory = true;
     this.translate.get('Home8100').subscribe((res) => {
@@ -235,23 +236,23 @@ export class RegiProAddComponent implements OnInit {
   }
 
   uploadEventHandler(e: UploadEvent) {
-    // let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-    // const access_token = authorization.access_token;
-    // const httpOptionsObj = {
-    //   'Content-Type': 'application/json',
-    //    'Authorization': 'Bearer '+access_token
-    // };
-    // const headers=  new HttpHeaders(httpOptionsObj);
-    // console.log('header', headers, httpOptionsObj);
-    // e.headers = e.headers = e.headers.append('Authorization', 'Bearer ' + access_token);
+    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+    const access_token = authorization.access_token;
+    const httpOptionsObj = {
+      'Content-Type': 'application/json',
+       'Authorization': 'Bearer '+access_token
+    };
+    const headers=  new HttpHeaders(httpOptionsObj);
+    console.log('header', headers, httpOptionsObj);
+    e.headers = headers;
     e.data = {
       userID : 1,
       customerNo: 1,
       corporateUserProfileImageURL: '',
       userFile : e.files[0].rawFile
     };
-    console.log('file', e.files[0].rawFile);
-    
+    console.log('file', e.headers);
+    // this.doRequestFile(e.files[0].rawFile);
   }
 
   uploadFileImage(file: UploadEvent): string {
@@ -268,4 +269,75 @@ export class RegiProAddComponent implements OnInit {
     return "N";
   }
 
+  public showButton(state: FileState): boolean {
+    return (state === FileState.Uploaded) ? true : false;
+  }
+
+  public remove(upload, uid: string) {
+    upload.removeFilesByUid(uid);
+  }
+
+  
+  doRequestFile(file1: File) {
+    console.log('file1', file1);
+    let file = new FileUpload
+    file.file = file1;
+
+    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+    const access_token = authorization.access_token;
+        
+    const httpOptionsObj = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+access_token
+    };
+    const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+    const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
+    const uri = environment.bizMOBServer + '/api/mobile/upload?userId='+user_info.id +'&lang='+lang;
+    const formData = new FormData()
+    formData.append('file', file1);
+
+    const data = this.httpClient.post(uri, formData, {
+      headers: new HttpHeaders(httpOptionsObj)
+    }).subscribe(
+      res => {
+       console.log('file uploading', res); 
+    }, error => {
+      console.log(error);
+    });
+
+    this.serverService.HTTPPost(environment.bizMOBServer+'/api/file/upload1', file).then(res=>{
+      console.log('res', res);
+    });
+  }
+
+
+uploadFiles(files: File) {
+  console.log('working now', files);
+    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+    const access_token = authorization.access_token;
+        
+    const httpOptionsObj = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+access_token
+    };
+    const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+    const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
+    const uri = environment.bizMOBServer + '/api/mobile/upload?userId='+user_info.id +'&lang='+lang;
+    const formData = new FormData()
+    formData.append('file', files);
+
+    const data = this.httpClient.post(environment.bizMOBServer+'/api/file/upload1', formData, {
+      headers: new HttpHeaders(httpOptionsObj)
+    }).subscribe(
+      res => {
+       console.log('file uploading', res); 
+    }, error => {
+      console.log(error);
+    });
+}
+
+}
+
+export class FileUpload {
+  file: File;
 }

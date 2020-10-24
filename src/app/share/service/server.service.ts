@@ -92,11 +92,10 @@ export class ServerService {
             $('div.loading').addClass('none');
             const result = res as any;
             if(result.error != null) {
-              console.log(result.error.message);
               this.message(result.error.message);
               reject();
             } else {
-              resolve(result.body);
+              resolve(result);
             }
             
         }, error => {
@@ -171,10 +170,9 @@ export class ServerService {
             $('div.loading').addClass('none');
             const result = res as any;
             if(result.error !== null) {
-              console.log(result.error.message);
               this.message(result.error.message);
             }
-            resolve(result.body);
+            resolve(result);
         }, error => {
           console.log(error);
         });
@@ -215,6 +213,7 @@ export class ServerService {
         console.log(result);
         if(result.error != null) {
           this.message(result.error.message);
+          reject();
         } else {
           resolve(result);
         }
