@@ -4,10 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { HttpEventType, HttpResponse, HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from '../../share/utils/utils.static';
-import { LOCAL_STORAGE } from '../../share/constants/common.const';
+import { LOCAL_STORAGE, LOGO_FILE_EXT } from '../../share/constants/common.const';
 import { FileRequestModel } from '../../share/model/request/req-file';
 import { ServerService } from '../../share/service/server.service';
 import { environment } from '../../../environments/environment.prod';
+import { FileRestrictions, SelectEvent, RemoveEvent, UploadEvent } from '@progress/kendo-angular-upload';
 
 @Component({
   selector: 'app-home1100',
@@ -162,6 +163,65 @@ export class Home1100Component implements OnInit {
       }
     });
 
+  }
+
+
+  // kendo 
+
+  public imagePreviews: any[] = [];
+  public uploadRestrictions: FileRestrictions = {
+    allowedExtensions: LOGO_FILE_EXT
+  };
+  
+  public selectEventHandler(e: SelectEvent): void {
+    const that = this;
+
+    e.files.forEach((file) => {
+
+      if (!file.validationErrors) {
+        const reader = new FileReader();
+
+        reader.onload = function (ev) {
+          const image = {
+            src: ev.target['result'],
+            uid: file.uid
+          };
+          console.log(ev.target);
+          console.log(typeof (ev.target));
+          that.imagePreviews.unshift(image);
+        };
+        console.log('file', file.rawFile);
+        this.file_name = file.name;
+        this.file_size =  file.size;
+        this.file_type = file.rawFile.type;
+        console.log(this.file_size, this.file_name, this.file_type);
+        
+        reader.readAsDataURL(file.rawFile); 
+      }
+    });
+  }
+
+  public clearEventHandler(val): void {
+    console.log('Clearing the file upload', val);
+    this.imagePreviews = [];
+  }
+
+  public removeEventHandler(e: RemoveEvent): void {
+
+    const index = this.imagePreviews.findIndex(item => item.uid === e.files[0].uid);
+
+    if (index >= 0) {
+      this.imagePreviews.splice(index, 1);
+    }
+  }
+
+  public completeEventHandler(val) {
+    console.log(val);
+  }
+
+  
+  uploadEventHandler(e: UploadEvent) {
+    // this.doRequestFile(e.files[0].rawFile);
   }
 
 }

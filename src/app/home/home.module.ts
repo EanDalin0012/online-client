@@ -11,6 +11,7 @@ import { MShareModule } from '../share/mshare/mshare.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { CkeditorComponent } from './ckeditor/ckeditor.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { UploadsModule } from '@progress/kendo-angular-upload';
 
 
 

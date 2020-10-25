@@ -15,7 +15,7 @@ import { PDFExportModule } from '@progress/kendo-angular-pdf-export';
 import { SchedulerModule } from '@progress/kendo-angular-scheduler';
 import { NotificationModule } from '@progress/kendo-angular-notification';
 import { InputsModule } from '@progress/kendo-angular-inputs';
-import { UploadModule } from '@progress/kendo-angular-upload';
+import { UploadModule, UploadsModule } from '@progress/kendo-angular-upload';
 import { ModalComponent } from '../component/modal/modal.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { PhoneNumberPipe } from '../pipe/phone-number.pipe';
@@ -40,6 +40,7 @@ import { DateFormatPipe } from '../pipe/date-format.pipe';
     SharedModule,
     SortableModule,
     DropDownsModule,
+    UploadsModule,
     PDFModule,
     DialogsModule,
     UploadModule,

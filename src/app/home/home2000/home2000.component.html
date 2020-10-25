@@ -1,1 +1,14 @@
-<p>home2000 works!</p>
+<kendo-fileselect
+            [restrictions]="fileRestrictions"
+            (select)="selectEventHandler($event)"
+            (remove)="removeEventHandler($event)">
+        </kendo-fileselect>
+
+
+        <div *ngIf="imagePreviews.length" class="img-preview example-config">
+            <h3>Preview selected images</h3>
+            <img *ngFor="let image of imagePreviews"
+            [src]="image.src"
+            alt="image preview"
+            style="width: 200px; margin: 10px;" />
+        </div>

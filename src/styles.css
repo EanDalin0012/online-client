@@ -5900,3 +5900,10 @@ body::-webkit-resizer {
     color: #ffffff;
     background-color: #007bff;
 }
+
+.k-upload .k-upload-files {
+    position: relative;
+}
+.k-upload .k-upload-files .k-upload-status button, .k-upload .k-upload-files .k-upload-status .k-button {
+    position: relative;
+}

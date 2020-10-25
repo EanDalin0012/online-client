@@ -11,7 +11,8 @@ const routes: Routes = [
   {path: '', component: Home1000Component},
   {path: 'home110', component: Home1100Component},
   {path: 'ckeditor', component: CkeditorComponent},
-  {path: 'home220', component: Home1200Component}
+  {path: 'home220', component: Home1200Component},
+  {path: 'home200', component: Home2000Component}
 ];
 
 @NgModule({

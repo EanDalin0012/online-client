@@ -257,7 +257,6 @@ export class RegiProAddComponent implements OnInit {
 
   uploadFileImage(file: UploadEvent): string {
     const trReq                   = new FileRequestModel();
-    trReq.body = file.files[0];
     console.log('trReq',trReq);
     const api = '/api/file/upload';
     this.serverService.HTTPRequestFile(api, file).then(response => {
