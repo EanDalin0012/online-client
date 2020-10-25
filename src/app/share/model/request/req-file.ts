@@ -1,4 +1,4 @@
-import { FileInfo } from '@progress/kendo-angular-upload';
+import { FileModel } from '../model/file';
 export class FileRequestModel  {
-    public body: any;
+    public body: FileModel;
 }

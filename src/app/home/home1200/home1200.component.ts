@@ -23,7 +23,7 @@ export class Home1200Component implements OnInit {
 
   
   getData():string {
-     this.uploadService.getFile('123-abc').then(res =>{
+    this.uploadService.getFile('123-abc').then(res =>{
       if(res) {
         this.data = res as any;
         console.log(this.data);

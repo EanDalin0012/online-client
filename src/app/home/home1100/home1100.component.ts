@@ -5,6 +5,9 @@ import { HttpEventType, HttpResponse, HttpClient, HttpHeaders } from '@angular/c
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from '../../share/utils/utils.static';
 import { LOCAL_STORAGE } from '../../share/constants/common.const';
+import { FileRequestModel } from '../../share/model/request/req-file';
+import { ServerService } from '../../share/service/server.service';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-home1100',
@@ -16,10 +19,12 @@ export class Home1100Component implements OnInit {
   imageSrc: string;
 
   file_name: string;
-  size: number;
-  type: string;
+  file_extension: string; // '.jpg'
+  file_type: string;
+  file_source: string;
+  file_size: number;
   modifiedDate: string;
-  
+
   myForm = new FormGroup({
 
    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -37,7 +42,8 @@ export class Home1100Component implements OnInit {
 
   fileInfos: Observable<any>;
   
-  constructor(private uploadService: UploadService,private http: HttpClient) { }
+  constructor(private uploadService: UploadService,private http: HttpClient,
+    private serverService: ServerService) { }
   
   ngOnInit(): void {
   }
@@ -52,8 +58,8 @@ export class Home1100Component implements OnInit {
     if(event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       this.file_name = event.target.files[0].name;
-      this.type = event.target.files[0].type;
-      this.size = event.target.files[0].size;
+      this.file_type = event.target.files[0].type;
+      this.file_size = event.target.files[0].size;
       this.modifiedDate = event.target.files[0].lastModifiedDate;
       reader.readAsDataURL(file);
       reader.onload = () => {
@@ -69,7 +75,6 @@ export class Home1100Component implements OnInit {
   submit(){
 
     console.log(this.myForm.value);
-    console.log(this.file_name, this.modifiedDate, this.type, this.size);
     
     let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
     const access_token = authorization.access_token;
@@ -138,6 +143,24 @@ export class Home1100Component implements OnInit {
   }
 
   getSourceImg() {
+
+  }
+
+  doRequest() {
+    let request = new FileRequestModel();
+    request.body.file_name      = this.file_name;
+    request.body.file_type      = this.file_type;
+    const split = this.file_type.split('/');
+    request.body.file_extension = '.'+split[1];
+    request.body.file_source    = this.imageSrc;
+    request.body.file_size      = this.file_size;
+    const api = environment.bizMOBServer +'/api/base64/image/write';
+    console.log(request);
+    this.serverService.HTTPPost(api, request).then(resp=>{
+      if(resp) {
+        console.log(resp);
+      }
+    });
 
   }
 
