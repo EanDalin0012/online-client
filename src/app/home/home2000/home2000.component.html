@@ -5,6 +5,7 @@
         </kendo-fileselect>
 
 
+
         <div *ngIf="imagePreviews.length" class="img-preview example-config">
             <h3>Preview selected images</h3>
             <img *ngFor="let image of imagePreviews"
@@ -12,3 +13,18 @@
             alt="image preview"
             style="width: 200px; margin: 10px;" />
         </div>
+
+
+
+        <!-- <kendo-fileselect
+        #myFileSelect="kendoFileSelect"
+        >
+        <ng-template kendoFileSelectFileTemplate let-files let-state="state">
+            <div>Name: {{files[0].name}} Size: {{files[0].size}} bytes</div>
+            <button *ngIf="showButton(state)"
+                (click)="remove(myFileSelect, files[0].uid)"
+                class="k-button" style="position: absolute; right: .2em;">
+                Remove
+            </button>
+        </ng-template>
+    </kendo-fileselect> -->

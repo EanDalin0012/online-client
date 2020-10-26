@@ -15,6 +15,7 @@ import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { FileRequestModel } from '../../share/model/request/req-file';
 import { Utils } from '../../share/utils/utils.static';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Base64RequestAdd } from '../../share/model/request/base64-req';
 @Component({
   selector: 'app-regi-pro-add',
   templateUrl: './regi-pro-add.component.html',
@@ -334,6 +335,16 @@ uploadFiles(files: File) {
       console.log(error);
     });
 }
+
+ doRequestAddBase64() {
+  let base64Request = new Base64RequestAdd();
+  base64Request.body.file_extension = "";
+ }
+
+ doRequestRemoveBase64() {
+
+ }
+
 
 }
 

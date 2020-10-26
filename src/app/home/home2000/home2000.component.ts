@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileRestrictions, SelectEvent, RemoveEvent } from '@progress/kendo-angular-upload';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home2000',
@@ -28,12 +29,12 @@ export class Home2000Component implements OnInit {
   }
 
   public removeEventHandler(e: RemoveEvent): void {
-    this.log(`Removing ${e.files[0].name}`);
-
-    const index = this.imagePreviews.findIndex(item => item.uid === e.files[0].uid);
-
+    const index = this.imagePreviews.findIndex(item =>item.uid === e.files[0].uid);
+    console.log(index);
+    
     if (index >= 0) {
-    this.imagePreviews.splice(index, 1);
+    //this.imagePreviews.splice(index, 1);
+    console.log(this.imagePreviews.splice(index, 1));
     }
 }
 
@@ -49,11 +50,11 @@ public selectEventHandler(e: SelectEvent): void {
         const reader = new FileReader();
 
         reader.onload = function (ev) {
-          console.log(ev.target['result']);
           
         const image = {
             src: ev.target['result'],
-            uid: file.uid
+            uid: file.uid,
+            id: file.uid +"-"+moment().format('YYYYMMDDhhmmss')
         };
 
         that.imagePreviews.unshift(image);
@@ -63,7 +64,6 @@ public selectEventHandler(e: SelectEvent): void {
         this.file_name = file.name;
         this.file_size =  file.size;
         this.file_type = file.rawFile.type;
-        console.log('reader', reader);
     }
     
     });
