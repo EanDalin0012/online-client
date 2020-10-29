@@ -4,6 +4,9 @@ import { Utils } from '../utils/utils.static';
 import { LOCAL_STORAGE } from '../constants/common.const';
 import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs/Observable';
+import { SelectEvent, FileInfo } from '@progress/kendo-angular-upload';
+import { ServerService } from './server.service';
+import { Base64RequestAdd } from '../model/request/base64-req';
 
 @Injectable({
   providedIn: 'root'
@@ -11,39 +14,36 @@ import { Observable } from 'rxjs/Observable';
 export class UploadService {
   SERVER_URL: string = environment.bizMOBServer;
 
-  constructor(private httpClient: HttpClient) { 
+  constructor(
+    private httpClient: HttpClient,
+    private server: ServerService
+    ) { 
 
   }
 
-  public upload(file: File):Promise<any>{
-    return new Promise((resolve, reject) =>{
-      console.log('start');
-      let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-      const access_token = authorization.access_token;
-          
-      const httpOptionsObj = {
-        'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
-        'Authorization': 'Bearer '+access_token,
-        'cache-control': 'no-cache'
-      };
-      const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
-      const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
-      let t = new Testing();
-      t.file = file;
-      const data = this.httpClient.post('http://localhost:8080/api/file/upload2',t, {
-        headers: new HttpHeaders(httpOptionsObj)
-      }).subscribe(
-        res => {
-         console.log('file uploading', res); 
-         resolve("dafd");
-      }, error => {
-        console.log(error);
-      });
-  
-    
+  public upload(fileInfo: FileInfo, base64:string ):Promise<Boolean> {
+    return new Promise(resolve =>{
+      if(fileInfo && base64) {
+        const api = environment.bizMOBServer +'/api/base64/image/write';
+        const base64RequestAdd = new Base64RequestAdd();
+        base64RequestAdd.body.file_type      = fileInfo.rawFile.type;
+        base64RequestAdd.body.file_name      = fileInfo.name;
+        base64RequestAdd.body.file_size      = fileInfo.size;
+        base64RequestAdd.body.file_extension = fileInfo.extension;
+        base64RequestAdd.body.base64         = base64;
+        console.log('base64RequestAdd', base64RequestAdd);
+        // this.server.HTTPPost(api, {}).then(resp =>{
+
+        // });
+      } else {
+        resolve(false);
+      }
     });
   }
 
+  public remove(id: string) {
+
+  }
   private baseUrl = 'http://localhost:8080/api/file/upload1';
 
   upload1(file: File): Observable<HttpEvent<any>> {

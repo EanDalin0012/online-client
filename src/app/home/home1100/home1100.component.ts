@@ -112,9 +112,9 @@ export class Home1100Component implements OnInit {
     const formData = new FormData();  
     formData.append('file', event.target.files[0]);  
     file.inProgress = true;  
-    this.uploadService.upload(event.target.files[0]).then( res=>{
-      console.log('rest', res);
-    });  
+    // this.uploadService.upload(event.target.files[0]).then( res=>{
+    //   console.log('rest', res);
+    // });  
   }
 
   selectFile(event): void {

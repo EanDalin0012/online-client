@@ -5907,3 +5907,13 @@ body::-webkit-resizer {
 .k-upload .k-upload-files .k-upload-status button, .k-upload .k-upload-files .k-upload-status .k-button {
     position: relative;
 }
+
+.k-upload .k-upload-files .k-file {
+    padding: 8px 8px 10px;
+}
+.display-none {
+    display: none;
+}
+.right-2em {
+    right: .2em !important;
+}

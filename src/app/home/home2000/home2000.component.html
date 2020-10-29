@@ -1,18 +1,43 @@
-<kendo-fileselect
+<!-- <kendo-fileselect
             [restrictions]="fileRestrictions"
             (select)="selectEventHandler($event)"
             (remove)="removeEventHandler($event)">
-        </kendo-fileselect>
+</kendo-fileselect> -->
 
 
+<kendo-fileselect
+[restrictions]="fileRestrictions"
+[multiple] = "false"
+(select)="selectEventHandler($event)"
+        #myFileSelect="kendoFileSelect">
+        <ng-template kendoFileSelectFileTemplate let-files let-state="state">
+            <div>Name: {{files[0].name}} Size: {{files[0].size}} bytes</div>
+            <!-- <button *ngIf="showButton(state)"
+                (click)="remove(myFileSelect, files[0].uid)"
+                class="k-button" style="position: absolute; right: .2em;">
+                Remove
+            </button> -->
 
-        <div *ngIf="imagePreviews.length" class="img-preview example-config">
-            <h3>Preview selected images</h3>
-            <img *ngFor="let image of imagePreviews"
-            [src]="image.src"
-            alt="image preview"
-            style="width: 200px; margin: 10px;" />
-        </div>
+            <!-- <button *ngIf="showButton(state)"
+                (click)="showButton1(myFileSelect, files[0].uid)"
+                class="k-button" style="position: absolute; right: .2em;">
+                Add
+            </button> -->
+
+            <button class="k-button" [ngClass]="{ 'right-2em': sltLanguageList }" style="position: absolute; right: 6.2em;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">Remove</button>
+
+            <button class="k-button" [ngClass]="{ 'display-none': sltLanguageList }" style="position: absolute; right: .2em;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);sltLanguageList = !sltLanguageList" [icon]="'upload'" [look]="'outline'">Upload</button>
+        </ng-template>
+    </kendo-fileselect>
+
+
+<div *ngIf="imagePreviews.length" class="img-preview example-config">
+    <h3>Preview selected images</h3>
+    <img *ngFor="let image of imagePreviews"
+    [src]="image.src"
+    alt="image preview"
+    style="width: 200px; margin: 10px;" />
+</div>
 
 
 
