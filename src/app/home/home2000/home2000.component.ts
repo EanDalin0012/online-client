@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FileRestrictions, SelectEvent, RemoveEvent, FileState } from '@progress/kendo-angular-upload';
 import * as moment from 'moment';
 import { UploadService } from '../../share/service/upload.service';
-import { element } from 'protractor';
+import { Base64WriteImage } from '../../share/model/model/base64';
 
 @Component({
   selector: 'app-home2000',
@@ -10,29 +10,21 @@ import { element } from 'protractor';
   styleUrls: ['./home2000.component.css']
 })
 export class Home2000Component implements OnInit {
-
-  sltLanguageList = false;
-  on = true;
   public events: string[] = [];
-    public imagePreviews: any[] = [];
+  public imagePreviews: any[] = [];
     
 
 
-    public fileRestrictions: FileRestrictions = {
+  public fileRestrictions: FileRestrictions = {
       allowedExtensions: ['.jpg', '.png']
-    };
-    image = {
-      src: '',
-      uid: '',
-      id: ''
-    };
-
-    file_name: string;
-    file_extension: string; // '.jpg'
-    file_type: string;
-    file_source: string;
-    file_size: number;
-    modifiedDate: string;
+  };
+  
+    // file_name: string;
+    // file_extension: string; // '.jpg'
+    // file_type: string;
+    // file_source: string;
+    // file_size: number;
+    // modifiedDate: string;
     i = 0;
 
   constructor(
@@ -44,16 +36,13 @@ export class Home2000Component implements OnInit {
 
   public removeEventHandler(e: RemoveEvent): void {
     const index = this.imagePreviews.findIndex(item =>item.uid === e.files[0].uid);
-    console.log(index);
-    
     if (index >= 0) {
-    //this.imagePreviews.splice(index, 1);
     console.log(this.imagePreviews.splice(index, 1));
     }
 }
 
 public selectEventHandler(e: SelectEvent): void {
-    console.log(e);
+    this.imagePreviews = [];
     const that = this;
     e.files.forEach((file) => {
     console.log(file.rawFile);
@@ -67,7 +56,11 @@ public selectEventHandler(e: SelectEvent): void {
         const image = {
             src: ev.target['result']+"",
             uid: file.uid,
-            id: file.uid +"-"+moment().format('YYYYMMDDhhmmss')
+            id: file.uid +"-"+moment().format('YYYYMMDDhhmmss'),
+            name: file.name,
+            size: file.size,
+            type: file.rawFile.type,
+            extension: file.extension
         };
         imagePreviews1.push(image);
         that.imagePreviews.unshift(image);
@@ -76,21 +69,11 @@ public selectEventHandler(e: SelectEvent): void {
         this.i++;
         console.log(this.i);
         console.log(imagePreviews1);
-        this.file_name = file.name;
-        this.file_size =  file.size;
-        this.file_type = file.rawFile.type;
         reader.readAsDataURL(file.rawFile);
         
     }
     
     });
-    this.sltLanguageList = false;
-    this.on = false;
-    console.log(this.imagePreviews);
-    if(this.imagePreviews) {
-      alert(this.imagePreviews.length);
-    }
-    
 }
 
 
@@ -116,18 +99,29 @@ upload(state) {
     this.imagePreviews.forEach(element =>{
       if(element.uid === state) {
           console.log("call add function", element);
-          return 'a';
+          const base64WriteImage = new Base64WriteImage();
+          // src: ev.target['result']+"",
+          // uid: file.uid,
+          // id: file.uid +"-"+moment().format('YYYYMMDDhhmmss'),
+          // name: file.name,
+          // size: file.size,
+          // type: file.rawFile.type,
+          // extension: file.extension
+          base64WriteImage.id        = element.id;
+          base64WriteImage.base64     = element.src;
+          base64WriteImage.file_name  = element.name;
+          base64WriteImage.file_type  = element.type;
+          base64WriteImage.file_size  = element.size;
+          base64WriteImage.file_extension = element.extension;
+          console.log('abc', base64WriteImage);
+
+          this.uploadService.upload(base64WriteImage).then(resp=>{
+
+          });
       } else {
-        return false;
       }
     });
   }
-
-  this.on = true;
-  return 'data';
-
-  
-  console.log(state);
   
 }
 

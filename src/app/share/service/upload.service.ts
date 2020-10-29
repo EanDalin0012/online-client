@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Utils } from '../utils/utils.static';
-import { LOCAL_STORAGE } from '../constants/common.const';
+import { LOCAL_STORAGE, Reponse_Status } from '../constants/common.const';
 import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs/Observable';
 import { SelectEvent, FileInfo } from '@progress/kendo-angular-upload';
 import { ServerService } from './server.service';
 import { Base64RequestAdd } from '../model/request/base64-req';
+import { Base64WriteImage } from '../model/model/base64';
 
 @Injectable({
   providedIn: 'root'
@@ -21,22 +22,18 @@ export class UploadService {
 
   }
 
-  public upload(fileInfo: FileInfo, base64:string ):Promise<Boolean> {
+  public upload(fileInfo: Base64WriteImage):Promise<Boolean> {
     return new Promise(resolve =>{
-      if(fileInfo && base64) {
-        const api = environment.bizMOBServer +'/api/base64/image/write';
-        const base64RequestAdd = new Base64RequestAdd();
-        base64RequestAdd.body.file_type      = fileInfo.rawFile.type;
-        base64RequestAdd.body.file_name      = fileInfo.name;
-        base64RequestAdd.body.file_size      = fileInfo.size;
-        base64RequestAdd.body.file_extension = fileInfo.extension;
-        base64RequestAdd.body.base64         = base64;
-        console.log('base64RequestAdd', base64RequestAdd);
-        // this.server.HTTPPost(api, {}).then(resp =>{
-
-        // });
-      } else {
-        resolve(false);
+      if(fileInfo) {
+        const api = '/api/base64/image/write';
+        console.log('base64RequestAdd', fileInfo, api);
+        this.server.HTTPPost(api, fileInfo).then(resp =>{
+          if ( resp && resp.body.status === Reponse_Status.Y) {
+              resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
       }
     });
   }

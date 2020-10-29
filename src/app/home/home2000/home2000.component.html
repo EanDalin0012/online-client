@@ -24,9 +24,9 @@
                 Add
             </button> -->
 
-            <button class="k-button" [ngClass]="{ 'right-2em': sltLanguageList }" style="position: absolute; right: 6.2em;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">Remove</button>
+            <button class="k-button"  style="position: absolute; right: 6.2em;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">Remove</button>
 
-            <button class="k-button" [ngClass]="{ 'display-none': sltLanguageList }" style="position: absolute; right: .2em;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);sltLanguageList = !sltLanguageList" [icon]="'upload'" [look]="'outline'">Upload</button>
+            <button class="k-button"  style="position: absolute; right: .2em;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);" [icon]="'upload'" [look]="'outline'">Upload</button>
         </ng-template>
     </kendo-fileselect>
 
