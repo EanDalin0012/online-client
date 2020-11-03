@@ -45,9 +45,8 @@ public selectEventHandler(e: SelectEvent): void {
     this.imagePreviews = [];
     const that = this;
     e.files.forEach((file) => {
-    console.log(file.rawFile);
+    console.log('testing', file);
     let imagePreviews1 = [];
-    console.log(`File selected: ${file}`);
 
     if (!file.validationErrors) {
         const reader = new FileReader();
@@ -98,26 +97,25 @@ upload(state) {
   if(this.imagePreviews.length > 0) {
     this.imagePreviews.forEach(element =>{
       if(element.uid === state) {
-          console.log("call add function", element);
-          const base64WriteImage = new Base64WriteImage();
-          // src: ev.target['result']+"",
-          // uid: file.uid,
-          // id: file.uid +"-"+moment().format('YYYYMMDDhhmmss'),
-          // name: file.name,
-          // size: file.size,
-          // type: file.rawFile.type,
-          // extension: file.extension
-          base64WriteImage.id        = element.id;
-          base64WriteImage.base64     = element.src;
-          base64WriteImage.file_name  = element.name;
-          base64WriteImage.file_type  = element.type;
-          base64WriteImage.file_size  = element.size;
-          base64WriteImage.file_extension = element.extension;
-          console.log('abc', base64WriteImage);
+          let splitted = element.src.split(','); 
+          const base64WriteImage = new Base64WriteImage();          
+          console.log('splitted', splitted)
+          if(splitted[1]) { 
+            base64WriteImage.id         = element.id;
+            base64WriteImage.base64     = splitted[1];
+            base64WriteImage.file_name  = element.name;
+            base64WriteImage.file_type  = element.type;
+            base64WriteImage.file_size  = element.size;
+            base64WriteImage.file_extension = element.extension;
+            console.log('abc', base64WriteImage);
+  
+            this.uploadService.upload(base64WriteImage).then(resp=>{
+  
+            });
 
-          this.uploadService.upload(base64WriteImage).then(resp=>{
-
-          });
+          }
+          
+         
       } else {
       }
     });

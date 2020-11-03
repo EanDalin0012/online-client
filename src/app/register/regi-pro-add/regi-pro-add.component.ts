@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ChunkSettings, FileInfo, FileRestrictions, FileState, RemoveEvent, SelectEvent, SuccessEvent, UploadEvent } from '@progress/kendo-angular-upload';
-
 import { environment } from 'src/environments/environment';
 import { ProductModel } from '../../share/model/model/product';
 import { ServerService } from '../../share/service/server.service';
@@ -12,342 +11,197 @@ import { ResponseDataModel } from '../../share/model/response/res-data';
 import { Reponse_Status, BTN_ROLES, LOGO_FILE_EXT, LOCAL_STORAGE, AES_INFO } from '../../share/constants/common.const';
 import { CategoryModel } from '../../share/model/model/category';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
-import { FileRequestModel } from '../../share/model/request/req-file';
+import { Base64WriteImage } from '../../share/model/model/base64';
+import { UploadService } from '../../share/service/upload.service';
+import * as moment from 'moment';
+import { CategoryRequestModel } from '../../share/model/request/req-main-category';
 import { Utils } from '../../share/utils/utils.static';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Base64RequestAdd } from '../../share/model/request/base64-req';
+import { Country, CountryData } from '../../home/home1000/data';
+import { DataService } from '../../share/service/data.service';
+
 @Component({
   selector: 'app-regi-pro-add',
   templateUrl: './regi-pro-add.component.html',
   styleUrls: ['./regi-pro-add.component.css']
 })
 export class RegiProAddComponent implements OnInit {
-
   
-  @ViewChild('subCate', {static: true}) subCate;
   modal;
   typeList: any[] = [];
-  categoryInfo = new  CategoryModel();
-  subCategoryId: number;
-
-  subCategoryName: string;
+  categoryModel: CategoryModel;
+  category_name: string;
+  description: string;
 
   translateTxt: any;
-  categoryList = new Array<CategoryModel>();
 
-  valuePrimitiveMainCategory: boolean;
-  defaultMainCategoryInfo: CategoryModel = {
-    id: 0,
-    name: 'Select Main Category',
-    description: null,
-    create_by: null,
-    modify_by: null,
-    create_date: null,
-    modify_date: null,
-    status: null
-  };
 
-  ngClassList: string;
+// file select declear
+   public imagePreviews: any[] = [];
+   public fileRestrictions: FileRestrictions = {
+       allowedExtensions: ['.jpg', '.png']
+   };
+   i = 0;
+// end file select declear
+// category info
+defaultCountry = {  
+  id: 0,
+  name: 'Select Cagetory',
+  description: '',
+  create_by: 0,
+  modify_by: 0,
+  create_date: '',
+  modify_date: '',
+  status: ''
+};
+filterSettings: DropDownFilterSettings = {
+  caseSensitive: false,
+  operator: 'startsWith'
+};
+cagetList = new Array<CategoryModel>();
+country: CategoryModel;
 
-  // img declear
-  uploadbtn = true;
-  public imagePreviews: any[] = [];
-  public uploadRemoveUrl = 'removeUrl';
-  userinfo: any;
-
-  public uploadRestrictions: FileRestrictions = {
-    allowedExtensions: LOGO_FILE_EXT
-  };
-
-  // public uploadSaveUrl: string;
-
-  selectedFile: File;
-  message: string;
-  userInfo: any;
-
-  api = '/api/file/upload';
-  public chunkSettings: ChunkSettings = {
-    size: 102400
-  };
-
-  product: ProductModel;
-  subCateId: number;
-  proName: string;
-  resourceFileInfoId: string;
-  description: string;
-  category_list = new Array<CategoryModel>();
-  filterSettings: DropDownFilterSettings = {
-    caseSensitive: false,
-    operator: 'startsWith'
-  };
-  uploadSaveUrl: string;
+// end 
 
   constructor(
-    private serverService: ServerService,
     private translate: TranslateService,
+    private serverService: ServerService,
     private modalService: ModalService,
-    private dataService: RequestDataService,
-    private httpClient: HttpClient,
+    private uploadService: UploadService,
+    private dataService: RequestDataService
   ) { }
 
   ngOnInit() {
-    this.uploadSaveUrl = environment.bizMOBServer + '/api/mobile/upload';
-    this.uploadRemoveUrl = environment.bizMOBServer + '/api/file/removeUrl';
-    this.valuePrimitiveMainCategory = true;
-    this.translate.get('Home8100').subscribe((res) => {
+    this.translate.get('Home7100').subscribe((res) => {
       this.translateTxt = res;
      });
-    this.inquiryCategory();
-    this.inquirySubCategory();
+     this.inquiryCategory();
   }
 
-  close() {
-    this.modal.close();
-  }
-
-  inquiryCategory() {
-    this.dataService.inquiryCategory().then(response =>{
-      this.category_list = response;
-      console.log(this.category_list);
-    }); 
-  }
-
-  valueChangeMainCategory(value) {
-    // console.log(value);
-    // if (value) {
-    //   this.subCategoryInfo = undefined;
-    //   this.valuePrimitiveSubCategory = true;
-    //   this.subCategoryList = [];
-    //   this.subCatListTrm.forEach(element => {
-    //     if (Number(value) === element.mainCategoryId) {
-    //       this.subCategoryList.push(element);
-    //     }
-    //   });
-    //   this.ngClassList = 'active-input';
-    // } else {
-    //   this.ngClassList = '';
-    // }
-  }
-
-  valueChangeSubCategory(value) {
-    if (value) {
-      this.subCategoryId = value;
-    }
-  }
-
-  onClickRegister() {
-    if (this.isValid() === true) {
-      const trReq                = new ProductModelRequest();
-      const api = '/api/product/save';
-      this.serverService.HTTPPost(api, trReq).then(rest => {
-        const response = rest as ResponseDataModel;
-        if ( response && response.body.status === Reponse_Status.Y) {
+  btnRegister() {
+    if ( this.isValid() === true) {
+      const userInfo                = Utils.getUserInfo();
+      const trReq                   = new CategoryRequestModel();
+      trReq.body.name               = this.category_name;
+      trReq.body.description        = this.description;
+      const api = '/api/category/save';
+      this.serverService.HTTPPost(api, trReq).then(response => {
+        const responseData = response as ResponseDataModel;
+        if ( responseData && responseData.body.status === Reponse_Status.Y) {
           this.modal.close( {close: BTN_ROLES.SAVE});
         }
       });
     }
+}
 
+private isValid(): boolean {
+  if (!this.category_name || this.category_name && this.category_name.trim() === ''
+      || this.category_name && this.category_name === null) {
+        const bool = this.modalService.messageAlert(this.translateTxt.MESSAGE_ERROR.MAIN_CATEGORY_REQUEIRED);
+        return bool;
+  } else {
+    return true;
+  }
+}
+
+  close() {
+    this.modal.close( {close: BTN_ROLES.CLOSE});
   }
 
-  onClickBtnSubCategory() {
-    this.subCategoryName = undefined;
+  onClickBtnMainCategoryName() {
+      this.category_name = undefined;
   }
 
-  onClickBtnDescr() {
+  onClickBtndescription() {
     this.description = undefined;
   }
 
-  isValid(): boolean {
-     
-
-      return true;
-  }
-
-  inquirySubCategory() {
-    // this.dataService.inquirySubCategoryList().then(response => {
-    //   this.subCatListTrm = response;
-    // });
-  }
-
-  // upload img
-
-  public onRemove(ev: RemoveEvent): void {
-    if ( this.resourceFileInfoId !== undefined) {
-      ev.data = {
-        resourceFileInfoId: this.resourceFileInfoId
-      };
-    }
-
-    ev.files.forEach((file: FileInfo) => {
-      this.imagePreviews = null;
-    });
-
-  }
-  public clearEventHandler(val): void {
-    console.log('Clearing the file upload', val);
-    this.imagePreviews = [];
-  }
-
-  successEventHandler(e: SuccessEvent) {
-    console.log('response file update', e);
-    // const responseData = e.response.body;
-    // if (responseData) {
-    //   if  (responseData.header.result === true) {
-    //     this.resourceFileInfoId = responseData.body.id;
-    //     const url = e.response.body.body.imageURL;
-    //   }
-    // }
-  }
-
-  public removeEventHandler(e: RemoveEvent): void {
-
-    const index = this.imagePreviews.findIndex(item => item.uid === e.files[0].uid);
-
-    if (index >= 0) {
-      this.imagePreviews.splice(index, 1);
-    }
-  }
-
+  // file select function
   public selectEventHandler(e: SelectEvent): void {
+    this.imagePreviews = [];
     const that = this;
-
     e.files.forEach((file) => {
+    console.log('testing', file);
+    let imagePreviews1 = [];
 
-      if (!file.validationErrors) {
+    if (!file.validationErrors) {
         const reader = new FileReader();
-
         reader.onload = function (ev) {
-          const image = {
-            src: ev.target['result'],
-            uid: file.uid
-          };
-          console.log(ev.target);
-          console.log(typeof (ev.target));
-          that.imagePreviews.unshift(image);
+       
+        const image = {
+            src: ev.target['result']+"",
+            uid: file.uid,
+            id: file.uid +"-"+moment().format('YYYYMMDDhhmmss'),
+            name: file.name,
+            size: file.size,
+            type: file.rawFile.type,
+            extension: file.extension
         };
-        console.log('file', file.rawFile);
+        imagePreviews1.push(image);
+        that.imagePreviews.unshift(image);
+
+        };
+        this.i++;
+        console.log(this.i);
+        console.log(imagePreviews1);
         reader.readAsDataURL(file.rawFile);
-      }
+        
+    }
+    
     });
   }
-
-
-  public completeEventHandler(val) {
-    console.log(val);
-  }
-
-  uploadEventHandler(e: UploadEvent) {
-    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-    const access_token = authorization.access_token;
-    const httpOptionsObj = {
-      'Content-Type': 'application/json',
-       'Authorization': 'Bearer '+access_token
-    };
-    const headers=  new HttpHeaders(httpOptionsObj);
-    console.log('header', headers, httpOptionsObj);
-    e.headers = headers;
-    e.data = {
-      userID : 1,
-      customerNo: 1,
-      corporateUserProfileImageURL: '',
-      userFile : e.files[0].rawFile
-    };
-    console.log('file', e.headers);
-    // this.doRequestFile(e.files[0].rawFile);
-  }
-
-  uploadFileImage(file: UploadEvent): string {
-    const trReq                   = new FileRequestModel();
-    console.log('trReq',trReq);
-    const api = '/api/file/upload';
-    this.serverService.HTTPRequestFile(api, file).then(response => {
-      const responseData = response as ResponseDataModel;
-      if ( responseData && responseData.body.status === Reponse_Status.Y) {
-        return responseData.body.status;
+  public remove(fileSelect, uid: string) {
+      fileSelect.removeFileByUid(uid);
+      if(this.imagePreviews.length > 0) {
+        this.imagePreviews.forEach((element,index) =>{
+          if(element.uid === uid) {
+              console.log("call add function", element, index);
+              this.imagePreviews.splice(index, 1);
+          }
+        });
       }
-    });
-    return "N";
-  }
+    }
 
-  public showButton(state: FileState): boolean {
-    return (state === FileState.Uploaded) ? true : false;
-  }
-
-  public remove(upload, uid: string) {
-    upload.removeFilesByUid(uid);
-  }
-
+    public showButton(state: FileState): boolean {
+      return (state === FileState.Selected) ? true : false;
+    }
+    
+upload(state) {
+  console.log(this.imagePreviews);
+  if(this.imagePreviews.length > 0) {
+    this.imagePreviews.forEach(element =>{
+      if(element.uid === state) {
+          let splitted = element.src.split(','); 
+          const base64WriteImage = new Base64WriteImage();          
+          console.log('splitted', splitted)
+          if(splitted[1]) { 
+            base64WriteImage.id         = element.id;
+            base64WriteImage.base64     = splitted[1];
+            base64WriteImage.file_name  = element.name;
+            base64WriteImage.file_type  = element.type;
+            base64WriteImage.file_size  = element.size;
+            base64WriteImage.file_extension = element.extension;
+            console.log('abc', base64WriteImage);
   
-  doRequestFile(file1: File) {
-    console.log('file1', file1);
-    let file = new FileUpload
-    file.file = file1;
+            this.uploadService.upload(base64WriteImage).then(resp=>{
+  
+            });
 
-    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-    const access_token = authorization.access_token;
-        
-    const httpOptionsObj = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer '+access_token
-    };
-    const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
-    const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
-    const uri = environment.bizMOBServer + '/api/mobile/upload?userId='+user_info.id +'&lang='+lang;
-    const formData = new FormData()
-    formData.append('file', file1);
-
-    const data = this.httpClient.post(uri, formData, {
-      headers: new HttpHeaders(httpOptionsObj)
-    }).subscribe(
-      res => {
-       console.log('file uploading', res); 
-    }, error => {
-      console.log(error);
+          }
+          
+         
+      } else {
+      }
     });
+  }
+  
+}
+  // end file select function
 
-    this.serverService.HTTPPost(environment.bizMOBServer+'/api/file/upload1', file).then(res=>{
-      console.log('res', res);
+  inquiryCategory() {
+    this.dataService.inquiryCategory().then(resp=>{
+      console.log(resp);
+      this.cagetList = resp as any;
     });
   }
 
-
-uploadFiles(files: File) {
-  console.log('working now', files);
-    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-    const access_token = authorization.access_token;
-        
-    const httpOptionsObj = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer '+access_token
-    };
-    const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
-    const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
-    const uri = environment.bizMOBServer + '/api/mobile/upload?userId='+user_info.id +'&lang='+lang;
-    const formData = new FormData()
-    formData.append('file', files);
-
-    const data = this.httpClient.post(environment.bizMOBServer+'/api/file/upload1', formData, {
-      headers: new HttpHeaders(httpOptionsObj)
-    }).subscribe(
-      res => {
-       console.log('file uploading', res); 
-    }, error => {
-      console.log(error);
-    });
-}
-
- doRequestAddBase64() {
-  let base64Request = new Base64RequestAdd();
-  base64Request.body.file_extension = "";
- }
-
- doRequestRemoveBase64() {
-
- }
-
-
-}
-
-export class FileUpload {
-  file: File;
 }

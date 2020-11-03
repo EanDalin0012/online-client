@@ -1,13 +1,12 @@
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpEvent, HttpRequest } from '@angular/common/http';
-import { Utils } from '../utils/utils.static';
-import { LOCAL_STORAGE, Reponse_Status } from '../constants/common.const';
-import { environment } from '../../../environments/environment.prod';
 import { Observable } from 'rxjs/Observable';
-import { SelectEvent, FileInfo } from '@progress/kendo-angular-upload';
-import { ServerService } from './server.service';
-import { Base64RequestAdd } from '../model/request/base64-req';
+import { environment } from '../../../environments/environment.prod';
+import { LOCAL_STORAGE, Reponse_Status } from '../constants/common.const';
 import { Base64WriteImage } from '../model/model/base64';
+import { Base64WriteImageRequestAdd } from '../model/request/base64-req';
+import { Utils } from '../utils/utils.static';
+import { ServerService } from './server.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,15 @@ export class UploadService {
       if(fileInfo) {
         const api = '/api/base64/image/write';
         console.log('base64RequestAdd', fileInfo, api);
-        this.server.HTTPPost(api, fileInfo).then(resp =>{
+        const data = new Base64WriteImageRequestAdd();
+        data.body.base64          = fileInfo.base64;
+        data.body.file_name       = fileInfo.file_name;
+        data.body.file_size       = fileInfo.file_size;
+        data.body.file_type       = fileInfo.file_type;
+        data.body.file_extension  = fileInfo.file_extension;
+        data.body.id              = fileInfo.id;
+        console.log('data:', data);
+        this.server.HTTPPost(api, data).then(resp =>{
           if ( resp && resp.body.status === Reponse_Status.Y) {
               resolve(true);
           } else {

@@ -1,75 +1,79 @@
 <div class="contentsWrap">
     <div class="container01">
         <div class="web_container">
-
+            <!-- header -->
             <div class="pop_header">
-                <h1>{{'Home8100.LABEL.REGISTER_SUB_CATEGORY_INFORMATION' | translate}}</h1>
+                <h1>{{'RegiCateAdd.Label.Tittle' | translate}}</h1>
                 <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
             </div>
-
+            <!-- //header -->
             <div class="web_Wrap">
 
                 <div class="form-row">
-
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">Category :</label>
-                        <kendo-dropdownlist [data]="category_list" [filterable]="true" [textField]="'name'" [valueField]="'countryCode'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="categoryInfo" [ngModelOptions]="{standalone:
-                            true}" [defaultItem]="defaultMainCategoryInfo" (valueChange)="valueChangeMainCategory($event)">
-                            <ng-template kendoDropDownListValueTemplate let-dataItem>
-                                <span class="template">{{ dataItem.name | translate}}</span>
-                            </ng-template>
-                            <ng-template kendoDropDownListItemTemplate let-dataItem>
-                                <span class="template">{{ dataItem.name | translate }}</span>
-                            </ng-template>
-                        </kendo-dropdownlist>
-                        <!-- <kendo-dropdownlist [ngClass]="ngClassList" [data]="category_list" [textField]="'name'" [valueField]="'id'" [(ngModel)]="categoryInfo" [ngModelOptions]="{standalone: true}" [valuePrimitive]="valuePrimitiveMainCategory" [defaultItem]="defaultMainCategoryInfo"
-                            (valueChange)="valueChangeMainCategory($event)"></kendo-dropdownlist> -->
+                        <label>{{'RegiCateAdd.Label.Name' | translate}}</label>
+                        <kendo-dropdownlist [data]="cagetList" [filterable]="true" [textField]="'name'" [valueField]="'id'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="country" [ngModelOptions]="{standalone:
+                            true}" [defaultItem]="defaultCountry">
+                                <ng-template kendoDropDownListValueTemplate let-dataItem>
+                                    <span class="template">{{ dataItem.name}}</span>
+                                </ng-template>
+                                <ng-template kendoDropDownListItemTemplate let-dataItem>
+                                    <span class="template">{{ dataItem.name}}</span>
+                                </ng-template>
+                            </kendo-dropdownlist>
+
                     </div>
-
                     <div class="form-group col-md-6">
-                        <label>Product Name :</label>
-                        <input type="text" [ngClass]="proName ? 'active-input': ''" [(ngModel)]="proName" placeholder="{{'Register5000.HOLDER.ENTER_PRODUCT_NAME' | translate}}" class="form-control">
+                        <label>{{'RegiCateAdd.Label.Name' | translate}}</label>
+                        <input type="text" [ngClass]="category_name? 'active-input' : ''" class="form-control" [(ngModel)]="category_name" placeholder="{{'RegiCateAdd.Holder.Enter_Category_Name' | translate}}">
+
                         <div class="in_box">
-                            <button [ngClass]="proName ? 'btn_del':''" (click)="onClickBtnDescr()" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
+                            <button type="button" [ngClass]="category_name? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group form-group-last col-md-12">
-                        <label>{{'Home2100.LABEL.DESCRIPTION' | translate}}</label>
-                        <input type="text" [ngClass]="description ? 'active-input': ''" [(ngModel)]="description" placeholder="{{'Home2100.PLACE_HOLDER.ENTER_DESCRIPTION' | translate}}" class="form-control">
+                        <label>{{'RegiCate.LABEL.Description' | translate}}</label>
+                        <input type="text" [ngClass]="description? 'active-input' : ''" [(ngModel)]="description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control">
                         <div class="in_box">
-                            <button [ngClass]="description ? 'btn_del':''" (click)="onClickBtnDescr()" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
+                            <button type="button" [ngClass]="description? 'btn_del' : ''" (click)="onClickBtndescription()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
                         </div>
 
                     </div>
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group form-group-last col-md-10">
-                        <label>{{'Home2100.LABEL.DESCRIPTION' | translate}}</label>
-                        <kendo-upload class="uploadi-img" [autoUpload]="false" [saveUrl]="uploadSaveUrl" [removeUrl]="uploadRemoveUrl" [restrictions]="uploadRestrictions" (select)="selectEventHandler($event)" (clear)="clearEventHandler($event)" (remove)="removeEventHandler($event)"
-                            (complete)="completeEventHandler($event)" (upload)="uploadEventHandler($event)">
-                        </kendo-upload>
-                        <!-- <button type="button" tabindex="-1" class="btn04 rcen_btn" [disabled]="uploadbtn" id="upload" ><span>{{'HOM3200.LABEL.UPLOAD' | translate}}</span></button> Upload -->
+                    <div class="form-group form-group-last col-md-12">
+                        <label>{{'RegiCate.LABEL.Description' | translate}}</label>
+                        
+                        <kendo-fileselect
+                        [restrictions]="fileRestrictions"
+                        [multiple] = "false"
+                        (select)="selectEventHandler($event)"
+                                #myFileSelect="kendoFileSelect">
+                                <ng-template kendoFileSelectFileTemplate let-files let-state="state">
+                                    <div>Name: {{files[0].name}} Size: {{files[0].size}} bytes</div>
+                                    <button class="k-button"  style="position: absolute; right: 6.2em;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">Remove</button>
 
-                        <img *ngFor="let image of imagePreviews" [src]="image.src" alt="image preview" style="width: 200px; margin: 10px;" />
-                    </div>
+                                    <button class="k-button"  style="position: absolute; right: .2em;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);" [icon]="'upload'" [look]="'outline'">Upload</button>
+                                </ng-template>
+                        </kendo-fileselect>
 
-                </div>
 
-                <div class="form-row">
-                    <div class="form-group form-group-last col-md-10">
-                        <input
-                        type="file"
-                        [multiple]="true"
-                        class="upload__input"
-                        (change)="uploadFiles($event)"
-                    />
+                        <div *ngIf="imagePreviews.length" class="img-preview example-config">
+                            <h3>Preview selected images</h3>
+                            <img *ngFor="let image of imagePreviews"
+                            [src]="image.src"
+                            alt="image preview"
+                            style="width: 200px; margin: 10px;" />
                         </div>
+
+                    </div>
                 </div>
+
 
             </div>
 
@@ -81,7 +85,7 @@
                 <span>{{'COMMON.BUTTON.CLOSE' | translate}}</span>
             </div>
             <div class="iam-btn-container mbr_introContent" style="display: inline-block;">
-                <button class="iam-button save" (click)="onClickRegister()">{{'COMMON.BUTTON.SAVE' | translate}}</button>
+                <button class="iam-button save" (click)="btnRegister()">{{'COMMON.BUTTON.SAVE' | translate}}</button>
             </div>
         </div>
     </div>
