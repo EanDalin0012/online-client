@@ -20,11 +20,13 @@ import { ModalComponent } from '../component/modal/modal.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { PhoneNumberPipe } from '../pipe/phone-number.pipe';
 import { DateFormatPipe } from '../pipe/date-format.pipe';
+import { SrcPipe } from '../pipe/src.pipe';
 
 @NgModule({
   declarations: [
     ModalComponent,
     PhoneNumberPipe,
+    SrcPipe,
     DateFormatPipe,
   ],
   imports: [
@@ -54,7 +56,8 @@ import { DateFormatPipe } from '../pipe/date-format.pipe';
     ButtonsModule,
     ProgressBarModule,
     PhoneNumberPipe,
-    DateFormatPipe
+    DateFormatPipe,
+    SrcPipe
   ],
   entryComponents: [
     ModalComponent,

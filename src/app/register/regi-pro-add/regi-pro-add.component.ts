@@ -29,8 +29,9 @@ export class RegiProAddComponent implements OnInit {
   modal;
   typeList: any[] = [];
   categoryModel: CategoryModel;
-  category_name: string;
+  product_name: string;
   description: string;
+  resource_img_id: string;
 
   translateTxt: any;
 
@@ -80,10 +81,15 @@ country: CategoryModel;
   btnRegister() {
     if ( this.isValid() === true) {
       const userInfo                = Utils.getUserInfo();
-      const trReq                   = new CategoryRequestModel();
-      trReq.body.name               = this.category_name;
+      const trReq                   = new ProductModelRequest();
+      trReq.body.name               = this.product_name;
       trReq.body.description        = this.description;
-      const api = '/api/category/save';
+      trReq.body.category_id        = this.categoryModel.id;
+      trReq.body.resource_img_id    = this.resource_img_id;
+      
+      const api = '/api/product/save';
+      console.log(trReq);
+      
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {
@@ -94,11 +100,17 @@ country: CategoryModel;
 }
 
 private isValid(): boolean {
-  if (!this.category_name || this.category_name && this.category_name.trim() === ''
-      || this.category_name && this.category_name === null) {
-        const bool = this.modalService.messageAlert(this.translateTxt.MESSAGE_ERROR.MAIN_CATEGORY_REQUEIRED);
+  console.log(this.categoryModel);
+  
+  if (!this.product_name || this.product_name && this.product_name.trim() === ''
+      || this.product_name && this.product_name === null) {
+        const bool = this.modalService.messageAlert('Invalid product name.');
         return bool;
-  } else {
+  } else if (!this.categoryModel) {
+    const bool = this.modalService.messageAlert('Please select category.');
+    return bool;
+  } 
+  else {
     return true;
   }
 }
@@ -108,7 +120,7 @@ private isValid(): boolean {
   }
 
   onClickBtnMainCategoryName() {
-      this.category_name = undefined;
+      this.product_name = undefined;
   }
 
   onClickBtndescription() {
@@ -120,7 +132,6 @@ private isValid(): boolean {
     this.imagePreviews = [];
     const that = this;
     e.files.forEach((file) => {
-    console.log('testing', file);
     let imagePreviews1 = [];
 
     if (!file.validationErrors) {
@@ -140,9 +151,6 @@ private isValid(): boolean {
         that.imagePreviews.unshift(image);
 
         };
-        this.i++;
-        console.log(this.i);
-        console.log(imagePreviews1);
         reader.readAsDataURL(file.rawFile);
         
     }
@@ -180,10 +188,12 @@ upload(state) {
             base64WriteImage.file_type  = element.type;
             base64WriteImage.file_size  = element.size;
             base64WriteImage.file_extension = element.extension;
-            console.log('abc', base64WriteImage);
-  
             this.uploadService.upload(base64WriteImage).then(resp=>{
-  
+              if(resp === true) {
+                this.resource_img_id = base64WriteImage.id;
+                console.log('resource_img_id', this.resource_img_id);
+                
+              }
             });
 
           }
@@ -196,7 +206,6 @@ upload(state) {
   
 }
   // end file select function
-
   inquiryCategory() {
     this.dataService.inquiryCategory().then(resp=>{
       console.log(resp);

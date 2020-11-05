@@ -3,6 +3,8 @@ import { ServerService } from './server.service';
 import { CategoryReponseModel } from '../model/response/res-category';
 import { RequestDataModel } from '../model/request/req-data';
 import { CategoryModel } from '../model/model/category';
+import { src } from '../../register/regi-pro/img';
+import { SRCRequestModel } from '../model/request/req-src';
 
 
 @Injectable({
@@ -106,6 +108,18 @@ export class RequestDataService {
       });
     });
   } 
+
+  srcRequest(src_id: string):Promise<any> {
+    return new Promise((resolve, reject) => {
+      const req = new SRCRequestModel();
+      req.body.id = src_id;
+      const api = '/api/base64/image/read/'+src_id;
+      this.serverService.HTTPGet(api).then(res => {
+        console.log('base 64', res);
+        resolve(res);
+      });
+    });
+  }
 
 }
 

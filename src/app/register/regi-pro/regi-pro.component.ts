@@ -8,14 +8,19 @@ import { DataService } from '../../share/service/data.service';
 import { ModalService } from '../../share/service/modal.service';
 import { ServerService } from '../../share/service/server.service';
 import { RequestDataModel } from '../../share/model/request/req-data';
-import { ProductModelResponse } from '../../share/model/response/res-product';
+import { ProductModelResponse, ProductDetaitsModelResponse } from '../../share/model/response/res-product';
 import { ProductModel } from '../../share/model/model/product';
 import { ObjIdModel } from '../../share/model/model/obj-id';
 import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
 import { ResponseDataModel } from '../../share/model/response/res-data';
-import { Reponse_Status, BTN_ROLES } from '../../share/constants/common.const';
+import { Reponse_Status, BTN_ROLES, LOCAL_STORAGE } from '../../share/constants/common.const';
 import { RegiProAddComponent } from '../regi-pro-add/regi-pro-add.component';
 import { RegiProEditComponent } from '../regi-pro-edit/regi-pro-edit.component';
+import { ProductDetailsModel } from '../../share/model/model/product-details';
+import { src } from './img';
+import { Utils } from '../../share/utils/utils.static';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-regi-pro',
@@ -23,7 +28,7 @@ import { RegiProEditComponent } from '../regi-pro-edit/regi-pro-edit.component';
   styleUrls: ['./regi-pro.component.css']
 })
 export class RegiProComponent implements OnInit {
-
+src = "";
   // start declear grid
 public info = true;
 public buttonCount = 5;
@@ -56,8 +61,8 @@ totalRecord: number;
 
 
 // declear variable
-product_list = new Array<ProductModel>();
-data = new Array<ProductModel>();
+product_list = new Array<ProductDetailsModel>();
+data = new Array<ProductDetailsModel>();
 obj_Id_model_list = new Array<ObjIdModel>();
 
 // end declear varibale
@@ -67,13 +72,15 @@ obj_Id_model_list = new Array<ObjIdModel>();
     private modalService: ModalService,
     private dataService: DataService,
     private titleService: Title,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private httpClient: HttpClient,
   ) { 
     this.titleService.setTitle('Product');
     this.setSelectableSettings();
   }
 
   ngOnInit(): void {
+    this.src = src;
     const url = (window.location.href).split('/');
     this.dataService.visitMessage(url[5]);
     this.inquiry();
@@ -85,9 +92,11 @@ obj_Id_model_list = new Array<ObjIdModel>();
     const trReq = new RequestDataModel();
     const api = '/api/product/list';
     this.service.HTTPGet(api).then(resp => {
-      const response   = resp as ProductModelResponse;
+      const response   = resp as ProductDetaitsModelResponse;
       if (response) {
         this.product_list = response.body;
+        console.log(this.product_list);
+        
         this.data          = response.body;
         this.loadingData(this.product_list);
       }
@@ -275,5 +284,27 @@ obj_Id_model_list = new Array<ObjIdModel>();
     component.save(options);
   }
   // end gride function
+
+  private flagURL(dataItem: any) {
+    if(dataItem != undefined) {
+      console.log(dataItem);
+      
+      let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      
+      const access_token = authorization.access_token;
+      const headers = { 
+        'Authorization': 'Bearer ' + access_token
+      }
+  
+      const api = '/api/base64/image/read/'+dataItem;
+      const uri = environment.bizMOBServer + api;
+      const data = this.httpClient.get(uri, {headers,responseType: "text"}).subscribe();
+      console.log(data);
+      return "data:image/jpeg;base64,"+data
+    } else {
+      return "";
+    }
+    
+  }
 
 }

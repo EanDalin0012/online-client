@@ -13,6 +13,7 @@ import { HttpClient, HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common
 import { AuthInterceptor } from './share/service/auth-interceptor.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SrcPipe } from './share/pipe/src.pipe';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,7 +25,7 @@ export function createTranslateLoader(http: HttpClient) {
     LayoutBlankComponent,
     LayoutComponent,
     Error404Component,
-    Error405Component
+    Error405Component,
   ],
   imports: [
     AppRoutingModule,

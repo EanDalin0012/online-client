@@ -78,7 +78,7 @@ export class AuthInterceptor implements HttpInterceptor {
     .pipe(
       finalize(() => {
         environment.production ? (() => '')() : console.log('Communicate finish.');
-        $('div.loading').addClass('none') ;
+        // $('div.loading').addClass('none') ;
       })
     )
     .catch((error) => {
