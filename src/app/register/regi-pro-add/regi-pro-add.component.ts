@@ -61,7 +61,6 @@ filterSettings: DropDownFilterSettings = {
 };
 cagetList = new Array<CategoryModel>();
 country: CategoryModel;
-public chips = []
 // end 
 
   constructor(
@@ -73,14 +72,6 @@ public chips = []
   ) { }
 
   ngOnInit() {
-    this.chips = [
-      {
-        label: 'Apple',
-        selected: true,
-        icon: null,
-        selectedIcon: 'k-icon k-i-check-outline'
-    }
-    ];
     this.translate.get('Home7100').subscribe((res) => {
       this.translateTxt = res;
      });

@@ -348,7 +348,8 @@
             "Tittle": "Product",
             "Product_Name": "Product Name",
             "Category_Name": "Category Name",
-            "Add_New_Product":"Add New Product"
+            "Add_New_Product":"Add New Product",
+            "Edit_Product":"Edit Product"
         },
         "Message": {
             "Pro_Save_Success": "Product Save Success",

@@ -39,6 +39,8 @@
                             "src/assets/bower_components/bootstrap-daterangepicker/daterangepicker.css",
                             "src/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
                             "src/assets/plugins/iCheck/square/blue.css",
+                            "src/assets/kendo-theme/default-4.24.0/all.css",
+                            "src/assets/kendo-theme/bootstrap-4.22.0/all.css",
                             "src/styles.css"
                         ],
                         "scripts": [
