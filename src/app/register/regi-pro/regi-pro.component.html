@@ -2,104 +2,86 @@
     <div class="page_title">
         <div class="breadcrumb">
             <div class="page_navi">
-                <span>{{'Registerr.LABEL.Register' | translate}}</span>
+                <span class="font-khmer-cursive">{{'Registerr.LABEL.Register' | translate}}</span>
             </div>
-            <h1><span>{{'RegiPro.Label.Tittle' | translate}}</span></h1>
+            <h1 class="margin-00"><span class="font-khmer-cursive">{{'RegiPro.Label.Tittle' | translate}}</span></h1>
         </div>
-
     </div>
 
     <div class="container01">
 
         <div class="col-md-12" style="margin-bottom: 15px; padding: 0px;">
-            <strong>{{'COMMON.LABEL.ITEMS' | translate: {'value': totalRecord} }}</strong>
+            <strong class="font-khmer-cursive">{{'COMMON.LABEL.ITEMS' | translate: {'value': totalRecord} }}</strong>
         </div>
 
         <div>
-
             <kendo-grid scrollable="virtual" [data]="gridView" [selectable]="selectableSettings" [sortable]="true" [sort]="sort" (sortChange)="sortChange($event)" [pageSize]="pageSize" [rowClass]="rowCallback" [skip]="skip" [kendoGridBinding]="product_list" [pageable]="{
             buttonCount: buttonCount,
             info: info,
             type: type,
             pageSizes: pageSizes,
-            previousNext: previousNext}" [height]="height" kendoGridSelectBy="id" [scrollable]="'true'" (pageChange)="pageChange($event)" class="table01 overflow-x" [selectedKeys]="mySelection">
+            previousNext: previousNext}" [height]="500" kendoGridSelectBy="id" [scrollable]="'true'" (pageChange)="pageChange($event)" class="table01 overflow-x" [selectedKeys]="mySelection">
                 <ng-template kendoGridToolbarTemplate>
                     <div class="form-row" style="width: 100%; border-left: none !important;">
                         <div class="form-group col-md-8">
-                            <input type="text" style="height: 34px;" [ngClass]="search? 'active-input' : ''" class="form-control" [(ngModel)]="search" (input)="searchChange($event)" placeholder="Please enter suplier name...">
+                            <input type="text" style="height: 34px;" [ngClass]="search? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="search" (input)="searchChange($event)" placeholder="Please enter suplier name...">
                             <div class="in_box">
                                 <button type="button" style="top: 5px;" [ngClass]="search? 'btn_del' : ''" (click)="deleteTextSearch()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                             </div>
                         </div>
-
                         <div class="form-group col-md-4">
-                            <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
+                            <button kendoGridExcelCommand class="export excel font-khmer-cursive" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
                                 {{'COMMON.BUTTON.EXPORT_PDF' | translate}}</button>
-                            <button kendoGridPDFCommand class="pdf export" type="button" icon="file-pdf" style="float:right; width: 165px;">
+                            <button kendoGridPDFCommand class="pdf export font-khmer-cursive" type="button" icon="file-pdf" style="float:right; width: 165px;">
                                 <span>{{'COMMON.BUTTON.EXPORT_EXCEL' | translate}}</span>
                             </button>
                         </div>
                     </div>
                 </ng-template>
-
                 <kendo-grid-checkbox-column class="cen" [width]="45" [resizable]="false" [columnMenu]="true" showSelectAll="true"></kendo-grid-checkbox-column>
-
                 <kendo-grid-column width="50" class="cen" [sortable]="false" field="no" title="{{'COMMON.LABEL.NO' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <p>{{rowIndex + 1}}</p>
+                        <p class="font-khmer-cursive">{{rowIndex + 1}}</p>
                     </ng-template>
                 </kendo-grid-column>
-
-                <kendo-grid-column width="200" class="subj" field="catgory_name" title="{{'RegiPro.Label.Category_Name' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="200" class="subj font-khmer-cursive" field="catgory_name" title="{{'RegiPro.Label.Category_Name' | translate}}"></kendo-grid-column>
                 <kendo-grid-column width="250" class="subj" field="name" title="{{'RegiPro.Label.Product_Name' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <img class="flag" [src]="flagURL(dataItem.resource_img_id)" width="30">
-                        <span style="margin-left: 10px;">{{dataItem.name}}</span>
+                        <img class="flag" [src]="url+dataItem.resource_img_id" width="30">
+                        <span class="font-khmer-cursive" style="margin-left: 10px;">{{dataItem.name}}</span>
                     </ng-template>
-
                 </kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="description" title="{{'RegiVen.LABEL.Description' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="create_date" title="{{'COMMON.LABEL.CREATE_DATE' | translate}}">
+                <kendo-grid-column width="190" class="subj font-khmer-cursive" field="description" title="{{'RegiVen.LABEL.Description' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj font-khmer-cursive" field="create_by" title="{{'COMMON.LABEL.Create_By' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj font-khmer-cursive" field="modify_by" title="{{'COMMON.LABEL.Modify_By' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="100" class="cen font-khmer-cursive" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <p>{{dataItem.create_date | dateFormat}}</p>
-                    </ng-template>
-
-                </kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="create_by" title="{{'COMMON.LABEL.Create_By' | translate}}"></kendo-grid-column>
-
-
-                <kendo-grid-column width="100" class="cen" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
-                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <button type="button" tabindex=-1 class="btn_edit01" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
+                        <button type="button" tabindex=-1 class="btn_edit01 font-khmer-cursive" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
                     </ng-template>
                 </kendo-grid-column>
 
-                <kendo-grid-pdf fileName="Vendor.pdf" [allPages]="true" paperSize="A2" [repeatHeaders]="true" [landscape]="true">
-
+                <kendo-grid-pdf fileName="Product.pdf" [allPages]="true" paperSize="A2" [repeatHeaders]="true" [landscape]="true">
                     <kendo-grid-pdf-margin top="2cm" left="1cm" right="1cm" bottom="2cm"></kendo-grid-pdf-margin>
                     <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
                         <div class="page-template">
                             <div class="header">
-                                <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+                                <div style="float: right" class="font-khmer-cursive"> {{'COMMON.LABEL.Page_Of' | translate: {'value': pageNum, 'value1': totalPages} }}</div>
                             </div>
-                            <div class="footer">
-                                Page {{ pageNum }} of {{ totalPages }}
+                            <div class="footer font-khmer-cursive">
+                                {{'COMMON.LABEL.Page_Of' | translate: {'value': pageNum, 'value1': totalPages} }}
                             </div>
                         </div>
                     </ng-template>
                 </kendo-grid-pdf>
 
                 <!-- excele -->
-                <kendo-excelexport [data]="data" fileName="Vendor.xlsx" #excelexport>
-                    <kendo-excelexport-column field="id" title="{{'COMMON.LABEL.NO' | translate}}"></kendo-excelexport-column>
-                    <kendo-excelexport-column field="name" title="{{'RegiCate.LABEL.Name' | translate}}"></kendo-excelexport-column>
-                    <kendo-excelexport-column field="contact" title="{{'RegiCate.LABEL.Contact' | translate}}"></kendo-excelexport-column>
-                    <kendo-excelexport-column field="other_contact" title="{{'RegiCate.LABEL.Other_Contact' | translate}}"></kendo-excelexport-column>
-                    <kendo-excelexport-column field="email" title="{{'RegiCate.LABEL.Email' | translate}}"></kendo-excelexport-column>
-                    <kendo-excelexport-column field="address" title="{{'RegiCate.LABEL.Address' | translate}}"></kendo-excelexport-column>
-                    <kendo-excelexport-column field="description" title="{{'RegiCate.LABEL.Description' | translate}}"></kendo-excelexport-column>
-
-                    <kendo-excelexport-column field="description" title="{{'RegiCate.LABEL.Description' | translate}}" [width]="350"></kendo-excelexport-column>
+                <kendo-excelexport [data]="data" fileName="Product.xlsx" #excelexport>
+                    <kendo-excelexport-column class="font-khmer-cursive"  field="id"            title="{{'COMMON.LABEL.NO' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column class="font-khmer-cursive"  field="catgory_name"  title="{{'RegiPro.Label.Category_Name' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column class="font-khmer-cursive"  field="name"          title="{{'RegiPro.Label.Product_Name' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column class="font-khmer-cursive"  field="description"   title="{{'RegiVen.LABEL.Description' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column class="font-khmer-cursive"  field="create_by"     title="{{'COMMON.LABEL.Create_By' | translate}}"></kendo-excelexport-column>
+                    <kendo-excelexport-column class="font-khmer-cursive"  field="modify_by"     title="{{'COMMON.LABEL.Modify_By' | translate}}"></kendo-excelexport-column>
                 </kendo-excelexport>
 
             </kendo-grid>
@@ -107,12 +89,12 @@
 
         <div class="table_control">
             <div class="btn_area">
-                <button type="button" tabindex=-1 class="btn03 r" (click)="delete()"><span>{{'COMMON.BUTTON.DELETE' | translate}}</span></button>
+                <button type="button" tabindex=-1 class="btn03 r font-khmer-cursive" (click)="delete()"><span>{{'COMMON.BUTTON.DELETE' | translate}}</span></button>
             </div>
         </div>
         <div class="c_btn">
             <div class="add-btn btn-css" (click)="add()">
-                <span>{{'COMMON.LABEL.ADD_NEW' | translate}}</span>
+                <span class="font-khmer-cursive">{{'COMMON.LABEL.ADD_NEW' | translate}}</span>
             </div>
         </div>
     </div>

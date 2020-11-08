@@ -1,14 +1,14 @@
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b>Admin</b>LTE</a>
+        <a href="#" class="font-khmer-cursive"><b>Admin</b>LTE</a>
     </div>
 
     <div class="login-box-body">
-        <p class="login-box-msg"><b>Sign in to start your session</b></p>
+        <p class="login-box-msg font-khmer-cursive"><b>Sign in to start your session</b></p>
 
 
         <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Email" [(ngModel)]="user_name" (keypress)="enterLoginHandler($event)" (keydown)="tapfocus($event)">
+            <input type="text" class="form-control font-khmer-cursive" placeholder="Email" [(ngModel)]="user_name" (keypress)="enterLoginHandler($event)" (keydown)="tapfocus($event)">
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
 
@@ -25,7 +25,7 @@
                         <span>
                             <i class="far f" [ngClass]="{'fa-check-circle red': remember_me, 'fa-times-circle ic': !remember_me}"></i>
                         </span>
-                         <span style="margin: 0px 1px 0px 10px;">Remember Me</span> 
+                         <span style="margin: 0px 1px 0px 10px;" class="font-khmer-cursive">Remember Me</span> 
                     </label>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <span class="i">
                     <i class="fas fa-download" style="font-size: 21px;color: #0055ff;"></i>
                 </span>
-                <span style="float: right; margin-top: 10px;margin-right: 20px;">Log In</span>
+                <span class="font-khmer-cursive" style="float: right; margin-top: 10px;margin-right: 20px;">Log In</span>
             </div>
 
 

@@ -12,6 +12,8 @@
             "REGISTER": "Register",
             "CREATE_DATE": "Create Date",
             "Create_By": "Create By",
+            "Modify_By": "Modify By",
+            "Page_Of":"Pages {{value}} of {{value1}}",
             "MODIFY_DATE": "Modify Date",
             "PAGE_OF_TOTAL": "Page {{ pageNum }} of {{ totalPages }}",
             "ID": "ID",

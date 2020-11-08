@@ -29,6 +29,7 @@ import { environment } from '../../../environments/environment.prod';
 })
 export class RegiProComponent implements OnInit {
 src = "";
+url: string;
   // start declear grid
 public info = true;
 public buttonCount = 5;
@@ -80,6 +81,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
   }
 
   ngOnInit(): void {
+    this.url = environment.bizServer.server +'/api/web/reader/read/';
     this.src = src;
     const url = (window.location.href).split('/');
     this.dataService.visitMessage(url[5]);
