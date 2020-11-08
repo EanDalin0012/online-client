@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
 import { CategoryModel } from '../../share/model/model/category';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { RequestDataService } from '../../share/service/get-data.service';
@@ -8,6 +8,11 @@ import * as moment from 'moment';
 import { Base64WriteImage } from '../../share/model/model/base64';
 import { UploadService } from '../../share/service/upload.service';
 import { environment } from '../../../environments/environment.stage';
+import { Utils } from '../../share/utils/utils.static';
+import { ProductModelRequest } from '../../share/model/request/req-product';
+import { ServerService } from '../../share/service/server.service';
+import { ResponseDataModel } from '../../share/model/response/res-data';
+import { ModalService } from '../../share/service/modal.service';
 @Component({
   selector: 'app-regi-pro-edit',
   templateUrl: './regi-pro-edit.component.html',
@@ -51,6 +56,8 @@ export class RegiProEditComponent implements OnInit {
   constructor(
     private dataService: RequestDataService,
     private uploadService: UploadService,
+    private serverService: ServerService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -120,6 +127,7 @@ export class RegiProEditComponent implements OnInit {
     });
     this.is_selected_file = true;
   }
+
   public remove(fileSelect, uid: string) {
       fileSelect.removeFileByUid(uid);
       if(this.imagePreviews.length > 0) {
@@ -130,11 +138,11 @@ export class RegiProEditComponent implements OnInit {
           }
         });
       }
-    }
+  }
 
-    public showButton(state: FileState): boolean {
-      return (state === FileState.Selected) ? true : false;
-    }
+  public showButton(state: FileState): boolean {
+    return (state === FileState.Selected) ? true : false;
+  }
     
 upload(state) {
   console.log(this.imagePreviews);
@@ -160,8 +168,6 @@ upload(state) {
             });
 
           }
-          
-         
       } else {
       }
     });
@@ -169,4 +175,42 @@ upload(state) {
   
 }
 // end file select function
+  
+edit() {
+  if ( this.isValid() === true) {
+    const userInfo                = Utils.getUserInfo();
+    const trReq                   = new ProductModelRequest();
+    trReq.body.name               = this.product_name;
+    trReq.body.description        = this.description;
+    trReq.body.category_id        = this.categoryModel.id;
+    trReq.body.resource_img_id    = this.resource_img_id;
+    
+    const api = '/api/product/update';
+    console.log(trReq);
+    
+    this.serverService.HTTPPost(api, trReq).then(response => {
+      const responseData = response as ResponseDataModel;
+      if ( responseData && responseData.body.status === Reponse_Status.Y) {
+        this.modal.close( {close: BTN_ROLES.SAVE});
+      }
+    });
+  }
+}
+
+private isValid(): boolean {
+  console.log(this.categoryModel);
+  
+  if (!this.product_name || this.product_name && this.product_name.trim() === ''
+      || this.product_name && this.product_name === null) {
+        const bool = this.modalService.messageAlert('Invalid product name.');
+        return bool;
+  } else if (!this.categoryModel) {
+    const bool = this.modalService.messageAlert('Please select category.');
+    return bool;
+  } 
+  else {
+    return true;
+  }
+}
+
 }

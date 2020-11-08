@@ -6020,3 +6020,30 @@ input::placeholder {
     height: 35px;
     width: 100px;
 }
+
+.btn-add-00:hover{
+    border-color: #212529;
+    color: #ffffff;
+    background-color: #212529;
+    background-image: none;
+}
+
+.btn-add-00 {
+    border-color: currentColor;
+    color: #212529;
+    background: none;
+    box-shadow: none;
+}
+.btn-add-00 span:nth-child(1) {
+    font-size: 20px;
+}
+.btn-add-00 span:nth-child(2) {
+    margin-top: 4px;
+}
+
+.border-color-red {
+    border-color: #f02f53;
+}
+.color-red{
+    color: #f02f53 !important;
+}
