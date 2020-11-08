@@ -18,6 +18,7 @@ import { CategoryRequestModel } from '../../share/model/request/req-main-categor
 import { Utils } from '../../share/utils/utils.static';
 import { Country, CountryData } from '../../home/home1000/data';
 import { DataService } from '../../share/service/data.service';
+import { ChipComponent } from '@progress/kendo-angular-buttons';
 
 @Component({
   selector: 'app-regi-pro-add',
@@ -60,7 +61,7 @@ filterSettings: DropDownFilterSettings = {
 };
 cagetList = new Array<CategoryModel>();
 country: CategoryModel;
-
+public chips = []
 // end 
 
   constructor(
@@ -72,6 +73,14 @@ country: CategoryModel;
   ) { }
 
   ngOnInit() {
+    this.chips = [
+      {
+        label: 'Apple',
+        selected: true,
+        icon: null,
+        selectedIcon: 'k-icon k-i-check-outline'
+    }
+    ];
     this.translate.get('Home7100').subscribe((res) => {
       this.translateTxt = res;
      });

@@ -20,7 +20,8 @@
             "Download_Excel": "Download Excel",
             "Download_Pdf": "Download PDF",
             "Delete_Items": "Delete Item(s)",
-            "Please_Select_Item_You_Delete": "Please select Item(s) that you want to delete."
+            "Please_Select_Item_You_Delete": "Please select Item(s) that you want to delete.",
+            "Upload_File": "Upload Image"
         },
         "BUTTON": {
             "BACK": "Back",
@@ -36,7 +37,9 @@
             "ADD_NEW": "Add New",
             "EXPORT_PDF": "Export to PDF",
             "EXPORT_EXCEL": "Export to Excel",
-            "ADD_IMG": "add img"
+            "ADD_IMG": "add img",
+            "Upload":"Upload",
+            "Remove":"Remove"
         },
         "MESSAGE": {
             "INVALID_EMAIL": "Invalid Email",
@@ -344,12 +347,16 @@
         "Label": {
             "Tittle": "Product",
             "Product_Name": "Product Name",
-            "Category_Name": "Category Name"
+            "Category_Name": "Category Name",
+            "Add_New_Product":"Add New Product"
         },
         "Message": {
             "Pro_Save_Success": "Product Save Success",
             "Pro_Update_Success": "Product Update Success",
             "Pro_Delete_Success": "Product Delete Success"
+        },
+        "Holder": {
+            "Enter_Product_Name":"Enter product name ..."
         }
 
     }

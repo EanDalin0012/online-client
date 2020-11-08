@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./regi-pro-edit.component.css']
 })
 export class RegiProEditComponent implements OnInit {
+  modal;
 
   constructor() { }
 
   ngOnInit(): void {
+      if(this.modal) {
+        console.log(this.modal.message);
+      }
   }
 
 }

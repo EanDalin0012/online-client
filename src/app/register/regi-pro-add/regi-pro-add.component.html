@@ -2,8 +2,8 @@
     <div class="container01">
         <div class="web_container">
             <!-- header -->
-            <div class="pop_header">
-                <h1>{{'RegiCateAdd.Label.Tittle' | translate}}</h1>
+            <div class="pop_header font-khmer-cursive">
+                <h1 class="font-khmer-cursive">{{'RegiPro.Label.Add_New_Product' | translate}}</h1>
                 <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
             </div>
             <!-- //header -->
@@ -11,21 +11,21 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>{{'RegiCateAdd.Label.Name' | translate}}</label>
+                        <label class="font-khmer-cursive">{{'RegiPro.Label.Category_Name' | translate}}</label>
                         <kendo-dropdownlist [data]="cagetList" [filterable]="true" [textField]="'name'" [valueField]="'id'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="categoryModel" [ngModelOptions]="{standalone:
                             true}" [defaultItem]="defaultCountry">
                                 <ng-template kendoDropDownListValueTemplate let-dataItem>
-                                    <span class="template">{{ dataItem.name}}</span>
+                                    <span class="template font-khmer-cursive">{{ dataItem.name}}</span>
                                 </ng-template>
                                 <ng-template kendoDropDownListItemTemplate let-dataItem>
-                                    <span class="template">{{ dataItem.name}}</span>
+                                    <span class="template font-khmer-cursive">{{ dataItem.name}}</span>
                                 </ng-template>
                             </kendo-dropdownlist>
 
                     </div>
                     <div class="form-group col-md-6">
-                        <label>{{'RegiCateAdd.Label.Name' | translate}}</label>
-                        <input type="text" [ngClass]="product_name? 'active-input' : ''" class="form-control" [(ngModel)]="product_name" placeholder="{{'RegiCateAdd.Holder.Enter_Category_Name' | translate}}">
+                        <label class="font-khmer-cursive">{{'RegiPro.Label.Product_Name' | translate}}</label>
+                        <input type="text" [ngClass]="product_name? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="product_name" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
 
                         <div class="in_box">
                             <button type="button" [ngClass]="product_name? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
@@ -36,8 +36,8 @@
 
                 <div class="form-row">
                     <div class="form-group form-group-last col-md-12">
-                        <label>{{'RegiCate.LABEL.Description' | translate}}</label>
-                        <input type="text" [ngClass]="description? 'active-input' : ''" [(ngModel)]="description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control">
+                        <label class="font-khmer-cursive">{{'RegiCate.LABEL.Description' | translate}}</label>
+                        <input type="text" [ngClass]="description? 'active-input' : ''" [(ngModel)]="description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control font-khmer-cursive">
                         <div class="in_box">
                             <button type="button" [ngClass]="description? 'btn_del' : ''" (click)="onClickBtndescription()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
                         </div>
@@ -47,24 +47,24 @@
 
                 <div class="form-row">
                     <div class="form-group form-group-last col-md-12">
-                        <label>{{'RegiCate.LABEL.Description' | translate}}</label>
+                        <label class="font-khmer-cursive">{{'COMMON.LABEL.Upload_File' | translate}}</label>
                         
                         <kendo-fileselect
                         [restrictions]="fileRestrictions"
                         [multiple] = "false"
+                        class="font-khmer-cursive"
                         (select)="selectEventHandler($event)"
                                 #myFileSelect="kendoFileSelect">
                                 <ng-template kendoFileSelectFileTemplate let-files let-state="state">
-                                    <div>Name: {{files[0].name}} Size: {{files[0].size}} bytes</div>
-                                    <button class="k-button"  style="position: absolute; right: 6.2em;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">Remove</button>
-
-                                    <button class="k-button"  style="position: absolute; right: .2em;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);" [icon]="'upload'" [look]="'outline'">Upload</button>
+                                    <div class="font-khmer-cursive">Name: {{files[0].name}} Size: {{files[0].size}} bytes</div>
+                                    <button class="k-button"  style="position: absolute; right: 6.2em;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.Remove' | translate}}</button>
+                                    <button class="k-button"  style="position: absolute; right: .2em;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);" [icon]="'upload'" [look]="'outline'">{{'COMMON.BUTTON.Upload' | translate}}</button>
                                 </ng-template>
                         </kendo-fileselect>
 
 
                         <div *ngIf="imagePreviews.length" class="img-preview example-config">
-                            <h3>Preview selected images</h3>
+                            <h3 class="font-khmer-cursive">Preview selected images</h3>
                             <img *ngFor="let image of imagePreviews"
                             [src]="image.src"
                             alt="image preview"
@@ -81,12 +81,14 @@
 
 
         <div class="c_btn">
-            <div class="add-close  btn-css margin-right-btn-clos" (click)="close()">
-                <span>{{'COMMON.BUTTON.CLOSE' | translate}}</span>
-            </div>
-            <div class="iam-btn-container mbr_introContent" style="display: inline-block;">
-                <button class="iam-button save" (click)="btnRegister()">{{'COMMON.BUTTON.SAVE' | translate}}</button>
-            </div>
+            <!-- <div class="add-close  btn-css margin-right-btn-clos" (click)="close()">
+                <span class="font-khmer-cursive">{{'COMMON.BUTTON.CLOSE' | translate}}</span>
+            </div> -->
+            <button (click)="close()" class="k-button"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
+            <button (click)="btnRegister()" class="k-button"  kendoButton [icon]="'download'" [look]="'outline'">{{'COMMON.BUTTON.SAVE' | translate}}</button>
+            <!-- <div class="iam-btn-container mbr_introContent" style="display: inline-block;">
+                <button class="iam-button save font-khmer-cursive" (click)="btnRegister()">{{'COMMON.BUTTON.SAVE' | translate}}</button>
+            </div> -->
         </div>
     </div>
 </div>
