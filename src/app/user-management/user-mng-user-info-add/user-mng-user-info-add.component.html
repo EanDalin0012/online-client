@@ -23,51 +23,128 @@
                         <!-- <form class="k-form" [formGroup]="form"> -->
                         <!-- user information -->
                         <ng-container *ngIf="currentStep === 0">
+
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.First_Name' | translate}}</label>
                                     <input type="text" [ngClass]="first_name? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="first_name" placeholder="{{'UserMngUserInfo.Holder.Enter_First_Name' | translate}}">
-            
                                     <div class="in_box">
-                                        <button type="button" [ngClass]="first_name? 'btn_del' : ''" (click)="FirstNameDelete()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                        <button type="button" [ngClass]="first_name? 'btn_del' : ''" (click)="Delete('first_name')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Last_Name' | translate}}</label>
                                     <input type="text" [ngClass]="last_name? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="last_name" placeholder="{{'UserMngUserInfo.Holder.Enter_Last_Name' | translate}}">
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="last_name? 'btn_del' : ''" (click)="Delete('last_name')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Gender' | translate}}</label>
+                                    <input type="text" [ngClass]="email? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="email" placeholder="{{'UserMngUserInfo.Holder.Enter_Email' | translate}}">
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="email? 'btn_del' : ''" (click)="Delete('email')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Date_Birth' | translate}}</label>
+                                    <input type="text" [ngClass]="contact? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="contact" placeholder="{{'UserMngUserInfo.Holder.Enter_Contact' | translate}}">
             
                                     <div class="in_box">
-                                        <button type="button" [ngClass]="last_name? 'btn_del' : ''" (click)="LastNameDelete()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                        <button type="button" [ngClass]="contact? 'btn_del' : ''" (click)="Delete('contact')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Email' | translate}}</label>
+                                    <input type="text" [ngClass]="email? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="email" placeholder="{{'UserMngUserInfo.Holder.Enter_Email' | translate}}">
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="email? 'btn_del' : ''" (click)="Delete('email')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Contact' | translate}}</label>
+                                    <input type="text" [ngClass]="contact? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="contact" placeholder="{{'UserMngUserInfo.Holder.Enter_Contact' | translate}}">
+            
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="contact? 'btn_del' : ''" (click)="Delete('contact')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Kh_Id' | translate}}</label>
+                                    <input type="text" [ngClass]="email? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="email" placeholder="{{'UserMngUserInfo.Holder.Enter_Email' | translate}}">
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="email? 'btn_del' : ''" (click)="Delete('email')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group form-group-last col-md-12">
+                                    <label class="font-khmer-cursive">{{'COMMON.LABEL.Upload_File' | translate}}</label>
+                                    
+                                    <kendo-fileselect
+                                    [restrictions]="fileRestrictions"
+                                    [multiple] = "false"
+                                    class="font-khmer-cursive kendo-fileselect-t"
+                                    (select)="selectEventHandler($event)"
+                                            #myFileSelect="kendoFileSelect">
+                                            <ng-template kendoFileSelectFileTemplate let-files let-state="state">
+                                                <div class="font-khmer-cursive">Name: {{files[0].name}} <strong class="chipe-00">Size: {{files[0].size}} bytes</strong></div>
+                                                <button class="k-button"  style="position: absolute; right: 6.2em; height: 30px;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.Remove' | translate}}</button>
+                                                <button class="k-button"  style="position: absolute; right: .2em; height: 30px;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);" [icon]="'upload'" [look]="'outline'">{{'COMMON.BUTTON.Upload' | translate}}</button>
+                                            </ng-template>
+                                    </kendo-fileselect>
+            
+            
+                                    <div *ngIf="imagePreviews.length" class="img-preview example-config">
+                                        <h3 class="font-khmer-cursive">Preview selected images</h3>
+                                        <img *ngFor="let image of imagePreviews"
+                                        [src]="image.src"
+                                        alt="image preview"
+                                        style="width: 200px; margin: 10px;" />
+                                    </div>
+                                   
             
                                 </div>
                             </div>
-                        </ng-container>
 
-                        <!-- <app-user-mng-user-info-add-form *ngIf="currentStep === 0" [userForm]="currentGroup"></app-user-mng-user-info-add-form> -->
+                        </ng-container>
 
                         <app-user-mng-user-info-add-account *ngIf="currentStep === 1" [accountForm]="currentGroup"></app-user-mng-user-info-add-account>
 
 
 
-                        <div>
-                            <span class="k-form-separator"></span>
-                            <span class="page">Step {{ currentStep + 1 }} of 2</span>
-                            <div>
-                                <button class="k-button prev" *ngIf="currentStep !== 0" (click)="prev()">
-                                        Previous
-                                    </button>
-                                <button class="k-button k-primary" (click)="next()" *ngIf="currentStep !== 2">
-                                        Next
-                                    </button>
-                                <button class="k-button k-primary" (click)="submit()" *ngIf="currentStep === 2">Submit</button>
+                        <div class="width-100p float-right right-0">
+                            <span class="page width-100p float-right right-0 text-align-right">Step {{ currentStep + 1 }} of 2</span>
+                            <div class="float-right right-0">
+                                <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 margin-right-15px" *ngIf="currentStep !== 0" (click)="prev()">
+                                    <i class="fas fa-arrow-circle-left font-size-20px"></i>
+                                    <span class="margin-lef-5px">{{'COMMON.BUTTON.Previous' | translate}}</span>
+                                </button>
+                                <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="next()" *ngIf="currentStep !== 2">
+                                    <i class="fas fa-arrow-circle-right font-size-20px"></i>
+                                    <span class="margin-lef-5px">{{'COMMON.BUTTON.Next' | translate}}</span>
+                                </button>
                             </div>
                         </div>
-                        <!-- </form> -->
                     </div>
                 </div>
 </div>
 
 </div>
+<div class="c_btn">
+    <button  (click) ="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
+    <button  *ngIf="currentStep === 2" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'download'" [look]="'outline'">{{'COMMON.BUTTON.SAVE' | translate}}</button>
+</div>
+
 </div>
 </div>

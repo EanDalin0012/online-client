@@ -42,7 +42,9 @@
             "Remove":"Remove",
             "Logout":"Logout",
             "Profile":"Profile",
-            "Login":"Login"
+            "Login":"Login",
+            "Next":"Next",
+            "Previous":"Previous"
         },
         "MESSAGE": {
             "INVALID_EMAIL": "Invalid Email",

@@ -6047,3 +6047,32 @@ input::placeholder {
 .color-red{
     color: #f02f53 !important;
 }
+i {
+    font-style: normal !important;
+}
+.font-size-20px{
+    font-size: 20px;
+}
+.margin-lef-5px{
+    margin-left: 5px;
+}
+.margin-right-15px{
+    margin-right: 15px;
+}
+.width-100p{
+    width: 100%;
+}
+
+.right-0px {
+    right: 0px;
+}
+.text-align-right{
+    text-align: right;
+}
+.text-align-left{
+    text-align: left;
+}
+
+.text-align-center{
+    text-align: center;
+}
