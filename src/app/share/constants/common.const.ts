@@ -149,7 +149,8 @@ export enum URLCODE {
   'RegiCate'         = 'category',
   'Vendor'           = 'vendor',
   'RegiPro'          = 'product',
-  'Set-Price-Product' = 'set-price-product'
+  'Set-Price-Product' = 'set-price-product',
+  'User-Info'       = 'user-info'
 }
 
 export enum CURRENCY_CODE {

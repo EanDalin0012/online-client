@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from 'src/app/share/utils/utils.static';
-import { LOCAL_STORAGE } from '../../share/constants/common.const';
+import { LOCAL_STORAGE, Reponse_Status } from '../../share/constants/common.const';
 import { Router } from '@angular/router';
+import { AuthentcatiionService } from '../../share/service/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,8 @@ export class HeaderComponent implements OnInit {
   };
   constructor(
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private authentcatiionService: AuthentcatiionService
   ) { }
 
   ngOnInit(): void {
@@ -35,9 +37,17 @@ export class HeaderComponent implements OnInit {
     this.translate.use( this.langCode );
   }
 
-  signOUt() {
-    Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
-    Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
-    this.router.navigate(['/login']);
+  Logout() {
+    this.authentcatiionService.revokeToken().then(resp=>{
+      if(resp.body.status === Reponse_Status.Y) {
+        Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
+        Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
+        this.router.navigate(['/login']);
+      }
+    });
+  }
+  
+  Profile() {
+
   }
 }

@@ -1,7 +1,4 @@
-
-class Body{
-    
-}
+import { UserDataModel } from '../model/user-data';
 export class UserDataRequest {
-    body = new Body();
+    body = new UserDataModel();
 }

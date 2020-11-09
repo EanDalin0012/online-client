@@ -32,6 +32,7 @@ export class RegiProEditComponent implements OnInit {
     status: ''
   };
   product_name: string;
+  product_id: number;
   categoryModel: CategoryModel;
   category_id: number;
   description:string;
@@ -68,6 +69,7 @@ export class RegiProEditComponent implements OnInit {
         this.product_name = this.modal.message.name;
         this.description  = this.modal.message.description;
         this.resource_img_id = this.modal.message.resource_img_id;
+        this.product_id      = this.modal.message.id;
         console.log(this.resource_img_id);
         
     }
@@ -180,6 +182,7 @@ edit() {
   if ( this.isValid() === true) {
     const userInfo                = Utils.getUserInfo();
     const trReq                   = new ProductModelRequest();
+    trReq.body.id                 = this.product_id;
     trReq.body.name               = this.product_name;
     trReq.body.description        = this.description;
     trReq.body.category_id        = this.categoryModel.id;
@@ -187,11 +190,10 @@ edit() {
     
     const api = '/api/product/update';
     console.log(trReq);
-    
     this.serverService.HTTPPost(api, trReq).then(response => {
       const responseData = response as ResponseDataModel;
       if ( responseData && responseData.body.status === Reponse_Status.Y) {
-        this.modal.close( {close: BTN_ROLES.SAVE});
+        this.modal.close( {close: BTN_ROLES.EDIT});
       }
     });
   }

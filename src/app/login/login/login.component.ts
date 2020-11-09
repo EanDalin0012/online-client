@@ -39,13 +39,14 @@ export class LoginComponent implements OnInit {
     if(this.remember_me === true) {
       this.user_name = Utils.getSecureStorage('user_id');
     }
+    console.log('remember_me', this.remember_me);
   }
 
   ngOnDestroy(): void {
     $('body').removeClass('hold-transition login-page');
   }
 
-  onClickLogin() {
+  Login() {
     if(this.remember_me) {
       Utils.setSecureStorage('user_id', this.user_name)
     }
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   enterLoginHandler(event: any) {
     if (event.keyCode === 13 && this.user_name !== '' && this.password !== '') {
-      this.onClickLogin();
+      this.Login();
     } else if (event.keyCode === 13 && this.user_name !== '') {
       this.passwordElement.nativeElement.focus();
     }

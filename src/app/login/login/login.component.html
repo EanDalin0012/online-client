@@ -22,20 +22,24 @@
 
                 <div class="checkbox icheck">
                     <label (click)="remember()">
-                        <span>
-                            <i class="far f" [ngClass]="{'fa-check-circle red': remember_me, 'fa-times-circle ic': !remember_me}"></i>
-                        </span>
-                         <span style="margin: 0px 1px 0px 10px;" class="font-khmer-cursive">Remember Me</span> 
+                        <span [ngClass]="{'k-i-close-circle red': !remember_me, 'k-i-check-circle ic': remember_me}" class="k-icon" style="margin: -3px 0px 0px 0px;"></span>
+                         <span style="margin: 0px 1px 0px 5px;" class="font-khmer-cursive">Remember Me</span> 
                     </label>
                 </div>
             </div>
 
-            <div class="btn-css col-xs-4 l cu" (click)="onClickLogin()">
+            <div class="col-xs-4 l cu" style="margin-right: -12px;" (click) ="Login()">
+                <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00">
+                    <span class="k-icon k-i-login"></span>
+                    <span style="margin-left: 5px;">{{'COMMON.BUTTON.Login' | translate}}</span>
+                </button>
+            </div>
+            <!-- <div class="btn-css col-xs-4 l cu" (click)="onClickLogin()">
                 <span class="i">
                     <i class="fas fa-download" style="font-size: 21px;color: #0055ff;"></i>
                 </span>
                 <span class="font-khmer-cursive" style="float: right; margin-top: 10px;margin-right: 20px;">Log In</span>
-            </div>
+            </div> -->
 
 
             <!-- <div class="col-xs-4">

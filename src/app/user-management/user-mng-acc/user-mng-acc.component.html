@@ -1,20 +1,20 @@
 <div class="contentsWrap contentsWrap01">
     <div class="page_title">
-        <div class="breadcrumb">
+        <div class="breadcrumb font-khmer-cursive">
             <div class="page_navi">
                 <span>{{'UserMngAcc.LABEL.Tittle1' | translate}}</span>
             </div>
             <div class="page_navi">
                 <span>{{'UserMngAcc.LABEL.Tittle2' | translate}}</span>
             </div>
-            <h1><span>{{'UserMngAcc.LABEL.Tittle3' | translate}}</span></h1>
+            <h1 class="margin-00 font-khmer-cursive"><span>{{'UserMngAcc.LABEL.Tittle3' | translate}}</span></h1>
         </div>
 
     </div>
 
     <div class="container01">
 
-        <div class="col-md-12" style="margin-bottom: 15px; padding: 0px;">
+        <div class="col-md-12 font-khmer-cursive" style="margin-bottom: 15px; padding: 0px;">
             <strong>{{'COMMON.LABEL.ITEMS' | translate: {'value': totalRecord} }}</strong>
         </div>
 
@@ -35,39 +35,39 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 font-khmer-cursive">
                             <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
                                 {{'COMMON.LABEL.Download_Excel' | translate}}</button>
                             <button kendoGridPDFCommand class="pdf export" type="button" icon="file-pdf" style="float:right; width: 165px;">
-                                <span>{{'COMMON.LABEL.Download_Pdf' | translate}}</span>
+                                <span class="font-khmer-cursive">{{'COMMON.LABEL.Download_Pdf' | translate}}</span>
                             </button>
                         </div>
                     </div>
                 </ng-template>
 
-                <kendo-grid-checkbox-column class="cen" [width]="45" [resizable]="false" [columnMenu]="true" showSelectAll="true"></kendo-grid-checkbox-column>
+                <kendo-grid-checkbox-column class="cen font-khmer-cursive" [width]="45" [resizable]="false" [columnMenu]="true" showSelectAll="true"></kendo-grid-checkbox-column>
 
-                <kendo-grid-column width="50" class="cen" [sortable]="false" field="no" title="{{'COMMON.LABEL.NO' | translate}}">
+                <kendo-grid-column width="50" class="cen font-khmer-cursive" [sortable]="false" field="no" title="{{'COMMON.LABEL.NO' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                         <p>{{rowIndex + 1}}</p>
                     </ng-template>
                 </kendo-grid-column>
 
-                <kendo-grid-column width="150" class="subj" field="user_name" title="{{'UserMngAcc.LABEL.User_Name' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="enabled" title="{{'UserMngAcc.LABEL.Enabled' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="account_locked" title="{{'UserMngAcc.LABEL.Account_Locked' | translate}}">
+                <kendo-grid-column width="150" class="subj font-khmer-cursive" field="user_name" title="{{'UserMngAcc.LABEL.User_Name' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj font-khmer-cursive" field="enabled" title="{{'UserMngAcc.LABEL.Enabled' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj font-khmer-cursive" field="account_locked" title="{{'UserMngAcc.LABEL.Account_Locked' | translate}}">
                     <!--  <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                         <span>{{dataItem.account_locked}}</span>
                         <button type="button" tabindex=-1 class="btn_edit01 float-right" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
                     </ng-template> -->
 
                 </kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="credentials_expired" title="{{'UserMngAcc.LABEL.Credentials_Expired' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="account_expired" title="{{'UserMngAcc.LABEL.Account_Expired' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj font-khmer-cursive" field="credentials_expired" title="{{'UserMngAcc.LABEL.Credentials_Expired' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj font-khmer-cursive" field="account_expired" title="{{'UserMngAcc.LABEL.Account_Expired' | translate}}"></kendo-grid-column>
 
-                <kendo-grid-column width="100" class="cen" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
+                <kendo-grid-column width="100" class="cen font-khmer-cursive" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <button type="button" tabindex=-1 class="btn_edit01" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
+                        <button type="button" tabindex=-1 class="btn_edit01 font-khmer-cursive" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
                     </ng-template>
                 </kendo-grid-column>
 

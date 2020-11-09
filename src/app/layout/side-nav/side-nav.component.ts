@@ -114,8 +114,9 @@ export class SideNavComponent implements OnInit {
         break;
       case 'User1000': // setting
       case 'UserMngAcc': // setting Set-Price-Product
+      case 'User-Info':
       case 'Set-Price-Product':
-        url += `user-mng/${URLCODE[urlCode]}`;
+        url += `user-management/${URLCODE[urlCode]}`;
         break;
     }
     this.router.navigate([url]);

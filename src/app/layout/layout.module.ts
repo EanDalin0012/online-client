@@ -5,6 +5,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { MShareModule } from '../share/mshare/mshare.module';
 
 
 
@@ -16,7 +17,8 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     SideNavComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MShareModule
   ],
   exports: [
     HeaderComponent,

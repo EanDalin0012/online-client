@@ -9,6 +9,16 @@ import { StepperComponent } from '@progress/kendo-angular-layout';
 })
 export class UserMngUserInfoAddComponent implements OnInit {
  
+  first_name: string;
+  last_name: string;
+  gender: string;
+  date_birth: string;
+  email: string;
+  contact: string;
+  kh_id: string;
+  resource_img_id: string;
+  description: string;
+  address: string;
   currentGroup= 'abcd';
   ngOnInit(): void {
     
@@ -24,7 +34,7 @@ export class UserMngUserInfoAddComponent implements OnInit {
   }
 
   private shouldValidate = (index: number): boolean => {
-      return false;
+      return true;
   }
 
   public steps = [
@@ -33,16 +43,25 @@ export class UserMngUserInfoAddComponent implements OnInit {
           isValid: this.isStepValid,
           icon:"user",
           selected: true,
-          validate: this.shouldValidate
+          validate: this.shouldValidate,
+          error: true,
       },
       {
-          label: 'Personal Details',
-          isValid: true,
-          // icon: 'account',
-          enabled: true,
-          error: true,
-          validate: true
-      },
+        label: 'User Information',
+        isValid: true,
+        icon:"user",
+        selected: false,
+        validate: false,
+        error: true,
+    },
+    {
+        label: 'User Information',
+        isValid: false,
+        icon:"k-icon k-i-file-word",
+        selected: false,
+        validate: true,
+        error: true,
+    },
       {
           label: 'Payment Details',
           isValid: this.isStepValid,
@@ -87,6 +106,7 @@ export class UserMngUserInfoAddComponent implements OnInit {
 
   public next(): void {
      this.currentStep += 1;
+
       // if (this.currentGroup.valid && this.currentStep !== this.steps.length) {
       //     this.currentStep += 1;
       //     return;
@@ -118,4 +138,16 @@ export class UserMngUserInfoAddComponent implements OnInit {
       // return groups[index];
   }
 
+  close() {
+
+  }
+
+  FirstNameDelete() {
+      this.first_name = undefined;
+  }
+
+  
+  LastNameDelete() {
+    this.last_name = undefined;
+    }
 }

@@ -39,7 +39,10 @@
             "EXPORT_EXCEL": "Export to Excel",
             "ADD_IMG": "add img",
             "Upload":"Upload",
-            "Remove":"Remove"
+            "Remove":"Remove",
+            "Logout":"Logout",
+            "Profile":"Profile",
+            "Login":"Login"
         },
         "MESSAGE": {
             "INVALID_EMAIL": "Invalid Email",
@@ -360,5 +363,28 @@
             "Enter_Product_Name":"Enter product name ..."
         }
 
+    },
+    "UserMngUserInfo":{
+        "Label": {
+            "User_Information":"User-Information",
+            "First_Name":"First Name",
+            "Last_Name":"Last Name",
+            "Gender":"Gender",
+            "Date_Birth":"Date Birth",
+            "Email":"Email",
+            "Contact":"Contact",
+            "Kh_Id": "ID Card",
+            "Address":"Address",
+            "Add_New_User":"Add New User",
+            "Edit_User":"Edit User"
+        },
+        "Holder": {
+            "Enter_First_Name":"Enter first name ...",
+            "Enter_Last_Name":"Enter last name ...",
+            "Enter_Email":"Enter email ...",
+            "Enter_Contact":"Enter contact ...",
+            "Enter_Kh_Id":"Enter ID card ...",
+            "Enter_Address":"Enter address ..."
+        }
     }
 }

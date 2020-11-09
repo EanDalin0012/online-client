@@ -1,30 +1,73 @@
-<div class="example">
-    <kendo-stepper #stepper [steps]="steps" [stepType]="'full'" [(currentStep)]="currentStep">
+<div class="contentsWrap">
+    <div class="container01 padding-top-20px">
+        <div class="web_container">
 
-    </kendo-stepper>
-
-    <div class="content">
-        <!-- <form class="k-form" [formGroup]="form"> -->
-
-        <app-user-mng-user-info-add-form *ngIf="currentStep === 0" [userForm]="currentGroup"></app-user-mng-user-info-add-form>
-
-        <app-user-mng-user-info-add-account *ngIf="currentStep === 1" [accountForm]="currentGroup"></app-user-mng-user-info-add-account>
-
-
-
-        <div>
-            <span class="k-form-separator"></span>
-            <span class="page">Step {{ currentStep + 1 }} of 2</span>
-            <div>
-                <button class="k-button prev" *ngIf="currentStep !== 0" (click)="prev()">
-                        Previous
-                    </button>
-                <button class="k-button k-primary" (click)="next()" *ngIf="currentStep !== 2">
-                        Next
-                    </button>
-                <button class="k-button k-primary" (click)="submit()" *ngIf="currentStep === 2">Submit</button>
+            <div class="pop_header font-khmer-cursive">
+                <h1 class="font-khmer-cursive">{{'UserMngUserInfo.Label.Add_New_User' | translate}}</h1>
+                <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
             </div>
-        </div>
-        <!-- </form> -->
-    </div>
+            <!-- //header -->
+            <div class="web_Wrap">
+
+                <div class="example">
+                    <kendo-stepper #stepper [steps]="steps" [stepType]="'full'" [(currentStep)]="currentStep">
+                        <!-- <ng-template kendoStepperStepTemplate let-step>
+                            <div class='custom-step'>
+                                <span class="{{step.icon}}"></span>
+                            </div>
+                            <span class='step-label'>{{step.label}}</span>
+                        </ng-template> -->
+                    </kendo-stepper>
+
+                    <div class="content">
+                        <!-- <form class="k-form" [formGroup]="form"> -->
+                        <!-- user information -->
+                        <ng-container *ngIf="currentStep === 0">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.First_Name' | translate}}</label>
+                                    <input type="text" [ngClass]="first_name? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="first_name" placeholder="{{'UserMngUserInfo.Holder.Enter_First_Name' | translate}}">
+            
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="first_name? 'btn_del' : ''" (click)="FirstNameDelete()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Last_Name' | translate}}</label>
+                                    <input type="text" [ngClass]="last_name? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="last_name" placeholder="{{'UserMngUserInfo.Holder.Enter_Last_Name' | translate}}">
+            
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="last_name? 'btn_del' : ''" (click)="LastNameDelete()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <!-- <app-user-mng-user-info-add-form *ngIf="currentStep === 0" [userForm]="currentGroup"></app-user-mng-user-info-add-form> -->
+
+                        <app-user-mng-user-info-add-account *ngIf="currentStep === 1" [accountForm]="currentGroup"></app-user-mng-user-info-add-account>
+
+
+
+                        <div>
+                            <span class="k-form-separator"></span>
+                            <span class="page">Step {{ currentStep + 1 }} of 2</span>
+                            <div>
+                                <button class="k-button prev" *ngIf="currentStep !== 0" (click)="prev()">
+                                        Previous
+                                    </button>
+                                <button class="k-button k-primary" (click)="next()" *ngIf="currentStep !== 2">
+                                        Next
+                                    </button>
+                                <button class="k-button k-primary" (click)="submit()" *ngIf="currentStep === 2">Submit</button>
+                            </div>
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                </div>
+</div>
+
+</div>
+</div>
 </div>

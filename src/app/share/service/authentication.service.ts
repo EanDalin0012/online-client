@@ -44,6 +44,32 @@ export class AuthentcatiionService {
       });
   }
 
+
+  public revokeToken():Promise<any> {
+    return new Promise((resolve,reject) => {
+      const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+      const lang = Utils.getSecureStorage(localStorage.I18N);
+      const api  = "/api/user/oauth/revoke-token";
+      const uri = this.bizserverUrl + api + '?userId='+userInfo.id +'&lang='+lang;
+      let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      const access_token = authorization.access_token;
+      const headers = { 
+        'Authorization': 'Bearer ' + access_token
+      }
+
+      this.httpClient.get(uri, {headers}).subscribe(rest => {
+        const result = rest as any;
+        if(result.error != null) {
+          this.message(result.error.message);
+          reject();
+        } else {
+          resolve(result);
+        }
+      });
+      
+    });
+  }
+
   private accessTokenRequest(auth: AuthentcatiionRequest, basicAuth?: BasicAuth): Promise<any> {
     return new Promise((resovle) => {
       $('div.loading').removeClass('none');
@@ -112,6 +138,18 @@ export class AuthentcatiionService {
         $('div.loading').addClass('none');
         resolve(rest);
       });
+    });
+  }
+
+  private message(message: string) {
+    this.modalService.alert({
+      // tslint:disable-next-line:max-line-length
+      content:  '<h2>'+message+'</h2>',
+      modalClass: ['pop_confirm'],
+      btnText: 'Confirm',
+      callback: (res) => {
+        return false;
+      }
     });
   }
 }
