@@ -1,0 +1,11 @@
+<kendo-dialog>
+    <kendo-dialog-titlebar>
+        <div style="font-size: 18px; line-height: 1.3em;"><span class="k-icon k-i-warning"></span> Delete Data</div>
+    </kendo-dialog-titlebar>
+    <p style="margin: 30px; text-align: center;">This action cannot be undone.</p>
+
+    <kendo-dialog-actions [layout]="actionsLayout">
+        <button kendoButton (click)="onDialogClose()">Cancel</button>
+        <button kendoButton (click)="onDeleteData()" primary="true">Delete</button>
+    </kendo-dialog-actions>
+</kendo-dialog>

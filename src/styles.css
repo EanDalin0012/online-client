@@ -5665,6 +5665,7 @@ kendo-dialog:focus {
     background: url("assets/images/file.svg") no-repeat left center;
     background-size: 15%;
     background-position-x: 3px;
+    padding: 2px !important;
 }
 
 .excel {
@@ -5697,6 +5698,8 @@ kendo-dialog:focus {
     background: url("assets/images/icon-excel.svg") no-repeat left center;
     background-size: 15%;
     background-position-x: 3px;
+    border-color: currentColor;
+    color: #212529;
 }
 
 .pdf:hover {
@@ -5705,8 +5708,7 @@ kendo-dialog:focus {
     background: url("assets/images/file.svg") no-repeat left center !important;
     background-size: 15% !important;
     border-color: #008cff;
-    background-position-x: 3px;
-    color: #575757;
+    color: #575757 ;
 }
 
 .uploadi-img ul.k-upload-files {
@@ -6034,6 +6036,21 @@ input::placeholder {
     background: none;
     box-shadow: none;
 }
+
+.btn-add-01 {
+    border-color: currentColor;
+    color: #212529;
+    box-shadow: none;
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.btn-add-01:hover{
+    border-color: #212529;
+    color: #ffffff;
+    background-color: #212529 !important;
+}
+
+
 .btn-add-00 span:nth-child(1) {
     font-size: 20px;
 }
@@ -6076,3 +6093,89 @@ i {
 .text-align-center{
     text-align: center;
 }
+
+/* .open-alert kendo-dialog-actions button {
+    background-color: red;
+}  */
+
+.open-alert div kendo-dialog-actions button.k-button {
+    background: url('assets/images/check-circle-solid.svg') !important; 
+    background-repeat: no-repeat !important;
+    background-size: 25% !important;
+    background-position-x: 5px !important;
+    background-position-y: 5px !important;
+    height: 35px !important;
+    width: 100px !important;
+    border-color: currentColor !important;
+    color: #212529 !important;
+    font-family: 'El Messiri', 'Khmer', sans-serif !important;
+    border-radius: 0.25rem !important;
+    text-align: right !important;
+}
+
+.open-alert div kendo-dialog-actions button.k-button:hover {
+    background-image: url('assets/images/check-circle-solid.svg') !important;
+    background-repeat: no-repeat !important;
+    background-size: 25% !important;
+    background-color: #c1c7d0 !important;
+    color: #030303!important;
+    text-align: right !important; 
+}
+
+
+.pop-dialog-confirm div kendo-dialog-actions button.k-button:nth-child(2) {
+    background: url('assets/images/check-circle-solid.svg') !important; 
+    background-repeat: no-repeat !important;
+    background-size: 22% !important;
+    background-position-x: 8px !important;
+    background-position-y: 5px !important;
+    height: 35px !important;
+    width: 100px !important;
+    border-color: currentColor !important;
+    color: #212529 !important;
+    font-family: 'El Messiri', 'Khmer', sans-serif !important;
+    border-radius: 0.25rem !important;
+    text-align: right !important;
+    font-size: 1rem !important;
+}
+
+.pop-dialog-confirm div kendo-dialog-actions button.k-button:nth-child(2):hover {
+    /* background-image: url('assets/images/check-circle-solid.svg') !important;
+    background-repeat: no-repeat !important; */
+    /* background-size: 25% !important; */
+    background-color: #c1c7d0 !important;
+    color: #030303!important;
+    text-align: right !important; 
+}
+
+.pop-dialog-close div kendo-dialog-actions button.k-button:nth-child(1) {
+    background: url('assets/images/close-solid.svg') !important; 
+    background-repeat: no-repeat !important;
+    background-size: 17% !important;
+    background-position-x: 10px !important;
+    background-position-y: 7px !important;
+    height: 35px !important;
+    width: 100px !important;
+    border-color: currentColor !important;
+    color: #212529 !important;
+    font-family: 'El Messiri', 'Khmer', sans-serif !important;
+    border-radius: 0.25rem !important;
+    text-align: right !important;
+    min-width: 95px;
+    box-sizing: border-box;
+    border-width: 1px !important;
+    border-style: solid !important;
+    font-size: 1rem !important;
+    line-height: 1.5;
+    padding: 9px 20px;
+}
+
+.pop-dialog-close div kendo-dialog-actions button.k-button:nth-child(1):hover {
+    /* background-image: url('assets/images/close-solid.svg') !important;
+    background-repeat: no-repeat !important;
+    background-size: 17% !important; */
+    background-color: #c1c7d0 !important;
+    color: #030303!important;
+    text-align: right !important; 
+}
+

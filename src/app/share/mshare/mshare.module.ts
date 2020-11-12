@@ -30,7 +30,7 @@ import { SrcPipe } from '../pipe/src.pipe';
     DateFormatPipe,
   ],
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [
     FormsModule,
@@ -57,7 +57,7 @@ import { SrcPipe } from '../pipe/src.pipe';
     ProgressBarModule,
     PhoneNumberPipe,
     DateFormatPipe,
-    SrcPipe
+    SrcPipe,
   ],
   entryComponents: [
     ModalComponent,

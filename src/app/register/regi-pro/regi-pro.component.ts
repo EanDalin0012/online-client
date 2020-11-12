@@ -169,7 +169,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
         content: 'Your select item(s) is: '+name,
         lBtn: {btnText: 'Close'},
         rBtn: {btnText: 'Confirm'},
-        modalClass: ['pop-confirm-btn dialog-confirm'],
+        modalClass: ['pop-confirm-btn dialog-confirm pop-dialog-confirm pop-dialog-close'],
         callback: response =>{
           console.log('response', response);
           if(response.text = 'Confirm') {
@@ -182,6 +182,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
         title: this.translateService.instant('COMMON.LABEL.Delete_Items'),
         content: '<h2>'+this.translateService.instant('COMMON.LABEL.Please_Select_Item_You_Delete')+'</h2>',
         btnText: this.translateService.instant('COMMON.BUTTON.CONFIRME'),
+        modalClass: ['open-alert'],
         callback: response =>{
           
         }

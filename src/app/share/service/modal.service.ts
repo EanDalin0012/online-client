@@ -8,6 +8,7 @@ import { ModalComponent } from '../component/modal/modal.component';
 import { MODAL_STORE_KEY } from '../constants/common.const';
 import { Store } from '../model/model/store-model';
 import { MShareModule } from '../mshare/mshare.module';
+import { AlertDialogComponent } from '../component/alert-dialog/alert-dialog.component';
 
 @Injectable({
   providedIn: MShareModule
@@ -258,11 +259,49 @@ export class ModalService {
       title: title,
       content: msg,
       btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
-      modalClass: ['message-alert testing'],
+      modalClass: ['message-alert testing, open-alert'],
       callback: rest => {
       }
     });
     return false;
+  }
+
+  /**
+   * @param content (component) component
+   * @param message (object)
+   * @param openAlert (object)
+   * @param callback (function) modal
+   * @param callback (function)
+   */
+  openAlert({ content, message = {}, opener = {}, modalClass = [], callback = (res: any) => {} }) {
+    const dialog: DialogRef = this.dialogService.open({
+      content: AlertDialogComponent
+    });
+    this.dialogRefList.push(dialog);
+    this.store.set(MODAL_STORE_KEY.MODAL_STORE_KEY, this.dialogRefList);
+    this.i++;
+    $('kendo-dialog').addClass(modalClass);
+    $('body').addClass('overHidden');
+
+    dialog.content.instance.modal = {
+      message,
+      callback,
+      opener,
+      close: (res: any) => {
+        const modalStoreKey = this.store.get(MODAL_STORE_KEY.MODAL_STORE_KEY);
+        modalStoreKey.splice(this.i - 1);
+        dialog.close(res);
+        $('body').removeClass('overHidden');
+      }
+    };
+
+    dialog.result.subscribe((res) => {
+      if (res instanceof DialogCloseResult) {
+        callback(false);
+      } else {
+        callback(res);
+      }
+    });
   }
 
 }

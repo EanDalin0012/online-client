@@ -87,6 +87,9 @@
                                 </div>
                             </div>
 
+                        </ng-container>
+
+                        <ng-container *ngIf="currentStep === 1">
                             <div class="form-row">
                                 <div class="form-group form-group-last col-md-12">
                                     <label class="font-khmer-cursive">{{'COMMON.LABEL.Upload_File' | translate}}</label>
@@ -116,10 +119,61 @@
             
                                 </div>
                             </div>
-
                         </ng-container>
 
-                        <app-user-mng-user-info-add-account *ngIf="currentStep === 1" [accountForm]="currentGroup"></app-user-mng-user-info-add-account>
+                        <ng-container *ngIf="currentStep === 2">
+                            <table class="table02">
+                                <colgroup>
+                                    <col style="width:16.666%;" span="6" />
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">{{'User1100.LABEL.User_Name' | translate}}</th>
+                                        <td colspan="5"><input type="text" [ngClass]="email? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="email" placeholder="{{'UserMngUserInfo.Holder.Enter_Email' | translate}}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">{{'User1100.LABEL.Enable' | translate}}</th>
+                                        <td>
+                                            <input type="text" [ngClass]="email? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="email" placeholder="{{'UserMngUserInfo.Holder.Enter_Email' | translate}}">
+                                        </td>
+                                        <th scope="row">{{'User1100.LABEL.Account_Lock' | translate}}</th>
+                                        <td>
+                                            <input type="text" [ngClass]="email? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="email" placeholder="{{'UserMngUserInfo.Holder.Enter_Email' | translate}}">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Is First Login</th>
+                                        <td colspan="5">
+                                            <input type="checkbox" [(ngModel)]="is_first_login" [checked]="is_first_login" id="chk1" class="checkbox" />
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <th scope="row">{{'User1100.LABEL.Enable' | translate}}</th>
+                                        <td>
+                                            <input type="checkbox" [(ngModel)]="enabled" [checked]="enabled" id="chk1" class="checkbox" />
+                                        </td>
+                                        <th scope="row">{{'User1100.LABEL.Account_Lock' | translate}}</th>
+                                        <td>
+                                            <input type="checkbox" data-md-icheck [(ngModel)]="accountLocked" [checked]="accountLocked" id="chk1" class="checkbox" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">{{'User1100.LABEL.Credentials_Expired' | translate}}</th>
+                                        <td>
+                                            <input type="checkbox" [(ngModel)]="credentialsExpired" [checked]="credentialsExpired" id="chk1" class="checkbox" />
+                                        </td>
+                                        <th scope="row">{{'User1100.LABEL.Account_Expired' | translate}}</th>
+                                        <td><input type="checkbox" [(ngModel)]="accountExpired" [checked]="accountExpired" id="chk1" class="checkbox" /></td>
+                                    </tr>
+                
+                            </table>
+                        </ng-container>
+
+                        <!-- <app-user-mng-user-info-add-account *ngIf="currentStep === 1" [accountForm]="currentGroup"></app-user-mng-user-info-add-account> -->
 
 
 

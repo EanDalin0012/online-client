@@ -6,6 +6,7 @@ import { Base64WriteImage } from '../../share/model/model/base64';
 import * as moment from 'moment';
 import { UploadService } from '../../share/service/upload.service';
 import { BTN_ROLES } from '../../share/constants/common.const';
+import { ModalService } from '../../share/service/modal.service';
 @Component({
   selector: 'app-user-mng-user-info-add',
   templateUrl: './user-mng-user-info-add.component.html',
@@ -26,6 +27,16 @@ export class UserMngUserInfoAddComponent implements OnInit {
   address: string;
   currentGroup= 'abcd';
 
+  userName:string;
+  enabled: boolean;
+  accountLocked:boolean;
+  credentialsExpired: boolean;
+  accountExpired: boolean;
+  is_first_login: boolean;
+  
+  user_information_validate = false;
+  account_validate = false;
+
   // file select declear
   public imagePreviews: any[] = [];
   public fileRestrictions: FileRestrictions = {
@@ -36,6 +47,7 @@ export class UserMngUserInfoAddComponent implements OnInit {
 
   constructor(
     private uploadService: UploadService,
+    private modalService: ModalService,
   ) {
 
   }
@@ -62,11 +74,11 @@ export class UserMngUserInfoAddComponent implements OnInit {
           isValid: this.isStepValid,
           icon:"user",
           selected: true,
-          validate: this.shouldValidate,
+          validate: this.user_information_validate,
           error: true,
       },
       {
-        label: 'User Information',
+        label: 'Profile',
         isValid: true,
         icon:"user",
         selected: false,
@@ -74,22 +86,12 @@ export class UserMngUserInfoAddComponent implements OnInit {
         error: true,
     },
     {
-        label: 'User Information',
-        isValid: false,
+        label: 'Account',
+        isValid: true,
         icon:"k-icon k-i-file-word",
         selected: false,
-        validate: true,
+        validate: false,
         error: true,
-    },
-      {
-          label: 'Payment Details',
-          isValid: this.isStepValid,
-          validate: this.shouldValidate
-      },
-      {
-        label: 'Payment Details',
-        isValid: this.isStepValid,
-        validate: this.shouldValidate
     }
   ];
 
@@ -124,7 +126,10 @@ export class UserMngUserInfoAddComponent implements OnInit {
 //   }
 
   public next(): void {
-     this.currentStep += 1;
+     if(this.checkUserInfo()) {
+      this.currentStep += 1;
+     }
+     
 
       // if (this.currentGroup.valid && this.currentStep !== this.steps.length) {
       //     this.currentStep += 1;
@@ -257,6 +262,15 @@ upload(state) {
   }
   
 }
+
+checkUserInfo():boolean {
+  if(this.first_name !== null || this.first_name.trim() !== '') {
+    const bool = this.modalService.messageAlert('Invalid product name.');
+    return bool;
+  }
+  return true;
+}
+
   // end file select function
 
 }
