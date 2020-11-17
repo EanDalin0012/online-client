@@ -44,18 +44,80 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Gender' | translate}}</label>
-                                    <input type="text" [ngClass]="email? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="email" placeholder="{{'UserMngUserInfo.Holder.Enter_Email' | translate}}">
-                                    <div class="in_box">
-                                        <button type="button" [ngClass]="email? 'btn_del' : ''" (click)="Delete('email')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                                    </div>
+                                    <kendo-dropdownlist
+                                            [data]="genderItems"
+                                            [textField]="'text'"
+                                            [valueField]="'value'"
+                                            [(ngModel)] = "gender"
+                                            [defaultItem]="defaultCountry"
+                                        >
+                                        <ng-template kendoDropDownListValueTemplate let-dataItem>
+                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                        </ng-template>
+                                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                        </ng-template>
+                                    </kendo-dropdownlist>
+                                    
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Date_Birth' | translate}}</label>
-                                    <input type="text" [ngClass]="contact? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="contact" placeholder="{{'UserMngUserInfo.Holder.Enter_Contact' | translate}}">
-            
-                                    <div class="in_box">
-                                        <button type="button" [ngClass]="contact? 'btn_del' : ''" (click)="Delete('contact')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    
+                                    <div class="form-group col-md-12 padding-left-00">
+                                        <div class="day">
+                                            <kendo-dropdownlist
+                                            [data]="day_list"
+                                            [textField]="'text'"
+                                            [valueField]="'value'"
+                                            [(ngModel)] = "day"
+                                            [defaultItem]="day_defaul"
+                                        >
+                                        <ng-template kendoDropDownListValueTemplate let-dataItem>
+                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                        </ng-template>
+                                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                        </ng-template>
+                                    </kendo-dropdownlist>
+                                        </div>
+
+                                        <div class="col-md-4 month">
+                                            <kendo-dropdownlist
+                                            [data]="month_list"
+                                            [textField]="'text'"
+                                            [valueField]="'value'"
+                                            [(ngModel)] = "month"
+                                            [defaultItem]="month_defaul"
+                                        >
+                                        <ng-template kendoDropDownListValueTemplate let-dataItem>
+                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                        </ng-template>
+                                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                        </ng-template>
+                                    </kendo-dropdownlist>
+                                        </div>
+
+                                        <div class="col-md-4 year">
+                                            <kendo-dropdownlist
+                                            [data]="year_list"
+                                            [textField]="'text'"
+                                            [valueField]="'value'"
+                                            [(ngModel)] = "year"
+                                            [defaultItem]="year_defaul"
+                                        >
+                                        <ng-template kendoDropDownListValueTemplate let-dataItem>
+                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                        </ng-template>
+                                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                        </ng-template>
+                                    </kendo-dropdownlist>
+                                        </div>
+
                                     </div>
+                                    <!-- <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="date_birth" required [(ngModel)] ="date_birth">
+                                    </kendo-datepicker> -->
                                 </div>
                             </div>
 
@@ -80,9 +142,19 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Kh_Id' | translate}}</label>
-                                    <input type="text" [ngClass]="email? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="email" placeholder="{{'UserMngUserInfo.Holder.Enter_Email' | translate}}">
+                                    <input type="text" [ngClass]="kh_id? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="kh_id" placeholder="{{'UserMngUserInfo.Holder.Enter_Card_Id' | translate}}">
                                     <div class="in_box">
-                                        <button type="button" [ngClass]="email? 'btn_del' : ''" (click)="Delete('email')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                        <button type="button" [ngClass]="kh_id? 'btn_del' : ''" (click)="Delete('kh_id')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Description' | translate}}</label>
+                                    <input type="text" [ngClass]="description? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="description" placeholder="{{'UserMngUserInfo.Holder.Enter_Description' | translate}}">
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="description? 'btn_del' : ''" (click)="Delete('description')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                                     </div>
                                 </div>
                             </div>

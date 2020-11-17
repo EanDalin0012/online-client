@@ -5,8 +5,11 @@ import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angula
 import { Base64WriteImage } from '../../share/model/model/base64';
 import * as moment from 'moment';
 import { UploadService } from '../../share/service/upload.service';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { BTN_ROLES, GENDER_CODE_LIST, Month_List } from '../../share/constants/common.const';
 import { ModalService } from '../../share/service/modal.service';
+import { GenderModel } from '../../share/model/model/gender';
+import { TranslateService } from '@ngx-translate/core';
+import { TextValue } from '../../share/model/model/text-value';
 @Component({
   selector: 'app-user-mng-user-info-add',
   templateUrl: './user-mng-user-info-add.component.html',
@@ -17,8 +20,30 @@ export class UserMngUserInfoAddComponent implements OnInit {
   
   first_name: string;
   last_name: string;
-  gender: string;
-  date_birth: string;
+  date_birth: Date = new Date();
+
+  day: TextValue;
+  day_defaul: TextValue = {
+    text: "Select Day",
+    value: ''
+  };
+
+  month: TextValue;
+  month_defaul: TextValue ={
+    text: "Select Month",
+    value: ''
+  };
+
+  year: TextValue;
+  year_defaul: TextValue ={
+    text: "Select Year",
+    value: ''
+  };
+
+  day_list: TextValue[];
+  month_list:  TextValue[] = Month_List;
+  year_list: TextValue[];
+
   email: string;
   contact: string;
   kh_id: string;
@@ -26,6 +51,8 @@ export class UserMngUserInfoAddComponent implements OnInit {
   description: string;
   address: string;
   currentGroup= 'abcd';
+  genderItems = GENDER_CODE_LIST;
+  gender: GenderModel;
 
   userName:string;
   enabled: boolean;
@@ -36,6 +63,11 @@ export class UserMngUserInfoAddComponent implements OnInit {
   
   user_information_validate = false;
   account_validate = false;
+
+  defaultCountry = {  
+    text: 'Select Gender',
+    value: ''
+  };
 
   // file select declear
   public imagePreviews: any[] = [];
@@ -48,11 +80,49 @@ export class UserMngUserInfoAddComponent implements OnInit {
   constructor(
     private uploadService: UploadService,
     private modalService: ModalService,
+    private translateService: TranslateService
   ) {
 
   }
   ngOnInit(): void {
-    
+    this.day_list = [];
+    this.year_list = [];
+    const contYear = Number(moment().format("YYYY")) -5;
+
+    let month = this.getNumberDayOfMonth(2,contYear);
+    this.year = {
+      text: contYear,
+      value: contYear
+    };
+    const currentMont =  moment().format("MM");
+   
+    this.month = {
+      text: moment().format("MMM"),
+      value: moment().format("MM")
+    }
+    const currentDay =  moment().format("DD");
+
+    let day = [];
+    month.forEach((element, index) => {
+      if(index +1 === Number(currentMont)) {
+        console.log(index +1, currentMont, element);
+        for(let i = 1; i<= element; i++) {
+          this.day_list.push({
+            text: i,
+            value: i
+          });
+        }
+      }
+    });
+    let v = contYear + 1;
+    for(let j = 0; j<= 80;j++) {
+      const vData = v -=1;
+      this.year_list.push({
+        text: vData,
+        value: vData
+      });
+    }
+    console.log('is leap year', month, currentMont, this.day_list, (Number(contYear)-10), this.year_list);
   }
 
   public currentStep = 0;
@@ -94,36 +164,6 @@ export class UserMngUserInfoAddComponent implements OnInit {
         error: true,
     }
   ];
-
-// public form = new FormGroup({
-//       accountDetails: new FormGroup({
-//           userName: new FormControl('', Validators.required),
-//           email: new FormControl('', [Validators.required, Validators.email]),
-//           password: new FormControl('', Validators.required),
-//           avatar: new FormControl(null)
-//       }),
-//       personalDetails: new FormGroup({
-//           fullName: new FormControl('', [Validators.required]),
-//           country: new FormControl('', [Validators.required]),
-//           gender: new FormControl(null, [Validators.required]),
-//           about: new FormControl('')
-//       }),
-//       paymentDetails: new FormGroup({
-//           paymentType: new FormControl(null, Validators.required),
-//           cardNumber: new FormControl('', Validators.required),
-//           cvc: new FormControl('', [
-//               Validators.required,
-//               Validators.maxLength(3),
-//               Validators.minLength(3)
-//           ]),
-//           expirationDate: new FormControl('', Validators.required),
-//           cardHolder: new FormControl('', Validators.required)
-//       })
-//   });
-
-//   public get currentGroup(): FormGroup {
-//       return this.getGroupAt(this.currentStep);
-//   }
 
   public next(): void {
      if(this.checkUserInfo()) {
@@ -264,12 +304,30 @@ upload(state) {
 }
 
 checkUserInfo():boolean {
-  if(this.first_name !== null || this.first_name.trim() !== '') {
-    const bool = this.modalService.messageAlert('Invalid product name.');
-    return bool;
+  console.log(this.gender.value, this.date_birth.getDate(), this.date_birth.getMonth(), this.date_birth.getFullYear());
+  
+  if(!this.first_name || this.first_name === '' || this.first_name === null) {
+    console.log(this.first_name);
+    return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_First_Name'));
+  } else if (!this.last_name || this.last_name === '' || this.last_name === null) {
+    return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Last_Name'));
+  } else if (!this.gender.value) {
+    return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Gender'));
+  } else if(!this.date_birth) {
+
   }
-  return true;
+   else {
+    return true;
+  }
 }
+
+
+  getNumberDayOfMonth(month: number, year: number) {
+    // note that month is 0 base like in the date date obje
+    let isLeap = ((year % 4) === 0 && ((year % 100) != 0 || (year % 400) ==0 ));
+    return [ 31, (isLeap ? 29 : 28), 31, 30, 31, 30, 31,
+      31, 30, 31, 30, 31 ];
+  }
 
   // end file select function
 

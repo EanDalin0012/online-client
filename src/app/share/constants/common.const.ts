@@ -1,4 +1,5 @@
 import { CurrencyCode } from './common.type';
+import { TextValue } from '../model/model/text-value';
 export enum CHANNEL  {
   ADMIN= '01', //
   WEB= '02',
@@ -169,4 +170,61 @@ export enum EVENT_CODE {
 export const CURRENCY_CODE_LIST = [
   { currencyCode: 'USD'},
   { currencyCode: 'KHR'}
+];
+
+export const GENDER_CODE_LIST = [
+  { 
+    text: 'COMMON.LABEL.Female',
+    value: 'f'
+  },
+  { 
+    text: 'COMMON.LABEL.Male',
+    value: 'm'
+  },
+  { 
+    text: 'COMMON.LABEL.Other',
+    value: 'o'
+  }
+];
+
+
+export const Month_List: TextValue[] = [
+  {
+    text: "COMMON.LABEL.January",
+    value: '1'
+  },
+  {
+    text: "COMMON.LABEL.February",
+    value: '2'
+  },{
+    text: "COMMON.LABEL.March",
+    value: '3'
+  },{
+    text: "COMMON.LABEL.April",
+    value: '4'
+  },{
+    text: "COMMON.LABEL.May",
+    value: '5'
+  },{
+    text: "COMMON.LABEL.June",
+    value: '6'
+  },{
+    text: "COMMON.LABEL.July",
+    value: '7'
+  },{
+    text: "COMMON.LABEL.August",
+    value: '8'
+  },{
+    text: "COMMON.LABEL.September",
+    value: '9'
+  },{
+    text: "COMMON.LABEL.October",
+    value: '10'
+  },{
+    text: "COMMON.LABEL.November",
+    value: '11'
+  },{
+    text: "COMMON.LABEL.December",
+    value: '12'
+  }
 ];

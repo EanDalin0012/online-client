@@ -21,7 +21,22 @@
             "Download_Pdf": "Download PDF",
             "Delete_Items": "Delete Item(s)",
             "Please_Select_Item_You_Delete": "Please select Item(s) that you want to delete.",
-            "Upload_File": "Upload Image"
+            "Upload_File": "Upload Image",
+            "Female":"Female",
+            "Male":"Male",
+            "Other":"Other",
+            "January":"January",
+            "February":"February",
+            "March":"March",
+            "April":"April",
+            "May":"May",
+            "June":"June",
+            "July":"July",
+            "August":"August",
+            "September":"September",
+            "October":"October",
+            "November":"November",
+            "December":"December"
         },
         "BUTTON": {
             "BACK": "Back",
@@ -378,7 +393,8 @@
             "Kh_Id": "ID Card",
             "Address":"Address",
             "Add_New_User":"Add New User",
-            "Edit_User":"Edit User"
+            "Edit_User":"Edit User",
+            "Description":"Description"
         },
         "Holder": {
             "Enter_First_Name":"Enter first name ...",
@@ -386,7 +402,14 @@
             "Enter_Email":"Enter email ...",
             "Enter_Contact":"Enter contact ...",
             "Enter_Kh_Id":"Enter ID card ...",
-            "Enter_Address":"Enter address ..."
+            "Enter_Address":"Enter address ...",
+            "Enter_Description":"Enter Description..",
+            "Enter_Card_Id":"Enter card identyfier..."
+        },
+        "Message": {
+            "Required_First_Name":"First Name is null || empty.",
+            "Required_Last_Name":"Last Name is null || empty.",
+            "Required_Gender":"Gendeer is null || empty."
         }
     }
 }

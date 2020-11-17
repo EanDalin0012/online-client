@@ -6122,7 +6122,6 @@ i {
     text-align: right !important; 
 }
 
-
 .pop-dialog-confirm div kendo-dialog-actions button.k-button:nth-child(2) {
     background: url('assets/images/check-circle-solid.svg') !important; 
     background-repeat: no-repeat !important;
@@ -6177,5 +6176,11 @@ i {
     background-color: #c1c7d0 !important;
     color: #030303!important;
     text-align: right !important; 
+}
+
+.open-alert div:nth-child(2) {
+    font-family: 'El Messiri', 'Khmer', sans-serif !important;
+    font-size: 1.1rem !important;
+    line-height: 1.5 !important;
 }
 
