@@ -92,6 +92,7 @@ public stepsIcons = [];
   ngOnInit(): void {
     this.day_list = [];
     this.year_list = [];
+    this.is_first_login = true;
     const contYear = Number(moment().format("YYYY")) -5;
 
     let month = this.getNumberDayOfMonth(2,contYear);
@@ -113,9 +114,9 @@ public stepsIcons = [];
 
     this.stepsIcons = [ 
       { label: 'Personal Info',  isValid: true },
-      { label: 'Profile', isValid: false },
+      { label: 'Profile', isValid: false , optional : true},
       { label: 'Card Identify', isValid: true },
-      { label: 'Attachments', isValid: true, optional : true }
+      { label: 'Account', isValid: true  }
     ];
   
   }

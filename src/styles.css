@@ -6191,3 +6191,9 @@ i {
     font-family: 'El Messiri', 'Khmer', sans-serif !important;
 }
 
+.k-step-link {
+    font-family: 'El Messiri', 'Khmer', sans-serif !important;
+}
+input[type=file], .k-upload-button {
+    font-family: 'El Messiri', 'Khmer', sans-serif !important;
+}

@@ -394,7 +394,9 @@
             "Address":"Address",
             "Add_New_User":"Add New User",
             "Edit_User":"Edit User",
-            "Description":"Description"
+            "Description":"Description",
+            "Card_Identify_Image_Front":"Card Identify Image Front",
+            "Card_Identify_Image_Rear":"Card Identify Image Rear"
         },
         "Holder": {
             "Enter_First_Name":"Enter first name ...",

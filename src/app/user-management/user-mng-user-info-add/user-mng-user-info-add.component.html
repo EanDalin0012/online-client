@@ -193,6 +193,54 @@
                                 </div>
                             </div>
 
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Card_Identify_Image_Front' | translate}}</label>
+                                    <kendo-fileselect
+                                    [restrictions]="fileRestrictions"
+                                    [multiple] = "false"
+                                    class="font-khmer-cursive kendo-fileselect-t"
+                                    (select)="selectEventHandler($event)"
+                                            #myFileSelect="kendoFileSelect">
+                                            <ng-template kendoFileSelectFileTemplate let-files let-state="state">
+                                                <div class="font-khmer-cursive">Name: {{files[0].name}} <strong class="chipe-00">Size: {{files[0].size}} bytes</strong></div>
+                                                <button class="k-button"  style="position: absolute; right: 6.2em; height: 30px;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.Remove' | translate}}</button>
+                                                <button class="k-button"  style="position: absolute; right: .2em; height: 30px;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);" [icon]="'upload'" [look]="'outline'">{{'COMMON.BUTTON.Upload' | translate}}</button>
+                                            </ng-template>
+                                    </kendo-fileselect>
+                                    <div *ngIf="imagePreviews.length" class="img-preview example-config">
+                                        <h3 class="font-khmer-cursive">Preview selected images</h3>
+                                        <img *ngFor="let image of imagePreviews"
+                                        [src]="image.src"
+                                        alt="image preview"
+                                        style="width: 200px; margin: 10px;" />
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Card_Identify_Image_Rear' | translate}}</label>
+                                    <kendo-fileselect
+                                    [restrictions]="fileRestrictions"
+                                    [multiple] = "false"
+                                    class="font-khmer-cursive kendo-fileselect-t"
+                                    (select)="selectEventHandler($event)"
+                                            #myFileSelect="kendoFileSelect">
+                                            <ng-template kendoFileSelectFileTemplate let-files let-state="state">
+                                                <div class="font-khmer-cursive">Name: {{files[0].name}} <strong class="chipe-00">Size: {{files[0].size}} bytes</strong></div>
+                                                <button class="k-button"  style="position: absolute; right: 6.2em; height: 30px;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.Remove' | translate}}</button>
+                                                <button class="k-button"  style="position: absolute; right: .2em; height: 30px;" *ngIf="showButton(state)"  kendoButton (click)="upload(files[0].uid);" [icon]="'upload'" [look]="'outline'">{{'COMMON.BUTTON.Upload' | translate}}</button>
+                                            </ng-template>
+                                    </kendo-fileselect>
+                                    <div *ngIf="imagePreviews.length" class="img-preview example-config">
+                                        <h3 class="font-khmer-cursive">Preview selected images</h3>
+                                        <img *ngFor="let image of imagePreviews"
+                                        [src]="image.src"
+                                        alt="image preview"
+                                        style="width: 200px; margin: 10px;" />
+                                    </div>
+                                </div>
+                            </div>
+
                         </ng-container>
 
                         <ng-container *ngIf="currentStep === 3">
