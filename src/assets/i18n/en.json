@@ -409,7 +409,12 @@
         "Message": {
             "Required_First_Name":"First Name is null || empty.",
             "Required_Last_Name":"Last Name is null || empty.",
-            "Required_Gender":"Gendeer is null || empty."
+            "Required_Gender":"Gendeer is null || empty.",
+            "Required_Day":"Day of birth is null || empty.",
+            "Required_Month":"Month of birth is null || empty.",
+            "Required_Year":"Year of birth is null || empty.",
+            "Required_Email":"Email is null || empty.",
+            "Required_Contact":"Contact is null || empty."
         }
     }
 }

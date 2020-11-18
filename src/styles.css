@@ -6184,3 +6184,10 @@ i {
     line-height: 1.5 !important;
 }
 
+.k-dropdown .k-dropdown-wrap, .k-dropdown .k-dropdown-wrap.k-state-focused {
+    font-family: 'El Messiri', 'Khmer', sans-serif !important;
+}
+.defualt-font{
+    font-family: 'El Messiri', 'Khmer', sans-serif !important;
+}
+

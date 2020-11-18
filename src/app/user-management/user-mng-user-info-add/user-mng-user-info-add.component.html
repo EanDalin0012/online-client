@@ -6,17 +6,13 @@
                 <h1 class="font-khmer-cursive">{{'UserMngUserInfo.Label.Add_New_User' | translate}}</h1>
                 <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
             </div>
-            <!-- //header -->
-            <div class="web_Wrap">
 
+            <div class="web_Wrap">
                 <div class="example">
-                    <kendo-stepper #stepper [steps]="steps" [stepType]="'full'" [(currentStep)]="currentStep">
-                        <!-- <ng-template kendoStepperStepTemplate let-step>
-                            <div class='custom-step'>
-                                <span class="{{step.icon}}"></span>
-                            </div>
-                            <span class='step-label'>{{step.label}}</span>
-                        </ng-template> -->
+                    <kendo-stepper
+                        [steps]="stepsIcons"
+                        [stepType]="'full'"
+                        [(currentStep)]="currentStep">
                     </kendo-stepper>
 
                     <div class="content">
@@ -49,13 +45,13 @@
                                             [textField]="'text'"
                                             [valueField]="'value'"
                                             [(ngModel)] = "gender"
-                                            [defaultItem]="defaultCountry"
+                                            [defaultItem]="default_gender"
                                         >
                                         <ng-template kendoDropDownListValueTemplate let-dataItem>
-                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                            <span class="template defualt-font">{{ dataItem.text | translate}}</span>
                                         </ng-template>
                                         <ng-template kendoDropDownListItemTemplate let-dataItem>
-                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                            <span class="template defualt-font">{{ dataItem.text | translate}}</span>
                                         </ng-template>
                                     </kendo-dropdownlist>
                                     
@@ -73,10 +69,10 @@
                                             [defaultItem]="day_defaul"
                                         >
                                         <ng-template kendoDropDownListValueTemplate let-dataItem>
-                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                            <span class="template defualt-font">{{ dataItem.text | translate}}</span>
                                         </ng-template>
                                         <ng-template kendoDropDownListItemTemplate let-dataItem>
-                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                            <span class="template defualt-font">{{ dataItem.text | translate}}</span>
                                         </ng-template>
                                     </kendo-dropdownlist>
                                         </div>
@@ -87,13 +83,14 @@
                                             [textField]="'text'"
                                             [valueField]="'value'"
                                             [(ngModel)] = "month"
+                                            (valueChange)="valueChangeMonth($event)"
                                             [defaultItem]="month_defaul"
                                         >
                                         <ng-template kendoDropDownListValueTemplate let-dataItem>
-                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                            <span class="template defualt-font">{{ dataItem.text | translate}}</span>
                                         </ng-template>
                                         <ng-template kendoDropDownListItemTemplate let-dataItem>
-                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                            <span class="template defualt-font">{{ dataItem.text | translate}}</span>
                                         </ng-template>
                                     </kendo-dropdownlist>
                                         </div>
@@ -104,20 +101,19 @@
                                             [textField]="'text'"
                                             [valueField]="'value'"
                                             [(ngModel)] = "year"
+                                            (valueChange)="valueChangeYear($event)"
                                             [defaultItem]="year_defaul"
                                         >
                                         <ng-template kendoDropDownListValueTemplate let-dataItem>
-                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                            <span class="template defualt-font">{{ dataItem.text | translate}}</span>
                                         </ng-template>
                                         <ng-template kendoDropDownListItemTemplate let-dataItem>
-                                            <span class="template">{{ dataItem.text | translate}}</span>
+                                            <span class="template defualt-font">{{ dataItem.text | translate}}</span>
                                         </ng-template>
                                     </kendo-dropdownlist>
                                         </div>
 
                                     </div>
-                                    <!-- <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="date_birth" required [(ngModel)] ="date_birth">
-                                    </kendo-datepicker> -->
                                 </div>
                             </div>
 
@@ -139,15 +135,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Kh_Id' | translate}}</label>
-                                    <input type="text" [ngClass]="kh_id? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="kh_id" placeholder="{{'UserMngUserInfo.Holder.Enter_Card_Id' | translate}}">
-                                    <div class="in_box">
-                                        <button type="button" [ngClass]="kh_id? 'btn_del' : ''" (click)="Delete('kh_id')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                                    </div>
-                                </div>
-                            </div>
+                           
 
                             <div class="form-row">
                                 <div class="form-group col-md-12">
@@ -194,6 +182,20 @@
                         </ng-container>
 
                         <ng-container *ngIf="currentStep === 2">
+
+                             <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="font-khmer-cursive">{{'UserMngUserInfo.Label.Kh_Id' | translate}}</label>
+                                    <input type="text" [ngClass]="kh_id? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="kh_id" placeholder="{{'UserMngUserInfo.Holder.Enter_Card_Id' | translate}}">
+                                    <div class="in_box">
+                                        <button type="button" [ngClass]="kh_id? 'btn_del' : ''" (click)="Delete('kh_id')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </ng-container>
+
+                        <ng-container *ngIf="currentStep === 3">
                             <table class="table02">
                                 <colgroup>
                                     <col style="width:16.666%;" span="6" />
@@ -245,18 +247,14 @@
                             </table>
                         </ng-container>
 
-                        <!-- <app-user-mng-user-info-add-account *ngIf="currentStep === 1" [accountForm]="currentGroup"></app-user-mng-user-info-add-account> -->
-
-
-
                         <div class="width-100p float-right right-0">
-                            <span class="page width-100p float-right right-0 text-align-right">Step {{ currentStep + 1 }} of 2</span>
+                            <span class="page width-100p float-right right-0 text-align-right">Steps {{ currentStep + 1 }} of 4</span>
                             <div class="float-right right-0">
                                 <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 margin-right-15px" *ngIf="currentStep !== 0" (click)="prev()">
                                     <i class="fas fa-arrow-circle-left font-size-20px"></i>
                                     <span class="margin-lef-5px">{{'COMMON.BUTTON.Previous' | translate}}</span>
                                 </button>
-                                <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="next()" *ngIf="currentStep !== 2">
+                                <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="next()" *ngIf="currentStep !== 3">
                                     <i class="fas fa-arrow-circle-right font-size-20px"></i>
                                     <span class="margin-lef-5px">{{'COMMON.BUTTON.Next' | translate}}</span>
                                 </button>
@@ -269,7 +267,7 @@
 </div>
 <div class="c_btn">
     <button  (click) ="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
-    <button  *ngIf="currentStep === 2" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'download'" [look]="'outline'">{{'COMMON.BUTTON.SAVE' | translate}}</button>
+    <button  *ngIf="currentStep === 3" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'download'" [look]="'outline'">{{'COMMON.BUTTON.SAVE' | translate}}</button>
 </div>
 
 </div>

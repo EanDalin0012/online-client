@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StepperComponent } from '@progress/kendo-angular-layout';
 import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angular-upload';
 import { Base64WriteImage } from '../../share/model/model/base64';
@@ -16,6 +15,11 @@ import { TextValue } from '../../share/model/model/text-value';
   styleUrls: ['./user-mng-user-info-add.component.css']
 })
 export class UserMngUserInfoAddComponent implements OnInit {
+  
+
+
+public stepsIcons = [];
+
   modal;
   
   first_name: string;
@@ -62,9 +66,10 @@ export class UserMngUserInfoAddComponent implements OnInit {
   is_first_login: boolean;
   
   user_information_validate = false;
+  user_information_error    = false;
   account_validate = false;
 
-  defaultCountry = {  
+  default_gender = {  
     text: 'Select Gender',
     value: ''
   };
@@ -90,94 +95,41 @@ export class UserMngUserInfoAddComponent implements OnInit {
     const contYear = Number(moment().format("YYYY")) -5;
 
     let month = this.getNumberDayOfMonth(2,contYear);
+
     this.year = {
       text: contYear,
       value: contYear
     };
+
     const currentMont =  moment().format("MM");
    
     this.month = {
       text: moment().format("MMM"),
       value: moment().format("MM")
     }
-    const currentDay =  moment().format("DD");
+    
+    this.day_list  = this.loadDayList(month,Number(currentMont) );
+    this.year_list = this.loadYearList(contYear + 1, 80);
 
-    let day = [];
-    month.forEach((element, index) => {
-      if(index +1 === Number(currentMont)) {
-        console.log(index +1, currentMont, element);
-        for(let i = 1; i<= element; i++) {
-          this.day_list.push({
-            text: i,
-            value: i
-          });
-        }
-      }
-    });
-    let v = contYear + 1;
-    for(let j = 0; j<= 80;j++) {
-      const vData = v -=1;
-      this.year_list.push({
-        text: vData,
-        value: vData
-      });
-    }
-    console.log('is leap year', month, currentMont, this.day_list, (Number(contYear)-10), this.year_list);
+    this.stepsIcons = [ 
+      { label: 'Personal Info',  isValid: true },
+      { label: 'Profile', isValid: false },
+      { label: 'Card Identify', isValid: true },
+      { label: 'Attachments', isValid: true, optional : true }
+    ];
+  
   }
 
   public currentStep = 0;
 
-  @ViewChild('stepper', { static: true })
-  public stepper: StepperComponent;
-
-  private isStepValid = (index: number): boolean => {
-      return true;
-  }
-
-  private shouldValidate = (index: number): boolean => {
-      return true;
-  }
-
-  public steps = [
-      {
-          label: 'User Information',
-          isValid: this.isStepValid,
-          icon:"user",
-          selected: true,
-          validate: this.user_information_validate,
-          error: true,
-      },
-      {
-        label: 'Profile',
-        isValid: true,
-        icon:"user",
-        selected: false,
-        validate: false,
-        error: true,
-    },
-    {
-        label: 'Account',
-        isValid: true,
-        icon:"k-icon k-i-file-word",
-        selected: false,
-        validate: false,
-        error: true,
-    }
-  ];
-
   public next(): void {
-     if(this.checkUserInfo()) {
+    if(this.checkUserInfo()) {
+      this.stepsIcons[0].isValid =  true;
+      this.stepsIcons[1].isValid =  true;
       this.currentStep += 1;
-     }
-     
-
-      // if (this.currentGroup.valid && this.currentStep !== this.steps.length) {
-      //     this.currentStep += 1;
-      //     return;
-      // }
-
-      // this.currentGroup.markAllAsTouched();
-      // this.stepper.validateSteps();
+    } else {
+      this.stepsIcons[0].isValid =  false;
+    }
   }
 
   public prev(): void {
@@ -185,21 +137,6 @@ export class UserMngUserInfoAddComponent implements OnInit {
   }
 
   public submit(): void {
-      // if (!this.currentGroup.valid) {
-      //     this.currentGroup.markAllAsTouched();
-      //     this.stepper.validateSteps();
-      // }
-      // if (this.form.valid) {
-      //     console.log('Submitted data', this.form.value);
-      // }
-  }
-
-  private getGroupAt(index: number) {
-      // const groups = Object.keys(this.form.controls).map(groupName =>
-      //     this.form.get(groupName)
-      //     ) as FormGroup[];
-
-      // return groups[index];
   }
 
   close() {
@@ -304,19 +241,25 @@ upload(state) {
 }
 
 checkUserInfo():boolean {
-  console.log(this.gender.value, this.date_birth.getDate(), this.date_birth.getMonth(), this.date_birth.getFullYear());
   
   if(!this.first_name || this.first_name === '' || this.first_name === null) {
-    console.log(this.first_name);
     return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_First_Name'));
   } else if (!this.last_name || this.last_name === '' || this.last_name === null) {
     return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Last_Name'));
-  } else if (!this.gender.value) {
+  } else if (!this.gender || this.gender.value === '') {
     return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Gender'));
-  } else if(!this.date_birth) {
-
-  }
-   else {
+  } else if(!this.day) {
+    return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Day'));
+  } else if(!this.month) {
+    return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Month'));
+  } else if(!this.year) {
+    return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Year'));
+  }else if(!this.email || this.email === '' || this.email == null) {
+    return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Email'));
+  }else if(!this.contact || this.contact === '' || this.contact == null) {
+    return this.modalService.messageAlert(this.translateService.instant('UserMngUserInfo.Message.Required_Contact'));
+  } else {
+    this.user_information_validate = true;
     return true;
   }
 }
@@ -328,6 +271,54 @@ checkUserInfo():boolean {
     return [ 31, (isLeap ? 29 : 28), 31, 30, 31, 30, 31,
       31, 30, 31, 30, 31 ];
   }
+
+  loadDayList(month: number[], currentMont: number):TextValue[]{
+    let vData: TextValue[] = [];
+    month.forEach((element, index) => {
+      if(index +1 === Number(currentMont)) {
+        for(let i = 1; i<= element; i++) {
+          vData.push({
+            text: i,
+            value: i
+          });
+        }
+      }
+    });
+    return vData;
+  }
+
+  loadYearList(startYear: number, nYear: number):TextValue[] {
+    let vData: TextValue[] = [];
+    for(let j = 0; j<= nYear;j++) {
+      const data = startYear -=1;
+        vData.push({
+        text: data,
+        value: data
+      });
+  }
+  return vData;
+}
+
+valueChangeMonth(event) {
+  if(event)  {
+    const monthList = this.getNumberDayOfMonth(Number(event.value), Number(this.year.value));
+    this.day_list  = this.loadDayList(monthList,Number(event.value) );
+    if(Number(this.day.value) > this.day_list.length) {
+      this.day = undefined;
+    }
+  }
+  
+}
+
+valueChangeYear(event) {
+  if(event)  {
+    const monthList = this.getNumberDayOfMonth(Number(this.month.value), Number(event.value));
+    this.day_list  = this.loadDayList(monthList,Number(this.month.value) );
+    if(Number(this.day.value) > this.day_list.length) {
+      this.day = undefined;
+    }
+  }
+}
 
   // end file select function
 
