@@ -6180,7 +6180,7 @@ i {
 
 .open-alert div:nth-child(2) {
     font-family: 'El Messiri', 'Khmer', sans-serif !important;
-    font-size: 1.1rem !important;
+    /* font-size: 1.1rem !important; */
     line-height: 1.5 !important;
 }
 

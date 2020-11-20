@@ -406,7 +406,8 @@
             "Enter_Kh_Id":"Enter ID card ...",
             "Enter_Address":"Enter address ...",
             "Enter_Description":"Enter Description..",
-            "Enter_Card_Id":"Enter card identyfier..."
+            "Enter_Card_Id":"Enter card identyfier...",
+            "Enter_PW":"Enter Password..."
         },
         "Message": {
             "Required_First_Name":"First Name is null || empty.",
@@ -416,7 +417,13 @@
             "Required_Month":"Month of birth is null || empty.",
             "Required_Year":"Year of birth is null || empty.",
             "Required_Email":"Email is null || empty.",
-            "Required_Contact":"Contact is null || empty."
+            "Required_Contact":"Contact is null || empty.",
+            "Required_Card_Id":"Card identyfie is null || empty.",
+            "Invalid_Email":"Sorry your email invalid, only letters (a-z), numbers (0-9), and periods (.) are allowed and (.,;:) was not allow. Ex: example@gmail.com",
+            "Required_User_Name":"User Name is null || empty.",
+            "Required_PW":"Password is null || empty.",
+            "Required_Re_PW":"Re-Password is null || empty.",
+            "Password_Not_Macth":"Password and Re-Password do not macth."
         }
     }
 }

@@ -20,3 +20,16 @@
     width: 210px;
     padding-right: 0px;
 }
+.margin-bottom {
+    margin-bottom: 0px;
+}
+.padding-0px{
+    padding: 0px;
+}
+.in_box-t .btn_del-t {
+    right: 6px;
+    top: 5px;
+}
+.margin-0px{
+    margin: 0px;
+}
