@@ -544,9 +544,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
                                                   date_birth: date_birth,
                                                   email: this.email,
                                                   contact: this.contact,
-                                                  description: this.description
-                                                }
-      userInfoRequestModel.body.profile    = {
+                                                  description: this.description,
                                                   profile_id_image: this.profile_id_image
                                                 }
       userInfoRequestModel.body.cardIdentify = {

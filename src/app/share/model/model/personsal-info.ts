@@ -5,5 +5,6 @@ export class PersonalInfo {
     date_birth: string;
     email: string;
     contact: string;
-    description: string
+    description: string;
+    profile_id_image: string;
 }

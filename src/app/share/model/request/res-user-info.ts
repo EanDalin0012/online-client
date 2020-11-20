@@ -6,7 +6,6 @@ import { AccountInfo } from '../model/account-info';
 export class UserInfoRequestModel {
     public body = {
         personalInfo: new PersonalInfo(),
-        profile: new Profile(),
         cardIdentify: new CardIdentify(),
         accountInfo: new AccountInfo()
     }
