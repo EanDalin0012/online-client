@@ -6,4 +6,6 @@ export class ProductDetailsModel extends commonModel{
     category_name: String;
     resource_img_id: string;
     description: string;
+    web_show?: boolean;
+    mobile_show?: boolean;
 }

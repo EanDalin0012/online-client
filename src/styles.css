@@ -6197,3 +6197,7 @@ i {
 input[type=file], .k-upload-button {
     font-family: 'El Messiri', 'Khmer', sans-serif !important;
 }
+
+.k-switch {
+    font-size: 8px !important;
+}

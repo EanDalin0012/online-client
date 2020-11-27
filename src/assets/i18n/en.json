@@ -369,7 +369,9 @@
             "Product_Name": "Product Name",
             "Category_Name": "Category Name",
             "Add_New_Product":"Add New Product",
-            "Edit_Product":"Edit Product"
+            "Edit_Product":"Edit Product",
+            "Show_On_Web":"Show on Web",
+            "Show_On_Mobile":"Show on Mobile"
         },
         "Message": {
             "Pro_Save_Success": "Product Save Success",

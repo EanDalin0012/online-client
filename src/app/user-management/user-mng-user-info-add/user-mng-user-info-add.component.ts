@@ -3,7 +3,7 @@ import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angula
 import { Base64WriteImage } from '../../share/model/model/base64';
 import * as moment from 'moment';
 import { UploadService } from '../../share/service/upload.service';
-import { BTN_ROLES, GENDER_CODE_LIST, Month_List } from '../../share/constants/common.const';
+import { BTN_ROLES, GENDER_CODE_LIST, Month_List, Reponse_Status } from '../../share/constants/common.const';
 import { ModalService } from '../../share/service/modal.service';
 import { GenderModel } from '../../share/model/model/gender';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,6 +11,7 @@ import { TextValue } from '../../share/model/model/text-value';
 import { UserInfoRequestModel } from '../../share/model/request/res-user-info';
 import { StepperActivateEvent } from '@progress/kendo-angular-layout';
 import { FormatterService } from '../../share/service/formatter.service';
+import { ServerService } from '../../share/service/server.service';
 @Component({
   selector: 'app-user-mng-user-info-add',
   templateUrl: './user-mng-user-info-add.component.html',
@@ -103,7 +104,8 @@ public fileRestrictions_card_rear: FileRestrictions = {
     private uploadService: UploadService,
     private modalService: ModalService,
     private translateService: TranslateService,
-    private formatterService: FormatterService
+    private formatterService: FormatterService,
+    private serverService: ServerService
   ) {
 
   }
@@ -472,6 +474,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
   }
 
   loadDayList(month: number[], currentMont: number):TextValue[]{
+    console.log(month);
     let vData: TextValue[] = [];
     month.forEach((element, index) => {
       if(index +1 === Number(currentMont)) {
@@ -562,6 +565,13 @@ public fileRestrictions_card_rear: FileRestrictions = {
                                                 account_expired: this.accountExpired,
                                               }
       console.log(userInfoRequestModel);
+      const api = 'api/user_info/save';
+
+      this.serverService.HTTPPost(api, userInfoRequestModel).then(response=>{
+        if(response && response.body.status === Reponse_Status.Y) {
+          this.modal.close( {close: BTN_ROLES.CLOSE});
+        }
+      });
 
   }
 

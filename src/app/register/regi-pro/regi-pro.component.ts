@@ -21,6 +21,8 @@ import { src } from './img';
 import { Utils } from '../../share/utils/utils.static';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
+import { SwitchRequest } from '../../share/model/request/req-switchs';
+import { switchProduct } from '../../share/model/model/switch';
 
 @Component({
   selector: 'app-regi-pro',
@@ -288,26 +290,36 @@ obj_Id_model_list = new Array<ObjIdModel>();
   }
   // end gride function
 
-  private flagURL(dataItem: any) {
-    if(dataItem != undefined) {
-      console.log(dataItem);
-      
-      let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-      
-      const access_token = authorization.access_token;
-      const headers = { 
-        'Authorization': 'Bearer ' + access_token
-      }
-  
-      const api = '/api/base64/image/read/'+dataItem;
-      const uri = environment.bizMOBServer + api;
-      const data = this.httpClient.get(uri, {headers,responseType: "text"}).subscribe();
-      console.log(data);
-      return "data:image/jpeg;base64,"+data
-    } else {
-      return "";
+
+  switchWeb(b: boolean, dataItem) {
+    console.log('v', b, dataItem);
+    if(b !== undefined && dataItem) {
+      const switchsRequest = new SwitchRequest();
+      switchsRequest.body.value = b;
+      switchsRequest.body.product_id = dataItem.id;
+      const api = '/api/product/switch_web';
+      this.service.HTTPPost(api, switchsRequest).then( res=>{
+        if ( res && res.body.status === Reponse_Status.Y) {
+          console.log(res);
+        }
+      });
+      console.log(switchsRequest);
     }
     
+  }
+
+  switchMobile(b: boolean, dataItem) {
+    if(b !== undefined && dataItem) {
+      const switchsRequest = new SwitchRequest();
+      switchsRequest.body.value = b;
+      switchsRequest.body.product_id = dataItem.id;
+      const api = '/api/product/switch_mobile';
+      console.log(switchsRequest);
+      this.service.HTTPPost(api, switchsRequest).then( res=>{
+        if ( res && res.body.status === Reponse_Status.Y) {
+        }
+      });
+    }
   }
 
 }
