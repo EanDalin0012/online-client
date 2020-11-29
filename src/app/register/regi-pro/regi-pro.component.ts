@@ -1,28 +1,25 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
-import { TranslateService } from '@ngx-translate/core';
-import { Title } from '@angular/platform-browser';
+import { environment } from '../../../environments/environment.prod';
+import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { ObjIdModel } from '../../share/model/model/obj-id';
+import { ProductDetailsModel } from '../../share/model/model/product-details';
+import { RequestDataModel } from '../../share/model/request/req-data';
+import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
+import { SwitchRequest } from '../../share/model/request/req-switchs';
+import { ResponseDataModel } from '../../share/model/response/res-data';
+import { ProductDetaitsModelResponse } from '../../share/model/response/res-product';
 import { DataService } from '../../share/service/data.service';
 import { ModalService } from '../../share/service/modal.service';
 import { ServerService } from '../../share/service/server.service';
-import { RequestDataModel } from '../../share/model/request/req-data';
-import { ProductModelResponse, ProductDetaitsModelResponse } from '../../share/model/response/res-product';
-import { ProductModel } from '../../share/model/model/product';
-import { ObjIdModel } from '../../share/model/model/obj-id';
-import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
-import { ResponseDataModel } from '../../share/model/response/res-data';
-import { Reponse_Status, BTN_ROLES, LOCAL_STORAGE } from '../../share/constants/common.const';
 import { RegiProAddComponent } from '../regi-pro-add/regi-pro-add.component';
 import { RegiProEditComponent } from '../regi-pro-edit/regi-pro-edit.component';
-import { ProductDetailsModel } from '../../share/model/model/product-details';
 import { src } from './img';
-import { Utils } from '../../share/utils/utils.static';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.prod';
-import { SwitchRequest } from '../../share/model/request/req-switchs';
-import { switchProduct } from '../../share/model/model/switch';
 
 @Component({
   selector: 'app-regi-pro',
@@ -301,6 +298,8 @@ obj_Id_model_list = new Array<ObjIdModel>();
       this.service.HTTPPost(api, switchsRequest).then( res=>{
         if ( res && res.body.status === Reponse_Status.Y) {
           console.log(res);
+          this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Show_On_Web_Success'));
+          this.inquiry();
         }
       });
       console.log(switchsRequest);
@@ -317,6 +316,8 @@ obj_Id_model_list = new Array<ObjIdModel>();
       console.log(switchsRequest);
       this.service.HTTPPost(api, switchsRequest).then( res=>{
         if ( res && res.body.status === Reponse_Status.Y) {
+          this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Show_On_Mobile_Success'));
+          this.inquiry();
         }
       });
     }

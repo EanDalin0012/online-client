@@ -5376,7 +5376,6 @@ div.in_box button {
 kendo-notification-container div {
     left: 79% !important;
     align-items: end !important;
-    top: -41px;
     float: right;
 }
 
@@ -6200,4 +6199,28 @@ input[type=file], .k-upload-button {
 
 .k-switch {
     font-size: 8px !important;
+}
+
+.k-notification-success {
+    min-width: 250px !important;
+}
+
+.k-notification-group {
+    margin-left: -25% !important;
+    z-index: 999999999999999 !important; 
+    min-width: auto !important;
+    min-height: auto !important;
+}
+
+
+.button-notification {
+    padding: 10px 5px;
+    color: #313536;
+    z-index: 9999999999999999999999999;
+}
+.notification-profile{
+    bottom: 100px;
+}
+.right0px {
+    right: 0px !important;
 }

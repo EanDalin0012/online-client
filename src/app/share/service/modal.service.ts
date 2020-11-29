@@ -225,19 +225,29 @@ export class ModalService {
     });
   }
 
-  showNotificationService(content: string, duration?: number) {
+  showNotificationService(content: string, duration?: number, cssClass?: string, closable?:boolean) {
+    console.log('cssClass',cssClass);
+    let css = cssClass;
+    let close = closable;
     let time = 400;
     if(duration) {
       time = duration;
     }
+    if(closable == undefined) {
+      close = false;
+    }
+    if(cssClass === undefined) {
+      css = '';
+    }
+
     if(content) {
       this.notificationService.show({
         content: content,
-        cssClass: 'button-notification',
+        cssClass: css,
         animation: { type: 'slide', duration: time },
         position: { horizontal: 'center', vertical: 'bottom' },
         type: { style: 'success', icon: true },
-        closable: false
+        closable: close
       });
     }
    

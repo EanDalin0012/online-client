@@ -64,6 +64,7 @@ export class ServerService {
         if (!access_token) {
           this.modalService.alert({
             content: '',
+            modalClass: ['open-alert'],
             btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
             callback: _res => {
               Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
@@ -225,7 +226,7 @@ export class ServerService {
     this.modalService.alert({
       // tslint:disable-next-line:max-line-length
       content:  '<h2>'+message+'</h2>',
-      modalClass: ['pop_confirm'],
+      modalClass: ['pop_confirm open-alert'],
       btnText: 'Confirm',
       callback: (res) => {
         return false;

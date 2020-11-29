@@ -12,6 +12,7 @@ import { UserInfoRequestModel } from '../../share/model/request/res-user-info';
 import { StepperActivateEvent } from '@progress/kendo-angular-layout';
 import { FormatterService } from '../../share/service/formatter.service';
 import { ServerService } from '../../share/service/server.service';
+import { NotificationService } from '@progress/kendo-angular-notification';
 @Component({
   selector: 'app-user-mng-user-info-add',
   templateUrl: './user-mng-user-info-add.component.html',
@@ -19,9 +20,11 @@ import { ServerService } from '../../share/service/server.service';
 })
 export class UserMngUserInfoAddComponent implements OnInit {
   
+  uploaded: boolean;
+  card_fron_uploaded: boolean;
+  card_rear_uploaded: boolean;
 
-
-public stepsIcons = [];
+  public stepsIcons = [];
 
   modal;
   
@@ -62,11 +65,11 @@ public stepsIcons = [];
   gender: GenderModel;
 
   userName:string;
-  enabled: boolean;
-  accountLocked:boolean;
-  credentialsExpired: boolean;
-  accountExpired: boolean;
-  is_first_login: boolean;
+  enabled: boolean            = false;
+  accountLocked:boolean       = false;
+  credentialsExpired: boolean = false;
+  accountExpired: boolean     = false;
+  is_first_login: boolean     = false;
   
   user_information_validate = false;
   user_information_error    = false;
@@ -105,7 +108,8 @@ public fileRestrictions_card_rear: FileRestrictions = {
     private modalService: ModalService,
     private translateService: TranslateService,
     private formatterService: FormatterService,
-    private serverService: ServerService
+    private serverService: ServerService,
+    private notificationService: NotificationService
   ) {
 
   }
@@ -198,6 +202,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
 
  // file select function
  public selectEventHandler(e: SelectEvent): void {
+  
     this.imagePreviews = [];
     const that = this;
     e.files.forEach((file) => {
@@ -208,7 +213,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
         reader.onload = function (ev) {
        
         const image = {
-            src: ev.target['result']+"",
+            src: ev.target['result'],
             uid: file.uid,
             id: file.uid +"-"+moment().format('YYYYMMDDhhmmss'),
             name: file.name,
@@ -221,11 +226,11 @@ public fileRestrictions_card_rear: FileRestrictions = {
 
         };
         reader.readAsDataURL(file.rawFile);
-        
+        this.uploaded = undefined;
     }
-    
     });
   }
+
   public remove(fileSelect, uid: string) {
       fileSelect.removeFileByUid(uid);
       if(this.imagePreviews.length > 0) {
@@ -236,6 +241,9 @@ public fileRestrictions_card_rear: FileRestrictions = {
           }
         });
       }
+      this.uploaded = undefined;
+      this.profile_id_image = undefined;
+
     }
 
   public showButton(state: FileState): boolean {
@@ -259,8 +267,9 @@ public fileRestrictions_card_rear: FileRestrictions = {
               this.uploadService.upload(base64WriteImage).then(resp=>{
                 if(resp === true) {
                   this.profile_id_image = base64WriteImage.id;
+                  this.uploaded = true;
+                  this.modalService.showNotificationService(this.translateService.instant('UserMngUserInfo.Message.Upload_Profile_Image_Success'), 400,'notification-profile');
                   console.log('profile_id_image', this.profile_id_image);
-                  
                 }
               });
             }
@@ -281,7 +290,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
         reader.onload = function (ev) {
        
         const image = {
-            src: ev.target['result']+"",
+            src: ev.target['result'],
             uid: file.uid,
             id: file.uid +"-"+moment().format('YYYYMMDDhhmmss'),
             name: file.name,
@@ -293,10 +302,10 @@ public fileRestrictions_card_rear: FileRestrictions = {
 
         };
         reader.readAsDataURL(file.rawFile);
-        
     }
-    
     });
+    this.card_fron_uploaded = undefined;
+
   }
   public remove_card_front(fileSelect, uid: string) {
       fileSelect.removeFileByUid(uid);
@@ -308,11 +317,12 @@ public fileRestrictions_card_rear: FileRestrictions = {
           }
         });
       }
+      this.card_fron_uploaded = undefined;
+      this.font_image_id = undefined;
+
     }
 
-  public showButton_card_front(state: FileState): boolean {
-    return (state === FileState.Selected) ? true : false;
-  }
+
     
   upload_card_front(state) {
     console.log(this.imagePreviews_card_front);
@@ -331,6 +341,8 @@ public fileRestrictions_card_rear: FileRestrictions = {
               this.uploadService.upload(base64WriteImage).then(resp=>{
                 if(resp === true) {
                   this.font_image_id = base64WriteImage.id;
+                  this.card_fron_uploaded = true;
+                  this.modalService.showNotificationService(this.translateService.instant('UserMngUserInfo.Message.Upload_Front_Image_Card_Success'), 400,'notification-profile');
                   console.log('font_image_id', this.font_image_id);
                   
                 }
@@ -351,7 +363,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
         const reader = new FileReader();
         reader.onload = function (ev) {
         const image = {
-            src: ev.target['result']+"",
+            src: ev.target['result'],
             uid: file.uid,
             id: file.uid +"-"+moment().format('YYYYMMDDhhmmss'),
             name: file.name,
@@ -364,6 +376,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
         reader.readAsDataURL(file.rawFile);
     }
     });
+    this.card_rear_uploaded = undefined;
   }
 
   public remove_card_rear(fileSelect, uid: string) {
@@ -376,10 +389,8 @@ public fileRestrictions_card_rear: FileRestrictions = {
           }
         });
       }
-  }
-
-  public showButton_card_rear(state: FileState): boolean {
-    return (state === FileState.Selected) ? true : false;
+      this.card_rear_uploaded = undefined;
+      this.rear_image_id = undefined;
   }
     
   upload_card_rear(state) {
@@ -400,6 +411,8 @@ public fileRestrictions_card_rear: FileRestrictions = {
               this.uploadService.upload(base64WriteImage).then(resp=>{
                 if(resp === true) {
                   this.rear_image_id = base64WriteImage.id;
+                  this.card_rear_uploaded = true;
+                  this.modalService.showNotificationService(this.translateService.instant('UserMngUserInfo.Message.Upload_Rear_Image_Card_Success'), 400,'notification-profile');
                   console.log('rear_image_id', this.rear_image_id);
                 }
               });
@@ -565,11 +578,10 @@ public fileRestrictions_card_rear: FileRestrictions = {
                                                 account_expired: this.accountExpired,
                                               }
       console.log(userInfoRequestModel);
-      const api = 'api/user_info/save';
-
+      const api = '/api/user_info/v1/save';
       this.serverService.HTTPPost(api, userInfoRequestModel).then(response=>{
         if(response && response.body.status === Reponse_Status.Y) {
-          this.modal.close( {close: BTN_ROLES.CLOSE});
+          this.modal.close( {close: BTN_ROLES.SAVE});
         }
       });
 
@@ -616,6 +628,5 @@ checkCardIdentyfyActivated(){
     true;
   }
 }
-  // end file select function
 
 }

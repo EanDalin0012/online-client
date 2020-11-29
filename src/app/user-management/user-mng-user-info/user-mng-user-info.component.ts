@@ -71,7 +71,7 @@ export class UserMngUserInfoComponent implements OnInit {
       callback: _response => {
         if(_response) {
           if(_response && _response.close === BTN_ROLES.SAVE) {
-           
+            this.modalService.showNotificationService(this.translateService.instant('UserMngUserInfo.Message.User_Info_Add_Success'), 400);
           }
         }
       }

@@ -376,7 +376,9 @@
         "Message": {
             "Pro_Save_Success": "Product Save Success",
             "Pro_Update_Success": "Product Update Success",
-            "Pro_Delete_Success": "Product Delete Success"
+            "Pro_Delete_Success": "Product Delete Success",
+            "Pro_Show_On_Mobile_Success": "Product Update Show On Mobile Success",
+            "Pro_Show_On_Web_Success": "Product Update Show On Web Success"
         },
         "Holder": {
             "Enter_Product_Name":"Enter product name ..."
@@ -425,7 +427,11 @@
             "Required_User_Name":"User Name is null || empty.",
             "Required_PW":"Password is null || empty.",
             "Required_Re_PW":"Re-Password is null || empty.",
-            "Password_Not_Macth":"Password and Re-Password do not macth."
+            "Password_Not_Macth":"Password and Re-Password do not macth.",
+            "Upload_Profile_Image_Success":"Upload Profile Image Success.",
+            "Upload_Front_Image_Card_Success":"Upload Card Identify Front Image Success.",
+            "Upload_Rear_Image_Card_Success":"Upload Card Identify Rear Image Success.",
+            "User_Info_Add_Success":"User Information save Success."
         }
     }
 }
