@@ -11,6 +11,8 @@ import { UserDataModel } from '../../share/model/model/user-data';
 import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { TranslateService } from '@ngx-translate/core';
+import { RequestDataModel } from '../../share/model/request/req-data';
+import { UserInfoDetails } from '../../share/model/model/user-info-details';
 
 @Component({
   selector: 'app-user-mng-user-info',
@@ -20,9 +22,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class UserMngUserInfoComponent implements OnInit {
   totalRecord = 0;
 
-  user_data_list = new Array<UserDataModel>();
+  user_data_list = new Array<UserInfoDetails>();
   search: string;
-  public data  = Array<UserDataModel>();
+  public data  = Array<UserInfoDetails>();
   // declear grid
   public gridData: any[];
   public gridView: GridDataResult;
@@ -35,19 +37,11 @@ export class UserMngUserInfoComponent implements OnInit {
   public type: 'numeric' | 'input' = 'numeric';
   public pageSizes: any[] = [10, 20, 30, 50, 100];
   public sort: SortDescriptor[] = [{
-    field: 'id',
+    field: 'user_info_id',
     dir: 'asc'
   }];
-  public rowCallback = (context: RowClassArgs) => {
-    switch (context.dataItem.serviceStatusDesc) {
-      case 'Deactivated':
-        return {dormant: true};
-        break;
-      default:
-        return {};
-        break;
-     }
-  }
+  
+  public checkboxOnly = false;
   public mySelection: any[] = [];
   // end declear grid
   constructor(
@@ -56,13 +50,16 @@ export class UserMngUserInfoComponent implements OnInit {
     private titleService: Title,
     private service: ServerService,
     private translateService: TranslateService
-  ) { }
+  ) {
+    this.setSelectableSettings();
+   }
 
   ngOnInit(): void {
     this.titleService.setTitle(this.translateService.instant('UserMngUserInfo.Label.User_Information'));
     const url = (window.location.href).split('/');
     console.log(url);
     this.dataService.visitMessage(url[5]);
+    this.inquiry();
   }
 
   add() {
@@ -79,11 +76,23 @@ export class UserMngUserInfoComponent implements OnInit {
   }
 
 
-  // grid function
-  public sortChange(sort: SortDescriptor[]): void {
-    this.sort = sort;
-    this.loadData();
+  public setSelectableSettings() {
+    this.selectableSettings = {
+        checkboxOnly: this.checkboxOnly,
+        mode: 'multiple'
+    };
   }
+
+  loadingData(data) {
+    if (data) {
+      this.gridView = {
+        data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
+        total: data.length
+      };
+    }
+    this.totalRecord = data.length;
+  }
+
   loadData() {
     this.gridView = {
       data: orderBy(this.gridData.slice(this.skip, this.skip + this.pageSize), this.sort),
@@ -96,6 +105,17 @@ export class UserMngUserInfoComponent implements OnInit {
     this.pageSize = take;
     this.paging();
   }
+  
+  public rowCallback = (context: RowClassArgs) => {
+      switch (context.dataItem.serviceStatusDesc) {
+        case 'Deactivated':
+          return {dormant: true};
+          break;
+        default:
+          return {};
+          break;
+       }
+  }
 
   private paging(): void {
     this.gridView = {
@@ -103,8 +123,11 @@ export class UserMngUserInfoComponent implements OnInit {
       total: this.gridData.length
     };
   }
-
-  // end grid function
+  public sortChange(sort: SortDescriptor[]): void {
+    this.sort = sort;
+    this.loadData();
+  }
+  // end gride function
 
   searchChange(event) {
     if (event) {
@@ -115,15 +138,7 @@ export class UserMngUserInfoComponent implements OnInit {
     }
   }
 
-  loadingData(data) {
-    if (data) {
-      this.gridView = {
-        data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
-        total: data.length
-      };
-    }
-    this.totalRecord = data.length;
-  }
+
   deleteTextSearch() {
     this.search = undefined;
     this.loadingData(this.user_data_list);
@@ -155,5 +170,19 @@ export class UserMngUserInfoComponent implements OnInit {
 
   Delete() {
 
+  }
+
+  inquiry() {
+    const trReq = new RequestDataModel();
+    const api = '/api/user_info/v1/inquiry';
+    this.service.HTTPGet(api).then(resp => {
+      const response   = resp as any;
+      if (response) {
+        this.user_data_list = response.body;
+        console.log('user_data_list', this.user_data_list);
+        this.data          = response.body;
+        this.loadingData(this.user_data_list);
+      }
+    });
   }
 }

@@ -21,6 +21,7 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { PhoneNumberPipe } from '../pipe/phone-number.pipe';
 import { DateFormatPipe } from '../pipe/date-format.pipe';
 import { SrcPipe } from '../pipe/src.pipe';
+import { GenderPipe } from '../pipe/gender.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SrcPipe } from '../pipe/src.pipe';
     PhoneNumberPipe,
     SrcPipe,
     DateFormatPipe,
+    GenderPipe
   ],
   imports: [
     CommonModule,
@@ -58,6 +60,7 @@ import { SrcPipe } from '../pipe/src.pipe';
     PhoneNumberPipe,
     DateFormatPipe,
     SrcPipe,
+    GenderPipe
   ],
   entryComponents: [
     ModalComponent,

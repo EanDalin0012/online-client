@@ -394,7 +394,7 @@
             "Date_Birth":"Date Birth",
             "Email":"Email",
             "Contact":"Contact",
-            "Kh_Id": "ID Card",
+            "Kh_Id": "Card Identify",
             "Address":"Address",
             "Add_New_User":"Add New User",
             "Edit_User":"Edit User",
@@ -411,7 +411,8 @@
             "Enter_Address":"Enter address ...",
             "Enter_Description":"Enter Description..",
             "Enter_Card_Id":"Enter card identyfier...",
-            "Enter_PW":"Enter Password..."
+            "Enter_PW":"Enter Password...",
+            "Search_BY_User_Name": "Search by user name..."
         },
         "Message": {
             "Required_First_Name":"First Name is null || empty.",

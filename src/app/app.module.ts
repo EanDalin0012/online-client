@@ -14,7 +14,6 @@ import { AuthInterceptor } from './share/service/auth-interceptor.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentModule } from './share/component/component/component.module';
-import { AlertDialogComponent } from './share/component/alert-dialog/alert-dialog.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
