@@ -25,6 +25,9 @@ import { SetPriceProductComponent } from './set-price-product/set-price-product.
 import { SetPriceProductAddComponent } from './set-price-product-add/set-price-product-add.component';
 import { SetPriceProductEditComponent } from './set-price-product-edit/set-price-product-edit.component';
 import { SetPriceProductViewComponent } from './set-price-product-view/set-price-product-view.component';
+import { CardIdentifyComponent } from './card-identify/card-identify.component';
+import { CardIdentifyViewComponent } from './card-identify-view/card-identify-view.component';
+import { UserMngAccViewComponent } from './user-mng-acc-view/user-mng-acc-view.component';
 
 
 
@@ -52,6 +55,9 @@ import { SetPriceProductViewComponent } from './set-price-product-view/set-price
    SetPriceProductAddComponent,
    SetPriceProductEditComponent,
    SetPriceProductViewComponent,
+   CardIdentifyComponent,
+   CardIdentifyViewComponent,
+   UserMngAccViewComponent,
   ],
   imports: [
     CommonModule,

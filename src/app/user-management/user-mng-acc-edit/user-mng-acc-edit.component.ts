@@ -3,6 +3,7 @@ import { ServerService } from '../../share/service/server.service';
 import { UserAccountRequest } from '../../share/model/request/req-user-account';
 import { UserAccountRespnonse } from '../../share/model/response/res-user-account';
 import { BTN_ROLES } from '../../share/constants/common.const';
+import { AccountInfoByIdRequest } from '../../share/model/request/account-get-info';
 
 @Component({
   selector: 'app-user-mng-acc-edit',
@@ -25,12 +26,14 @@ export class UserMngAccEditComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.modal) {
-      this.enabled             = this.modal.message.enabled;
-      this.accountExpired     = this.modal.message.account_expired;
-      this.accountLocked        = this.modal.message.account_locked;
-      this.credentialsExpired = this.modal.message.credentials_expired;
-      this.userName           = this.modal.message.user_name;
-      this.id                 = this.modal.message.id;
+      console.log(this.modal);
+      this.inquiry(this.modal.message.account_id);
+      // this.enabled             = this.modal.message.enabled;
+      // this.accountExpired     = this.modal.message.account_expired;
+      // this.accountLocked        = this.modal.message.account_locked;
+      // this.credentialsExpired = this.modal.message.credentials_expired;
+      // this.userName           = this.modal.message.user_name;
+      // this.id                 = this.modal.message.id;
     }
   }
 
@@ -54,5 +57,26 @@ export class UserMngAccEditComponent implements OnInit {
         this.modal.close({close: BTN_ROLES.EDIT});
       }
     });
+  }
+
+  inquiry(id: number) {
+
+    let data = new AccountInfoByIdRequest();
+    data.body.account_id = id;
+
+    const api ='/api/user/account/account_id';
+
+    this.service.HTTPPost(api, data).then(resp=> {
+      console.log(resp);
+      if(resp.body) {
+        this.enabled            = resp.body.enabled;
+        this.accountExpired     = resp.body.account_expired;
+        this.accountLocked      = resp.body.account_locked;
+        this.credentialsExpired = resp.body.credentials_expired;
+        this.userName           = resp.body.user_name;
+        this.id                 = resp.body.id;
+      }
+    });
+
   }
 }

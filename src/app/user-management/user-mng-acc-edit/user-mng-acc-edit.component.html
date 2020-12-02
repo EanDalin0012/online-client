@@ -1,5 +1,5 @@
 <div class="contentsWrap" style="height: auto;">
-    <div class="container01">
+    <div class="container01" style="margin-top: 40px;">
         <div class="web_container">
             <!-- header -->
             <div class="pop_header">
@@ -13,8 +13,8 @@
                 </colgroup>
                 <tbody>
                     <tr>
-                        <th scope="row">{{'User1100.LABEL.User_Name' | translate}}</th>
-                        <td colspan="5"><strong>{{userName}}</strong></td>
+                        <th class = "font-khmer-cursive" scope="row">{{'User1100.LABEL.User_Name' | translate}}</th>
+                        <td colspan="5"><strong class = "font-khmer-cursive">{{userName}}</strong></td>
                     </tr>
                     <tr>
                         <th scope="row">{{'User1100.LABEL.Enable' | translate}}</th>
@@ -40,12 +40,8 @@
         </div>
         <!-- footer -->
         <div class="c_btn">
-            <div class="add-close  btn-css margin-right-btn-clos" (click)="close()">
-                <span>{{'COMMON.BUTTON.CLOSE' | translate}}</span>
-            </div>
-            <div class="iam-btn-container mbr_introContent" style="display: inline-block;">
-                <button class="iam-button save" (click)="save()">{{'COMMON.BUTTON.SAVE' | translate}}</button>
-            </div>
+            <button  (click) ="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
+            <button  (click) ="save()"  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'download'" [look]="'outline'">{{'COMMON.BUTTON.SAVE' | translate}}</button>
         </div>
 
     </div>

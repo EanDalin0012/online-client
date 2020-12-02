@@ -108,8 +108,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
     private modalService: ModalService,
     private translateService: TranslateService,
     private formatterService: FormatterService,
-    private serverService: ServerService,
-    private notificationService: NotificationService
+    private serverService: ServerService
   ) {
 
   }
@@ -137,10 +136,10 @@ public fileRestrictions_card_rear: FileRestrictions = {
     this.year_list = this.loadYearList(contYear + 1, 80);
 
     this.stepsIcons = [ 
-      { label: 'Personal Info',  isValid: true },
-      { label: 'Profile', isValid: true },
-      { label: 'Card Identify', isValid: false },
-      { label: 'Account', isValid: false  }
+      { label: this.translateService.instant('UserMngUserInfo.Label.User_Information'),  isValid: true },
+      { label: this.translateService.instant('UserMngUserInfo.Label.Profile'), isValid: true },
+      { label: this.translateService.instant('UserMngUserInfo.Label.Kh_Id'), isValid: false },
+      { label: this.translateService.instant('UserMngUserInfo.Label.Account'), isValid: false  }
     ];
   
   }

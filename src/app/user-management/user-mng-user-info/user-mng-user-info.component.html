@@ -46,8 +46,22 @@
                     </ng-template>
                 </kendo-grid-column>
 
-                <kendo-grid-column width="150" class="subj" field="card_id" title="{{'UserMngUserInfo.Label.Kh_Id' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="150" class="subj" field="user_name" title="{{'User1100.LABEL.User_Name' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="220" class="subj" field="card_id" title="{{'UserMngUserInfo.Label.Kh_Id' | translate}}">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <span>{{dataItem.card_id}}</span>
+                        <button  (click) ="openViewCardIdentify(dataItem)" class="v-card-identy defualt-font" kendoButton [look]="'outline'">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column width="150" class="subj" field="user_name" title="{{'User1100.LABEL.User_Name' | translate}}">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <span>{{dataItem.user_name}}</span>
+                        <button  (click) ="openViewAccount(dataItem)" class="v-card-identy defualt-font" kendoButton [look]="'outline'">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </ng-template>
+                </kendo-grid-column>
 
                 <kendo-grid-column width="150" class="subj" field="first_name" title="{{'UserMngUserInfo.Label.First_Name' | translate}}"></kendo-grid-column>
                 <kendo-grid-column width="150" class="subj" field="last_name" title="{{'UserMngUserInfo.Label.Last_Name' | translate}}"></kendo-grid-column>

@@ -1,0 +1,49 @@
+<div class="contentsWrap" style="height: auto;">
+    <div class="container01" style="margin-top: 40px;">
+        <div class="web_container">
+            <!-- header -->
+            <div class="pop_header">
+                <h1 class="font-khmer-cursive">{{'UserMngUserInfo.Label.Kh_Id' | translate}}</h1>
+                <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
+            </div>
+            <!-- //header -->
+            <table class="table02">
+                <colgroup>
+                    <col style="width:16.666%;" span="6" />
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th class = "defualt-font" scope="row">{{'UserMngUserInfo.Label.Kh_Id' | translate}}</th>
+                        <td colspan="5"><strong class = "defualt-font">{{cardIdentify?.card_id}}</strong></td>
+                    </tr>
+                    <tr>
+                        <th class = "defualt-font" scope="row">{{'UserMngUserInfo.Label.Card_Identify_Image_Front' | translate}}</th>
+                        <td>
+                            <span>{{cardIdentify?.font_image_id}}</span>
+                        </td>
+                        <th class = "defualt-font" scope="row">{{'UserMngUserInfo.Label.Card_Identify_Image_Rear' | translate}}</th>
+                        <td>
+                            <span>{{cardIdentify?.rear_image_id}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">
+                            <img class="flag" [src]="url+cardIdentify.font_image_id">
+                        </th>
+                        
+                        <th scope="row" colspan="2">
+                            <img class="flag" [src]="url+cardIdentify.rear_image_id">
+                        </th>
+                       
+                    </tr>
+
+            </table>
+
+        </div>
+        <!-- footer -->
+        <div class="c_btn">
+            <button  (click) ="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
+        </div>
+
+    </div>
+</div>

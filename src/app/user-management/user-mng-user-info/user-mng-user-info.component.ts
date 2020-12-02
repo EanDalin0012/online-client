@@ -1,18 +1,18 @@
-import { Component, OnInit, Pipe } from '@angular/core';
-import { ModalService } from '../../share/service/modal.service';
-import { UserMngUserInfoAddFormComponent } from '../user-mng-user-info-add-form/user-mng-user-info-add-form.component';
-import { UserMngUserInfoAddComponent } from '../user-mng-user-info-add/user-mng-user-info-add.component';
-import { BTN_ROLES } from '../../share/constants/common.const';
-import { DataService } from '../../share/service/data.service';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { ServerService } from '../../share/service/server.service';
-import { GridDataResult, SelectableSettings, RowClassArgs } from '@progress/kendo-angular-grid';
-import { UserDataModel } from '../../share/model/model/user-data';
-import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
-import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { TranslateService } from '@ngx-translate/core';
-import { RequestDataModel } from '../../share/model/request/req-data';
+import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
+import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
+import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
+import { BTN_ROLES } from '../../share/constants/common.const';
 import { UserInfoDetails } from '../../share/model/model/user-info-details';
+import { RequestDataModel } from '../../share/model/request/req-data';
+import { DataService } from '../../share/service/data.service';
+import { ModalService } from '../../share/service/modal.service';
+import { ServerService } from '../../share/service/server.service';
+import { CardIdentifyViewComponent } from '../card-identify-view/card-identify-view.component';
+import { UserMngAccEditComponent } from '../user-mng-acc-edit/user-mng-acc-edit.component';
+import { UserMngUserInfoAddComponent } from '../user-mng-user-info-add/user-mng-user-info-add.component';
 
 @Component({
   selector: 'app-user-mng-user-info',
@@ -185,4 +185,29 @@ export class UserMngUserInfoComponent implements OnInit {
       }
     });
   }
+
+  openViewCardIdentify(dataItem) {
+    this.modalService.open({
+      content: CardIdentifyViewComponent,
+      message: dataItem,
+      callback: _response => {
+        if(_response) {
+          console.log(_response);
+        }
+      }
+    });
+  }
+
+  openViewAccount(dataItem) {
+    this.modalService.open({
+      content: UserMngAccEditComponent,
+      message: dataItem,
+      callback: _response => {
+        if(_response) {
+          console.log(_response);
+        }
+      }
+    });
+  }
 }
+
