@@ -20,7 +20,7 @@ export class RequestDataService {
     inquiryCategory(): Promise<CategoryModel[]> {
       return new Promise( (resolve, reject) => {
       const trReq = new RequestDataModel();
-      const api = '/api/category/list';
+      const api = '/api/category/v1/list';
       this.serverService.HTTPGet(api).then(resp => {
         const response   = resp as CategoryReponseModel;
         if (response) {

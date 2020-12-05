@@ -91,7 +91,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
    // declear function
    inquiry() {
     const trReq = new RequestDataModel();
-    const api = '/api/product/list';
+    const api = '/api/product/v1/list';
     this.service.HTTPGet(api).then(resp => {
       const response   = resp as ProductDetaitsModelResponse;
       if (response) {

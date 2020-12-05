@@ -125,7 +125,7 @@ export class AuthentcatiionService {
     return new Promise((resolve) => {
       $('div.loading').removeClass('none');
       const lang = Utils.getSecureStorage(localStorage.I18N);
-      const api = '/api/user/load_user';
+      const api = '/api/user/v1/load_user';
       const uri =
         this.bizserverUrl + api + '?userName=' + userName + '&lang=' + lang;
       let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);

@@ -87,7 +87,7 @@ country: CategoryModel;
       trReq.body.category_id        = this.categoryModel.id;
       trReq.body.resource_img_id    = this.resource_img_id;
       
-      const api = '/api/product/save';
+      const api = '/api/product/v1/save';
       console.log(trReq);
       
       this.serverService.HTTPPost(api, trReq).then(response => {

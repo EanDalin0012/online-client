@@ -24,7 +24,7 @@ export class UploadService {
   public upload(fileInfo: Base64WriteImage):Promise<Boolean> {
     return new Promise(resolve =>{
       if(fileInfo) {
-        const api = '/api/base64/image/write';
+        const api = '/api/base64/image/v1/write';
         const data = new Base64WriteImageRequestAdd();
         data.body.base64          = fileInfo.base64;
         data.body.file_name       = fileInfo.file_name;
