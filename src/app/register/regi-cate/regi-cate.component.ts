@@ -76,7 +76,7 @@ menu = '';
 
   inquiry() {
     const trReq = new RequestDataModel();
-    const api = '/api/category/list';
+    const api = '/api/category/v1/list';
     this.service.HTTPGet(api).then(resp => {
       const response   = resp as CategoryReponseModel;
       if (response) {
@@ -263,7 +263,7 @@ menu = '';
     const trReq = new ObjIdDeleteRequest();
     trReq.body = this.obj_Id_model_list;
 
-    const api = '/api/category/delete';
+    const api = '/api/category/v1/delete';
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
       if (response.body.status === Reponse_Status.Y) {

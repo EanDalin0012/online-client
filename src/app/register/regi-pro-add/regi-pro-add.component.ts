@@ -1,24 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ChunkSettings, FileInfo, FileRestrictions, FileState, RemoveEvent, SelectEvent, SuccessEvent, UploadEvent } from '@progress/kendo-angular-upload';
-import { environment } from 'src/environments/environment';
-import { ProductModel } from '../../share/model/model/product';
-import { ServerService } from '../../share/service/server.service';
-import { ModalService } from '../../share/service/modal.service';
-import { RequestDataService } from '../../share/service/get-data.service';
+import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
+import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angular-upload';
+import * as moment from 'moment';
+import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { Base64WriteImage } from '../../share/model/model/base64';
+import { CategoryModel } from '../../share/model/model/category';
 import { ProductModelRequest } from '../../share/model/request/req-product';
 import { ResponseDataModel } from '../../share/model/response/res-data';
-import { Reponse_Status, BTN_ROLES, LOGO_FILE_EXT, LOCAL_STORAGE, AES_INFO } from '../../share/constants/common.const';
-import { CategoryModel } from '../../share/model/model/category';
-import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
-import { Base64WriteImage } from '../../share/model/model/base64';
+import { RequestDataService } from '../../share/service/get-data.service';
+import { ModalService } from '../../share/service/modal.service';
+import { ServerService } from '../../share/service/server.service';
 import { UploadService } from '../../share/service/upload.service';
-import * as moment from 'moment';
-import { CategoryRequestModel } from '../../share/model/request/req-main-category';
 import { Utils } from '../../share/utils/utils.static';
-import { Country, CountryData } from '../../home/home1000/data';
-import { DataService } from '../../share/service/data.service';
-import { ChipComponent } from '@progress/kendo-angular-buttons';
 
 @Component({
   selector: 'app-regi-pro-add',
@@ -33,7 +27,7 @@ export class RegiProAddComponent implements OnInit {
   product_name: string;
   description: string;
   resource_img_id: string;
-
+  image_uploaded: boolean;
   translateTxt: any;
 
 
@@ -129,6 +123,7 @@ private isValid(): boolean {
 
   // file select function
   public selectEventHandler(e: SelectEvent): void {
+    this.image_uploaded = false;
     this.imagePreviews = [];
     const that = this;
     e.files.forEach((file) => {
@@ -158,6 +153,7 @@ private isValid(): boolean {
     });
   }
   public remove(fileSelect, uid: string) {
+      this.image_uploaded = false;
       fileSelect.removeFileByUid(uid);
       if(this.imagePreviews.length > 0) {
         this.imagePreviews.forEach((element,index) =>{
@@ -191,6 +187,7 @@ upload(state) {
             this.uploadService.upload(base64WriteImage).then(resp=>{
               if(resp === true) {
                 this.resource_img_id = base64WriteImage.id;
+                this.image_uploaded = true;
                 console.log('resource_img_id', this.resource_img_id);
                 
               }

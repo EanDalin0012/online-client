@@ -80,7 +80,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
   }
 
   ngOnInit(): void {
-    this.url = environment.bizServer.server +'/api/web/reader/read/';
+    this.url = environment.bizServer.server +'/api/web/reader/v1/read/';
     this.src = src;
     const url = (window.location.href).split('/');
     this.dataService.visitMessage(url[5]);
@@ -203,7 +203,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     const trReq = new ObjIdDeleteRequest();
     trReq.body = this.obj_Id_model_list;
 
-    const api = '/api/vendor/delete';
+    const api = '/api/product/v1/delete';
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
       if (response.body.status === Reponse_Status.Y) {

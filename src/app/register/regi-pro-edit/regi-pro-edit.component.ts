@@ -20,6 +20,8 @@ import { ModalService } from '../../share/service/modal.service';
 })
 export class RegiProEditComponent implements OnInit {
   modal;
+  image_uploaded: boolean;
+
   cagetList = new Array<CategoryModel>();
   defaultCountry = {  
     id: 0,
@@ -62,7 +64,7 @@ export class RegiProEditComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.url = environment.bizServer.server +'/api/web/reader/read/';
+    this.url = environment.bizServer.server +'/api/web/reader/v1/read/';
     if(this.modal) {
         console.log(this.modal.message);
         this.category_id = this.modal.message.category_id;
@@ -106,6 +108,7 @@ export class RegiProEditComponent implements OnInit {
 
   // file select function
   public selectEventHandler(e: SelectEvent): void {
+    this.image_uploaded = false;
     this.imagePreviews = [];
     const that = this;
     e.files.forEach((file) => {
@@ -140,6 +143,7 @@ export class RegiProEditComponent implements OnInit {
           }
         });
       }
+      this.image_uploaded = false;
   }
 
   public showButton(state: FileState): boolean {
@@ -164,6 +168,7 @@ upload(state) {
             this.uploadService.upload(base64WriteImage).then(resp=>{
               if(resp === true) {
                 this.resource_img_id = base64WriteImage.id;
+                this.image_uploaded = true;
                 console.log('resource_img_id', this.resource_img_id);
                 
               }
@@ -188,7 +193,7 @@ edit() {
     trReq.body.category_id        = this.categoryModel.id;
     trReq.body.resource_img_id    = this.resource_img_id;
     
-    const api = '/api/product/update';
+    const api = '/api/product/v1/update';
     console.log(trReq);
     this.serverService.HTTPPost(api, trReq).then(response => {
       const responseData = response as ResponseDataModel;

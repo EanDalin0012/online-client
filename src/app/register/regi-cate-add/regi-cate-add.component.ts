@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MainCategory } from '../../share/model/model/main-category';
 import { TranslateService } from '@ngx-translate/core';
 import { ServerService } from '../../share/service/server.service';
 import { ModalService } from '../../share/service/modal.service';
@@ -41,7 +40,7 @@ export class RegiCateAddComponent implements OnInit {
       const trReq                   = new CategoryRequestModel();
       trReq.body.name               = this.category_name;
       trReq.body.description        = this.description;
-      const api = '/api/category/save';
+      const api = '/api/category/v1/save';
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {

@@ -46,7 +46,7 @@ export class RegiCateEditComponent implements OnInit {
       trReq.body.name               = this.category_name;
       trReq.body.description        = this.description;
       trReq.body.id                 = this.id;
-      const api = '/api/category/update';
+      const api = '/api/category/v1/update';
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {
