@@ -37,12 +37,12 @@ export class RegiVenEditComponent implements OnInit {
     }
   }
 
-  btnRegister() {
+  edit() {
     if ( this.isValid() === true) {
       const trReq                   = new VendorRequestModel();
       trReq.body                    = this.vendorModel;
       console.log(trReq);
-      const api = '/api/vendor/update';
+      const api = '/api/vendor/v1/update';
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {

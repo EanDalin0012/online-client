@@ -79,7 +79,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
   // declear function
   inquiry() {
     const trReq = new RequestDataModel();
-    const api = '/api/vendor/list';
+    const api = '/api/vendor/v1/list';
     this.service.HTTPGet(api).then(resp => {
       const response   = resp as VendorResponseModel;
       if (response) {
@@ -115,7 +115,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
         content: 'Your select item(s) is: '+name,
         lBtn: {btnText: 'Close'},
         rBtn: {btnText: 'Confirm'},
-        modalClass: ['pop-confirm-btn dialog-confirm'],
+        modalClass: ['pop-confirm-btn dialog-confirm pop-dialog-confirm pop-dialog-close'],
         callback: response =>{
           console.log('response', response);
           if(response.text = 'Confirm') {
@@ -149,7 +149,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     const trReq = new ObjIdDeleteRequest();
     trReq.body = this.obj_Id_model_list;
 
-    const api = '/api/vendor/delete';
+    const api = '/api/vendor/v1/delete';
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
       if (response.body.status === Reponse_Status.Y) {

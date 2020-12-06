@@ -6227,5 +6227,7 @@ input[type=file], .k-upload-button {
 .defualt-font{
     font-weight: 600;
     font-size: 1rem;
+}
+.color-label{
     color: #0e1d4a;
 }

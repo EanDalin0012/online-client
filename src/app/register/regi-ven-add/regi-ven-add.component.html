@@ -1,26 +1,27 @@
 <div class="contentsWrap">
-    <div class="container01">
+    <div class="container01" style="margin-top: 35px;">
         <div class="web_container">
             <!-- header -->
             <div class="pop_header">
-                <h1>{{'RegiVenAdd.Label.Tittle' | translate}}</h1>
+                <h1 class="defualt-font"> <b>{{'RegiVenAdd.Label.Tittle' | translate}}</b></h1>
                 <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
             </div>
             <!-- //header -->
-            <div class="web_Wrap" style="white-space: normal;">
+            <div class="web_Wrap">
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">{{'RegiVenAdd.Label.Name'| translate}} :</label>
-                        <input type="text" [ngClass]="vendorModel.name? 'active-input' : ''" [(ngModel)]="vendorModel.name" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Name' | translate}}" class="form-control">
+                        <label class="defualt-font color-label">{{'RegiVenAdd.Label.Name'| translate}} :</label>
+                        <!-- <input type="text" [ngClass]="vendorModel.name? 'active-input' : ''" [(ngModel)]="vendorModel.name" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Name' | translate}}" class="form-control defualt-font"> -->
+                        <input type="text" [ngClass]="vendorModel.name? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="vendorModel.name" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Name' | translate}}">
                         <div class="in_box">
-                            <button (click)="btnX('name')" [ngClass]="vendorModel.name ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                            <button (click)="btnX('name')" [ngClass]="vendorModel.name ? 'btn_del' : ''" type="button" class="btn"></button>
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label>{{'RegiVenAdd.Label.Contact'| translate}} :</label>
-                        <input type="text" (input)="inputContact($event)" [ngClass]="contact ? 'active-input' : ''" class="form-control" [(ngModel)]="contact" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Contact' | translate}}">
+                        <label class="defualt-font">{{'RegiVenAdd.Label.Contact'| translate}} :</label>
+                        <input type="text" (input)="inputContact($event)" [ngClass]="contact ? 'active-input' : ''" class="form-control defualt-font" [(ngModel)]="contact" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Contact' | translate}}">
 
                         <div class="in_box">
                             <button (click)="btnX('contact')" [ngClass]="contact ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
@@ -30,7 +31,7 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="inputPassword4">{{'RegiVenAdd.Label.Other_Contact'| translate}} :</label>
+                        <label for="inputPassword4" class="defualt-font">{{'RegiVenAdd.Label.Other_Contact'| translate}} :</label>
 
                         <input type="text" (input)="inputOtherContact($event)" [ngClass]="other_contact ? 'active-input' : ''" class="form-control" [(ngModel)]="other_contact" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Other_Contact' | translate}}">
 
@@ -40,8 +41,8 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label>{{'RegiVenAdd.Label.Email'| translate}} :</label>
-                        <input type="text" [ngClass]="vendorModel.email ? 'active-input' : ''" class="form-control" [(ngModel)]="vendorModel.email" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Email' | translate}}">
+                        <label class="defualt-font">{{'RegiVenAdd.Label.Email'| translate}} :</label>
+                        <input type="text" [ngClass]="vendorModel.email ? 'active-input' : ''" class="form-control defualt-font" [(ngModel)]="vendorModel.email" placeholder="{{'RegiVenAdd.Holder.Please_Enter_Vendor_Email' | translate}}">
 
                         <div class="in_box">
                             <button (click)="btnX('address')" [ngClass]="vendorModel.email ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
@@ -53,8 +54,8 @@
 
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label>{{'RegiVenAdd.Label.Address'| translate}} :</label>
-                        <input type="text" #subCate [ngClass]="vendorModel.address ? 'active-input' : ''" class="form-control" [(ngModel)]="vendorModel.address" placeholder="{{'RegiVenAdd.Holder.Pleas_Enter_vendor_Address' | translate}}">
+                        <label class="defualt-font">{{'RegiVenAdd.Label.Address'| translate}} :</label>
+                        <input type="text" #subCate [ngClass]="vendorModel.address ? 'active-input' : ''" class="form-control defualt-font" [(ngModel)]="vendorModel.address" placeholder="{{'RegiVenAdd.Holder.Pleas_Enter_vendor_Address' | translate}}">
 
                         <div class="in_box">
                             <button (click)="btnX('address')" [ngClass]="vendorModel.address ? 'btn_del' : ''" type="button" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
@@ -66,8 +67,8 @@
 
                 <div class="form-row">
                     <div class="form-group form-group-last">
-                        <label>{{'RegiCate.LABEL.Description' | translate}}</label>
-                        <input type="text" [ngClass]="vendorModel.description? 'active-input' : ''" [(ngModel)]="vendorModel.description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control">
+                        <label class="defualt-font">{{'RegiCate.LABEL.Description' | translate}}</label>
+                        <input type="text" [ngClass]="vendorModel.description? 'active-input' : ''" [(ngModel)]="vendorModel.description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control defualt-font">
                         <div class="in_box">
                             <button (click)="btnX('description')" type="button" [ngClass]="vendorModel.description? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
                         </div>
@@ -82,12 +83,8 @@
 
 
         <div class="c_btn">
-            <div class="add-close  btn-css margin-right-btn-clos" (click)="close()">
-                <span>{{'COMMON.BUTTON.CLOSE' | translate}}</span>
-            </div>
-            <div class="iam-btn-container mbr_introContent" style="display: inline-block;">
-                <button class="iam-button save" (click)="btnRegister()">{{'COMMON.BUTTON.SAVE' | translate}}</button>
-            </div>
+            <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
+            <button (click)="btnRegister()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'download'" [look]="'outline'">{{'COMMON.BUTTON.SAVE' | translate}}</button>
         </div>
     </div>
 </div>

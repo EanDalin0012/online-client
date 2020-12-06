@@ -37,7 +37,7 @@ export class RegiVenAddComponent implements OnInit {
       const trReq                   = new VendorRequestModel();
       trReq.body                    = this.vendorModel;
       console.log(trReq);
-      const api = '/api/vendor/save';
+      const api = '/api/vendor/v1/save';
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {

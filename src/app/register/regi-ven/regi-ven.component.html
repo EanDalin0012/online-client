@@ -2,9 +2,9 @@
     <div class="page_title">
         <div class="breadcrumb">
             <div class="page_navi">
-                <span>{{'Registerr.LABEL.Register' | translate}}</span>
+                <span class="defualt-font">{{'Registerr.LABEL.Register' | translate}}</span>
             </div>
-            <h1><span>{{'RegiCate.LABEL.Tittle' | translate}}</span></h1>
+            <h1 class="defualt-font">{{'RegiCate.LABEL.Tittle' | translate}}</h1>
         </div>
 
     </div>
@@ -12,10 +12,9 @@
     <div class="container01">
 
         <div class="col-md-12" style="margin-bottom: 15px; padding: 0px;">
-            <strong>{{'COMMON.LABEL.ITEMS' | translate: {'value': totalRecord} }}</strong>
+            <strong class="defualt-font">{{'COMMON.LABEL.ITEMS' | translate: {'value': totalRecord} }}</strong>
         </div>
 
-        <div>
 
             <kendo-grid scrollable="virtual" [data]="gridView" [selectable]="selectableSettings" [sortable]="true" [sort]="sort" (sortChange)="sortChange($event)" [pageSize]="pageSize" [rowClass]="rowCallback" [skip]="skip" [kendoGridBinding]="vendor_list" [pageable]="{
             buttonCount: buttonCount,
@@ -26,57 +25,57 @@
                 <ng-template kendoGridToolbarTemplate>
                     <div class="form-row" style="width: 100%; border-left: none !important;">
                         <div class="form-group col-md-8">
-                            <input type="text" style="height: 34px;" [ngClass]="search? 'active-input' : ''" class="form-control" [(ngModel)]="search" (input)="searchChange($event)" placeholder="Please enter suplier name...">
+                            <input type="text" style="height: 34px;" [ngClass]="search? 'active-input' : ''" class="form-control defualt-font" [(ngModel)]="search" (input)="searchChange($event)" placeholder="Please enter suplier name...">
                             <div class="in_box">
-                                <button type="button" style="top: 5px;" [ngClass]="search? 'btn_del' : ''" (click)="deleteTextSearch()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                                <button type="button" style="top: 5px;" [ngClass]="search? 'btn_del' : ''" (click)="deleteTextSearch()" tabindex=-1 class="btn defualt-font" tabindex=-1 tabindex=-1></button>
                             </div>
                         </div>
 
                         <div class="form-group col-md-4">
-                            <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
+                            <button kendoGridExcelCommand class="export excel defualt-font" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
                                 {{'COMMON.BUTTON.EXPORT_PDF' | translate}}</button>
-                            <button kendoGridPDFCommand class="pdf export" type="button" icon="file-pdf" style="float:right; width: 165px;">
+                            <button kendoGridPDFCommand class="pdf export defualt-font" type="button" icon="file-pdf" style="float:right; width: 165px;">
                                 <span>{{'COMMON.BUTTON.EXPORT_EXCEL' | translate}}</span>
                             </button>
                         </div>
                     </div>
                 </ng-template>
 
-                <kendo-grid-checkbox-column class="cen" [width]="45" [resizable]="false" [columnMenu]="true" showSelectAll="true"></kendo-grid-checkbox-column>
+                <kendo-grid-checkbox-column class="cen defualt-font" [width]="45" [resizable]="false" [columnMenu]="true" showSelectAll="true"></kendo-grid-checkbox-column>
 
-                <kendo-grid-column width="50" class="cen" [sortable]="false" field="no" title="{{'COMMON.LABEL.NO' | translate}}">
+                <kendo-grid-column width="50" class="cen defualt-font" [sortable]="false" field="no" title="{{'COMMON.LABEL.NO' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <p>{{rowIndex + 1}}</p>
+                        <p class="defualt-font">{{rowIndex + 1}}</p>
                     </ng-template>
                 </kendo-grid-column>
 
-                <kendo-grid-column width="150" class="subj" field="name" title="{{'RegiVen.LABEL.Name' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="150" class="subj" field="contact" title="{{'RegiVen.LABEL.Contact' | translate}}">
+                <kendo-grid-column width="150" class="subj defualt-font" field="name" title="{{'RegiVen.LABEL.Name' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="150" class="subj defualt-font" field="contact" title="{{'RegiVen.LABEL.Contact' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <p>{{dataItem.contact | phoneNumberFormat}}</p>
+                        <p class="defualt-font">{{dataItem.contact | phoneNumberFormat}}</p>
                     </ng-template>
                 </kendo-grid-column>
-                <kendo-grid-column width="150" class="subj" field="other_contact" title="{{'RegiVen.LABEL.Other_Contact' | translate}}">
+                <kendo-grid-column width="150" class="subj defualt-font" field="other_contact" title="{{'RegiVen.LABEL.Other_Contact' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <p>{{dataItem.other_contact | phoneNumberFormat}}</p>
-                    </ng-template>
-
-                </kendo-grid-column>
-                <kendo-grid-column width="150" class="subj" field="email" title="{{'RegiVen.LABEL.Email' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="150" class="subj" field="address" title="{{'RegiVen.LABEL.Address' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="description" title="{{'RegiVen.LABEL.Description' | translate}}"></kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="create_date" title="{{'COMMON.LABEL.CREATE_DATE' | translate}}">
-                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <p>{{dataItem.create_date | dateFormat}}</p>
+                        <p class="defualt-font">{{dataItem.other_contact | phoneNumberFormat}}</p>
                     </ng-template>
 
                 </kendo-grid-column>
-                <kendo-grid-column width="190" class="subj" field="create_by" title="{{'COMMON.LABEL.Create_By' | translate}}"></kendo-grid-column>
-
-
-                <kendo-grid-column width="100" class="cen" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
+                <kendo-grid-column width="150" class="subj defualt-font" field="email" title="{{'RegiVen.LABEL.Email' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="150" class="subj defualt-font" field="address" title="{{'RegiVen.LABEL.Address' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj defualt-font" field="description" title="{{'RegiVen.LABEL.Description' | translate}}"></kendo-grid-column>
+                <kendo-grid-column width="190" class="subj defualt-font" field="create_date" title="{{'COMMON.LABEL.CREATE_DATE' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <button type="button" tabindex=-1 class="btn_edit01" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
+                        <p class="defualt-font">{{dataItem.create_date | dateFormat}}</p>
+                    </ng-template>
+
+                </kendo-grid-column>
+                <kendo-grid-column width="190" class="subj defualt-font" field="create_by" title="{{'COMMON.LABEL.Create_By' | translate}}"></kendo-grid-column>
+
+
+                <kendo-grid-column width="100" class="cen defualt-font" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                        <button type="button" tabindex=-1 class="btn_edit01 defualt-font" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
                     </ng-template>
                 </kendo-grid-column>
 
@@ -86,9 +85,9 @@
                     <ng-template kendoGridPDFTemplate let-pageNum="pageNum" let-totalPages="totalPages">
                         <div class="page-template">
                             <div class="header">
-                                <div style="float: right">Page {{ pageNum }} of {{ totalPages }}</div>
+                                <div style="float: right" class="defualt-font">Page {{ pageNum }} of {{ totalPages }}</div>
                             </div>
-                            <div class="footer">
+                            <div class="footer defualt-font">
                                 Page {{ pageNum }} of {{ totalPages }}
                             </div>
                         </div>
@@ -109,17 +108,19 @@
                 </kendo-excelexport>
 
             </kendo-grid>
-        </div>
 
         <div class="table_control">
-            <div class="btn_area">
-                <button type="button" tabindex=-1 class="btn03 r" (click)="delete()"><span>{{'COMMON.BUTTON.DELETE' | translate}}</span></button>
-            </div>
+            <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 border-color-red" (click)="delete()">
+                <span class="k-icon k-i-minus-circle color-red"></span>
+                <span class="border-color-red color-red">{{'COMMON.BUTTON.DELETE' | translate}}</span>
+            </button>
         </div>
         <div class="c_btn">
-            <div class="add-btn btn-css" (click)="add()">
-                <span>{{'COMMON.LABEL.ADD_NEW' | translate}}</span>
-            </div>
+            <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="add()">
+                <span class="k-icon k-i-plus-circle "></span>
+                <span>{{'COMMON.BUTTON.ADD_NEW' | translate}}</span>
+            </button>
+            
         </div>
     </div>
 </div>
