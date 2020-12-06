@@ -12,6 +12,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { CkeditorComponent } from './ckeditor/ckeditor.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { UploadsModule } from '@progress/kendo-angular-upload';
+import { ListKIconComponent } from './list-k-icon/list-k-icon.component';
 
 
 
@@ -22,7 +23,7 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
     Home1200Component, 
     Home2000Component, 
     Home2100Component, 
-    Home2200Component, CkeditorComponent
+    Home2200Component, CkeditorComponent, ListKIconComponent
   ],
   imports: [
     CKEditorModule,

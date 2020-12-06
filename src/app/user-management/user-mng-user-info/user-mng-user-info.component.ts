@@ -13,6 +13,7 @@ import { ServerService } from '../../share/service/server.service';
 import { CardIdentifyViewComponent } from '../card-identify-view/card-identify-view.component';
 import { UserMngAccEditComponent } from '../user-mng-acc-edit/user-mng-acc-edit.component';
 import { UserMngUserInfoAddComponent } from '../user-mng-user-info-add/user-mng-user-info-add.component';
+import { UserMngUserInfoEditComponent } from '../user-mng-user-info-edit/user-mng-user-info-edit.component';
 
 @Component({
   selector: 'app-user-mng-user-info',
@@ -165,7 +166,15 @@ export class UserMngUserInfoComponent implements OnInit {
 
   
   Edit(dataItem) {
-
+    this.modalService.open({
+      content: UserMngUserInfoEditComponent,
+      message: dataItem,
+      callback: _response => {
+        if(_response) {
+          console.log(_response);
+        }
+      }
+    });
   }
 
   Delete() {

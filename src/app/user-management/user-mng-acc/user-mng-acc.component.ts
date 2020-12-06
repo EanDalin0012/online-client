@@ -75,7 +75,7 @@ export class UserMngAccComponent implements OnInit {
 
   inquiry() {
     const trReq = new UserDataRequest();
-    const api = '/api/user/account/list';
+    const api = '/api/user/account/v1/list';
     this.service.HTTPGet(api).then(resp => {
       const response   = resp as UserDataResponse;
       if (response) {
@@ -88,9 +88,12 @@ export class UserMngAccComponent implements OnInit {
   }
 
   edit(dataItems) {
+    let data = {
+      account_id: dataItems.account_id
+    }
     this.modalService.open({
       content: UserMngAccEditComponent,
-      message: dataItems,
+      message: data,
       callback: _response => {
         if(_response) {
           if(_response && _response.close === BTN_ROLES.EDIT) {

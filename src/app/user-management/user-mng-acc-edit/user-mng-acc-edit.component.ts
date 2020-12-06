@@ -50,7 +50,7 @@ export class UserMngAccEditComponent implements OnInit {
     trReq.body.userName           = this.userName;
     trReq.body.id                 = this.id;
     console.log(trReq);
-    const api = '/api/user/account/update'
+    const api = '/api/user/account/v1/update'
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as UserAccountRespnonse;
       if (response.body.isSuccessYN === 'Y') {
@@ -60,12 +60,10 @@ export class UserMngAccEditComponent implements OnInit {
   }
 
   inquiry(id: number) {
-
     let data = new AccountInfoByIdRequest();
     data.body.account_id = id;
-
-    const api ='/api/user/account/account_id';
-
+    console.log(data);
+    const api ='/api/user/account/v1/account_id';
     this.service.HTTPPost(api, data).then(resp=> {
       console.log(resp);
       if(resp.body) {
