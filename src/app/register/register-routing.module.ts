@@ -8,7 +8,8 @@ import { RegiProComponent } from './regi-pro/regi-pro.component';
 const routes: Routes = [
    {path: 'category', component: RegiCateComponent},
    {path: 'vendor', component: RegiVenComponent},
-   {path: 'product', component: RegiProComponent}
+   {path: 'product', component: RegiProComponent},
+   {path: 'view-product-detail', component: RegiProComponent}
    
 ];
 

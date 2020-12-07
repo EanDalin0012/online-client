@@ -35,3 +35,15 @@
     .dis-none {
         display: none;
     }
+
+    .v-card-identy{
+        float: right;
+        border: none;
+    }
+
+    .i-font{
+        font-size: 16px !important;
+    }
+    .i-font-18{
+        font-size: 18px !important;
+    }

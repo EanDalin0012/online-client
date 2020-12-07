@@ -73,9 +73,12 @@
                 <kendo-grid-column width="190" class="subj defualt-font" field="create_by" title="{{'COMMON.LABEL.Create_By' | translate}}"></kendo-grid-column>
 
 
-                <kendo-grid-column width="100" class="cen defualt-font" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
+                <kendo-grid-column width="130" class="cen defualt-font" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <button type="button" tabindex=-1 class="btn_edit01 defualt-font" id="rowIndex" (click)="edit(dataItem)"><span>{{'COMMON.BUTTON.EDIT' | translate}}</span></button>
+                        <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 v-card-identy k-float-left" (click)="edit(dataItem)">
+                            <span class="k-icon k-i-track-changes i-font"></span>
+                            <span style="margin-left: 5px;">edit</span>
+                        </button>
                     </ng-template>
                 </kendo-grid-column>
 

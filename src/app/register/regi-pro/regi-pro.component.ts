@@ -6,7 +6,7 @@ import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/c
 import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { environment } from '../../../environments/environment.prod';
-import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, Reponse_Status, URLCODE } from '../../share/constants/common.const';
 import { ObjIdModel } from '../../share/model/model/obj-id';
 import { ProductDetailsModel } from '../../share/model/model/product-details';
 import { RequestDataModel } from '../../share/model/request/req-data';
@@ -20,6 +20,7 @@ import { ServerService } from '../../share/service/server.service';
 import { RegiProAddComponent } from '../regi-pro-add/regi-pro-add.component';
 import { RegiProEditComponent } from '../regi-pro-edit/regi-pro-edit.component';
 import { src } from './img';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-regi-pro',
@@ -73,7 +74,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     private dataService: DataService,
     private titleService: Title,
     private translateService: TranslateService,
-    private httpClient: HttpClient,
+    private router: Router
   ) { 
     this.titleService.setTitle('Product');
     this.setSelectableSettings();
@@ -321,6 +322,12 @@ obj_Id_model_list = new Array<ObjIdModel>();
         }
       });
     }
+  }
+
+  viewProductDeatil(dataItem) {
+    this.dataService.viewProductDetailMessage(dataItem);
+    const url = `/main/register/${URLCODE['view-product-detail']}`;
+    this.router.navigate([url]);
   }
 
 }
