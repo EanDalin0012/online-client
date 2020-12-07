@@ -16,6 +16,9 @@ import { MShareModule } from '../share/mshare/mshare.module';
 import { RegisterRoutingModule } from './register-routing.module';
 import { RegiVenAddFormComponent } from './regi-ven-add-form/regi-ven-add-form.component';
 import { RegiVenAddFormAddressComponent } from './regi-ven-add-form-address/regi-ven-add-form-address.component';
+import { RegiProDetailAddComponent } from './regi-pro-detail-add/regi-pro-detail-add.component';
+import { RegiProDetailEditComponent } from './regi-pro-detail-edit/regi-pro-detail-edit.component';
+import { RegiProDetailViewsComponent } from './regi-pro-detail-views/regi-pro-detail-views.component';
 
 
 
@@ -34,7 +37,10 @@ import { RegiVenAddFormAddressComponent } from './regi-ven-add-form-address/regi
     RegiCustAddComponent,
     RegiCustEditComponent,
     RegiVenAddFormComponent,
-    RegiVenAddFormAddressComponent
+    RegiVenAddFormAddressComponent,
+    RegiProDetailAddComponent,
+    RegiProDetailEditComponent,
+    RegiProDetailViewsComponent
   
   ],
   imports: [
