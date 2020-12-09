@@ -436,5 +436,14 @@
             "Upload_Rear_Image_Card_Success":"Upload Card Identify Rear Image Success.",
             "User_Info_Add_Success":"User Information save Success."
         }
+    },
+    "RegiProDetail":{
+        "Label": {
+            "Product_Details_image":"Product Details Image",
+            "Product_Details_Description":"Product Details Description"
+        },
+        "Message": {
+
+        }
     }
 }

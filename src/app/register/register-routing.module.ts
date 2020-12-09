@@ -10,7 +10,7 @@ const routes: Routes = [
    {path: 'category', component: RegiCateComponent},
    {path: 'vendor', component: RegiVenComponent},
    {path: 'product', component: RegiProComponent},
-   {path: 'view-product-detail', component: RegiProDetailViewsComponent}
+  //  {path: 'view-product-detail', component: RegiProDetailViewsComponent}
    
 ];
 

@@ -19,6 +19,7 @@ import { RegiVenAddFormAddressComponent } from './regi-ven-add-form-address/regi
 import { RegiProDetailAddComponent } from './regi-pro-detail-add/regi-pro-detail-add.component';
 import { RegiProDetailEditComponent } from './regi-pro-detail-edit/regi-pro-detail-edit.component';
 import { RegiProDetailViewsComponent } from './regi-pro-detail-views/regi-pro-detail-views.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 
 
@@ -45,6 +46,7 @@ import { RegiProDetailViewsComponent } from './regi-pro-detail-views/regi-pro-de
   ],
   imports: [
     MShareModule,
+    CKEditorModule,
     RegisterRoutingModule
   ],
   exports: [

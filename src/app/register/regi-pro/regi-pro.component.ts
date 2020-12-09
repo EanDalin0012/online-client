@@ -21,6 +21,8 @@ import { RegiProAddComponent } from '../regi-pro-add/regi-pro-add.component';
 import { RegiProEditComponent } from '../regi-pro-edit/regi-pro-edit.component';
 import { src } from './img';
 import { Router } from '@angular/router';
+import { RegiProDetailViewsComponent } from '../regi-pro-detail-views/regi-pro-detail-views.component';
+import { RegiProDetailAddComponent } from '../regi-pro-detail-add/regi-pro-detail-add.component';
 
 @Component({
   selector: 'app-regi-pro',
@@ -28,6 +30,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./regi-pro.component.css']
 })
 export class RegiProComponent implements OnInit {
+btnText: string;
+
 src = "";
 url: string;
   // start declear grid
@@ -85,6 +89,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     this.src = src;
     const url = (window.location.href).split('/');
     this.dataService.visitMessage(url[5]);
+    this.btnText = this.translateService.instant('COMMON.BUTTON.ADD_NEW');
     this.inquiry();
   }
 
@@ -98,7 +103,6 @@ obj_Id_model_list = new Array<ObjIdModel>();
       if (response) {
         this.product_list = response.body;
         console.log(this.product_list);
-        
         this.data          = response.body;
         this.loadingData(this.product_list);
       }
@@ -325,9 +329,31 @@ obj_Id_model_list = new Array<ObjIdModel>();
   }
 
   viewProductDeatil(dataItem) {
-    this.dataService.viewProductDetailMessage(dataItem);
-    const url = `/main/register/${URLCODE['view-product-detail']}`;
-    this.router.navigate([url]);
+    // this.dataService.viewProductDetailMessage(dataItem);
+    // const url = `/main/register/${URLCODE['view-product-detail']}`;
+    // this.router.navigate([url]);
+
+    this.modalService.open({
+      content: RegiProDetailViewsComponent,
+      callback: response =>{
+        if(response.close === BTN_ROLES.SAVE) {
+          this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Save_Success'));
+          this.inquiry();
+        }
+      }
+    });
+  }
+
+  addProductDeatil(dataItem) {
+    this.modalService.open({
+      content: RegiProDetailAddComponent,
+      callback: response =>{
+        if(response.close === BTN_ROLES.SAVE) {
+          this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Save_Success'));
+          this.inquiry();
+        }
+      }
+    });
   }
 
 }

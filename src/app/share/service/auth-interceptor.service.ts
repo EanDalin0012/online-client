@@ -46,6 +46,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
     for ( let idx = 0 ; idx < this.longtimeApis.length ; idx++ ) {
       if ( req.url.indexOf(this.longtimeApis[idx]) > 0 ){
         environment.production ? (() => '')() : console.log('timeout sec changed.');
@@ -67,7 +68,7 @@ export class AuthInterceptor implements HttpInterceptor {
       //   }
 
       // }
-
+      console.log('testing kaddfkl');
       if (event instanceof HttpResponse){
         // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
         environment.production ? (() => '')() : console.log(event.body);
