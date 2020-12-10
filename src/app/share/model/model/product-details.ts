@@ -8,4 +8,5 @@ export class ProductDetailsModel extends commonModel{
     description: string;
     web_show?: boolean;
     mobile_show?: boolean;
+    product_details_references_id?: string;
 }

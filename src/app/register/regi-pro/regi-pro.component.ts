@@ -1,12 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { environment } from '../../../environments/environment.prod';
-import { BTN_ROLES, Reponse_Status, URLCODE } from '../../share/constants/common.const';
+import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
 import { ObjIdModel } from '../../share/model/model/obj-id';
 import { ProductDetailsModel } from '../../share/model/model/product-details';
 import { RequestDataModel } from '../../share/model/request/req-data';
@@ -18,11 +18,10 @@ import { DataService } from '../../share/service/data.service';
 import { ModalService } from '../../share/service/modal.service';
 import { ServerService } from '../../share/service/server.service';
 import { RegiProAddComponent } from '../regi-pro-add/regi-pro-add.component';
+import { RegiProDetailAddComponent } from '../regi-pro-detail-add/regi-pro-detail-add.component';
+import { RegiProDetailViewsComponent } from '../regi-pro-detail-views/regi-pro-detail-views.component';
 import { RegiProEditComponent } from '../regi-pro-edit/regi-pro-edit.component';
 import { src } from './img';
-import { Router } from '@angular/router';
-import { RegiProDetailViewsComponent } from '../regi-pro-detail-views/regi-pro-detail-views.component';
-import { RegiProDetailAddComponent } from '../regi-pro-detail-add/regi-pro-detail-add.component';
 
 @Component({
   selector: 'app-regi-pro',
@@ -102,7 +101,6 @@ obj_Id_model_list = new Array<ObjIdModel>();
       const response   = resp as ProductDetaitsModelResponse;
       if (response) {
         this.product_list = response.body;
-        console.log(this.product_list);
         this.data          = response.body;
         this.loadingData(this.product_list);
       }
@@ -254,10 +252,8 @@ obj_Id_model_list = new Array<ObjIdModel>();
       switch (context.dataItem.serviceStatusDesc) {
         case 'Deactivated':
           return {dormant: true};
-          break;
         default:
           return {};
-          break;
        }
   }
 
@@ -294,20 +290,17 @@ obj_Id_model_list = new Array<ObjIdModel>();
 
 
   switchWeb(b: boolean, dataItem) {
-    console.log('v', b, dataItem);
     if(b !== undefined && dataItem) {
       const switchsRequest = new SwitchRequest();
       switchsRequest.body.value = b;
       switchsRequest.body.product_id = dataItem.id;
-      const api = '/api/product/switch_web';
+      const api = '/api/product/v1/switch_web';
       this.service.HTTPPost(api, switchsRequest).then( res=>{
         if ( res && res.body.status === Reponse_Status.Y) {
-          console.log(res);
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Show_On_Web_Success'));
           this.inquiry();
         }
       });
-      console.log(switchsRequest);
     }
     
   }
@@ -317,8 +310,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       const switchsRequest = new SwitchRequest();
       switchsRequest.body.value = b;
       switchsRequest.body.product_id = dataItem.id;
-      const api = '/api/product/switch_mobile';
-      console.log(switchsRequest);
+      const api = '/api/product/v1/switch_mobile';
       this.service.HTTPPost(api, switchsRequest).then( res=>{
         if ( res && res.body.status === Reponse_Status.Y) {
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Show_On_Mobile_Success'));
@@ -329,12 +321,9 @@ obj_Id_model_list = new Array<ObjIdModel>();
   }
 
   viewProductDeatil(dataItem) {
-    // this.dataService.viewProductDetailMessage(dataItem);
-    // const url = `/main/register/${URLCODE['view-product-detail']}`;
-    // this.router.navigate([url]);
-
     this.modalService.open({
       content: RegiProDetailViewsComponent,
+      message: dataItem,
       callback: response =>{
         if(response.close === BTN_ROLES.SAVE) {
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Save_Success'));
@@ -346,6 +335,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
 
   addProductDeatil(dataItem) {
     this.modalService.open({
+      message: dataItem,
       content: RegiProDetailAddComponent,
       callback: response =>{
         if(response.close === BTN_ROLES.SAVE) {

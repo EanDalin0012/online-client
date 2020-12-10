@@ -33,8 +33,8 @@
                                             #myFileSelect="kendoFileSelect">
                                             <ng-template kendoFileSelectFileTemplate let-files let-state="state">
                                                 <div class="font-khmer-cursive">Name: {{files[0].name}} <strong class="chipe-00">Size: {{files[0].size}} bytes</strong></div>
-                                                <button [ngClass]="{right0px: image_uploaded == true}" class="k-button"  style="position: absolute; right: 6.2em; height: 30px;" *ngIf="showButton(state)"  kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.Remove' | translate}}</button>
-                                                <button *ngIf="!image_uploaded" class="k-button"  style="position: absolute; right: .2em; height: 30px;"  kendoButton (click)="upload(files[0].uid);" [icon]="'upload'" [look]="'outline'">{{'COMMON.BUTTON.Upload' | translate}}</button>
+                                                <button [ngClass]="{right0px: showButton(state) == false}" class="k-button"  style="position: absolute; right: 6.2em; height: 30px;"   kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.Remove' | translate}}</button>
+                                                <button *ngIf = "upload(files[0].uid, 'f') == false" class="k-button"  style="position: absolute; right: .2em; height: 30px;"  kendoButton (click)="upload(files[0].uid, 't');" [icon]="'upload'" [look]="'outline'">{{'COMMON.BUTTON.Upload' | translate}}</button>
                                             </ng-template>
                                     </kendo-fileselect>
             
@@ -53,7 +53,29 @@
                         </ng-container>
 
                         <ng-container *ngIf="currentStep === 1">
-                            <ckeditor [(ngModel)]="model.editorData" [config]="config" editorUrl="../../../../assets/ckeditor/ckeditor.js" ></ckeditor>
+                            <kendo-tabstrip (tabSelect)="onTabSelect($event)">
+                                
+                                <kendo-tabstrip-tab [title]="'Contain English'" [selected]="true">
+                                  <ng-template kendoTabContent>
+                                    <ckeditor [(ngModel)]="modelEn.editorData" [config]="config" editorUrl="../../../../assets/ckeditor/ckeditor.js" ></ckeditor>
+                                  </ng-template>
+                                </kendo-tabstrip-tab>
+                            
+                                <kendo-tabstrip-tab [title]="'Contain Khmer'">
+                                  <ng-template kendoTabContent>
+                                    <ckeditor [(ngModel)]="modelKH.editorData" [config]="config" editorUrl="../../../../assets/ckeditor/ckeditor.js" ></ckeditor>
+                                  </ng-template>
+                                </kendo-tabstrip-tab>
+
+                                <kendo-tabstrip-tab [title]="'Contain Chiness'">
+                                    <ng-template kendoTabContent>
+                                      <ckeditor [(ngModel)]="modelCH.editorData" [config]="config" editorUrl="../../../../assets/ckeditor/ckeditor.js" ></ckeditor>
+                                    </ng-template>
+                                  </kendo-tabstrip-tab>
+                                
+                              </kendo-tabstrip>
+                              
+                            
 
                             <script>
                                 CKEDITOR.replace('editor', {
@@ -77,10 +99,10 @@
                                         name: 'styles',
                                         items: ['Format']
                                     }],
-                                    cloudServices_uploadUrl: 'https://33333.cke-cs.com/easyimage/upload/',
+                                    // cloudServices_uploadUrl: 'https://33333.cke-cs.com/easyimage/upload/',
                                     // Note: this is a token endpoint to be used for CKEditor 4 samples / developer tests only. Images uploaded using the testing token service may be deleted automatically at any moment.
                                     // To create your own token URL please visit https://ckeditor.com/ckeditor-cloud-services/.
-                                    cloudServices_tokenUrl: 'https://33333.cke-cs.com/token/dev/ijrDsqFix838Gh3wGO3F77FSW94BwcLXprJ4APSp3XQ26xsUHTi0jcb1hoBt',
+                                    // cloudServices_tokenUrl: 'https://33333.cke-cs.com/token/dev/ijrDsqFix838Gh3wGO3F77FSW94BwcLXprJ4APSp3XQ26xsUHTi0jcb1hoBt',
                                     height: 500
                                 });
                             </script>

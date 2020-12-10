@@ -6231,3 +6231,6 @@ input[type=file], .k-upload-button {
 .color-label{
     color: #0e1d4a;
 }
+.k-icon-font-default {
+    font-size: 18px !important;
+}

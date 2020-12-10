@@ -8,6 +8,9 @@ import { UploadService } from '../../share/service/upload.service';
 import { ModalService } from '../../share/service/modal.service';
 import { ServerService } from '../../share/service/server.service';
 import { BTN_ROLES } from '../../share/constants/common.const';
+import { ProductDescriptionRequest } from '../../share/model/request/req-production-description';
+import { ProductDescription } from '../../share/model/model/product-description';
+import { ResourceID } from '../../share/model/model/resource-id';
 
 @Component({
   selector: 'app-regi-pro-detail-add',
@@ -21,8 +24,16 @@ export class RegiProDetailAddComponent implements OnInit {
     customConfig: ''
   }
   
-  public model = {
-    editorData: '<p>Hello, world! Hello </p>'
+  public modelEn = {
+    editorData: '<p>English contain </p>'
+  };
+
+  public modelKH = {
+    editorData: '<p>Khmer contain </p>'
+  };
+
+  public modelCH = {
+    editorData: '<p>Chiness contain</p>'
   };
 
   public stepsIcons = [];
@@ -111,39 +122,45 @@ export class RegiProDetailAddComponent implements OnInit {
       return (state === FileState.Selected) ? true : false;
     }
     
-upload(state) {
+upload(state, value: string) {
   console.log(this.imagePreviews);
-  if(this.imagePreviews.length > 0) {
-    this.imagePreviews.forEach(element =>{
-      if(element.uid === state) {
-          let splitted = element.src.split(','); 
-          const base64WriteImage = new Base64WriteImage();          
-          console.log('splitted', splitted)
-          if(splitted[1]) { 
-            base64WriteImage.id         = element.id;
-            base64WriteImage.base64     = splitted[1];
-            base64WriteImage.file_name  = element.name;
-            base64WriteImage.file_type  = element.type;
-            base64WriteImage.file_size  = element.size;
-            base64WriteImage.file_extension = element.extension;
-            this.uploadService.upload(base64WriteImage).then(resp=>{
-              if(resp === true) {
-                this.resource_img_id_list.push({resource_id: base64WriteImage.id});
-                this.image_uploaded = true;
-                console.log('resource_img_id', this.resource_img_id_list);
-                
-              }
-            });
-
-          }
-          
-         
-      } else {
-      }
-    });
+  if(value === 'f'){
+    return false;
+  } else if(value === 't') {
+    if(this.imagePreviews.length > 0) {
+      this.imagePreviews.forEach(element =>{
+        if(element.uid === state) {
+            let splitted = element.src.split(','); 
+            const base64WriteImage = new Base64WriteImage();          
+            console.log('splitted', splitted)
+            if(splitted[1]) { 
+              base64WriteImage.id         = element.id;
+              base64WriteImage.base64     = splitted[1];
+              base64WriteImage.file_name  = element.name;
+              base64WriteImage.file_type  = element.type;
+              base64WriteImage.file_size  = element.size;
+              base64WriteImage.file_extension = element.extension;
+              this.uploadService.upload(base64WriteImage).then(resp=>{
+                if(resp === true) {
+                  this.resource_img_id_list.push({resource_id: base64WriteImage.id});
+                  console.log('resource_img_id', this.resource_img_id_list);
+                 return true;
+                }
+              });
+            }
+        } 
+      });
+    } else {
+      return false;
+    }
   }
   
 }
+
+  uploaded(value:boolean): boolean {
+    return value;
+  }
+
   // end file select function
   public prev(): void {
     this.currentStep -= 1;
@@ -170,7 +187,20 @@ upload(state) {
     this.modal.close( {close: BTN_ROLES.CLOSE});
   }
 
+  onTabSelect(e) {
+    console.log(e);
+  }
+
   save() {
-    console.log(this.model);
+    const reqData = new ProductDescriptionRequest();
+    let productDescription = new ProductDescription();
+    productDescription.context_en = this.modelEn.editorData;
+    productDescription.context_kh = this.modelKH.editorData;
+    productDescription.context_ch = this.modelCH.editorData;
+    let resourceID = new Array<ResourceID>();
+    resourceID = this.resource_img_id_list;
+    reqData.body.product_description = productDescription;
+    reqData.body.resource_id = resourceID;
+    console.log(reqData);
   }
 }
