@@ -89,7 +89,7 @@ export class AuthInterceptor implements HttpInterceptor {
         this.modalService.alert({
           title: error.error.error,
           content:  '<p>'+ error.error.error_description+'</p>',
-          modalClass: [''],
+          modalClass: ['message-alert testing, open-alert'],
           btnText: 'Confirm',
           callback: (res) => {
           }
@@ -98,7 +98,7 @@ export class AuthInterceptor implements HttpInterceptor {
       if (error && error.status === 0) {
           this.modalService.alert({
             content:  'message : <span>Connection faile</span> status: ' + error.statusText,
-            modalClass: [''],
+            modalClass: ['message-alert testing, open-alert'],
             btnText: 'Confirm',
             callback: (res) => {
               return false;

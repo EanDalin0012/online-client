@@ -7,10 +7,11 @@ import { Base64WriteImage } from '../../share/model/model/base64';
 import { UploadService } from '../../share/service/upload.service';
 import { ModalService } from '../../share/service/modal.service';
 import { ServerService } from '../../share/service/server.service';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
 import { ProductDescriptionRequest } from '../../share/model/request/req-production-description';
 import { ProductDescription } from '../../share/model/model/product-description';
 import { ResourceID } from '../../share/model/model/resource-id';
+import { ResponseDataModel } from '../../share/model/response/res-data';
 
 @Component({
   selector: 'app-regi-pro-detail-add',
@@ -144,6 +145,7 @@ upload(state, value: string) {
                 if(resp === true) {
                   this.resource_img_id_list.push({resource_id: base64WriteImage.id});
                   console.log('resource_img_id', this.resource_img_id_list);
+                  this.modalService.showNotificationService(this.translateService.instant('Uploaded Image name:'+element.name), 900,'notification-profile upload-product-image');
                  return true;
                 }
               });
@@ -202,5 +204,13 @@ upload(state, value: string) {
     reqData.body.product_description = productDescription;
     reqData.body.resource_id = resourceID;
     console.log(reqData);
+    const api = '/api/product/description/v1/save';
+    this.serverService.HTTPPost(api, reqData).then(response => {
+      const responseData = response as ResponseDataModel;
+      if ( responseData && responseData.body.status === Reponse_Status.Y) {
+        this.modal.close( {close: BTN_ROLES.SAVE});
+      }
+    });
   }
+  
 }

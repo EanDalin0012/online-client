@@ -36,7 +36,10 @@
             "September":"September",
             "October":"October",
             "November":"November",
-            "December":"December"
+            "December":"December",
+            "Preview_Selected_Images":"Preview selected images",
+            "File_Name": "Name: {{ value }}",
+            "File_Size": "Size: {{ value }} bytes"
         },
         "BUTTON": {
             "BACK": "Back",

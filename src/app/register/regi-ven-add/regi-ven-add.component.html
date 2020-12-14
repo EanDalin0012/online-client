@@ -83,8 +83,17 @@
 
 
         <div class="c_btn">
-            <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
-            <button (click)="btnRegister()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'download'" [look]="'outline'">{{'COMMON.BUTTON.SAVE' | translate}}</button>
+
+            <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+                <span class="k-icon k-i-close-circle k-i-x-circle margin-top-1px font-size-20px"></span>
+                <span class="margin-top-5px margin-left-5px">{{'COMMON.BUTTON.CLOSE' | translate}}</span>
+            </button>
+
+            <button  (click)="btnRegister()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+                <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
+                <span class="margin-top-5px margin-left-5px">{{'COMMON.BUTTON.SAVE' | translate}}</span>
+            </button>
+            
         </div>
     </div>
 </div>

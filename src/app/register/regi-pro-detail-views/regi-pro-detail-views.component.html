@@ -1,1 +1,56 @@
-<p>regi-pro-detail-views works!</p>
+<div class="contentsWrap">
+    <div class="container01 padding-top-20px">
+        <div class="web_container">
+            <!-- header -->
+            <div class="pop_header font-khmer-cursive">
+                <h1 class="font-khmer-cursive">{{'RegiPro.Label.Add_New_Product' | translate}}</h1>
+                <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
+            </div>
+            <!-- //header -->
+            <div class="web_Wrap">
+
+                <kendo-splitter orientation="vertical" style="height: 340px;">
+
+                    <kendo-splitter-pane>
+                      <kendo-splitter>
+          
+                        <kendo-splitter-pane [collapsible]="true" size="40%">
+                          <div class="pane-content">
+                            <h3>Inner splitter / left pane</h3>
+                            <p>Resizable and collapsible.</p>
+                          </div>
+                        </kendo-splitter-pane>
+          
+                        <kendo-splitter-pane>
+                          <div class="pane-content">
+                            <h3>Inner splitter / center pane</h3>
+                            <p>Resizable only.</p>
+                          </div>
+                        </kendo-splitter-pane>
+          
+                      </kendo-splitter>
+                    </kendo-splitter-pane>
+          
+                    <kendo-splitter-pane size="100px">
+                      <div class="pane-content">
+                        <h3>Outer splitter / Middle pane</h3>
+                        <p>Resizable only.</p>
+                      </div>
+                    </kendo-splitter-pane>
+          
+                    <kendo-splitter-pane [resizable]="false" size="100px">
+                      <div class="pane-content">
+                        <h3>Outer splitter / Bottom pane</h3>
+                        <p>Non-resizable and non-collapsible.</p>
+                      </div>
+                    </kendo-splitter-pane>
+                  </kendo-splitter>
+               
+            </div>
+        </div>
+        <div class="c_btn">
+            <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
+            
+        </div>
+    </div>
+</div>

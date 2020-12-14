@@ -82,7 +82,6 @@ country: CategoryModel;
       trReq.body.resource_img_id    = this.resource_img_id;
       
       const api = '/api/product/v1/save';
-      console.log(trReq);
       
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
@@ -94,8 +93,6 @@ country: CategoryModel;
 }
 
 private isValid(): boolean {
-  console.log(this.categoryModel);
-  
   if (!this.product_name || this.product_name && this.product_name.trim() === ''
       || this.product_name && this.product_name === null) {
         const bool = this.modalService.messageAlert('Invalid product name.');
@@ -131,8 +128,8 @@ private isValid(): boolean {
 
     if (!file.validationErrors) {
         const reader = new FileReader();
+
         reader.onload = function (ev) {
-       
         const image = {
             src: ev.target['result']+"",
             uid: file.uid,
@@ -142,23 +139,22 @@ private isValid(): boolean {
             type: file.rawFile.type,
             extension: file.extension
         };
+
         imagePreviews1.push(image);
         that.imagePreviews.unshift(image);
 
         };
         reader.readAsDataURL(file.rawFile);
-        
     }
-    
     });
   }
+
   public remove(fileSelect, uid: string) {
       this.image_uploaded = false;
       fileSelect.removeFileByUid(uid);
       if(this.imagePreviews.length > 0) {
         this.imagePreviews.forEach((element,index) =>{
           if(element.uid === uid) {
-              console.log("call add function", element, index);
               this.imagePreviews.splice(index, 1);
           }
         });
@@ -170,13 +166,11 @@ private isValid(): boolean {
     }
     
 upload(state) {
-  console.log(this.imagePreviews);
   if(this.imagePreviews.length > 0) {
     this.imagePreviews.forEach(element =>{
       if(element.uid === state) {
           let splitted = element.src.split(','); 
-          const base64WriteImage = new Base64WriteImage();          
-          console.log('splitted', splitted)
+          const base64WriteImage = new Base64WriteImage();
           if(splitted[1]) { 
             base64WriteImage.id         = element.id;
             base64WriteImage.base64     = splitted[1];
@@ -188,15 +182,9 @@ upload(state) {
               if(resp === true) {
                 this.resource_img_id = base64WriteImage.id;
                 this.image_uploaded = true;
-                console.log('resource_img_id', this.resource_img_id);
-                
               }
             });
-
           }
-          
-         
-      } else {
       }
     });
   }
@@ -205,7 +193,6 @@ upload(state) {
   // end file select function
   inquiryCategory() {
     this.dataService.inquiryCategory().then(resp=>{
-      console.log(resp);
       this.cagetList = resp as any;
     });
   }
