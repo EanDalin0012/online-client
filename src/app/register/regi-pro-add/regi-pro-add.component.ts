@@ -178,6 +178,7 @@ upload(state) {
             base64WriteImage.file_type  = element.type;
             base64WriteImage.file_size  = element.size;
             base64WriteImage.file_extension = element.extension;
+            console.log(base64WriteImage);
             this.uploadService.upload(base64WriteImage).then(resp=>{
               if(resp === true) {
                 this.resource_img_id = base64WriteImage.id;

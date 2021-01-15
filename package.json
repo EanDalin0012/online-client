@@ -53,6 +53,7 @@
         "ckeditor4-angular": "^2.0.0",
         "crypto-js": "^4.0.0",
         "crypto-ts": "^1.0.2",
+        "dompurify": "^2.2.6",
         "font-awesome": "^4.7.0",
         "get-google-fonts": "^1.2.2",
         "http-client": "^4.3.1",

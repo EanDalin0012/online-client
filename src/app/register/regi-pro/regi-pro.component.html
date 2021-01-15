@@ -82,17 +82,17 @@
                             <span style="margin-left: 5px;">edit</span>
                         </button>
 
-                        <button *ngIf = "dataItem.product_details_references_id" class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 btn-order float-left" (click)="viewProductDeatil(dataItem)" style="width: 120px;">
+                        <button *ngIf = "dataItem.product_detials_id" class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 btn-order float-left" (click)="viewProductDeatil(dataItem)" style="width: 120px;">
                             <span class="k-icon k-i-vimeo-box i-font-18" style="margin-left: 10px;"></span>
                             <span style="margin-left: 5px;">veiw detail</span>
                         </button>
 
-                        <button *ngIf = "!dataItem.product_details_references_id" class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00  btn-order" (click)="addProductDeatil(dataItem)">
+                        <button *ngIf = "!dataItem.product_detials_id" class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00  btn-order" (click)="addProductDeatil(dataItem)">
                             <span class="k-icon k-i-plus-circle "></span>
                             <span style="margin-left: 5px;">{{'COMMON.BUTTON.ADD_NEW' | translate}}</span>
                         </button>
 
-                        <button *ngIf = "dataItem.product_details_references_id" class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00  btn-order" (click)="addProductDeatil(dataItem)">
+                        <button *ngIf = "dataItem.product_detials_id" class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00  btn-order" (click)="addProductDeatil(dataItem)">
                             <span class="k-icon k-i-track-changes i-font-18"></span>
                             <span style="margin-left: 5px;">edit detail</span>
                         </button>

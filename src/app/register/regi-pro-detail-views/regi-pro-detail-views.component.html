@@ -16,41 +16,77 @@
           
                         <kendo-splitter-pane [collapsible]="true" size="40%">
                           <div class="pane-content">
-                            <h3>Inner splitter / left pane</h3>
-                            <p>Resizable and collapsible.</p>
+                            
+                            <div class="example-config">
+                              <img [src]="items[0].url" alt="items[0].title" style="min-width: 80%;margin-left: 10%;" draggable="false" />
+                            </div>
+
+                            <kendo-scrollview
+                              [data]="items"
+                              [width]="width"
+                              [height]="height"
+                              class="slider-001"
+                              [arrows]="arrows">
+                                <ng-template let-item="item">
+                                    <h2 class="demo-title">{{item.title}}</h2>
+                                    <img src='{{item.url}}' alt='{{item.title}}' [ngStyle]="{minWidth: width}" draggable="false" />
+                                </ng-template>
+                            </kendo-scrollview>
+                            
                           </div>
                         </kendo-splitter-pane>
           
                         <kendo-splitter-pane>
                           <div class="pane-content">
-                            <h3>Inner splitter / center pane</h3>
-                            <p>Resizable only.</p>
+                            <kendo-tabstrip (tabSelect)="onTabSelect($event)">
+                                
+                              <kendo-tabstrip-tab [title]="'Contain English'" [selected]="true">
+                                <ng-template kendoTabContent>
+                                  <div [innerHTML] = "modelEn.editorData"></div>
+                                </ng-template>
+                              </kendo-tabstrip-tab>
+                          
+                              <kendo-tabstrip-tab [title]="'Contain Khmer'">
+                                <ng-template kendoTabContent>
+                                  <div [innerHTML] = "modelKH.editorData | sanitizeHtml"></div>
+                                </ng-template>
+                              </kendo-tabstrip-tab>
+
+                              <kendo-tabstrip-tab [title]="'Contain Chiness'">
+                                  <ng-template kendoTabContent>
+                                    <div [innerHTML] = "modelCH.editorData"></div>
+                                  </ng-template>
+                                </kendo-tabstrip-tab>
+                              
+                            </kendo-tabstrip>
                           </div>
                         </kendo-splitter-pane>
           
                       </kendo-splitter>
                     </kendo-splitter-pane>
           
-                    <kendo-splitter-pane size="100px">
+                    <!-- <kendo-splitter-pane size="100px">
                       <div class="pane-content">
                         <h3>Outer splitter / Middle pane</h3>
                         <p>Resizable only.</p>
                       </div>
-                    </kendo-splitter-pane>
+                    </kendo-splitter-pane> -->
           
-                    <kendo-splitter-pane [resizable]="false" size="100px">
+                    <!-- <kendo-splitter-pane [resizable]="false" size="100px">
                       <div class="pane-content">
                         <h3>Outer splitter / Bottom pane</h3>
                         <p>Non-resizable and non-collapsible.</p>
                       </div>
-                    </kendo-splitter-pane>
+                    </kendo-splitter-pane> -->
                   </kendo-splitter>
                
             </div>
         </div>
         <div class="c_btn">
-            <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [icon]="'x'" [look]="'outline'">{{'COMMON.BUTTON.CLOSE' | translate}}</button>
-            
+          <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+            <span class="k-icon k-i-close-circle k-i-x-circle margin-top-1px font-size-20px"></span>
+            <span class="margin-top-5px margin-left-5px">{{'COMMON.BUTTON.CLOSE' | translate}}</span>
+          </button>
         </div>
     </div>
 </div>

@@ -22,6 +22,7 @@ import { PhoneNumberPipe } from '../pipe/phone-number.pipe';
 import { DateFormatPipe } from '../pipe/date-format.pipe';
 import { SrcPipe } from '../pipe/src.pipe';
 import { GenderPipe } from '../pipe/gender.pipe';
+import { SanitizeHtmlPipe } from '../pipe/sanitize-html.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { GenderPipe } from '../pipe/gender.pipe';
     PhoneNumberPipe,
     SrcPipe,
     DateFormatPipe,
-    GenderPipe
+    GenderPipe,
+    SanitizeHtmlPipe
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { GenderPipe } from '../pipe/gender.pipe';
     PhoneNumberPipe,
     DateFormatPipe,
     SrcPipe,
-    GenderPipe
+    GenderPipe,
+    SanitizeHtmlPipe
   ],
   entryComponents: [
     ModalComponent,

@@ -20,6 +20,7 @@ import { RegiProDetailAddComponent } from './regi-pro-detail-add/regi-pro-detail
 import { RegiProDetailEditComponent } from './regi-pro-detail-edit/regi-pro-detail-edit.component';
 import { RegiProDetailViewsComponent } from './regi-pro-detail-views/regi-pro-detail-views.component';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
 
 
 
@@ -47,6 +48,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
   imports: [
     MShareModule,
     CKEditorModule,
+    ScrollViewModule,
     RegisterRoutingModule
   ],
   exports: [

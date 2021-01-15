@@ -136,6 +136,7 @@ export class AuthentcatiionService {
       this.httpClient.get(uri, { headers }).subscribe((rest) => {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
+        console.log('user info response dat', rest);
         resolve(rest);
       });
     });

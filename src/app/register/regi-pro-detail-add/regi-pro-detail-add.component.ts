@@ -41,6 +41,7 @@ export class RegiProDetailAddComponent implements OnInit {
   public currentStep = 0;
   image_uploaded: boolean;
 
+  product_id = 0;
   // file select declear
   public imagePreviews: any[] = [];
   resource_img_id_list: any[] = [];
@@ -57,12 +58,16 @@ export class RegiProDetailAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.imagePreviews = [];
     this.stepsIcons = [ 
       { label: this.translateService.instant('RegiProDetail.Label.Product_Details_image'),  isValid: true },
       { label: this.translateService.instant('RegiProDetail.Label.Product_Details_Description'), isValid: true }
     ];
     this.image_uploaded = false;
     this.resource_img_id_list = [];
+    if(this.modal.message) {
+      this.product_id = this.modal.message.id;
+    }
   }
 
   public onStepActivate(ev: StepperActivateEvent): void {
@@ -78,10 +83,9 @@ export class RegiProDetailAddComponent implements OnInit {
   // file select function
   public selectEventHandler(e: SelectEvent): void {
     this.image_uploaded = false;
-    this.imagePreviews = [];
+   
     const that = this;
     e.files.forEach((file) => {
-    let imagePreviews1 = [];
 
     if (!file.validationErrors) {
         const reader = new FileReader();
@@ -96,8 +100,7 @@ export class RegiProDetailAddComponent implements OnInit {
             type: file.rawFile.type,
             extension: file.extension
         };
-        imagePreviews1.push(image);
-        that.imagePreviews.unshift(image);
+        that.imagePreviews.push(image);
 
         };
         reader.readAsDataURL(file.rawFile);
@@ -195,6 +198,7 @@ upload(state, value: string) {
 
   save() {
     const reqData = new ProductDescriptionRequest();
+
     let productDescription = new ProductDescription();
     productDescription.context_en = this.modelEn.editorData;
     productDescription.context_kh = this.modelKH.editorData;
@@ -203,6 +207,7 @@ upload(state, value: string) {
     resourceID = this.resource_img_id_list;
     reqData.body.product_description = productDescription;
     reqData.body.resource_id = resourceID;
+    reqData.body.product_id = this.product_id;
     console.log(reqData);
     const api = '/api/product/description/v1/save';
     this.serverService.HTTPPost(api, reqData).then(response => {

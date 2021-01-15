@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
 import { ObjIdModel } from '../../share/model/model/obj-id';
 import { ProductDetailsModel } from '../../share/model/model/product-details';
@@ -101,6 +101,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       const response   = resp as ProductDetaitsModelResponse;
       if (response) {
         this.product_list = response.body;
+        console.log(this.product_list);
         this.data          = response.body;
         this.loadingData(this.product_list);
       }
