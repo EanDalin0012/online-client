@@ -49,17 +49,17 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
+    // tslint:disable-next-line: prefer-for-of
     for ( let idx = 0 ; idx < this.longtimeApis.length ; idx++ ) {
       if ( req.url.indexOf(this.longtimeApis[idx]) > 0 ){
         environment.production ? (() => '')() : console.log('timeout sec changed.');
         this.timeoutmillsec = 2 * 60 * 1000;
         break;
-      }
     }
+  }
 
     // console.log('new headers', clonedRequest.headers.keys());
-    return next.handle(req).timeout(this.timeoutmillsec)
-    .map(event => {
+    return next.handle(req).timeout(this.timeoutmillsec).map(event => {
       // if (environment.encryptionUse) {
       //   const aesInfo: any = Utils.getSecureStorage(AES_INFO.STORE) || {};
       //   if (event instanceof HttpResponse) {
@@ -70,17 +70,17 @@ export class AuthInterceptor implements HttpInterceptor {
       //   }
       // }
 
-        if (event instanceof HttpResponse) {
-          event = event.clone({ body: {
-            body: JSON.parse(this.cryptoService.decrypt(event.body.body))
-          }});
-          console.log('dddd', event);
+      if (event instanceof HttpResponse) {
+        event = event.clone({ body: {
+          header: event.body.header,
+          body: JSON.parse(event.body.body)
+        }});
+      }
 
-        }
-        if (event instanceof HttpResponse){
-          // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
-          environment.production ? (() => '')() : console.log(event.body);
-        }
+        // if (event instanceof HttpResponse){
+        //   // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
+        //   environment.production ? (() => '')() : console.log(event.body);
+        // }
       // "CBK_SES_001"
       return event;
     })

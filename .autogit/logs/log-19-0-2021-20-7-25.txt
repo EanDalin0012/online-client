@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Tue Jan 19 2021 20:07:25 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/share/service/auth-interceptor.service.ts
+* src/app/share/service/server.service.ts
+
+
+Created files:
+* .autogit/logs/log-19-0-2021-17-35-4.txt
+
+
+Deleted files:
+
+
+Renamed files:
