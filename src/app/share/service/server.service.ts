@@ -1,3 +1,4 @@
+import { CryptoService } from './crypto.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import * as $ from 'jquery';
@@ -28,7 +29,8 @@ export class ServerService {
     private httpClient: HttpClient,
     private modalService: ModalService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cryptoService: CryptoService
   ) {
     this.bizserverUrl = environment.bizMOBServer;
   }
@@ -58,7 +60,7 @@ export class ServerService {
         // $('div.loading').addClass('none');
         $('div.loading').removeClass('none');
         $('body').removeClass('loaded');
-        
+
         let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
         const access_token = authorization.access_token;
         if (!access_token) {
@@ -74,7 +76,7 @@ export class ServerService {
           });
           return;
         }
-        
+
         const httpOptionsObj = {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+access_token
@@ -82,7 +84,20 @@ export class ServerService {
         const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
         const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
         const uri = this.bizserverUrl + api+'?userId='+user_info.id +'&lang='+lang;
-        this.data = this.httpClient.post(uri, JSON.stringify(TrClass), {
+        const dataBody =JSON.stringify(TrClass);
+
+        console.log('data', dataBody);
+
+        const encryptionData = this.cryptoService.encrypt(dataBody);
+        console.log('encryptionData', encryptionData);
+        const requestData = {
+          body: TrClass
+        };
+        console.log('requestData', requestData);
+
+        console.log('encryptionData', JSON.stringify(requestData));
+
+        this.data = this.httpClient.post(uri, JSON.stringify(requestData), {
           headers: new HttpHeaders(httpOptionsObj)
         }).subscribe(
           res => {
@@ -98,7 +113,7 @@ export class ServerService {
             } else {
               resolve(result);
             }
-            
+
         }, error => {
           console.log(error);
         });
@@ -108,7 +123,7 @@ export class ServerService {
    }
 
 
-   
+
   public HTTPRequestFile(api, uploadEvent: UploadEvent): Promise<any> {
     return new Promise((resolve, reject) => {
       const aesInfo: any = Utils.getSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME) || {};
@@ -134,7 +149,7 @@ export class ServerService {
         // $('div.loading').addClass('none');
         $('div.loading').removeClass('none');
         $('body').removeClass('loaded');
-        
+
         let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
         const access_token = authorization.access_token;
         if (!access_token) {
@@ -149,14 +164,14 @@ export class ServerService {
           });
           return;
         }
-        
+
         const httpOptionsObj = {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+access_token
         };
         const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
         const lang = Utils.getSecureStorage(localStorage.I18N);
-        
+
         const uri = this.bizserverUrl + api+'?userId='+user_info.id +'&lang='+lang+'&file='+uploadEvent.files[0].rawFile;
         const formData = new FormData();
 
@@ -189,11 +204,11 @@ export class ServerService {
       const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
       const lang = Utils.getSecureStorage(localStorage.I18N);
       const uri = this.bizserverUrl + api + '?userId='+userInfo.id +'&lang='+lang;
-    
+
       let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-      
+
       const access_token = authorization.access_token;
-  
+
       // if (!access_token) {
       //   this.modalService.alert({
       //     content: 'fadfadf',
@@ -204,7 +219,7 @@ export class ServerService {
       //   });
       //   return;
       // }
-      const headers = { 
+      const headers = {
         'Authorization': 'Bearer ' + access_token
       }
       this.httpClient.get(uri, {headers}).subscribe(rest => {
@@ -233,5 +248,5 @@ export class ServerService {
       }
     });
   }
-  
+
 }
