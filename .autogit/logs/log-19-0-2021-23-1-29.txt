@@ -1,0 +1,19 @@
+-------------------- Auto-Git Log --------------------
+		Tue Jan 19 2021 23:01:29 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/register/regi-cate/regi-cate.component.ts
+* src/app/share/service/auth-interceptor.service.ts
+* src/app/share/service/authentication.service.ts
+* src/app/share/service/server.service.ts
+
+
+Created files:
+* .autogit/logs/log-19-0-2021-22-31-10.txt
+
+
+Deleted files:
+
+
+Renamed files:
