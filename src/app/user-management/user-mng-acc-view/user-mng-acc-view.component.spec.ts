@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UserMngAccViewComponent } from './user-mng-acc-view.component';
 
@@ -6,7 +6,7 @@ describe('UserMngAccViewComponent', () => {
   let component: UserMngAccViewComponent;
   let fixture: ComponentFixture<UserMngAccViewComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ UserMngAccViewComponent ]
     })

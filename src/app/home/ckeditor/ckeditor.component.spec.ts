@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CkeditorComponent } from './ckeditor.component';
 
@@ -6,7 +6,7 @@ describe('CkeditorComponent', () => {
   let component: CkeditorComponent;
   let fixture: ComponentFixture<CkeditorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CkeditorComponent ]
     })

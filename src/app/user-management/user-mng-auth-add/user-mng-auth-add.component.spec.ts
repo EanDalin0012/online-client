@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { UserMngAuthAddComponent } from './user-mng-auth-add.component';
 
@@ -6,7 +6,7 @@ describe('UserMngAuthAddComponent', () => {
   let component: UserMngAuthAddComponent;
   let fixture: ComponentFixture<UserMngAuthAddComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ UserMngAuthAddComponent ]
     })

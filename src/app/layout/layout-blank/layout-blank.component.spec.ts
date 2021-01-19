@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LayoutBlankComponent } from './layout-blank.component';
 
@@ -6,7 +6,7 @@ describe('LayoutBlankComponent', () => {
   let component: LayoutBlankComponent;
   let fixture: ComponentFixture<LayoutBlankComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LayoutBlankComponent ]
     })
