@@ -90,9 +90,11 @@ export class ServerService {
 
         const encryptionData = this.cryptoService.encrypt(dataBody);
         console.log('encryptionData', encryptionData);
+
         const requestData = {
-          body: TrClass
+          body: encryptionData.toString()
         };
+
         console.log('requestData', requestData);
 
         console.log('encryptionData', JSON.stringify(requestData));
@@ -107,6 +109,8 @@ export class ServerService {
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
             const result = res as any;
+            console.log(res, res,res);
+
             if(result.error != null) {
               this.message(result.error.message);
               reject();

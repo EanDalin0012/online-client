@@ -1,3 +1,4 @@
+import { CryptoService } from './crypto.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Injectable, NgZone } from '@angular/core';
@@ -31,6 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
     private zone: NgZone,
     private modal: ModalService,
     private modalService: ModalService,
+    private cryptoService: CryptoService
   ) {
 
   }
@@ -66,12 +68,19 @@ export class AuthInterceptor implements HttpInterceptor {
       //       body: JSON.parse(this.decrypt(event.body.body, aesInfo.aesKey))
       //     }});
       //   }
-
       // }
-      if (event instanceof HttpResponse){
-        // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
-        environment.production ? (() => '')() : console.log(event.body);
-      }
+
+        if (event instanceof HttpResponse) {
+          event = event.clone({ body: {
+            body: JSON.parse(this.cryptoService.decrypt(event.body.body))
+          }});
+          console.log('dddd', event);
+
+        }
+        if (event instanceof HttpResponse){
+          // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
+          environment.production ? (() => '')() : console.log(event.body);
+        }
       // "CBK_SES_001"
       return event;
     })

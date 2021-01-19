@@ -1,0 +1,15 @@
+-------------------- Auto-Git Log --------------------
+		Tue Jan 19 2021 17:35:04 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/share/service/server.service.ts
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:
