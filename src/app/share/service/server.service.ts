@@ -230,7 +230,7 @@ export class ServerService {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
         const result = rest as any;
-        console.log(result);
+        console.log('resultresultresultresult', result);
         if(result.error != null) {
           this.message(result.error.message);
           reject();

@@ -1,3 +1,4 @@
+import { CryptoService } from './crypto.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,22 +19,23 @@ export class AuthentcatiionService {
     private httpClient: HttpClient,
     private modalService: ModalService,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private cryptoService: CryptoService
   ) {
     this.bizserverUrl = environment.bizMOBServer;
   }
 
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
-      this.accessTokenRequest(auth, basicAuth).then(response =>{
-        const _authorization = response as any;
-        console.log('_authorization', _authorization);
-        
-        if(_authorization.access_token) {
-          Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
-          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, _authorization);
-          this.loadUserByUserName(auth.user_name).then(userResponse =>{
+      this.accessTokenRequest(auth, basicAuth).then(response => {
+        const authorization = response as any;
+        const authorizationData = JSON.parse(this.cryptoService.decrypt(authorization.body));
 
-            if(userResponse) {
+        if (authorizationData.access_token) {
+          Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
+          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, authorizationData);
+          this.loadUserByUserName(auth.user_name).then(userResponse => {
+
+            if (userResponse) {
               Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, userResponse.body);
               this.router.navigate(['/main/home']);
               console.log(userResponse);
@@ -45,15 +47,15 @@ export class AuthentcatiionService {
   }
 
 
-  public revokeToken():Promise<any> {
-    return new Promise((resolve,reject) => {
+  public revokeToken(): Promise<any> {
+    return new Promise((resolve, reject) => {
       const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
       const lang = Utils.getSecureStorage(localStorage.I18N);
       const api  = "/api/user/oauth/revoke-token";
       const uri = this.bizserverUrl + api + '?userId='+userInfo.id +'&lang='+lang;
       let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
       const access_token = authorization.access_token;
-      const headers = { 
+      const headers = {
         'Authorization': 'Bearer ' + access_token
       }
 
@@ -66,7 +68,7 @@ export class AuthentcatiionService {
           resolve(result);
         }
       });
-      
+
     });
   }
 

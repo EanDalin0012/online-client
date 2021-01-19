@@ -71,10 +71,14 @@ export class AuthInterceptor implements HttpInterceptor {
       // }
 
       if (event instanceof HttpResponse) {
-        event = event.clone({ body: {
-          header: event.body.header,
-          body: JSON.parse(event.body.body)
-        }});
+        const bodyData = event.body.body;
+        console.log('data', event.body.header);
+        const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
+        console.log('data', data);
+        // event = event.clone({ body: {
+        //   header: event.body.header,
+        //   body: JSON.parse(event.body.body)
+        // }});
       }
 
         // if (event instanceof HttpResponse){
@@ -82,15 +86,14 @@ export class AuthInterceptor implements HttpInterceptor {
         //   environment.production ? (() => '')() : console.log(event.body);
         // }
       // "CBK_SES_001"
+      console.log("reqreqreq", req);
+
       return event;
-    })
-    .pipe(
-      finalize(() => {
+    }).pipe(finalize(() => {
         environment.production ? (() => '')() : console.log('Communicate finish.');
         // $('div.loading').addClass('none') ;
       })
-    )
-    .catch((error) => {
+    ).catch((error) => {
       console.log('error', error);
       if ( Number(error.status) === 401) {
         this.router.navigate(['/login']);
