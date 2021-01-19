@@ -71,10 +71,12 @@ export class AuthInterceptor implements HttpInterceptor {
       // }
 
       if (event instanceof HttpResponse) {
-        const bodyData = event.body.body;
-        console.log('data', event.body.header);
-        const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
-        console.log('data', data);
+        const bodyData = event.clone(event);
+        console.log(bodyData.headers);
+        const b = event instanceof HttpResponse;
+        console.log('data', event.body.header, bodyData.headers.get('Key-Code'));
+        // const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
+        // console.log('data', data);
         // event = event.clone({ body: {
         //   header: event.body.header,
         //   body: JSON.parse(event.body.body)
@@ -86,7 +88,6 @@ export class AuthInterceptor implements HttpInterceptor {
         //   environment.production ? (() => '')() : console.log(event.body);
         // }
       // "CBK_SES_001"
-      console.log("reqreqreq", req);
 
       return event;
     }).pipe(finalize(() => {

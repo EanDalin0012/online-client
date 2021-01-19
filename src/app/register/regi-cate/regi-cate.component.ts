@@ -67,7 +67,7 @@ menu = '';
     this.titleService.setTitle('Category');
     this.setSelectableSettings();
    }
-  
+
   ngOnInit(): void {
     const url = (window.location.href).split('/');
     this.dataService.visitMessage(url[5]);
@@ -81,7 +81,6 @@ menu = '';
       const response   = resp as CategoryReponseModel;
       if (response) {
         this.category_list = response.body;
-        console.log('', this.category_list);
         this.data          = response.body;
         this.loadingData(this.category_list);
       }
@@ -118,7 +117,7 @@ menu = '';
     this.pageSize = take;
     this.paging();
   }
-  
+
   public rowCallback = (context: RowClassArgs) => {
       switch (context.dataItem.serviceStatusDesc) {
         case 'Deactivated':
@@ -151,12 +150,12 @@ menu = '';
       this.loadingData(resultSearch);
     }
   }
-  
+
   deleteTextSearch() {
     this.search = undefined;
     this.loadingData(this.category_list);
   }
-  
+
   public excelExportExcel(component) {
     const options = component.workbookOptions();
     const rows = options.sheets[0].rows;
@@ -220,10 +219,10 @@ menu = '';
           this.obj_Id_model_list.push({
             id: Number(element)
           });
-          
+
           ++i;
       });
-            
+
       this.modalService.confirm({
         title: 'Delete Item(s)',
         content: 'Your select item(s) is: '+name,
@@ -243,7 +242,7 @@ menu = '';
         content: '<h2>Please select Item(s) that you want to delete.</h2>',
         btnText: 'Confirm',
         callback: response =>{
-          
+
         }
       });
     }

@@ -52,12 +52,12 @@ export class AuthentcatiionService {
       const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
       const lang = Utils.getSecureStorage(localStorage.I18N);
       const api  = "/api/user/oauth/revoke-token";
-      const uri = this.bizserverUrl + api + '?userId='+userInfo.id +'&lang='+lang;
+      const uri = this.bizserverUrl + api + '?userId=' + userInfo.id + '&lang=' + lang;
       let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
       const access_token = authorization.access_token;
       const headers = {
         'Authorization': 'Bearer ' + access_token
-      }
+      };
 
       this.httpClient.get(uri, {headers}).subscribe(rest => {
         const result = rest as any;
@@ -135,11 +135,12 @@ export class AuthentcatiionService {
       const headers = {
         Authorization: 'Bearer ' + access_token,
       };
-      this.httpClient.get(uri, { headers }).subscribe((rest) => {
+      this.httpClient.get(uri, { headers }).subscribe(rest => {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
-        console.log('user info response dat', rest);
-        resolve(rest);
+        const bodyData = rest as any;
+        const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
+        resolve(data);
       });
     });
   }

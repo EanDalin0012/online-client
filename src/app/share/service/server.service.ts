@@ -224,19 +224,21 @@ export class ServerService {
       //   return;
       // }
       const headers = {
-        'Authorization': 'Bearer ' + access_token
-      }
+        Authorization: 'Bearer ' + access_token
+      };
+
       this.httpClient.get(uri, {headers}).subscribe(rest => {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
         const result = rest as any;
-        console.log('resultresultresultresult', result);
-        if(result.error != null) {
+        const data = JSON.parse(this.cryptoService.decrypt(result.body));
+        if (result.error != null) {
           this.message(result.error.message);
           reject();
         } else {
-          resolve(result);
+          resolve(data);
         }
+
       });
     });
   }
