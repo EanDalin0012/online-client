@@ -47,7 +47,6 @@ export class Home1000Component implements OnInit {
     console.log(url);
     this.dataService.visitMessage(url[5]);
     this.countryList = CountryData;
-    this.encrypt();
   }
 
   setBankName(country) {
@@ -58,10 +57,6 @@ export class Home1000Component implements OnInit {
 
   }
 
-  encrypt() {
-    var encrypted = CryptoJS.AES.encrypt("Message", "Secret Passphrase");
-    var decrypted = CryptoJS.AES.decrypt(encrypted, "Secret Passphrase");
-    console.log(encrypted, decrypted);
-  }
+
 
 }

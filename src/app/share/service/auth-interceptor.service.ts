@@ -68,7 +68,6 @@ export class AuthInterceptor implements HttpInterceptor {
       //   }
 
       // }
-      console.log('testing kaddfkl');
       if (event instanceof HttpResponse){
         // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
         environment.production ? (() => '')() : console.log(event.body);
