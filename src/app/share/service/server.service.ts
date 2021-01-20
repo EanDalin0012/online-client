@@ -84,7 +84,7 @@ export class ServerService {
         const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
         const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
         const uri = this.bizserverUrl + api+'?userId='+user_info.id +'&lang='+lang;
-        const dataBody =JSON.stringify(TrClass);
+        const dataBody =JSON.stringify(TrClass.body);
 
         console.log('data', dataBody);
 
