@@ -83,19 +83,16 @@ export class ServerService {
         };
         const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
         const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
-        const uri = this.bizserverUrl + api+'?userId='+user_info.id +'&lang='+lang;
-        const dataBody =JSON.stringify(TrClass.body);
+        const uri = this.bizserverUrl + api + '?userId=' + user_info.id + '&lang=' + lang;
+        const dataBody = JSON.stringify(TrClass);
 
         console.log('data', dataBody);
 
         const encryptionData = this.cryptoService.encrypt(dataBody);
-        console.log('encryptionData', encryptionData);
 
         const requestData = {
           body: encryptionData.toString()
         };
-
-        console.log('requestData', requestData);
 
         console.log('encryptionData', JSON.stringify(requestData));
 
@@ -109,13 +106,15 @@ export class ServerService {
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
             const result = res as any;
-            console.log(res, res,res);
-
-            if(result.error != null) {
-              this.message(result.error.message);
+            const dataBody = result.body;
+            console.log('rest data', res);
+            const decryptionData = JSON.parse(this.cryptoService.decrypt(dataBody));
+            console.log('decryptionData', decryptionData);
+            if (decryptionData.error != null) {
+              this.message(decryptionData.error.message);
               reject();
             } else {
-              resolve(result);
+              resolve(decryptionData);
             }
 
         }, error => {

@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Wed Jan 20 2021 22:28:06 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/share/service/server.service.ts
+
+
+Created files:
+* .autogit/logs/log-20-0-2021-19-26-55.txt
+
+
+Deleted files:
+
+
+Renamed files:
