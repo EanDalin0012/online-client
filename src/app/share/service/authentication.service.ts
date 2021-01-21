@@ -139,8 +139,8 @@ export class AuthentcatiionService {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
         const bodyData = rest as any;
-        const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
-        resolve(data);
+        // const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
+        resolve(bodyData);
       });
     });
   }
