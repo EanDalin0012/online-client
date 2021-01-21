@@ -84,19 +84,19 @@ export class ServerService {
         const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
         const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
         const uri = this.bizserverUrl + api + '?userId=' + user_info.id + '&lang=' + lang;
-        const dataBody = JSON.stringify(TrClass.body);
 
+        /*
+        const dataBody = JSON.stringify(TrClass);
         console.log('data', dataBody);
-
         const encryptionData = this.cryptoService.encrypt(dataBody);
-
         const requestData = {
           body: encryptionData.toString()
         };
 
         console.log('encryptionData', JSON.stringify(requestData));
+        */
 
-        this.data = this.httpClient.post(uri, JSON.stringify(requestData), {
+        this.data = this.httpClient.post(uri, JSON.stringify(TrClass), {
           headers: new HttpHeaders(httpOptionsObj)
         }).subscribe(
           res => {
@@ -235,7 +235,7 @@ export class ServerService {
           this.message(result.error.message);
           reject();
         } else {
-          resolve(data);
+          resolve(result);
         }
 
       });
