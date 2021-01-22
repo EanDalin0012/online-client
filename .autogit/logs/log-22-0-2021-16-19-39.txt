@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Fri Jan 22 2021 16:19:39 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/register/regi-cate/regi-cate.component.ts
+* src/app/share/model/model/obj-id.ts
+
+
+Created files:
+* .autogit/logs/log-22-0-2021-15-48-41.txt
+
+
+Deleted files:
+
+
+Renamed files:

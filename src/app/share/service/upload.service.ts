@@ -24,6 +24,7 @@ export class UploadService {
   public upload(fileInfo: Base64WriteImage):Promise<Boolean> {
     return new Promise(resolve =>{
       if(fileInfo) {
+
         const api = '/api/base64/image/v1/write';
         const data = new Base64WriteImageRequestAdd();
         data.body.base64          = fileInfo.base64;
@@ -32,7 +33,8 @@ export class UploadService {
         data.body.file_type       = fileInfo.file_type;
         data.body.file_extension  = fileInfo.file_extension;
         data.body.id              = fileInfo.id;
-        this.server.HTTPPost(api, data).then(resp =>{
+
+        this.server.HTTPPost(api, data).then(resp => {
           if ( resp && resp.body.status === Reponse_Status.Y) {
               resolve(true);
           } else {
