@@ -17,7 +17,7 @@ export class UploadService {
   constructor(
     private httpClient: HttpClient,
     private server: ServerService
-    ) { 
+    ) {
 
   }
 
@@ -77,16 +77,16 @@ export class UploadService {
       const uri = environment.bizMOBServer + api ;// + '?userId='+userInfo.id +'&lang='+lang;
       let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
       const access_token = authorization.access_token;
-      const headers = { 
+      const headers = {
         'Authorization': 'Bearer ' + access_token
       }
-      this.httpClient.get(uri, {headers,responseType: "text"}).subscribe(rest => {
+      this.httpClient.get(uri, {headers, responseType: "text"}).subscribe(rest => {
         const result = rest as any;
         console.log('result', rest);
         if(result.error != null) {
         } else {
           console.log(result);
-          
+
           resolve(result);
         }
       });
@@ -94,20 +94,20 @@ export class UploadService {
 }
 
   async getFile1(source_id: string) {
-  
+
     const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
     const lang = Utils.getSecureStorage(localStorage.I18N);
     const api = '/api/file/resource1/'+source_id;
     const uri = environment.bizMOBServer + api ;// + '?userId='+userInfo.id +'&lang='+lang;
     let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
     const access_token = authorization.access_token;
-    const headers = { 
+    const headers = {
       'Authorization': 'Bearer ' + access_token
     }
     const data = await this.httpClient.get(uri, {headers,responseType: "text"}).toPromise();
     console.log(data);
     return data;
-  
+
 }
 }
 
