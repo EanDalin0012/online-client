@@ -20,7 +20,7 @@ import { Utils } from '../../share/utils/utils.static';
   styleUrls: ['./regi-pro-add.component.css']
 })
 export class RegiProAddComponent implements OnInit {
-  
+
   modal;
   typeList: any[] = [];
   categoryModel: CategoryModel;
@@ -39,7 +39,7 @@ export class RegiProAddComponent implements OnInit {
    i = 0;
 // end file select declear
 // category info
-defaultCountry = {  
+defaultCountry = {
   id: 0,
   name: 'Select Cagetory',
   description: '',
@@ -55,7 +55,7 @@ filterSettings: DropDownFilterSettings = {
 };
 cagetList = new Array<CategoryModel>();
 country: CategoryModel;
-// end 
+// end
 
   constructor(
     private translate: TranslateService,
@@ -80,9 +80,9 @@ country: CategoryModel;
       trReq.body.description        = this.description;
       trReq.body.category_id        = this.categoryModel.id;
       trReq.body.resource_img_id    = this.resource_img_id;
-      
+
       const api = '/api/product/v1/save';
-      
+
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === Reponse_Status.Y) {
@@ -100,7 +100,7 @@ private isValid(): boolean {
   } else if (!this.categoryModel) {
     const bool = this.modalService.messageAlert('Please select category.');
     return bool;
-  } 
+  }
   else {
     return true;
   }
@@ -164,14 +164,14 @@ private isValid(): boolean {
     public showButton(state: FileState): boolean {
       return (state === FileState.Selected) ? true : false;
     }
-    
+
 upload(state) {
   if(this.imagePreviews.length > 0) {
     this.imagePreviews.forEach(element =>{
       if(element.uid === state) {
-          let splitted = element.src.split(','); 
+          let splitted = element.src.split(',');
           const base64WriteImage = new Base64WriteImage();
-          if(splitted[1]) { 
+          if(splitted[1]) {
             base64WriteImage.id         = element.id;
             base64WriteImage.base64     = splitted[1];
             base64WriteImage.file_name  = element.name;
@@ -179,6 +179,15 @@ upload(state) {
             base64WriteImage.file_size  = element.size;
             base64WriteImage.file_extension = element.extension;
             console.log(base64WriteImage);
+
+            // console.log('data', dataBody);
+            // const encryptionData = this.cryptoService.encrypt(dataBody);
+            // const requestData = {
+            //   body: encryptionData.toString()
+            // };
+
+          // console.log('encryptionData', JSON.stringify(requestData));
+
             this.uploadService.upload(base64WriteImage).then(resp=>{
               if(resp === true) {
                 this.resource_img_id = base64WriteImage.id;
@@ -189,7 +198,7 @@ upload(state) {
       }
     });
   }
-  
+
 }
   // end file select function
   inquiryCategory() {
