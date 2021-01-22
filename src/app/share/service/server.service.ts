@@ -172,6 +172,7 @@ export class ServerService {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+access_token
         };
+
         const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
         const lang = Utils.getSecureStorage(localStorage.I18N);
 
