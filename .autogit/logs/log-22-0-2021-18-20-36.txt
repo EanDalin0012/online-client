@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Fri Jan 22 2021 18:20:36 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/register/regi-pro/regi-pro.component.ts
+* src/app/share/model/model/switch.ts
+
+
+Created files:
+* .autogit/logs/log-22-0-2021-17-50-16.txt
+
+
+Deleted files:
+
+
+Renamed files:
