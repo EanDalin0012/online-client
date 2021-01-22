@@ -54,7 +54,7 @@ public mySelection: any[] = [];
 // start declear variable
 totalRecord = 0;
 category_list = new Array<CategoryModel>();
-obj_Id_model_list = new Array<ObjIdModel>();
+obj_Id_model_list = [];
 public data  = Array<CategoryModel>();;
 menu = '';
 
@@ -217,7 +217,7 @@ menu = '';
           }
 
           this.obj_Id_model_list.push({
-            id: Number(element)
+            id: element+''
           });
 
           ++i;
@@ -261,7 +261,7 @@ menu = '';
   doDelete() {
     const trReq = new ObjIdDeleteRequest();
     trReq.body = this.obj_Id_model_list;
-
+    console.log(trReq);
     const api = '/api/category/v1/delete';
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
