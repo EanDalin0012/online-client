@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Fri Jan 22 2021 12:16:23 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/share/service/authentication.service.ts
+* src/app/share/service/server.service.ts
+
+
+Created files:
+* .autogit/logs/log-22-0-2021-11-46-0.txt
+
+
+Deleted files:
+
+
+Renamed files:

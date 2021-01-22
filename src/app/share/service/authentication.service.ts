@@ -28,9 +28,8 @@ export class AuthentcatiionService {
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
       this.accessTokenRequest(auth, basicAuth).then(response => {
         const authorization = response as any;
-        const authorizationData = JSON.parse(this.cryptoService.decrypt(authorization.body));
-        console.log('authorizationData', authorizationData);
-        console.log('authorizationData', authorization);
+        // const authorizationData = JSON.parse(this.cryptoService.decrypt(authorization.body));
+        console.log(authorization);
 
         if (authorization.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
@@ -144,7 +143,6 @@ export class AuthentcatiionService {
         console.log('bodyData', bodyData);
 
         // const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
-        // console.log('data', data);
         resolve(bodyData);
       });
     });
