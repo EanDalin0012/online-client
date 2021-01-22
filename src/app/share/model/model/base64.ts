@@ -4,11 +4,11 @@ export class Base64WriteImage{
     file_name: string;
     file_extension: string; // 'jpg'
     file_type: string;
-    file_size: number;
+    file_size: string;
     id: string;
 }
 
 
-export class Base64Remove{ 
+export class Base64Remove{
     id: string;
 }

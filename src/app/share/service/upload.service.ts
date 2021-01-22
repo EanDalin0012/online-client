@@ -1,3 +1,4 @@
+import { CryptoService } from './crypto.service';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -16,7 +17,8 @@ export class UploadService {
 
   constructor(
     private httpClient: HttpClient,
-    private server: ServerService
+    private server: ServerService,
+    private cryptoService: CryptoService
     ) {
 
   }
@@ -33,6 +35,15 @@ export class UploadService {
         data.body.file_type       = fileInfo.file_type;
         data.body.file_extension  = fileInfo.file_extension;
         data.body.id              = fileInfo.id;
+
+        const dataBody = JSON.stringify(fileInfo);
+        console.log('data', dataBody);
+        const encryptionData = this.cryptoService.encrypt(dataBody);
+        const requestData = {
+          body: encryptionData.toString()
+        };
+
+          console.log('encryptionData', JSON.stringify(requestData));
 
         this.server.HTTPPost(api, data).then(resp => {
           if ( resp && resp.body.status === Reponse_Status.Y) {

@@ -176,19 +176,10 @@ upload(state) {
             base64WriteImage.base64     = splitted[1];
             base64WriteImage.file_name  = element.name;
             base64WriteImage.file_type  = element.type;
-            base64WriteImage.file_size  = element.size;
+            base64WriteImage.file_size  = element.size + '';
             base64WriteImage.file_extension = element.extension;
             console.log(base64WriteImage);
-
-            // console.log('data', dataBody);
-            // const encryptionData = this.cryptoService.encrypt(dataBody);
-            // const requestData = {
-            //   body: encryptionData.toString()
-            // };
-
-          // console.log('encryptionData', JSON.stringify(requestData));
-
-            this.uploadService.upload(base64WriteImage).then(resp=>{
+            this.uploadService.upload(base64WriteImage).then(resp => {
               if(resp === true) {
                 this.resource_img_id = base64WriteImage.id;
                 this.image_uploaded = true;
