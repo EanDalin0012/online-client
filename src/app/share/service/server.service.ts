@@ -106,15 +106,15 @@ export class ServerService {
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
             const result = res as any;
-            const dataBody = result.body;
-            console.log('rest data', res);
-            const decryptionData = JSON.parse(this.cryptoService.decrypt(dataBody));
-            console.log('decryptionData', decryptionData);
-            if (decryptionData.error != null) {
-              this.message(decryptionData.error.message);
+            // const dataBody = result.body;
+            console.log('rest data', result);
+            // const decryptionData = JSON.parse(this.cryptoService.decrypt(dataBody));
+            // console.log('decryptionData', decryptionData);
+            if (result.error != null) {
+              this.message(result.error.message);
               reject();
             } else {
-              resolve(decryptionData);
+              resolve(result);
             }
 
         }, error => {

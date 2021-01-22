@@ -28,11 +28,12 @@ export class AuthentcatiionService {
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
       this.accessTokenRequest(auth, basicAuth).then(response => {
         const authorization = response as any;
-        const authorizationData = JSON.parse(this.cryptoService.decrypt(authorization.body));
+        // const authorizationData = JSON.parse(this.cryptoService.decrypt(authorization.body));
+        console.log(authorization);
 
-        if (authorizationData.access_token) {
+        if (authorization.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
-          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, authorizationData);
+          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, authorization);
           this.loadUserByUserName(auth.user_name).then(userResponse => {
 
             if (userResponse) {
@@ -139,6 +140,8 @@ export class AuthentcatiionService {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
         const bodyData = rest as any;
+        console.log('bodyData', bodyData);
+
         // const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
         resolve(bodyData);
       });

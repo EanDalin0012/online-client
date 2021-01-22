@@ -70,18 +70,18 @@ export class AuthInterceptor implements HttpInterceptor {
       //   }
       // }
 
-      if (event instanceof HttpResponse) {
-        const bodyData = event.clone(event);
-        console.log(bodyData.headers);
-        const b = event instanceof HttpResponse;
-        console.log('data', event.body.header, bodyData.headers.get('Key-Code'));
-        // const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
-        // console.log('data', data);
-        // event = event.clone({ body: {
-        //   header: event.body.header,
-        //   body: JSON.parse(event.body.body)
-        // }});
-      }
+      // if (event instanceof HttpResponse) {
+      //   const bodyData = event.clone(event);
+      //   console.log(bodyData.headers);
+      //   const b = event instanceof HttpResponse;
+      //   console.log('data', event.body.header, bodyData.headers.get('Key-Code'));
+      //   const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
+      //   console.log('data', data);
+      //   event = event.clone({ body: {
+      //     header: event.body.header,
+      //     body: JSON.parse(event.body.body)
+      //   }});
+      // }
 
         // if (event instanceof HttpResponse){
         //   // environment.production ? (() => '')() : console.log(' Response Code : ' + apiname);
