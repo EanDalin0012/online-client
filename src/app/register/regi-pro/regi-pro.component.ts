@@ -78,7 +78,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     private titleService: Title,
     private translateService: TranslateService,
     private router: Router
-  ) { 
+  ) {
     this.titleService.setTitle('Product');
     this.setSelectableSettings();
   }
@@ -163,10 +163,10 @@ obj_Id_model_list = new Array<ObjIdModel>();
           this.obj_Id_model_list.push({
             id: Number(element)
           });
-          
+
           ++i;
       });
-            
+
       this.modalService.confirm({
         title: 'Delete Item(s)',
         content: 'Your select item(s) is: '+name,
@@ -183,11 +183,10 @@ obj_Id_model_list = new Array<ObjIdModel>();
     } else {
       this.modalService.alert({
         title: this.translateService.instant('COMMON.LABEL.Delete_Items'),
-        content: '<h2>'+this.translateService.instant('COMMON.LABEL.Please_Select_Item_You_Delete')+'</h2>',
+        content: '<h2>' + this.translateService.instant('COMMON.LABEL.Please_Select_Item_You_Delete')+'</h2>',
         btnText: this.translateService.instant('COMMON.BUTTON.CONFIRME'),
         modalClass: ['open-alert'],
-        callback: response =>{
-          
+        callback: response => {
         }
       });
     }
@@ -216,7 +215,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       }
     });
   }
-  // end declear function 
+  // end declear function
 
   // Declear function gride
   public setSelectableSettings() {
@@ -248,7 +247,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     this.pageSize = take;
     this.paging();
   }
-  
+
   public rowCallback = (context: RowClassArgs) => {
       switch (context.dataItem.serviceStatusDesc) {
         case 'Deactivated':
@@ -294,16 +293,16 @@ obj_Id_model_list = new Array<ObjIdModel>();
     if(b !== undefined && dataItem) {
       const switchsRequest = new SwitchRequest();
       switchsRequest.body.value = b;
-      switchsRequest.body.product_id = dataItem.id;
+      switchsRequest.body.product_id = dataItem.id + '';
       const api = '/api/product/v1/switch_web';
-      this.service.HTTPPost(api, switchsRequest).then( res=>{
+      this.service.HTTPPost(api, switchsRequest).then( res => {
         if ( res && res.body.status === Reponse_Status.Y) {
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Show_On_Web_Success'));
           this.inquiry();
         }
       });
     }
-    
+
   }
 
   switchMobile(b: boolean, dataItem) {
