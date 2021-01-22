@@ -85,8 +85,8 @@ export class ServerService {
         const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
         const uri = this.bizserverUrl + api + '?userId=' + user_info.id + '&lang=' + lang;
 
-        /*
-        const dataBody = JSON.stringify(TrClass);
+
+        const dataBody = JSON.stringify(TrClass.body);
         console.log('data', dataBody);
         const encryptionData = this.cryptoService.encrypt(dataBody);
         const requestData = {
@@ -94,9 +94,9 @@ export class ServerService {
         };
 
         console.log('encryptionData', JSON.stringify(requestData));
-        */
 
-        this.data = this.httpClient.post(uri, JSON.stringify(TrClass), {
+
+        this.data = this.httpClient.post(uri, JSON.stringify(requestData), {
           headers: new HttpHeaders(httpOptionsObj)
         }).subscribe(
           res => {
