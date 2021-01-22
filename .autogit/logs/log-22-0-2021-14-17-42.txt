@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Fri Jan 22 2021 14:17:42 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/share/service/upload.service.ts
+
+
+Created files:
+* .autogit/logs/log-22-0-2021-13-47-23.txt
+
+
+Deleted files:
+
+
+Renamed files:
