@@ -9,7 +9,6 @@ const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'main', component: LayoutComponent, loadChildren: './mng-module/mng-module.module#MngModuleModule'},
   {path: 'login', component: LayoutBlankComponent, loadChildren: './login/login.module#LoginModule'},
-  
   { path: 'announce/4error', component: Error404Component },
   { path: 'announce/5error', component: Error405Component },
   { path: '**', component: Error404Component },
