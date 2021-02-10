@@ -82,7 +82,7 @@ export class Home1000Component implements OnInit {
     }
     const api = '/api/decrypt/v1/index';
     this.serverService.HTTPPost(api, body).then(response => {
-      console.log('responseresponseresponseresponseresponse', response);
+      console.log('responseresponseresponserespo nseresponse', response);
         alert(JSON.stringify(response));
     });
 
