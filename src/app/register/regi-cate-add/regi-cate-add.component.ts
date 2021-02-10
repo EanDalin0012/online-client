@@ -50,6 +50,33 @@ export class RegiCateAddComponent implements OnInit {
     }
 }
 
+  btnRegisterTest() {
+      const  body = {
+        a: 'd',
+        b:'a',
+        d:'d',
+        data: {
+          v1: 'v1',
+          v2: 'v2',
+          v3: 'v2',
+          v4: [
+            {
+              g: 'g',
+              g1: 'g1'
+            }
+            ]
+        }
+      }
+      const api = '/api/admin/v1/txt';
+      this.serverService.HTTPPost(api, body).then(response => {
+        const responseData = response as ResponseDataModel;
+        if ( responseData && responseData.body.status === Reponse_Status.Y) {
+          this.modal.close( {close: BTN_ROLES.SAVE});
+        }
+      });
+
+  }
+
 private isValid(): boolean {
   if (!this.category_name || this.category_name && this.category_name.trim() === ''
       || this.category_name && this.category_name === null) {

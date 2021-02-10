@@ -1,4 +1,4 @@
-<div class="contentsWrap contentsWrap01">
+ <div class="contentsWrap contentsWrap01">
     <div class="page_title">
         <div class="breadcrumb">
             <div class="page_navi">
@@ -54,7 +54,7 @@
                 <kendo-grid-column width="190" class="subj" field="description" title="{{'RegiCate.LABEL.Description' | translate}}"></kendo-grid-column>
                 <kendo-grid-column width="190" class="subj font-khmer-cursive" field="create_by" title="{{'COMMON.LABEL.Create_By' | translate}}"></kendo-grid-column>
                 <kendo-grid-column width="190" class="subj font-khmer-cursive" field="modify_by" title="{{'COMMON.LABEL.Modify_By' | translate}}"></kendo-grid-column>
-                
+
 
                 <kendo-grid-column width="100" class="cen" [sortable]="false" field="edit" title="{{'COMMON.BUTTON.EDIT' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -100,6 +100,11 @@
                 <span class="k-icon k-i-plus-circle "></span>
                 <span class="margin-left-5px">{{'COMMON.BUTTON.ADD_NEW' | translate}}</span>
             </button>
+
         </div>
+      <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="btnRegisterTest()">
+        <span class="k-icon k-i-plus-circle "></span>
+        <span class="margin-left-5px">Testing Request Encryption to Server side</span>
+      </button>
     </div>
 </div>

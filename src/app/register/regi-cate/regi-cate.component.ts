@@ -55,7 +55,7 @@ public mySelection: any[] = [];
 totalRecord = 0;
 category_list = new Array<CategoryModel>();
 obj_Id_model_list = [];
-public data  = Array<CategoryModel>();;
+public data  = Array<CategoryModel>();
 menu = '';
 
   constructor(
@@ -276,6 +276,30 @@ menu = '';
   }
 
   // end declear function
+
+  btnRegisterTest() {
+    const  body = {
+      a: 'd',
+      b:'a',
+      d:'d',
+      data: {
+        v1: 'v1',
+        v2: 'v2',
+        v3: 'v2',
+        v4: [
+          {
+            g: 'g',
+            g1: 'g1'
+          }
+        ]
+      }
+    }
+    const api = '/api/admin/v1/txt1';
+    this.service.HTTPPost(api, body).then(response => {
+      console.log('response',response);
+    });
+
+  }
 
 }
 
