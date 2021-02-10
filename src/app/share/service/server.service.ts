@@ -88,7 +88,7 @@ export class ServerService {
       /*
       * encryption process
       * */
-        const dataBody = JSON.stringify(TrClass.body);
+        const dataBody = JSON.stringify(TrClass);
         console.log('data', dataBody);
         const encryptionData = this.cryptoService.encrypt(dataBody);
         const requestData = {

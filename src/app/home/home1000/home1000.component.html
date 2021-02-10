@@ -41,6 +41,11 @@
             <button class="iam-button">{{'COMMON.LABEL.SORT' | translate}}</button>
         </div>
 
+        <button  (click)="btnRegister()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+          <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
+          <span class="margin-top-5px margin-left-5px">{{'COMMON.BUTTON.SAVE' | translate}}</span>
+        </button>
+
         <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="value" required>
         </kendo-datepicker>
 
@@ -53,7 +58,9 @@
                 <span class="template">{{ dataItem.name}}</span>
             </ng-template>
         </kendo-dropdownlist>
-        
-        
+
+
     </div>
 </div>
+
+

@@ -1,0 +1,21 @@
+-------------------- Auto-Git Log --------------------
+		Wed Feb 10 2021 23:14:25 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/layout/header/header.component.html
+* src/app/register/regi-cate-add/regi-cate-add.component.html
+* src/app/register/regi-cate-add/regi-cate-add.component.ts
+* src/app/register/regi-cate/regi-cate.component.html
+* src/app/register/regi-cate/regi-cate.component.ts
+* src/app/share/service/server.service.ts
+
+
+Created files:
+* .autogit/logs/log-24-0-2021-15-3-19.txt
+
+
+Deleted files:
+
+
+Renamed files:

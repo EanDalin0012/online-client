@@ -139,7 +139,7 @@ export class AuthInterceptor implements HttpInterceptor {
         this.modal.alert({
           content : message[msgKey],
           callback : () => {
-            this.zone.run(() =>  this.router.navigate(['/login']));
+            // this.zone.run(() =>  this.router.navigate(['/login']));
           }
         });
       } else {

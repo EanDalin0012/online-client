@@ -1,3 +1,5 @@
+import { ServerService } from './../../share/service/server.service';
+import { ResponseDataModel } from './../../share/model/response/res-data';
 import { Component, OnInit } from '@angular/core';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { DataService } from 'src/app/share/service/data.service';
@@ -39,6 +41,7 @@ export class Home1000Component implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private serverService: ServerService,
   ) { }
 
   ngOnInit() {
@@ -58,5 +61,31 @@ export class Home1000Component implements OnInit {
   }
 
 
+
+  btnRegister() {
+    const  body = {
+      name: "data",
+      a: 'd',
+      b:'a',
+      d:'d',
+      data: {
+        v1: 'v1',
+        v2: 'v2',
+        v3: 'v2',
+        v4: [
+          {
+            g: 'g',
+            g1: 'g1'
+          }
+          ]
+      }
+    }
+    const api = '/api/decrypt/v1/index';
+    this.serverService.HTTPPost(api, body).then(response => {
+      console.log('responseresponseresponseresponseresponse', response);
+        alert(JSON.stringify(response));
+    });
+
+}
 
 }
