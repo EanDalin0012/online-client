@@ -77,7 +77,16 @@
                 </kendo-grid-column> -->
                 <kendo-grid-column width="340" class="cen font-khmer-cursive" [sortable]="false" field="edit" title="Action">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                        <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 v-card-identy k-float-left" (click)="edit(dataItem)">
+
+                      <div class="dropdown dropdown-action">
+                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <a href="#" class="dropdown-item" data-toggle="modal" data-target="#edit_job"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                          <a href="#" class="dropdown-item" data-toggle="modal" data-target="#delete_job"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                        </div>
+                      </div>
+
+                        <!-- <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 v-card-identy k-float-left" (click)="edit(dataItem)">
                             <span class="k-icon k-i-track-changes i-font-18"></span>
                             <span style="margin-left: 5px;">edit</span>
                         </button>
@@ -95,7 +104,7 @@
                         <button *ngIf = "dataItem.product_detials_id" class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00  btn-order" (click)="addProductDeatil(dataItem)">
                             <span class="k-icon k-i-track-changes i-font-18"></span>
                             <span style="margin-left: 5px;">edit detail</span>
-                        </button>
+                        </button> -->
 
                     </ng-template>
                 </kendo-grid-column>
