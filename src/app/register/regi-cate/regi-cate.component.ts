@@ -8,7 +8,7 @@ import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { ModalService } from '../../share/service/modal.service';
 import { RegiCateAddComponent } from '../regi-cate-add/regi-cate-add.component';
-import { BTN_ROLES, STATUS, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
 import { DataService } from '../../share/service/data.service';
 import { RegiCateEditComponent } from '../regi-cate-edit/regi-cate-edit.component';
 import { Title } from '@angular/platform-browser';
@@ -45,15 +45,21 @@ public checkboxOnly = false;
 public mode = 'multiple';
 gridheight = screen.height * 0.5;
 public selectedCallback = (args) => args.dataItem;
+// tslint:disable-next-line:member-ordering
 public selectableSettings: SelectableSettings;
+// tslint:disable-next-line:member-ordering
 public skip = 0;
+// tslint:disable-next-line:member-ordering
 public pageSize = 10;
+// tslint:disable-next-line:member-ordering
 public mySelection: any[] = [];
 // end declear grid
 
-// start declear variable
+// tslint:disable-next-line:member-ordering
 totalRecord = 0;
+// tslint:disable-next-line:member-ordering
 category_list = new Array<CategoryModel>();
+// tslint:disable-next-line:member-ordering
 obj_Id_model_list = [];
 public data  = Array<CategoryModel>();
 menu = '';
@@ -74,7 +80,7 @@ menu = '';
     this.inquiry();
   }
 
-  inquiry() {
+  inquiry(){
     const trReq = new RequestDataModel();
     const api = '/api/category/v1/list';
     this.service.HTTPGet(api).then(resp => {
@@ -122,10 +128,8 @@ menu = '';
       switch (context.dataItem.serviceStatusDesc) {
         case 'Deactivated':
           return {dormant: true};
-          break;
         default:
           return {};
-          break;
        }
   }
 
@@ -159,6 +163,7 @@ menu = '';
   public excelExportExcel(component) {
     const options = component.workbookOptions();
     const rows = options.sheets[0].rows;
+    console.log(rows);
 
     let altIdx = 0;
     rows.forEach((row) => {
@@ -225,13 +230,13 @@ menu = '';
 
       this.modalService.confirm({
         title: 'Delete Item(s)',
-        content: 'Your select item(s) is: '+name,
+        content: 'Your select item(s) is: ' + name,
         lBtn: {btnText: 'Close'},
         rBtn: {btnText: 'Confirm'},
         modalClass: ['pop-confirm-btn dialog-confirm'],
         callback: response =>{
           console.log('response', response);
-          if(response.text = 'Confirm') {
+          if (response.text === 'Confirm') {
             this.doDelete();
           }
         }
@@ -241,9 +246,7 @@ menu = '';
         title: 'Delete Item(s)',
         content: '<h2>Please select Item(s) that you want to delete.</h2>',
         btnText: 'Confirm',
-        callback: response =>{
-
-        }
+        callback: response => {}
       });
     }
   }
@@ -280,8 +283,8 @@ menu = '';
   btnRegisterTest() {
     const  body = {
       a: 'd',
-      b:'a',
-      d:'d',
+      b: 'a',
+      d: 'd',
       data: {
         v1: 'v1',
         v2: 'v2',
@@ -296,7 +299,7 @@ menu = '';
     }
     const api = '/api/admin/v1/txt1';
     this.service.HTTPPost(api, body).then(response => {
-      console.log('response',response);
+      console.log('response', response);
     });
 
   }
@@ -306,4 +309,4 @@ menu = '';
 const data = '<div class="m"><table class=" table02 tmenue "><tbody><tr>'
 + '<th scope=" row "></th></tr><tr>'
 + '<th scope="row "></th></tr></tbody>'
-+' </table>  </div>';
++ ' </table>  </div>';

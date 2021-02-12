@@ -35,18 +35,15 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                              <!-- <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
-                                {{'COMMON.BUTTON.EXPORT_PDF' | translate}}
-                              </button> -->
 
-                              <button class="k-button font-khmer-cursive btn-add-00" (click)="add()">
-                                  <span class="k-icon k-i-plus-circle"></span>
-                                  <span class="margin-left-5px">{{'COMMON.BUTTON.ADD_NEW' | translate}}</span>
+                              <button kendoGridPDFCommand class="k-button font-khmer-cursive btn-add-00 export-word" >
+                                  <span class="font-size-15">{{'COMMON.BUTTON.EXPORT_PDF' | translate}}</span>
                               </button>
 
-                            <button kendoGridPDFCommand class="pdf export" type="button" icon="file-pdf" style="float:right; width: 165px;">
-                                <span>{{'COMMON.BUTTON.EXPORT_EXCEL' | translate}}</span>
+                              <button kendoGridExcelCommand class="k-button font-khmer-cursive btn-add-00 export-word" (click)="excelExportExcel(excelexport)" >
+                                <span class="font-size-15" >{{'COMMON.BUTTON.EXPORT_EXCEL' | translate}}</span>
                             </button>
+
                         </div>
                     </div>
                 </ng-template>

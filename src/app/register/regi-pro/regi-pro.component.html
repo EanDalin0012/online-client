@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                            
+
                             <button kendoGridExcelCommand class="export btn-add-01 excel font-khmer-cursive" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
                                 {{'COMMON.BUTTON.EXPORT_PDF' | translate}}</button>
                             <button kendoGridPDFCommand class="pdf export font-khmer-cursive btn-add-01" type="button" icon="file-pdf" style="float:right; width: 165px;">
@@ -40,7 +40,7 @@
                     </div>
                 </ng-template>
                 <kendo-grid-checkbox-column class="cen" [width]="45" [resizable]="false" [columnMenu]="true" showSelectAll="true"></kendo-grid-checkbox-column>
-                
+
                 <kendo-grid-column width="50" class="cen" [sortable]="false" field="no" title="{{'COMMON.LABEL.NO' | translate}}">
                     <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                         <p class="font-khmer-cursive">{{rowIndex + 1}}</p>
@@ -58,7 +58,7 @@
                         <kendo-switch [(ngModel)]="dataItem.mobile_show" (ngModelChange) = "switchMobile(dataItem.mobile_show, dataItem)"></kendo-switch>
                     </ng-template>
                 </kendo-grid-column>
-                
+
 
                 <kendo-grid-column width="200" class="subj font-khmer-cursive" field="catgory_name" title="{{'RegiPro.Label.Category_Name' | translate}}"></kendo-grid-column>
                 <kendo-grid-column width="250" class="subj" field="name" title="{{'RegiPro.Label.Product_Name' | translate}}">
