@@ -6096,7 +6096,7 @@ i {
 }  */
 
 .open-alert div kendo-dialog-actions button.k-button {
-    background: url('assets/images/check-circle-solid.svg') !important; 
+    background: url('assets/images/check-circle-solid.svg') !important;
     background-repeat: no-repeat !important;
     background-size: 25% !important;
     background-position-x: 5px !important;
@@ -6116,11 +6116,11 @@ i {
     background-size: 25% !important;
     background-color: #c1c7d0 !important;
     color: #030303!important;
-    text-align: right !important; 
+    text-align: right !important;
 }
 
 .pop-dialog-confirm div kendo-dialog-actions button.k-button:nth-child(2) {
-    background: url('assets/images/check-circle-solid.svg') !important; 
+    background: url('assets/images/check-circle-solid.svg') !important;
     background-repeat: no-repeat !important;
     background-size: 22% !important;
     background-position-x: 8px !important;
@@ -6141,11 +6141,11 @@ i {
     /* background-size: 25% !important; */
     background-color: #c1c7d0 !important;
     color: #030303!important;
-    text-align: right !important; 
+    text-align: right !important;
 }
 
 .pop-dialog-close div kendo-dialog-actions button.k-button:nth-child(1) {
-    background: url('assets/images/close-solid.svg') !important; 
+    background: url('assets/images/close-solid.svg') !important;
     background-repeat: no-repeat !important;
     background-size: 17% !important;
     background-position-x: 10px !important;
@@ -6172,7 +6172,7 @@ i {
     background-size: 17% !important; */
     background-color: #c1c7d0 !important;
     color: #030303!important;
-    text-align: right !important; 
+    text-align: right !important;
 }
 
 .open-alert div:nth-child(2) {
@@ -6205,7 +6205,7 @@ input[type=file], .k-upload-button {
 
 .k-notification-group {
     margin-left: -25% !important;
-    z-index: 999999999999999 !important; 
+    z-index: 999999999999999 !important;
     min-width: auto !important;
     min-height: auto !important;
 }
@@ -6244,4 +6244,71 @@ input[type=file], .k-upload-button {
 }
 .margin-left-5px {
     margin-left: 5px;
+}
+
+
+.table .dropdown-menu {
+  font-size: 13px;
+  min-width: 120px;
+  padding: 0;
+}
+/* add date 2021-02-12 yyyy-mm-dd */
+
+.table .dropdown-menu {
+  font-size: 13px;
+  min-width: 120px;
+  padding: 0;
+}
+.dropdown-menu.show {
+  display: block;
+}
+.dropdown-menu[x-placement^=bottom], .dropdown-menu[x-placement^=left], .dropdown-menu[x-placement^=right], .dropdown-menu[x-placement^=top] {
+  /* right: auto; */
+  /* bottom: auto; */
+}
+.dropdown-menu {
+  font-size: 13px;
+}
+.dropdown-menu {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  transform-origin: left top 0;
+  box-shadow: inherit;
+  background-color: #fff;
+}
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: .5rem 0;
+  margin: .125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+}
+
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: .25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
 }
