@@ -88,6 +88,7 @@ menu = '';
       if (response) {
         this.category_list = response.body;
         this.data          = response.body;
+        this.gridData      = this.category_list;
         this.loadingData(this.category_list);
       }
     });

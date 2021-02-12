@@ -86,37 +86,32 @@ export class ServerService {
         const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
         const uri = this.url + api + '?userId=' + userInfo.id + '&lang=' + lang;
 
-      /*
-      * encryption process
-      * */
         const dataBody = JSON.stringify(TrClass);
         console.log('data', dataBody);
         const encryptionData = this.cryptoService.encrypt(dataBody);
         const requestData = {
           body: encryptionData.toString()
         };
-        console.log('encryptionData', JSON.stringify(requestData));
-        /*
-        * encryption process
-        * */
 
         this.data = this.httpClient.post(uri, JSON.stringify(requestData), {
           headers: new HttpHeaders(httpOptionsObj)
-        }).subscribe(
-          res => {
+        }).subscribe( res => {
             const newAesInfo: any = Utils.getSecureStorage(AES_INFO.STORE) || {};
             newAesInfo.timestamp = new Date().getTime();
             Utils.setSecureStorage(AES_INFO.STORE, newAesInfo);
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
-            const result = res as any;
-            console.log('rest data', result);
 
-            if (result.error != null) {
+            const result = res as any;
+            const responseData = JSON.parse(result);
+            const rawData = responseData.body;
+            const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+
+            if (decryptData.error != null) {
               this.message(result.error.message);
               reject();
             } else {
-              resolve(result);
+              resolve(decryptData);
             }
 
         }, error => {

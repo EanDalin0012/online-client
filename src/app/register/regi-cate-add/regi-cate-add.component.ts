@@ -36,8 +36,7 @@ export class RegiCateAddComponent implements OnInit {
 
   btnRegister() {
     if ( this.isValid() === true) {
-      const userInfo                = Utils.getUserInfo();
-      const trReq                   = new CategoryRequestModel();
+      const trReq            = new CategoryRequestModel();
       trReq.body.name               = this.category_name;
       trReq.body.description        = this.description;
       const api = '/api/category/v1/save';
