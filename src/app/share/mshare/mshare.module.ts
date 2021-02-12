@@ -72,7 +72,7 @@ import { SanitizeHtmlPipe } from '../pipe/sanitize-html.pipe';
     DatePipe,
   ]
 })
-export class MShareModule { 
+export class MShareModule {
   static forRoot(): ModuleWithProviders<MShareModule> {
     return {
       ngModule: MShareModule,

@@ -27,11 +27,10 @@ export class AuthentcatiionService {
 
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
       this.accessTokenRequest(auth, basicAuth).then(response => {
+
         const authorization = JSON.parse(response);
         const rawData = authorization.body;
-        console.log(authorization);
         const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
-        console.log('authorizationData', decryptData);
 
         if (decryptData.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
@@ -129,23 +128,27 @@ export class AuthentcatiionService {
   private loadUserByUserName(userName: string): Promise<any> {
     return new Promise((resolve) => {
       $('div.loading').removeClass('none');
+
       const lang = Utils.getSecureStorage(localStorage.I18N);
       const api = '/api/user/v1/load_user';
-      const uri =
-        this.bizserverUrl + api + '?userName=' + userName + '&lang=' + lang;
-      let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      const uri = this.bizserverUrl + api + '?userName=' + userName + '&lang=' + lang;
+      const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
       const access_token = authorization.access_token;
+
       const headers = {
         Authorization: 'Bearer ' + access_token,
       };
+
       this.httpClient.get(uri, { headers }).subscribe(rest => {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
         const bodyData = rest as any;
-        console.log('bodyData', bodyData);
 
-        // const data = JSON.parse(this.cryptoService.decrypt(bodyData.body));
-        resolve(bodyData);
+        const responseData = JSON.parse(bodyData);
+        const rawData = responseData.body;
+        const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+
+        resolve(decryptData);
       });
     });
   }

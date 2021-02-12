@@ -9,17 +9,15 @@ export class SrcPipe implements PipeTransform {
 
   constructor(
     private requestDataService: RequestDataService
-  ) {
+  ) {}
 
-  }
+  // tslint:disable-next-line:typedef
   transform(value: string) {
     console.log(value);
-    if(value) {
-      this.requestDataService.srcRequest(value).then(res=>{
+    if (value) {
+      this.requestDataService.srcRequest(value).then( res => {
         const data = res as SRCResponseModel;
-        console.log("data:image/jpeg;base64,"+data.body.src);
-        
-        return "data:image/jpeg;base64,"+data.body.src;
+        return 'data:image/jpeg;base64,' + data.body.src;
       });
     }
   }

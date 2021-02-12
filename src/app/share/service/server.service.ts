@@ -18,7 +18,7 @@ import { UploadEvent } from '@progress/kendo-angular-upload';
 export class ServerService {
   modal;
   data;
-  private bizserverUrl: string;
+  private url: string;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json'
@@ -32,7 +32,7 @@ export class ServerService {
     private translate: TranslateService,
     private cryptoService: CryptoService
   ) {
-    this.bizserverUrl = environment.bizMOBServer;
+    this.url = environment.bizMOBServer;
   }
 
   public HTTPPost(api, TrClass: any): Promise<any> {
@@ -61,14 +61,14 @@ export class ServerService {
         $('div.loading').removeClass('none');
         $('body').removeClass('loaded');
 
-        let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+        const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
         const access_token = authorization.access_token;
         if (!access_token) {
           this.modalService.alert({
             content: '',
             modalClass: ['open-alert'],
             btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
-            callback: _res => {
+            callback: res => {
               Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
               Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
               this.router.navigate(['/login']);
@@ -79,11 +79,12 @@ export class ServerService {
 
         const httpOptionsObj = {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+access_token
+          Authorization: 'Bearer ' + access_token
         };
-        const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+
+        const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
         const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
-        const uri = this.bizserverUrl + api + '?userId=' + user_info.id + '&lang=' + lang;
+        const uri = this.url + api + '?userId=' + userInfo.id + '&lang=' + lang;
 
       /*
       * encryption process
@@ -92,7 +93,7 @@ export class ServerService {
         console.log('data', dataBody);
         const encryptionData = this.cryptoService.encrypt(dataBody);
         const requestData = {
-          body: new String(encryptionData)
+          body: encryptionData.toString()
         };
         console.log('encryptionData', JSON.stringify(requestData));
         /*
@@ -109,10 +110,8 @@ export class ServerService {
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
             const result = res as any;
-            // const dataBody = result.body;
             console.log('rest data', result);
-            // const decryptionData = JSON.parse(this.cryptoService.decrypt(dataBody));
-            // console.log('decryptionData', decryptionData);
+
             if (result.error != null) {
               this.message(result.error.message);
               reject();
@@ -156,13 +155,13 @@ export class ServerService {
         $('div.loading').removeClass('none');
         $('body').removeClass('loaded');
 
-        let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+        const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
         const access_token = authorization.access_token;
         if (!access_token) {
           this.modalService.alert({
             content: '',
             btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
-            callback: _res => {
+            callback: res => {
               Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
               Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
               this.router.navigate(['/login']);
@@ -173,13 +172,13 @@ export class ServerService {
 
         const httpOptionsObj = {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+access_token
+          Authorization: 'Bearer ' + access_token
         };
 
-        const user_info = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+        const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
         const lang = Utils.getSecureStorage(localStorage.I18N);
 
-        const uri = this.bizserverUrl + api+'?userId='+user_info.id +'&lang='+lang+'&file='+uploadEvent.files[0].rawFile;
+        const uri = this.url + api + '?userId=' + userInfo.id + '&lang=' + lang + '&file=' + uploadEvent.files[0].rawFile;
         const formData = new FormData();
 
         this.data = this.httpClient.post(uri, formData, {
@@ -192,7 +191,7 @@ export class ServerService {
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
             const result = res as any;
-            if(result.error !== null) {
+            if (result.error !== null) {
               this.message(result.error.message);
             }
             resolve(result);
@@ -205,14 +204,15 @@ export class ServerService {
    }
 
   public HTTPGet(api, obj?: any): Promise<any> {
-    return new Promise((resolve, reject) =>{
+    return new Promise((resolve, reject) => {
+
       $('div.loading').removeClass('none');
       $('body').removeClass('loaded');
       const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
       const lang = Utils.getSecureStorage(localStorage.I18N);
-      const uri = this.bizserverUrl + api + '?userId='+userInfo.id +'&lang='+lang;
+      const uri = this.url + api + '?userId=' + userInfo.id + '&lang=' + lang;
 
-      let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
 
       const access_token = authorization.access_token;
 
@@ -231,17 +231,20 @@ export class ServerService {
       };
 
       this.httpClient.get(uri, {headers}).subscribe(rest => {
+
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
         const result = rest as any;
-        console.log('result', result);
-        // const encryptionData = this.cryptoService.decrypt(result);
-        // const data = JSON.parse(this.cryptoService.decrypt(result.body));
-        if (result.error != null) {
+
+        const responseData = JSON.parse(result);
+        const rawData = responseData.body;
+        const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+
+        if (decryptData.error != null) {
           this.message(result.error.message);
           reject();
         } else {
-          resolve(result);
+          resolve(decryptData);
         }
 
       });
@@ -249,15 +252,16 @@ export class ServerService {
   }
 
   private message(message: string) {
+
     this.modalService.alert({
-      // tslint:disable-next-line:max-line-length
-      content:  '<h2>'+message+'</h2>',
+      content:  '<h2>' + message + '</h2>',
       modalClass: ['pop_confirm open-alert'],
       btnText: 'Confirm',
       callback: (res) => {
         return false;
       }
     });
+
   }
 
 }
