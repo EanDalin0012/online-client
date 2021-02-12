@@ -100,7 +100,7 @@ export class AuthInterceptor implements HttpInterceptor {
         this.router.navigate(['/login']);
         this.modalService.alert({
           title: error.error.error,
-          content:  '<p>'+ error.error.error_description+'</p>',
+          content:  '<p>' + error.error.error_description + '</p>',
           modalClass: ['message-alert testing, open-alert'],
           btnText: 'Confirm',
           callback: (res) => {

@@ -11,17 +11,15 @@ import { Utils } from './share/utils/utils.static';
 })
 export class AppComponent {
   title = 'online-client';
-  
+
   constructor(
     private translate: TranslateService,
     private router: Router
   ) {
     this.setInitialAppLanguage();
-    if (Utils.getSecureStorage(localStorage.USER_INFO) === null) {
-      this.router.navigate(['/login']);
-    }
   }
 
+  // tslint:disable-next-line:typedef
   setInitialAppLanguage() {
     const i18n = Utils.getSecureStorage( LOCAL_STORAGE.I18N );
     if ( !i18n ) {

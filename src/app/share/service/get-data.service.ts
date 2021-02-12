@@ -30,7 +30,7 @@ export class RequestDataService {
       });
     });
   }
-/* 
+/*
   inquirySubCategoryList(): Promise<SubCategory[]> {
     return new Promise( (resovle) => {
       const trReq = new RequestData();
@@ -94,25 +94,25 @@ export class RequestDataService {
   }
 */
 
-  requestUserInfo(user_name: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+  requestUserInfo(userName: string): Promise<any> {
+    return new Promise((resolve) => {
       const api = '/api/user/v1/load_user';
       const obj = {
-        'user_name': user_name
-      }
-      this.serverService.HTTPGet(api, obj).then(_res => {
-        const response = _res as any;
-        console.log('user info', _res);
+        user_name: userName
+      };
+
+      this.serverService.HTTPGet(api, obj).then(res => {
+        const response = res as any;
         resolve(response.body);
       });
     });
-  } 
+  }
 
-  srcRequest(src_id: string):Promise<any> {
-    return new Promise((resolve, reject) => {
+  srcRequest(srcId: string): Promise<any> {
+    return new Promise((resolve) => {
       const req = new SRCRequestModel();
-      req.body.id = src_id;
-      const api = '/api/base64/image/v1/read/'+src_id;
+      req.body.id = srcId;
+      const api = '/api/base64/image/v1/read/' + srcId;
       this.serverService.HTTPGet(api).then(res => {
         console.log('base 64', res);
         resolve(res);

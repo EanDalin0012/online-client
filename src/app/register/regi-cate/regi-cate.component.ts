@@ -88,7 +88,7 @@ menu = '';
   }
 
   // Declear function gride
-  public setSelectableSettings() {
+  setSelectableSettings() {
     this.selectableSettings = {
         checkboxOnly: this.checkboxOnly,
         mode: 'multiple'

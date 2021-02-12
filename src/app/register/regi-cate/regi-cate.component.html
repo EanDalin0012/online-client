@@ -1,11 +1,13 @@
  <div class="contentsWrap contentsWrap01">
     <div class="page_title">
-        <div class="breadcrumb">
-            <div class="page_navi">
-                <span>{{'Registerr.LABEL.Register' | translate}}</span>
-            </div>
-            <h1><span>{{'RegiCate.LABEL.Tittle' | translate}}</span></h1>
-        </div>
+        <div class="page_title">
+          <div class="breadcrumb">
+              <div class="page_navi">
+                  <span class="font-khmer-cursive">{{'Registerr.LABEL.Register' | translate}}</span>
+              </div>
+              <h1 class="margin-00"><span class="font-khmer-cursive">{{'RegiCate.LABEL.Tittle' | translate}}</span></h1>
+          </div>
+      </div>
 
     </div>
 
@@ -33,8 +35,15 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
-                                {{'COMMON.BUTTON.EXPORT_PDF' | translate}}</button>
+                              <!-- <button kendoGridExcelCommand class="export excel" type="button" style="width: 155px;" icon="file-excel" (click)="excelExportExcel(excelexport)">
+                                {{'COMMON.BUTTON.EXPORT_PDF' | translate}}
+                              </button> -->
+
+                              <button class="k-button font-khmer-cursive btn-add-00" (click)="add()">
+                                  <span class="k-icon k-i-plus-circle"></span>
+                                  <span class="margin-left-5px">{{'COMMON.BUTTON.ADD_NEW' | translate}}</span>
+                              </button>
+
                             <button kendoGridPDFCommand class="pdf export" type="button" icon="file-pdf" style="float:right; width: 165px;">
                                 <span>{{'COMMON.BUTTON.EXPORT_EXCEL' | translate}}</span>
                             </button>
@@ -90,21 +99,24 @@
         </div>
 
         <div class="table_control">
+
+          <div class="col-md-3">
             <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 border-color-red" (click)="delete()">
-                <span class="k-icon k-i-minus-circle color-red"></span>
-                <span class="border-color-red color-red margin-left-5px">{{'COMMON.BUTTON.DELETE' | translate}}</span>
-            </button>
-        </div>
-        <div class="c_btn">
-            <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="add()">
-                <span class="k-icon k-i-plus-circle "></span>
-                <span class="margin-left-5px">{{'COMMON.BUTTON.ADD_NEW' | translate}}</span>
-            </button>
+              <span class="k-icon k-i-minus-circle color-red"></span>
+              <span class="border-color-red color-red margin-left-5px">{{'COMMON.BUTTON.DELETE' | translate}}</span>
+          </button>
+          </div>
+
+
+            <div class="c_btn">
+              <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="add()">
+                  <span class="k-icon k-i-plus-circle "></span>
+                  <span class="margin-left-5px">{{'COMMON.BUTTON.ADD_NEW' | translate}}</span>
+              </button>
+
+          </div>
 
         </div>
-      <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="btnRegisterTest()">
-        <span class="k-icon k-i-plus-circle "></span>
-        <span class="margin-left-5px">Testing Request Encryption to Server side</span>
-      </button>
+
     </div>
 </div>
