@@ -234,6 +234,8 @@ export class ServerService {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
         const result = rest as any;
+        console.log('result', result);
+        // const encryptionData = this.cryptoService.decrypt(result);
         // const data = JSON.parse(this.cryptoService.decrypt(result.body));
         if (result.error != null) {
           this.message(result.error.message);

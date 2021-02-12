@@ -27,13 +27,15 @@ export class AuthentcatiionService {
 
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
       this.accessTokenRequest(auth, basicAuth).then(response => {
-        const authorization = response as any;
-        // const authorizationData = JSON.parse(this.cryptoService.decrypt(authorization.body));
+        const authorization = JSON.parse(response);
+        const rawData = authorization.body;
         console.log(authorization);
+        const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+        console.log('authorizationData', decryptData);
 
-        if (authorization.access_token) {
+        if (decryptData.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
-          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, authorization);
+          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, decryptData);
           this.loadUserByUserName(auth.user_name).then(userResponse => {
 
             if (userResponse) {
