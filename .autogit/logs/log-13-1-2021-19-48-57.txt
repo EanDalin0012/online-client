@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Sat Feb 13 2021 19:48:57 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/register/regi-cate/regi-cate.component.ts
+* src/app/share/constants/common.const.ts
+
+
+Created files:
+* .autogit/logs/log-13-1-2021-18-19-31.txt
+
+
+Deleted files:
+
+
+Renamed files:
