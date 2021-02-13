@@ -12,7 +12,6 @@ import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
 import { DataService } from '../../share/service/data.service';
 import { RegiCateEditComponent } from '../regi-cate-edit/regi-cate-edit.component';
 import { Title } from '@angular/platform-browser';
-import { ObjIdModel } from '../../share/model/model/obj-id';
 import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
 import { ResponseDataModel } from '../../share/model/response/res-data';
 

@@ -174,15 +174,15 @@ export const CURRENCY_CODE_LIST = [
 ];
 
 export const GENDER_CODE_LIST = [
-  { 
+  {
     text: 'COMMON.LABEL.Female',
     value: 'f'
   },
-  { 
+  {
     text: 'COMMON.LABEL.Male',
     value: 'm'
   },
-  { 
+  {
     text: 'COMMON.LABEL.Other',
     value: 'o'
   }
