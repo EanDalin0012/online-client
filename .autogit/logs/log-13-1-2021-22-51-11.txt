@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Sat Feb 13 2021 22:51:11 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/styles.css
+
+
+Created files:
+* .autogit/logs/log-13-1-2021-22-20-53.txt
+
+
+Deleted files:
+
+
+Renamed files:
