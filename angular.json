@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "online-client": {
+        "ecommerce-adminlte": {
             "projectType": "application",
             "schematics": {},
             "root": "",
@@ -13,7 +13,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/online-client",
+                        "outputPath": "dist/ecommerce-adminlte",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -98,18 +98,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "online-client:build"
+                        "browserTarget": "ecommerce-adminlte:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "online-client:build:production"
+                            "browserTarget": "ecommerce-adminlte:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "online-client:build"
+                        "browserTarget": "ecommerce-adminlte:build"
                     }
                 },
                 "test": {
@@ -146,18 +146,18 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "online-client:serve"
+                        "devServerTarget": "ecommerce-adminlte:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "online-client:serve:production"
+                            "devServerTarget": "ecommerce-adminlte:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "online-client",
+    "defaultProject": "ecommerce-adminlte",
     "cli": {
         "analytics": "535b2e60-46ff-4162-9e71-dfc10a5a75bf"
     }
