@@ -3,7 +3,7 @@ import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angula
 import { Base64WriteImage } from '../../share/model/model/base64';
 import * as moment from 'moment';
 import { UploadService } from '../../share/service/upload.service';
-import { BTN_ROLES, GENDER_CODE_LIST, Month_List, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, GENDER_CODE_LIST, MonthList, Reponse_Status } from '../../share/constants/common.const';
 import { ModalService } from '../../share/service/modal.service';
 import { GenderModel } from '../../share/model/model/gender';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,7 +19,7 @@ import { NotificationService } from '@progress/kendo-angular-notification';
   styleUrls: ['./user-mng-user-info-add.component.css']
 })
 export class UserMngUserInfoAddComponent implements OnInit {
-  
+
   uploaded: boolean;
   card_fron_uploaded: boolean;
   card_rear_uploaded: boolean;
@@ -27,7 +27,7 @@ export class UserMngUserInfoAddComponent implements OnInit {
   public stepsIcons = [];
 
   modal;
-  
+
   first_name: string;
   last_name: string;
   date_birth: Date = new Date();
@@ -51,7 +51,7 @@ export class UserMngUserInfoAddComponent implements OnInit {
   };
 
   day_list: TextValue[];
-  month_list:  TextValue[] = Month_List;
+  month_list:  TextValue[] = MonthList;
   year_list: TextValue[];
 
   email: string;
@@ -70,7 +70,7 @@ export class UserMngUserInfoAddComponent implements OnInit {
   credentialsExpired: boolean = false;
   accountExpired: boolean     = false;
   is_first_login: boolean     = false;
-  
+
   user_information_validate = false;
   user_information_error    = false;
   account_validate = false;
@@ -81,7 +81,7 @@ export class UserMngUserInfoAddComponent implements OnInit {
   pw: string;
   re_pw: string;
 
-  default_gender = {  
+  default_gender = {
     text: 'Select Gender',
     value: ''
   };
@@ -126,22 +126,22 @@ public fileRestrictions_card_rear: FileRestrictions = {
     };
 
     const currentMont =  moment().format("MM");
-   
+
     this.month = {
       text: moment().format("MMM"),
       value: moment().format("MM")
     }
-    
+
     this.day_list  = this.loadDayList(month,Number(currentMont) );
     this.year_list = this.loadYearList(contYear + 1, 80);
 
-    this.stepsIcons = [ 
+    this.stepsIcons = [
       { label: this.translateService.instant('UserMngUserInfo.Label.User_Information'),  isValid: true },
       { label: this.translateService.instant('UserMngUserInfo.Label.Profile'), isValid: true },
       { label: this.translateService.instant('UserMngUserInfo.Label.Kh_Id'), isValid: false },
       { label: this.translateService.instant('UserMngUserInfo.Label.Account'), isValid: false  }
     ];
-  
+
   }
 
   public currentStep = 0;
@@ -195,13 +195,13 @@ public fileRestrictions_card_rear: FileRestrictions = {
         case 'contact':
             this.contact = undefined;
             break;
-        
+
     }
  }
 
  // file select function
  public selectEventHandler(e: SelectEvent): void {
-  
+
     this.imagePreviews = [];
     const that = this;
     e.files.forEach((file) => {
@@ -210,7 +210,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
     if (!file.validationErrors) {
         const reader = new FileReader();
         reader.onload = function (ev) {
-       
+
         const image = {
             src: ev.target['result'],
             uid: file.uid,
@@ -248,15 +248,15 @@ public fileRestrictions_card_rear: FileRestrictions = {
   public showButton(state: FileState): boolean {
     return (state === FileState.Selected) ? true : false;
   }
-    
+
   upload(state) {
     console.log(this.imagePreviews);
     if(this.imagePreviews.length > 0) {
       this.imagePreviews.forEach(element =>{
         if(element.uid === state) {
-            let splitted = element.src.split(','); 
-            const base64WriteImage = new Base64WriteImage(); 
-            if(splitted[1]) { 
+            let splitted = element.src.split(',');
+            const base64WriteImage = new Base64WriteImage();
+            if(splitted[1]) {
               base64WriteImage.id         = element.id;
               base64WriteImage.base64     = splitted[1];
               base64WriteImage.file_name  = element.name;
@@ -275,7 +275,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
         }
       });
     }
-    
+
   }
 
 
@@ -287,7 +287,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
     if (!file.validationErrors) {
         const reader = new FileReader();
         reader.onload = function (ev) {
-       
+
         const image = {
             src: ev.target['result'],
             uid: file.uid,
@@ -322,15 +322,15 @@ public fileRestrictions_card_rear: FileRestrictions = {
     }
 
 
-    
+
   upload_card_front(state) {
     console.log(this.imagePreviews_card_front);
     if(this.imagePreviews_card_front.length > 0) {
       this.imagePreviews_card_front.forEach(element =>{
         if(element.uid === state) {
-            let splitted = element.src.split(','); 
-            const base64WriteImage = new Base64WriteImage(); 
-            if(splitted[1]) { 
+            let splitted = element.src.split(',');
+            const base64WriteImage = new Base64WriteImage();
+            if(splitted[1]) {
               base64WriteImage.id         = element.id;
               base64WriteImage.base64     = splitted[1];
               base64WriteImage.file_name  = element.name;
@@ -343,7 +343,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
                   this.card_fron_uploaded = true;
                   this.modalService.showNotificationService(this.translateService.instant('UserMngUserInfo.Message.Upload_Front_Image_Card_Success'), 400,'notification-profile');
                   console.log('font_image_id', this.font_image_id);
-                  
+
                 }
               });
 
@@ -351,7 +351,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
         }
       });
     }
-    
+
   }
 
   public selectEventHandler_card_rear(e: SelectEvent): void {
@@ -391,15 +391,15 @@ public fileRestrictions_card_rear: FileRestrictions = {
       this.card_rear_uploaded = undefined;
       this.rear_image_id = undefined;
   }
-    
+
   upload_card_rear(state) {
     console.log(this.imagePreviews_card_rear);
     if(this.imagePreviews_card_rear.length > 0) {
       this.imagePreviews_card_rear.forEach(element =>{
         if(element.uid === state) {
-            let splitted = element.src.split(','); 
-            const base64WriteImage = new Base64WriteImage(); 
-            if(splitted[1]) { 
+            let splitted = element.src.split(',');
+            const base64WriteImage = new Base64WriteImage();
+            if(splitted[1]) {
               base64WriteImage.id         = element.id;
               base64WriteImage.base64     = splitted[1];
               base64WriteImage.file_name  = element.name;
@@ -420,7 +420,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
         }
       });
     }
-    
+
   }
 
 
@@ -460,7 +460,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
     } else {
       return true;
     }
-  } 
+  }
 
   checkAccount(){
     if(!this.user_name || this.user_name === '' || this.user_name === null) {
@@ -521,7 +521,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
         this.day = undefined;
       }
     }
-    
+
   }
 
   valueChangeYear(event) {
@@ -545,8 +545,8 @@ public fileRestrictions_card_rear: FileRestrictions = {
         this.currentStep = 3;
         return;
        }
-      const userInfoRequestModel = new UserInfoRequestModel(); 
-        
+      const userInfoRequestModel = new UserInfoRequestModel();
+
       let day = (this.day.value.toString().length === 1 ? "0"+this.day.value : this.day.value);
       let month = (this.month.value.toString().length === 1 ? "0"+this.month.value : this.month.value);
 

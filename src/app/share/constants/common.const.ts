@@ -189,7 +189,7 @@ export const GENDER_CODE_LIST = [
 ];
 
 
-export const Month_List: TextValue[] = [
+export const MonthList: TextValue[] = [
   {
     text: "COMMON.LABEL.January",
     value: '1'
@@ -229,3 +229,5 @@ export const Month_List: TextValue[] = [
     value: '12'
   }
 ];
+
+export const deviceInfo = 'deviceInfo';

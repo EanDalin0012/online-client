@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { LANGUAGE, LOCAL_STORAGE } from './share/constants/common.const';
+import { LANGUAGE, LOCAL_STORAGE, deviceInfo } from './share/constants/common.const';
 import { Utils } from './share/utils/utils.static';
 import { JsonipService } from './share/service/jsonip.service';
 import { DeviceDetectorInfoService } from './share/service/device-detector-info.service';
+import { CacheInfo } from './share/cache/cache-info';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +27,12 @@ export class AppComponent implements OnInit{
 
     this.jsonipService.jsonIp().then( response =>{
       console.log('jsonipService', response);
+      CacheInfo.networkIP = response;
     });
 
     const deviceDetectorInfo = this.deviceDetectorInfoService.deviceDetectorInfo();
+    CacheInfo.deviceinfo.set(deviceInfo, deviceDetectorInfo);
+
     console.log('deviceDetectorInfo', deviceDetectorInfo);
 
   }

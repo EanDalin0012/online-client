@@ -5,9 +5,10 @@ import { TranslateService } from '@ngx-translate/core';
 import * as $ from 'jquery';
 import { environment } from '../../../environments/environment';
 import { ModalService } from './modal.service';
-import { LOCAL_STORAGE } from '../constants/common.const';
+import { LOCAL_STORAGE, deviceInfo } from '../constants/common.const';
 import { Utils } from '../utils/utils.static';
 import { Router } from '@angular/router';
+import { CacheInfo } from '../cache/cache-info';
 
 @Injectable({
   providedIn: 'root',
@@ -106,7 +107,10 @@ export class AuthentcatiionService {
 
       const httpOptionsObj = {
         Authorization: btoa,
+        deviceInfo: JSON.stringify(CacheInfo.deviceinfo.get(deviceInfo)),
+        networkIp: CacheInfo.networkIP
       };
+      console.log('httpOptionsObj', httpOptionsObj);
 
       const formData = new FormData();
       formData.append('client_id', 'spring-security-oauth2-read-write-client');

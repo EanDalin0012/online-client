@@ -247,7 +247,6 @@ export class ServerService {
   }
 
   private message(message: string) {
-
     this.modalService.alert({
       content:  '<h2>' + message + '</h2>',
       modalClass: ['pop_confirm open-alert'],
@@ -256,7 +255,6 @@ export class ServerService {
         return false;
       }
     });
-
   }
 
 }
