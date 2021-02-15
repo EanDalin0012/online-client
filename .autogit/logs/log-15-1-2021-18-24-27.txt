@@ -1,0 +1,25 @@
+-------------------- Auto-Git Log --------------------
+		Mon Feb 15 2021 18:24:27 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* package.json
+* src/app/app.component.ts
+
+
+Created files:
+* .autogit/logs/log-14-1-2021-23-32-30.txt
+* package-lock.json
+* src/app/share/model/model/device-detector-info.ts
+* src/app/share/service/device-detector-info.service.spec.ts
+* src/app/share/service/device-detector-info.service.ts
+* src/app/share/service/http.service.spec.ts
+* src/app/share/service/http.service.ts
+* src/app/share/service/jsonip.service.spec.ts
+* src/app/share/service/jsonip.service.ts
+
+
+Deleted files:
+
+
+Renamed files:
