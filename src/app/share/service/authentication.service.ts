@@ -8,6 +8,8 @@ import { ModalService } from './modal.service';
 import { LOCAL_STORAGE, deviceInfo } from '../constants/common.const';
 import { Utils } from '../utils/utils.static';
 import { Router } from '@angular/router';
+import { HttpService } from './http.service';
+import { RequestUserInfo } from '../model/model/request-user-info';
 import { CacheInfo } from '../cache/cache-info';
 
 @Injectable({
@@ -21,13 +23,15 @@ export class AuthentcatiionService {
     private modalService: ModalService,
     private translate: TranslateService,
     private router: Router,
-    private cryptoService: CryptoService
+    private cryptoService: CryptoService,
+    private httpService: HttpService
   ) {
     this.bizserverUrl = environment.bizMOBServer;
   }
 
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
       this.accessTokenRequest(auth, basicAuth).then(response => {
+        console.log(response);
 
         const authorization = JSON.parse(response);
         const rawData = authorization.body;
@@ -106,11 +110,8 @@ export class AuthentcatiionService {
         window.btoa(credentail.User_name + ':' + credentail.password);
 
       const httpOptionsObj = {
-        Authorization: btoa,
-        deviceInfo: JSON.stringify(CacheInfo.deviceinfo.get(deviceInfo)),
-        networkIp: CacheInfo.networkIP
+        Authorization: btoa
       };
-      console.log('httpOptionsObj', httpOptionsObj);
 
       const formData = new FormData();
       formData.append('client_id', 'spring-security-oauth2-read-write-client');
@@ -122,38 +123,46 @@ export class AuthentcatiionService {
         .post(uri, formData, {
           headers: new HttpHeaders(httpOptionsObj),
         })
-        .subscribe((_auth) => {
+        .subscribe((auth) => {
           $('div.loading').addClass('none');
-          resovle(_auth);
+          resovle(auth);
         });
     });
   }
 
   private loadUserByUserName(userName: string): Promise<any> {
     return new Promise((resolve) => {
-      $('div.loading').removeClass('none');
-
-      const lang = Utils.getSecureStorage(localStorage.I18N);
+      let requestUserInfo: RequestUserInfo;
+      const device = CacheInfo.deviceinfo.get(deviceInfo);
+      requestUserInfo.userName = userName;
       const api = '/api/user/v1/load_user';
-      const uri = this.bizserverUrl + api + '?userName=' + userName + '&lang=' + lang;
-      const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-      const access_token = authorization.access_token;
-
-      const headers = {
-        Authorization: 'Bearer ' + access_token,
-      };
-
-      this.httpClient.get(uri, { headers }).subscribe(rest => {
-        $('body').addClass('loaded');
-        $('div.loading').addClass('none');
-        const bodyData = rest as any;
-
-        const responseData = JSON.parse(bodyData);
-        const rawData = responseData.body;
-        const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
-
-        resolve(decryptData);
+      this.httpService.Post(api, requestUserInfo).then(response => {
+        console.log(response);
       });
+
+      // $('div.loading').removeClass('none');
+
+      // const lang = Utils.getSecureStorage(localStorage.I18N);
+      // const api = '/api/user/v1/load_user';
+      // const uri = this.bizserverUrl + api + '?userName=' + userName + '&lang=' + lang;
+      // const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      // const access_token = authorization.access_token;
+
+      // const headers = {
+      //   Authorization: 'Bearer ' + access_token,
+      // };
+
+      // this.httpClient.get(uri, { headers }).subscribe(rest => {
+      //   $('body').addClass('loaded');
+      //   $('div.loading').addClass('none');
+      //   const bodyData = rest as any;
+
+      //   const responseData = JSON.parse(bodyData);
+      //   const rawData = responseData.body;
+      //   const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+
+      //   resolve(decryptData);
+      // });
     });
   }
 

@@ -1,0 +1,22 @@
+-------------------- Auto-Git Log --------------------
+		Mon Feb 15 2021 22:55:34 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/app.component.ts
+* src/app/share/constants/common.const.ts
+* src/app/share/service/authentication.service.ts
+* src/app/share/service/server.service.ts
+* src/app/user-management/user-mng-user-info-add/user-mng-user-info-add.component.ts
+* src/app/user-management/user-mng-user-info-edit/user-mng-user-info-edit.component.ts
+
+
+Created files:
+* src/app/share/cache/cache-info.ts
+
+
+Deleted files:
+* src/app/share/utils/crypto.ts
+
+
+Renamed files:
