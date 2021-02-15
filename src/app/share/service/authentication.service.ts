@@ -5,11 +5,10 @@ import { TranslateService } from '@ngx-translate/core';
 import * as $ from 'jquery';
 import { environment } from '../../../environments/environment';
 import { ModalService } from './modal.service';
-import { LOCAL_STORAGE, deviceInfo } from '../constants/common.const';
+import { LOCAL_STORAGE } from '../constants/common.const';
 import { Utils } from '../utils/utils.static';
 import { Router } from '@angular/router';
 import { HttpService } from './http.service';
-import { RequestUserInfo } from '../model/model/request-user-info';
 import { CacheInfo } from '../cache/cache-info';
 
 @Injectable({
@@ -17,6 +16,7 @@ import { CacheInfo } from '../cache/cache-info';
 })
 export class AuthentcatiionService {
   private bizserverUrl: string;
+
 
   constructor(
     private httpClient: HttpClient,
@@ -132,37 +132,33 @@ export class AuthentcatiionService {
 
   private loadUserByUserName(userName: string): Promise<any> {
     return new Promise((resolve) => {
-      let requestUserInfo: RequestUserInfo;
-      const device = CacheInfo.deviceinfo.get(deviceInfo);
-      requestUserInfo.userName = userName;
+
+      const device = CacheInfo.deviceinfo;
+      const networkIp = CacheInfo.networkIP;
+      const deviceInfo = JSON.stringify(device);
+      const lang = Utils.getSecureStorage(localStorage.I18N);
       const api = '/api/user/v1/load_user';
-      this.httpService.Post(api, requestUserInfo).then(response => {
-        console.log(response);
+      const uri = this.bizserverUrl + api + '?userName=' + userName + '&lang=' + lang  + '&networkIp=' + networkIp + '&deviceInfo='+deviceInfo.toString();
+      const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      const access_token = authorization.access_token;
+
+      const headers = {
+        Authorization: 'Bearer ' + access_token,
+      };
+
+      $('div.loading').removeClass('none');
+
+      this.httpClient.get(uri, { headers }).subscribe(rest => {
+        $('body').addClass('loaded');
+        $('div.loading').addClass('none');
+        const bodyData = rest as any;
+
+        const responseData = JSON.parse(bodyData);
+        const rawData = responseData.body;
+        const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+
+        resolve(decryptData);
       });
-
-      // $('div.loading').removeClass('none');
-
-      // const lang = Utils.getSecureStorage(localStorage.I18N);
-      // const api = '/api/user/v1/load_user';
-      // const uri = this.bizserverUrl + api + '?userName=' + userName + '&lang=' + lang;
-      // const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-      // const access_token = authorization.access_token;
-
-      // const headers = {
-      //   Authorization: 'Bearer ' + access_token,
-      // };
-
-      // this.httpClient.get(uri, { headers }).subscribe(rest => {
-      //   $('body').addClass('loaded');
-      //   $('div.loading').addClass('none');
-      //   const bodyData = rest as any;
-
-      //   const responseData = JSON.parse(bodyData);
-      //   const rawData = responseData.body;
-      //   const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
-
-      //   resolve(decryptData);
-      // });
     });
   }
 

@@ -99,19 +99,20 @@ export class HttpService {
             Utils.setSecureStorage(AES_INFO.STORE, newAesInfo);
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
-
             const result = res as any;
-            const responseData = JSON.parse(result);
-            const rawData = responseData.body;
-            const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
-
-            if (decryptData.error != null) {
-              this.message(result.error.message);
-              reject();
+            if (result) {
+              const responseData = JSON.parse(result);
+              const rawData = responseData.body;
+              const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+              if (decryptData.error != null) {
+                reject();
+                this.message(result.error.message);
+              } else {
+                resolve(decryptData);
+              }
             } else {
-              resolve(decryptData);
+              reject();
             }
-
         }, error => {
           console.log(error);
         });

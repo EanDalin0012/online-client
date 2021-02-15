@@ -31,7 +31,7 @@ export class AppComponent implements OnInit{
     });
 
     const deviceDetectorInfo = this.deviceDetectorInfoService.deviceDetectorInfo();
-    CacheInfo.deviceinfo.set(deviceInfo, deviceDetectorInfo);
+    CacheInfo.deviceinfo = deviceDetectorInfo;
 
     console.log('deviceDetectorInfo', deviceDetectorInfo);
 
