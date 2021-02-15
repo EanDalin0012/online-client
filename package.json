@@ -59,6 +59,7 @@
     "http-client": "^4.3.1",
     "jquery": "^3.5.1",
     "moment": "^2.27.0",
+    "ngx-device-detector": "^2.0.5",
     "rxjs": "^6.5.5",
     "rxjs-compat": "^6.6.3",
     "rxjs-observable": "0.0.7",
