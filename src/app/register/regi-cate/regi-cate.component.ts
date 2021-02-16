@@ -21,47 +21,43 @@ import { ResponseDataModel } from '../../share/model/response/res-data';
   styleUrls: ['./regi-cate.component.css']
 })
 export class RegiCateComponent implements OnInit {
-// start declear grid
-public info = true;
-public buttonCount = 5;
-public type: 'numeric' | 'input' = 'numeric';
-public previousNext = false;
-public pageSizes: any[] = [10, 20, 30, 50, 100];
-public group: any[] = [{
-  field: ''
-}];
-public multiple = false;
-public allowUnsort = true;
-public height = 'auto';
-search: string;
-public sort: SortDescriptor[] = [{
-  field: 'id',
-  dir: 'asc'
-}];
-public gridView: GridDataResult;
-public gridData: any[];
-public checkboxOnly = false;
-public mode = 'multiple';
-gridheight = screen.height * 0.5;
-public selectedCallback = (args) => args.dataItem;
-// tslint:disable-next-line:member-ordering
-public selectableSettings: SelectableSettings;
-// tslint:disable-next-line:member-ordering
-public skip = 0;
-// tslint:disable-next-line:member-ordering
-public pageSize = 10;
-// tslint:disable-next-line:member-ordering
-public mySelection: any[] = [];
+  // start declear grid
+  public info = true;
+  public buttonCount = 5;
+  public type: 'numeric' | 'input' = 'numeric';
+  public previousNext = false;
+  public pageSizes: any[] = [10, 20, 30, 50, 100];
+  public group: any[] = [{
+    field: ''
+  }];
+  public multiple = false;
+  public allowUnsort = true;
+  public height = 'auto';
+  search: string;
+  public sort: SortDescriptor[] = [{
+    field: 'id',
+    dir: 'asc'
+  }];
+  public gridView: GridDataResult;
+  public gridData: any[];
+  public checkboxOnly = false;
+  public mode = 'multiple';
+  gridheight = screen.height * 0.5;
+  public selectedCallback = (args) => args.dataItem;
+  public selectableSettings: SelectableSettings;
+  public skip = 0;
+  public pageSize = 10;
+  public mySelection: any[] = [];
 // end declear grid
 
-// tslint:disable-next-line:member-ordering
-totalRecord = 0;
-// tslint:disable-next-line:member-ordering
-category_list = new Array<CategoryModel>();
-// tslint:disable-next-line:member-ordering
-obj_Id_model_list = [];
-public data  = Array<CategoryModel>();
-menu = '';
+  // tslint:disable-next-line:member-ordering
+  totalRecord = 0;
+  // tslint:disable-next-line:member-ordering
+  categorylist = new Array<CategoryModel>();
+  // tslint:disable-next-line:member-ordering
+  obj_Id_model_list = [];
+  public data  = Array<CategoryModel>();
+  menu = '';
 
   constructor(
     private service: ServerService,
@@ -86,10 +82,10 @@ menu = '';
       const response   = resp as CategoryReponseModel;
       if (response) {
 
-        this.category_list = response.body;
+        this.categorylist = response.body;
         this.data          = response.body;
-        this.gridData      = this.category_list;
-        this.loadingData(this.category_list);
+        this.gridData      = this.categorylist;
+        this.loadingData(this.categorylist);
       }
     });
   }
@@ -150,7 +146,7 @@ menu = '';
   searchChange(event) {
     if (event) {
       console.log(event.target.value);
-      const resultSearch  = this.category_list.filter( data => data.name.toLowerCase().includes(event.target.value));
+      const resultSearch  = this.categorylist.filter( data => data.name.toLowerCase().includes(event.target.value));
       this.totalRecord    = resultSearch.length;
       this.loadingData(resultSearch);
     }
@@ -158,7 +154,7 @@ menu = '';
 
   deleteTextSearch() {
     this.search = undefined;
-    this.loadingData(this.category_list);
+    this.loadingData(this.categorylist);
   }
 
   public excelExportExcel(component) {
@@ -185,9 +181,9 @@ menu = '';
     this.modalService.open({
       content: RegiCateEditComponent,
       message: dataItems,
-      callback: _response => {
-        if(_response) {
-          if(_response && _response.close === BTN_ROLES.EDIT) {
+      callback: response => {
+        if (response) {
+          if ( response && response.close === BTN_ROLES.EDIT) {
             this.inquiry();
           }
         }
@@ -198,9 +194,9 @@ menu = '';
   add() {
     this.modalService.open({
       content: RegiCateAddComponent,
-      callback: _response => {
-        if(_response) {
-          if(_response && _response.close === BTN_ROLES.SAVE) {
+      callback: response => {
+        if (response) {
+          if (response && response.close === BTN_ROLES.SAVE) {
             this.inquiry();
           }
         }
@@ -209,7 +205,7 @@ menu = '';
   }
 
   delete() {
-    if(this.mySelection.length > 0) {
+    if (this.mySelection.length > 0) {
       let name = '';
       let i = 0;
       this.mySelection.forEach(element => {
@@ -223,7 +219,7 @@ menu = '';
           }
 
           this.obj_Id_model_list.push({
-            id: element+''
+            id: element + ''
           });
 
           ++i;
@@ -254,7 +250,7 @@ menu = '';
 
   getNameById(val: number): string {
     let name = '';
-    this.category_list.forEach(element => {
+    this.categorylist.forEach(element => {
       if (element.id === val) {
         name = element.name ; // + '(' + element.id + ')';
       }
@@ -277,32 +273,6 @@ menu = '';
 
   menue() {
     this.menu = data;
-  }
-
-  // end declear function
-
-  btnRegisterTest() {
-    const  body = {
-      a: 'd',
-      b: 'a',
-      d: 'd',
-      data: {
-        v1: 'v1',
-        v2: 'v2',
-        v3: 'v2',
-        v4: [
-          {
-            g: 'g',
-            g1: 'g1'
-          }
-        ]
-      }
-    }
-    const api = '/api/admin/v1/txt1';
-    this.service.HTTPPost(api, body).then(response => {
-      console.log('response', response);
-    });
-
   }
 
 }
