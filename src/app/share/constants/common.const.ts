@@ -55,7 +55,7 @@ export enum Reponse_Status {
   N = 'N'
 }
 
-export enum LOCAL_STORAGE {
+export enum LocalStorage {
     DEVICE_INFO     = 'deviceInfo',
     CONTENTS_VERSION= 'contentsVersion',
     PRE_TRANSACTION = 'preTransaction',

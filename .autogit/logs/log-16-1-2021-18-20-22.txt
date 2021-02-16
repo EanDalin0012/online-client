@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Tue Feb 16 2021 18:20:22 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/share/service/authentication.service.ts
+
+
+Created files:
+* .autogit/logs/log-15-1-2021-23-56-10.txt
+* src/app/share/model/model/load-user-info.ts
+
+
+Deleted files:
+
+
+Renamed files:

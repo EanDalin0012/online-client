@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as $ from 'jquery';
 import { environment } from '../../../environments/environment';
 import { ModalService } from './modal.service';
-import { LOCAL_STORAGE } from '../constants/common.const';
+import { LocalStorage } from '../constants/common.const';
 import { Utils } from '../utils/utils.static';
 import { Router } from '@angular/router';
 import { HttpService } from './http.service';
@@ -39,12 +39,12 @@ export class AuthentcatiionService {
         const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
 
         if (decryptData.access_token) {
-          Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
-          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, decryptData);
+          Utils.setSecureStorage(LocalStorage.LAST_EVENT_TIME, String(new Date().getTime()));
+          Utils.setSecureStorage(LocalStorage.Authorization, decryptData);
           this.loadUserByUserName(auth.user_name).then(userResponse => {
 
             if (userResponse) {
-              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, userResponse.body);
+              Utils.setSecureStorage(LocalStorage.USER_INFO, userResponse);
               this.router.navigate(['/main/home']);
               console.log(userResponse);
             }
@@ -57,11 +57,11 @@ export class AuthentcatiionService {
 
   public revokeToken(): Promise<any> {
     return new Promise((resolve, reject) => {
-      const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+      const userInfo = Utils.getSecureStorage(LocalStorage.USER_INFO);
       const lang = Utils.getSecureStorage(localStorage.I18N);
       const api  = "/api/user/oauth/revoke-token";
       const uri = this.baseUrl + api + '?userId=' + userInfo.id + '&lang=' + lang;
-      let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      let authorization = Utils.getSecureStorage(LocalStorage.Authorization);
       const access_token = authorization.access_token;
       const headers = {
         'Authorization': 'Bearer ' + access_token
@@ -141,7 +141,7 @@ export class AuthentcatiionService {
       loadUserInfo.networkIP  = networkIp;
       loadUserInfo.userName = userName;
 
-      const authorize = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      const authorize = Utils.getSecureStorage(LocalStorage.Authorization);
       const accessToken = authorize.access_token;
       if (!accessToken) {
         this.modalService.alert({
@@ -149,8 +149,8 @@ export class AuthentcatiionService {
           modalClass: ['open-alert'],
           btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
           callback: res => {
-            Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
-            Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
+            Utils.removeSecureStorage(LocalStorage.Authorization);
+            Utils.removeSecureStorage(LocalStorage.USER_INFO);
             this.router.navigate(['/login']);
           }
         });
@@ -162,7 +162,7 @@ export class AuthentcatiionService {
       const requestData = {
         body: encryptionData.toString()
       };
-      const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
+      const lang = Utils.getSecureStorage(LocalStorage.I18N);
       const httpOptionsObj = {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + accessToken
@@ -179,13 +179,10 @@ export class AuthentcatiionService {
           $('body').addClass('loaded');
           $('div.loading').addClass('none');
           const result = res as any;
-          console.log('result', result);
           if (result) {
             const responseData = JSON.parse(result);
             const rawData = responseData.body;
             const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
-            console.log('decryptData', decryptData);
-
             if (decryptData.error != null) {
               reject();
               this.message(result.error.message);
