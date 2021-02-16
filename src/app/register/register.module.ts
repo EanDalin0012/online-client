@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegiCateComponent } from './regi-cate/regi-cate.component';
-import { RegiCateAddComponent } from './regi-cate-add/regi-cate-add.component';
 import { RegiCateEditComponent } from './regi-cate-edit/regi-cate-edit.component';
 import { RegiProComponent } from './regi-pro/regi-pro.component';
 import { RegiProAddComponent } from './regi-pro-add/regi-pro-add.component';
@@ -21,13 +19,14 @@ import { RegiProDetailEditComponent } from './regi-pro-detail-edit/regi-pro-deta
 import { RegiProDetailViewsComponent } from './regi-pro-detail-views/regi-pro-detail-views.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
+import { CategoryComponent } from './category/category.component';
+import { CategoryAddComponent } from './category-add/category-add.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
 
 
 
 @NgModule({
   declarations: [
-    RegiCateComponent,
-    RegiCateAddComponent,
     RegiCateEditComponent,
     RegiProComponent,
     RegiProAddComponent,
@@ -42,8 +41,11 @@ import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
     RegiVenAddFormAddressComponent,
     RegiProDetailAddComponent,
     RegiProDetailEditComponent,
-    RegiProDetailViewsComponent
-  
+    RegiProDetailViewsComponent,
+    CategoryComponent,
+    CategoryAddComponent,
+    CategoryEditComponent
+
   ],
   imports: [
     MShareModule,

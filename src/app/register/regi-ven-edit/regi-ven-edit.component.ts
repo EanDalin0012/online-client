@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
 import { VendorRequestModel } from '../../share/model/request/req-vendor';
 import { ResponseDataModel } from '../../share/model/response/res-data';
 import { VendorModel } from '../../share/model/model/vendor';
@@ -45,7 +45,7 @@ export class RegiVenEditComponent implements OnInit {
       const api = '/api/vendor/v1/update';
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
-        if ( responseData && responseData.body.status === Reponse_Status.Y) {
+        if ( responseData && responseData.body.status === ResponseStatus.Y) {
           this.modal.close( {close: BTN_ROLES.EDIT});
         }
       });

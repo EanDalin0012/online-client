@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { RequestDataModel } from '../../share/model/request/req-data';
 import { VendorResponseModel } from '../../share/model/response/res-vendor';
 import { RegiVenAddComponent } from '../regi-ven-add/regi-ven-add.component';
-import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
 import { RegiVenEditComponent } from '../regi-ven-edit/regi-ven-edit.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
@@ -65,7 +65,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     private dataService: DataService,
     private titleService: Title,
     private translateService: TranslateService
-  ) { 
+  ) {
     this.titleService.setTitle('Vendor');
     this.setSelectableSettings();
   }
@@ -106,10 +106,10 @@ obj_Id_model_list = new Array<ObjIdModel>();
           this.obj_Id_model_list.push({
             id: Number(element)
           });
-          
+
           ++i;
       });
-            
+
       this.modalService.confirm({
         title: 'Delete Item(s)',
         content: 'Your select item(s) is: '+name,
@@ -129,7 +129,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
         content: '<h2>'+this.translateService.instant('COMMON.LABEL.Please_Select_Item_You_Delete')+'</h2>',
         btnText: this.translateService.instant('COMMON.BUTTON.CONFIRME'),
         callback: response =>{
-          
+
         }
       });
     }
@@ -152,7 +152,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     const api = '/api/vendor/v1/delete';
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
-      if (response.body.status === Reponse_Status.Y) {
+      if (response.body.status === ResponseStatus.Y) {
         this.modalService.showNotificationService(this.translateService.instant('RegiVen.Message.Vendor_Delete_Success'));
         this.inquiry();
       }
@@ -170,7 +170,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       }
     });
   }
-  
+
   edit(dataItems) {
     this.modalService.open({
       content: RegiVenEditComponent,
@@ -192,12 +192,12 @@ obj_Id_model_list = new Array<ObjIdModel>();
       this.loadingData(resultSearch);
     }
   }
-  
+
   deleteTextSearch() {
     this.search = undefined;
     this.loadingData(this.vendor_list);
   }
-  
+
   public excelExportExcel(component) {
     const options = component.workbookOptions();
     const rows = options.sheets[0].rows;
@@ -249,7 +249,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     this.pageSize = take;
     this.paging();
   }
-  
+
   public rowCallback = (context: RowClassArgs) => {
       switch (context.dataItem.serviceStatusDesc) {
         case 'Deactivated':
@@ -272,5 +272,5 @@ obj_Id_model_list = new Array<ObjIdModel>();
     this.loadData();
   }
   // end gride function
-  
+
 }

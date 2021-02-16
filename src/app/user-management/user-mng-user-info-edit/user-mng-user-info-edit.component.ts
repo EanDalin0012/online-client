@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TextValue } from '../../share/model/model/text-value';
-import { MonthList, GENDER_CODE_LIST, BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { MonthList, GENDER_CODE_LIST, BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
 import { GenderModel } from '../../share/model/model/gender';
 import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angular-upload';
 import { UploadService } from '../../share/service/upload.service';
@@ -580,7 +580,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
       console.log(userInfoRequestModel);
       const api = '/api/user_info/v1/save';
       this.serverService.HTTPPost(api, userInfoRequestModel).then(response=>{
-        if(response && response.body.status === Reponse_Status.Y) {
+        if(response && response.body.status === ResponseStatus.Y) {
           this.modal.close( {close: BTN_ROLES.SAVE});
         }
       });

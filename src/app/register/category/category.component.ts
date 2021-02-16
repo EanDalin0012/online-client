@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RequestDataModel } from '../../share/model/request/req-data';
 import { ServerService } from '../../share/service/server.service';
 import { CategoryReponseModel } from '../../share/model/response/res-category';
 import { CategoryModel } from '../../share/model/model/category';
@@ -7,22 +6,22 @@ import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kend
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { ModalService } from '../../share/service/modal.service';
-import { RegiCateAddComponent } from '../regi-cate-add/regi-cate-add.component';
-import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
 import { DataService } from '../../share/service/data.service';
 import { RegiCateEditComponent } from '../regi-cate-edit/regi-cate-edit.component';
 import { Title } from '@angular/platform-browser';
 import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
 import { ResponseDataModel } from '../../share/model/response/res-data';
+import { CategoryAddComponent } from '../category-add/category-add.component';
 
 @Component({
-  selector: 'app-regi-cate',
-  templateUrl: './regi-cate.component.html',
-  styleUrls: ['./regi-cate.component.css']
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
 })
-export class RegiCateComponent implements OnInit {
+export class CategoryComponent implements OnInit {
 
-  // start declear grid
+  // start Declaration grid
   info = true;
   buttonCount = 5;
   type: 'numeric' | 'input' = 'numeric';
@@ -73,7 +72,7 @@ export class RegiCateComponent implements OnInit {
     this.inquiry();
   }
 
-  inquiry(){
+  inquiry(): void {
     const api = '/api/category/v1/list';
     this.service.HTTPGet(api).then(resp => {
       const response   = resp as CategoryReponseModel;
@@ -87,15 +86,15 @@ export class RegiCateComponent implements OnInit {
     });
   }
 
-  // Declear function gride
-  setSelectableSettings() {
+  // Declaration  function gride
+  setSelectableSettings(): void {
     this.selectableSettings = {
         checkboxOnly: this.checkboxOnly,
         mode: 'multiple'
     };
   }
 
-  loadingData(data) {
+  loadingData(data): void {
     if (data) {
       this.gridView = {
         data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
@@ -105,7 +104,7 @@ export class RegiCateComponent implements OnInit {
     this.totalRecord = data.length;
   }
 
-  loadData() {
+  loadData(): void {
     this.gridView = {
       data: orderBy(this.gridData.slice(this.skip, this.skip + this.pageSize), this.sort),
       total: this.gridData.length
@@ -133,14 +132,14 @@ export class RegiCateComponent implements OnInit {
       total: this.gridData.length
     };
   }
-  public sortChange(sort: SortDescriptor[]): void {
+
+  sortChange(sort: SortDescriptor[]): void {
     this.sort = sort;
     this.loadData();
   }
   // end gride function
 
-  // declear function
-  searchChange(event) {
+  searchChange(event): void {
     if (event) {
       console.log(event.target.value);
       const resultSearch  = this.categorylist.filter( data => data.name.toLowerCase().includes(event.target.value));
@@ -149,12 +148,12 @@ export class RegiCateComponent implements OnInit {
     }
   }
 
-  deleteTextSearch() {
+  deleteTextSearch(): void {
     this.search = undefined;
     this.loadingData(this.categorylist);
   }
 
-  public excelExportExcel(component) {
+  excelExportExcel(component): void {
     const options = component.workbookOptions();
     const rows = options.sheets[0].rows;
     console.log(rows);
@@ -174,7 +173,7 @@ export class RegiCateComponent implements OnInit {
     component.save(options);
   }
 
-  edit(dataItems) {
+  edit(dataItems): void {
     this.modalService.open({
       content: RegiCateEditComponent,
       message: dataItems,
@@ -188,9 +187,9 @@ export class RegiCateComponent implements OnInit {
     });
   }
 
-  add() {
+  add(): void {
     this.modalService.open({
-      content: RegiCateAddComponent,
+      content: CategoryAddComponent,
       callback: response => {
         if (response) {
           if (response && response.close === BTN_ROLES.SAVE) {
@@ -201,7 +200,7 @@ export class RegiCateComponent implements OnInit {
     });
   }
 
-  delete() {
+  delete(): void {
     if (this.mySelection.length > 0) {
       let name = '';
       let i = 0;
@@ -255,20 +254,20 @@ export class RegiCateComponent implements OnInit {
     return name;
   }
 
-  doDelete() {
+  doDelete(): void {
     const trReq = new ObjIdDeleteRequest();
     trReq.body = this.obj_Id_model_list;
     console.log(trReq);
     const api = '/api/category/v1/delete';
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
-      if (response.body.status === Reponse_Status.Y) {
+      if (response.body.status === ResponseStatus.Y) {
        this.inquiry();
       }
     });
   }
 
-  menue() {
+  menue(): void {
     this.menu = data;
   }
 

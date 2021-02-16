@@ -7,7 +7,7 @@ import { Base64WriteImage } from '../../share/model/model/base64';
 import { UploadService } from '../../share/service/upload.service';
 import { ModalService } from '../../share/service/modal.service';
 import { ServerService } from '../../share/service/server.service';
-import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
 import { ProductDescriptionRequest } from '../../share/model/request/req-production-description';
 import { ProductDescription } from '../../share/model/model/product-description';
 import { ResourceID } from '../../share/model/model/resource-id';
@@ -24,7 +24,7 @@ export class RegiProDetailAddComponent implements OnInit {
   config: {
     customConfig: ''
   }
-  
+
   public modelEn = {
     editorData: '<p>English contain </p>'
   };
@@ -59,7 +59,7 @@ export class RegiProDetailAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.imagePreviews = [];
-    this.stepsIcons = [ 
+    this.stepsIcons = [
       { label: this.translateService.instant('RegiProDetail.Label.Product_Details_image'),  isValid: true },
       { label: this.translateService.instant('RegiProDetail.Label.Product_Details_Description'), isValid: true }
     ];
@@ -83,14 +83,14 @@ export class RegiProDetailAddComponent implements OnInit {
   // file select function
   public selectEventHandler(e: SelectEvent): void {
     this.image_uploaded = false;
-   
+
     const that = this;
     e.files.forEach((file) => {
 
     if (!file.validationErrors) {
         const reader = new FileReader();
         reader.onload = function (ev) {
-       
+
         const image = {
             src: ev.target['result']+"",
             uid: file.uid,
@@ -104,9 +104,9 @@ export class RegiProDetailAddComponent implements OnInit {
 
         };
         reader.readAsDataURL(file.rawFile);
-        
+
     }
-    
+
     });
   }
   public remove(fileSelect, uid: string) {
@@ -125,7 +125,7 @@ export class RegiProDetailAddComponent implements OnInit {
     public showButton(state: FileState): boolean {
       return (state === FileState.Selected) ? true : false;
     }
-    
+
 upload(state, value: string) {
   console.log(this.imagePreviews);
   if(value === 'f'){
@@ -134,10 +134,10 @@ upload(state, value: string) {
     if(this.imagePreviews.length > 0) {
       this.imagePreviews.forEach(element =>{
         if(element.uid === state) {
-            let splitted = element.src.split(','); 
-            const base64WriteImage = new Base64WriteImage();          
+            let splitted = element.src.split(',');
+            const base64WriteImage = new Base64WriteImage();
             console.log('splitted', splitted)
-            if(splitted[1]) { 
+            if(splitted[1]) {
               base64WriteImage.id         = element.id;
               base64WriteImage.base64     = splitted[1];
               base64WriteImage.file_name  = element.name;
@@ -153,13 +153,13 @@ upload(state, value: string) {
                 }
               });
             }
-        } 
+        }
       });
     } else {
       return false;
     }
   }
-  
+
 }
 
   uploaded(value:boolean): boolean {
@@ -212,10 +212,10 @@ upload(state, value: string) {
     const api = '/api/product/description/v1/save';
     this.serverService.HTTPPost(api, reqData).then(response => {
       const responseData = response as ResponseDataModel;
-      if ( responseData && responseData.body.status === Reponse_Status.Y) {
+      if ( responseData && responseData.body.status === ResponseStatus.Y) {
         this.modal.close( {close: BTN_ROLES.SAVE});
       }
     });
   }
-  
+
 }

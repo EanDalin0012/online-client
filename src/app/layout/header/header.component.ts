@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from 'src/app/share/utils/utils.static';
-import { LocalStorage, Reponse_Status } from '../../share/constants/common.const';
+import { LocalStorage, ResponseStatus } from '../../share/constants/common.const';
 import { Router } from '@angular/router';
 import { AuthentcatiionService } from '../../share/service/authentication.service';
 
@@ -38,8 +38,8 @@ export class HeaderComponent implements OnInit {
   }
 
   Logout() {
-    this.authentcatiionService.revokeToken().then(resp=>{
-      if(resp.body.status === Reponse_Status.Y) {
+    this.authentcatiionService.revokeToken().then(resp => {
+      if(resp.body.status === ResponseStatus.Y) {
         Utils.removeSecureStorage(LocalStorage.USER_INFO);
         Utils.removeSecureStorage(LocalStorage.Authorization);
         this.router.navigate(['/login']);

@@ -6,7 +6,7 @@ import { ModalService } from '../../share/service/modal.service';
 import { Utils } from '../../share/utils/utils.static';
 import { CategoryRequestModel } from '../../share/model/request/req-main-category';
 import { ResponseDataModel } from '../../share/model/response/res-data';
-import { Reponse_Status, BTN_ROLES } from '../../share/constants/common.const';
+import { ResponseStatus, BTN_ROLES } from '../../share/constants/common.const';
 
 @Component({
   selector: 'app-regi-cate-edit',
@@ -49,7 +49,7 @@ export class RegiCateEditComponent implements OnInit {
       const api = '/api/category/v1/update';
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
-        if ( responseData && responseData.body.status === Reponse_Status.Y) {
+        if ( responseData && responseData.body.status === ResponseStatus.Y) {
           this.modal.close( {close: BTN_ROLES.EDIT});
         }
       });

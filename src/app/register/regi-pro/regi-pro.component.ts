@@ -6,7 +6,7 @@ import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/c
 import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { environment } from '../../../environments/environment';
-import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
 import { ObjIdModel } from '../../share/model/model/obj-id';
 import { ProductDetailsModel } from '../../share/model/model/product-details';
 import { RequestDataModel } from '../../share/model/request/req-data';
@@ -209,7 +209,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     const api = '/api/product/v1/delete';
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
-      if (response.body.status === Reponse_Status.Y) {
+      if (response.body.status === ResponseStatus.Y) {
         this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Update_Success'));
         this.inquiry();
       }
@@ -296,7 +296,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       switchsRequest.body.product_id = dataItem.id + '';
       const api = '/api/product/v1/switch_web';
       this.service.HTTPPost(api, switchsRequest).then( res => {
-        if ( res && res.body.status === Reponse_Status.Y) {
+        if ( res && res.body.status === ResponseStatus.Y) {
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Show_On_Web_Success'));
           this.inquiry();
         }
@@ -311,8 +311,8 @@ obj_Id_model_list = new Array<ObjIdModel>();
       switchsRequest.body.value = b;
       switchsRequest.body.product_id = dataItem.id;
       const api = '/api/product/v1/switch_mobile';
-      this.service.HTTPPost(api, switchsRequest).then( res=>{
-        if ( res && res.body.status === Reponse_Status.Y) {
+      this.service.HTTPPost(api, switchsRequest).then( res => {
+        if ( res && res.body.status === ResponseStatus.Y) {
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Show_On_Mobile_Success'));
           this.inquiry();
         }

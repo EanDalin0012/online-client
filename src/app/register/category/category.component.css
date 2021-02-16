@@ -1,0 +1,59 @@
+.i {
+  font-style: unset;
+  font-size: 19px;
+}
+
+.bt {
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
+  height: 35px;
+  justify-content: center;
+  width: 35px;
+  margin-left: 34%;
+}
+
+.bt:hover {
+  background-color: rgb(100 123 134 / 32%);
+}
+
+.m {
+  position: absolute;
+  margin-top: 100px;
+  margin-right: 123px;
+  display: flex;
+}
+
+.tmenue {
+  width: 200px;
+}
+
+.dis-block {
+  display: block;
+}
+
+.dis-none {
+  display: none;
+}
+
+.v-card-identy{
+  float: right;
+  border: none;
+}
+
+.i-font{
+  font-size: 16px !important;
+}
+.i-font-18{
+  font-size: 18px !important;
+}
+
+.export-word {
+width: 165px;
+padding: 0;
+margin-right: 15px;
+}
+.font-size-15 {
+font-size: 15px !important;
+padding-top: 5px !important;
+}

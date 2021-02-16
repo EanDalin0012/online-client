@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../../share/service/server.service';
-import { Reponse_Status } from '../../share/constants/common.const';
 import { CardIdentifyByIdRequest } from '../../share/model/request/card-identify-get-info';
 import { CardIdentify } from '../../share/model/model/card-identify';
 import { environment } from '../../../environments/environment.prod';
@@ -37,7 +36,7 @@ export class CardIdentifyViewComponent implements OnInit {
   }
 
   doRequest() {
-    
+
   }
 
   inquiry() {
@@ -56,5 +55,5 @@ export class CardIdentifyViewComponent implements OnInit {
     });
 
   }
-  
+
 }

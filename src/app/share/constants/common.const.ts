@@ -50,7 +50,7 @@ export enum BTN_ROLES {
     ACTIVE    = 'ACTIVE'
 
 }
-export enum Reponse_Status {
+export enum ResponseStatus {
   Y = 'Y',
   N = 'N'
 }

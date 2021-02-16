@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BTN_ROLES, Reponse_Status } from '../../share/constants/common.const';
+import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
 import { CategoryModel } from '../../share/model/model/category';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { RequestDataService } from '../../share/service/get-data.service';
@@ -23,7 +23,7 @@ export class RegiProEditComponent implements OnInit {
   image_uploaded: boolean;
 
   cagetList = new Array<CategoryModel>();
-  defaultCountry = {  
+  defaultCountry = {
     id: 0,
     name: 'Select Cagetory',
     description: '',
@@ -73,7 +73,7 @@ export class RegiProEditComponent implements OnInit {
         this.resource_img_id = this.modal.message.resource_img_id;
         this.product_id      = this.modal.message.id;
         console.log(this.resource_img_id);
-        
+
     }
 
     this.inquiryCategory();
@@ -83,13 +83,13 @@ export class RegiProEditComponent implements OnInit {
   close() {
     this.modal.close( {close: BTN_ROLES.CLOSE});
   }
-  
+
   onClickBtnMainCategoryName() {
     this.product_name = undefined;
   }
-  
+
   onClickBtndescription() {
-    this.description = undefined; 
+    this.description = undefined;
   }
 
   inquiryCategory() {
@@ -128,7 +128,7 @@ export class RegiProEditComponent implements OnInit {
         };
         reader.readAsDataURL(file.rawFile);
     }
-    
+
     });
     this.is_selected_file = true;
   }
@@ -149,16 +149,16 @@ export class RegiProEditComponent implements OnInit {
   public showButton(state: FileState): boolean {
     return (state === FileState.Selected) ? true : false;
   }
-    
+
 upload(state) {
   console.log(this.imagePreviews);
   if(this.imagePreviews.length > 0) {
     this.imagePreviews.forEach(element =>{
       if(element.uid === state) {
-          let splitted = element.src.split(','); 
-          const base64WriteImage = new Base64WriteImage();          
+          let splitted = element.src.split(',');
+          const base64WriteImage = new Base64WriteImage();
           console.log('splitted', splitted)
-          if(splitted[1]) { 
+          if(splitted[1]) {
             base64WriteImage.id         = element.id;
             base64WriteImage.base64     = splitted[1];
             base64WriteImage.file_name  = element.name;
@@ -170,7 +170,7 @@ upload(state) {
                 this.resource_img_id = base64WriteImage.id;
                 this.image_uploaded = true;
                 console.log('resource_img_id', this.resource_img_id);
-                
+
               }
             });
 
@@ -179,10 +179,10 @@ upload(state) {
       }
     });
   }
-  
+
 }
 // end file select function
-  
+
 edit() {
   if ( this.isValid() === true) {
     const userInfo                = Utils.getUserInfo();
@@ -192,12 +192,12 @@ edit() {
     trReq.body.description        = this.description;
     trReq.body.category_id        = this.categoryModel.id;
     trReq.body.resource_img_id    = this.resource_img_id;
-    
+
     const api = '/api/product/v1/update';
     console.log(trReq);
     this.serverService.HTTPPost(api, trReq).then(response => {
       const responseData = response as ResponseDataModel;
-      if ( responseData && responseData.body.status === Reponse_Status.Y) {
+      if ( responseData && responseData.body.status === ResponseStatus.Y) {
         this.modal.close( {close: BTN_ROLES.EDIT});
       }
     });
@@ -206,7 +206,7 @@ edit() {
 
 private isValid(): boolean {
   console.log(this.categoryModel);
-  
+
   if (!this.product_name || this.product_name && this.product_name.trim() === ''
       || this.product_name && this.product_name === null) {
         const bool = this.modalService.messageAlert('Invalid product name.');
@@ -214,7 +214,7 @@ private isValid(): boolean {
   } else if (!this.categoryModel) {
     const bool = this.modalService.messageAlert('Please select category.');
     return bool;
-  } 
+  }
   else {
     return true;
   }

@@ -3,7 +3,7 @@ import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment.prod';
-import { LocalStorage, Reponse_Status } from '../constants/common.const';
+import { LocalStorage, ResponseStatus } from '../constants/common.const';
 import { Base64WriteImage } from '../model/model/base64';
 import { Base64WriteImageRequestAdd } from '../model/request/base64-req';
 import { Utils } from '../utils/utils.static';
@@ -46,7 +46,7 @@ export class UploadService {
           console.log('encryptionData', JSON.stringify(requestData));
 
         this.server.HTTPPost(api, data).then(resp => {
-          if ( resp && resp.body.status === Reponse_Status.Y) {
+          if ( resp && resp.body.status === ResponseStatus.Y) {
               resolve(true);
           } else {
             resolve(false);
