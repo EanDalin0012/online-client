@@ -8,7 +8,7 @@ import { ServerService } from '../../share/service/server.service';
 import { ModalService } from '../../share/service/modal.service';
 import { UserDataRequest } from '../../share/model/request/req-user-data';
 import { UserDataResponse } from '../../share/model/response/res-user-data';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { ButtonRole } from '../../share/constants/common.const';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { UserMngAccEditComponent } from '../user-mng-acc-edit/user-mng-acc-edit.component';
 
@@ -70,7 +70,7 @@ export class UserMngAccComponent implements OnInit {
     this.inquiry();
   }
 
-  
+
   // Declear function
 
   inquiry() {
@@ -96,7 +96,7 @@ export class UserMngAccComponent implements OnInit {
       message: data,
       callback: _response => {
         if(_response) {
-          if(_response && _response.close === BTN_ROLES.EDIT) {
+          if(_response && _response.close === ButtonRole.edit) {
             this.inquiry();
           }
         }
@@ -166,7 +166,7 @@ export class UserMngAccComponent implements OnInit {
     this.pageSize = take;
     this.paging();
   }
-  
+
   public rowCallback = (context: RowClassArgs) => {
       switch (context.dataItem.serviceStatusDesc) {
         case 'Deactivated':

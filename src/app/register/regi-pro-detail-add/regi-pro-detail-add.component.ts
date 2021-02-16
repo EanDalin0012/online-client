@@ -7,7 +7,7 @@ import { Base64WriteImage } from '../../share/model/model/base64';
 import { UploadService } from '../../share/service/upload.service';
 import { ModalService } from '../../share/service/modal.service';
 import { ServerService } from '../../share/service/server.service';
-import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
+import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { ProductDescriptionRequest } from '../../share/model/request/req-production-description';
 import { ProductDescription } from '../../share/model/model/product-description';
 import { ResourceID } from '../../share/model/model/resource-id';
@@ -189,7 +189,7 @@ upload(state, value: string) {
 
 
   close() {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
   onTabSelect(e) {
@@ -213,7 +213,7 @@ upload(state, value: string) {
     this.serverService.HTTPPost(api, reqData).then(response => {
       const responseData = response as ResponseDataModel;
       if ( responseData && responseData.body.status === ResponseStatus.Y) {
-        this.modal.close( {close: BTN_ROLES.SAVE});
+        this.modal.close( {close: ButtonRole.save});
       }
     });
   }

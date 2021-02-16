@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { ButtonRole } from '../../share/constants/common.const';
 import { UserInfoDetails } from '../../share/model/model/user-info-details';
 import { RequestDataModel } from '../../share/model/request/req-data';
 import { DataService } from '../../share/service/data.service';
@@ -41,7 +41,7 @@ export class UserMngUserInfoComponent implements OnInit {
     field: 'user_info_id',
     dir: 'asc'
   }];
-  
+
   public checkboxOnly = false;
   public mySelection: any[] = [];
   // end declear grid
@@ -68,7 +68,7 @@ export class UserMngUserInfoComponent implements OnInit {
       content: UserMngUserInfoAddComponent,
       callback: _response => {
         if(_response) {
-          if(_response && _response.close === BTN_ROLES.SAVE) {
+          if(_response && _response.close === ButtonRole.save) {
             this.modalService.showNotificationService(this.translateService.instant('UserMngUserInfo.Message.User_Info_Add_Success'), 400);
           }
         }
@@ -106,7 +106,7 @@ export class UserMngUserInfoComponent implements OnInit {
     this.pageSize = take;
     this.paging();
   }
-  
+
   public rowCallback = (context: RowClassArgs) => {
       switch (context.dataItem.serviceStatusDesc) {
         case 'Deactivated':
@@ -164,7 +164,7 @@ export class UserMngUserInfoComponent implements OnInit {
     component.save(options);
   }
 
-  
+
   Edit(dataItem) {
     this.modalService.open({
       content: UserMngUserInfoEditComponent,

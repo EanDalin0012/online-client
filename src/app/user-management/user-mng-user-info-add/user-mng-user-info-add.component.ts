@@ -3,7 +3,7 @@ import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angula
 import { Base64WriteImage } from '../../share/model/model/base64';
 import * as moment from 'moment';
 import { UploadService } from '../../share/service/upload.service';
-import { BTN_ROLES, GENDER_CODE_LIST, MonthList, ResponseStatus } from '../../share/constants/common.const';
+import { ButtonRole, GENDER_CODE_LIST, MonthList, ResponseStatus } from '../../share/constants/common.const';
 import { ModalService } from '../../share/service/modal.service';
 import { GenderModel } from '../../share/model/model/gender';
 import { TranslateService } from '@ngx-translate/core';
@@ -178,7 +178,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
   }
 
   close() {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
  Delete(value: string) {
@@ -580,7 +580,7 @@ public fileRestrictions_card_rear: FileRestrictions = {
       const api = '/api/user_info/v1/save';
       this.serverService.HTTPPost(api, userInfoRequestModel).then(response=>{
         if(response && response.body.status === ResponseStatus.Y) {
-          this.modal.close( {close: BTN_ROLES.SAVE});
+          this.modal.close( {close: ButtonRole.save});
         }
       });
 

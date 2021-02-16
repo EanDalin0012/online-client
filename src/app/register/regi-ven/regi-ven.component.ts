@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 import { RequestDataModel } from '../../share/model/request/req-data';
 import { VendorResponseModel } from '../../share/model/response/res-vendor';
 import { RegiVenAddComponent } from '../regi-ven-add/regi-ven-add.component';
-import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
+import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { RegiVenEditComponent } from '../regi-ven-edit/regi-ven-edit.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
@@ -163,7 +163,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
     this.modalService.open({
       content: RegiVenAddComponent,
       callback: response =>{
-        if(response.close === BTN_ROLES.SAVE) {
+        if(response.close === ButtonRole.save) {
           this.modalService.showNotificationService(this.translateService.instant('RegiVen.Message.Vendor_Save_Success'));
           this.inquiry();
         }
@@ -176,7 +176,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       content: RegiVenEditComponent,
       message: dataItems,
       callback: response =>{
-        if(response.close === BTN_ROLES.EDIT) {
+        if(response.close === ButtonRole.edit) {
           this.modalService.showNotificationService(this.translateService.instant('RegiVen.Message.Vendor_Update_Success'));
           this.inquiry();
         }

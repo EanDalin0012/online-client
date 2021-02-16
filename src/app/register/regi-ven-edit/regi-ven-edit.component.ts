@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
+import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { VendorRequestModel } from '../../share/model/request/req-vendor';
 import { ResponseDataModel } from '../../share/model/response/res-data';
 import { VendorModel } from '../../share/model/model/vendor';
@@ -46,7 +46,7 @@ export class RegiVenEditComponent implements OnInit {
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === ResponseStatus.Y) {
-          this.modal.close( {close: BTN_ROLES.EDIT});
+          this.modal.close( {close: ButtonRole.edit});
         }
       });
     }
@@ -80,7 +80,7 @@ export class RegiVenEditComponent implements OnInit {
   }
 
   close() {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
   btnX(value) {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../../share/service/server.service';
 import { UserAccountRequest } from '../../share/model/request/req-user-account';
 import { UserAccountRespnonse } from '../../share/model/response/res-user-account';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { ButtonRole } from '../../share/constants/common.const';
 import { AccountInfoByIdRequest } from '../../share/model/request/account-get-info';
 
 @Component({
@@ -54,7 +54,7 @@ export class UserMngAccEditComponent implements OnInit {
     this.service.HTTPPost(api, trReq).then(resp => {
       const response   = resp as UserAccountRespnonse;
       if (response.body.isSuccessYN === 'Y') {
-        this.modal.close({close: BTN_ROLES.EDIT});
+        this.modal.close({close: ButtonRole.edit});
       }
     });
   }

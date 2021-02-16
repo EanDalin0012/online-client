@@ -12,10 +12,10 @@
               <div class="form-row">
                   <div class="form-group col-md-12">
                       <label>{{'RegiCateAdd.Label.Name' | translate}}</label>
-                      <input type="text" [ngClass]="category_name? 'active-input' : ''" class="form-control" [(ngModel)]="category_name" placeholder="{{'RegiCateAdd.Holder.Enter_Category_Name' | translate}}">
+                      <input type="text" [ngClass]="categoryName? 'active-input' : ''" class="form-control" [(ngModel)]="categoryName" placeholder="{{'RegiCateAdd.Holder.Enter_Category_Name' | translate}}">
 
                       <div class="in_box">
-                          <button type="button" [ngClass]="category_name? 'btn_del' : ''" (click)="onClickButtonMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                          <button type="button" [ngClass]="categoryName? 'btn_del' : ''" (click)="onClickButtonMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                       </div>
 
                   </div>

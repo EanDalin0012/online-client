@@ -42,12 +42,12 @@ export enum AES_INFO {
     STORE = 'AES_INFO'
 }
 
-export enum BTN_ROLES {
-    CLOSE     = 'CLOSE',
-    EDIT      = 'EDIT',
-    SAVE      = 'SAVE',
-    DELETE    = 'DELETE',
-    ACTIVE    = 'ACTIVE'
+export enum ButtonRole {
+    close     = 'close',
+    edit      = 'edit',
+    save      = 'save',
+    delete    = 'delete',
+    active    = 'active'
 
 }
 export enum ResponseStatus {

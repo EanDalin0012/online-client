@@ -6,13 +6,13 @@ import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kend
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/common/page-change-event';
 import { ModalService } from '../../share/service/modal.service';
-import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
+import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { DataService } from '../../share/service/data.service';
-import { RegiCateEditComponent } from '../regi-cate-edit/regi-cate-edit.component';
 import { Title } from '@angular/platform-browser';
 import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
 import { ResponseDataModel } from '../../share/model/response/res-data';
 import { CategoryAddComponent } from '../category-add/category-add.component';
+import { CategoryEditComponent } from '../category-edit/category-edit.component';
 
 @Component({
   selector: 'app-category',
@@ -175,11 +175,11 @@ export class CategoryComponent implements OnInit {
 
   edit(dataItems): void {
     this.modalService.open({
-      content: RegiCateEditComponent,
+      content: CategoryEditComponent,
       message: dataItems,
       callback: response => {
         if (response) {
-          if ( response && response.close === BTN_ROLES.EDIT) {
+          if ( response && response.close === ButtonRole.edit) {
             this.inquiry();
           }
         }
@@ -192,7 +192,7 @@ export class CategoryComponent implements OnInit {
       content: CategoryAddComponent,
       callback: response => {
         if (response) {
-          if (response && response.close === BTN_ROLES.SAVE) {
+          if (response && response.close === ButtonRole.save) {
             this.inquiry();
           }
         }

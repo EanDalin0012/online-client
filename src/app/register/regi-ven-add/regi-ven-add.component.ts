@@ -5,7 +5,7 @@ import { ServerService } from '../../share/service/server.service';
 import { ModalService } from '../../share/service/modal.service';
 import { VendorRequestModel } from '../../share/model/request/req-vendor';
 import { ResponseDataModel } from '../../share/model/response/res-data';
-import { ResponseStatus, BTN_ROLES } from '../../share/constants/common.const';
+import { ResponseStatus, ButtonRole } from '../../share/constants/common.const';
 import { FormaterInputService } from '../../share/service/formater-input.service';
 
 @Component({
@@ -41,7 +41,7 @@ export class RegiVenAddComponent implements OnInit {
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === ResponseStatus.Y) {
-          this.modal.close( {close: BTN_ROLES.SAVE});
+          this.modal.close( {close: ButtonRole.save});
         }
       });
     }
@@ -75,7 +75,7 @@ private isValid(): boolean {
 }
 
   close() {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
   btnX(value) {

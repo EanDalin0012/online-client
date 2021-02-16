@@ -6,7 +6,7 @@ import { PageChangeEvent } from '@progress/kendo-angular-dropdowns/dist/es2015/c
 import { GridDataResult, RowClassArgs, SelectableSettings } from '@progress/kendo-angular-grid';
 import { orderBy, SortDescriptor } from '@progress/kendo-data-query';
 import { environment } from '../../../environments/environment';
-import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
+import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { ObjIdModel } from '../../share/model/model/obj-id';
 import { ProductDetailsModel } from '../../share/model/model/product-details';
 import { RequestDataModel } from '../../share/model/request/req-data';
@@ -113,7 +113,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       content: RegiProEditComponent,
       message: dataItems,
       callback: response =>{
-        if(response.close === BTN_ROLES.EDIT) {
+        if(response.close === ButtonRole.edit) {
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Update_Success'));
           this.inquiry();
         }
@@ -138,7 +138,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       this.modalService.open({
         content: RegiProAddComponent,
         callback: response =>{
-          if(response.close === BTN_ROLES.SAVE) {
+          if(response.close === ButtonRole.save) {
             this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Save_Success'));
             this.inquiry();
           }
@@ -325,7 +325,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       content: RegiProDetailViewsComponent,
       message: dataItem,
       callback: response =>{
-        if(response.close === BTN_ROLES.SAVE) {
+        if(response.close === ButtonRole.save) {
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Save_Success'));
           this.inquiry();
         }
@@ -338,7 +338,7 @@ obj_Id_model_list = new Array<ObjIdModel>();
       message: dataItem,
       content: RegiProDetailAddComponent,
       callback: response =>{
-        if(response.close === BTN_ROLES.SAVE) {
+        if(response.close === ButtonRole.save) {
           this.modalService.showNotificationService(this.translateService.instant('RegiPro.Message.Pro_Save_Success'));
           this.inquiry();
         }

@@ -11,7 +11,7 @@ import { ServerService } from '../../share/service/server.service';
 import { ModalService } from '../../share/service/modal.service';
 import { SetPriceProductAddComponent } from '../set-price-product-add/set-price-product-add.component';
 import { SetPriceProductEditComponent } from '../set-price-product-edit/set-price-product-edit.component';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { ButtonRole } from '../../share/constants/common.const';
 
 @Component({
   selector: 'app-set-price-product',
@@ -215,7 +215,7 @@ export class SetPriceProductComponent implements OnInit {
     sale_price_after_discount: 9,
     discount: 10,
   }];
-  
+
   setProductPriceModelList = new Array<SetProductPriceModel>();
   list = new Array<SetProductPriceModel>();
   data = new Array<SetProductPriceModel>();
@@ -292,7 +292,7 @@ export class SetPriceProductComponent implements OnInit {
       message: dataItems,
       callback: _response => {
         if(_response) {
-          if(_response && _response.close === BTN_ROLES.EDIT) {
+          if(_response && _response.close === ButtonRole.edit) {
             this.inquiry();
           }
         }
@@ -362,7 +362,7 @@ export class SetPriceProductComponent implements OnInit {
     this.pageSize = take;
     this.paging();
   }
-  
+
   public rowCallback = (context: RowClassArgs) => {
       switch (context.dataItem.serviceStatusDesc) {
         case 'Deactivated':
@@ -389,5 +389,5 @@ export class SetPriceProductComponent implements OnInit {
   // declear function
 
   // end declear function
-  
+
 }

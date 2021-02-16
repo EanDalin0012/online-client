@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BTN_ROLES } from '../../share/constants/common.const';
+import { ButtonRole } from '../../share/constants/common.const';
 import { ProductDescriptionIDRequest } from '../../share/model/request/req-product-description-by-by';
 import { ServerService } from '../../share/service/server.service';
 import { ProductViewDetails } from '../../share/model/model/product-view-detias';
@@ -33,7 +33,7 @@ public arrows = true;
   public modelCH = {
     editorData: ''
   };
-  
+
   constructor(
     private service: ServerService
   ) { }
@@ -46,7 +46,7 @@ public arrows = true;
   }
 
   close() {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
   onTabSelect(e) {

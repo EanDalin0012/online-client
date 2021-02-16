@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Wed Feb 17 2021 00:04:47 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/register/category-edit/category-edit.component.html
+* src/app/register/category-edit/category-edit.component.ts
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:

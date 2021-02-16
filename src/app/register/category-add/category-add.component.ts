@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ServerService } from '../../share/service/server.service';
 import { ModalService } from '../../share/service/modal.service';
-import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
-import { CategoryRequestModel } from '../../share/model/request/req-main-category';
+import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { ResponseDataModel } from '../../share/model/response/res-data';
 import { CategoryModel } from '../../share/model/model/category';
 
@@ -36,14 +35,14 @@ export class CategoryAddComponent implements OnInit {
 
   btnRegister(): void {
     if ( this.isValid() === true) {
-      const trReq            = new CategoryRequestModel();
-      trReq.body.name               = this.categoryName;
-      trReq.body.description        = this.description;
+      const category          = new CategoryModel();
+      category.name               = this.categoryName;
+      category.description        = this.description;
       const api = '/api/category/v1/save';
-      this.serverService.HTTPPost(api, trReq).then(response => {
+      this.serverService.HTTPPost(api, category).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === ResponseStatus.Y) {
-          this.modal.close( {close: BTN_ROLES.SAVE});
+          this.modal.close( {close: ButtonRole.save});
         }
       });
     }
@@ -60,7 +59,7 @@ export class CategoryAddComponent implements OnInit {
   }
 
   close(): void {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
   onClickBtnMainCategoryName(): void {

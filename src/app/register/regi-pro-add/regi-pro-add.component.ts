@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angular-upload';
 import * as moment from 'moment';
-import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
+import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { Base64WriteImage } from '../../share/model/model/base64';
 import { CategoryModel } from '../../share/model/model/category';
 import { ProductModelRequest } from '../../share/model/request/req-product';
@@ -86,7 +86,7 @@ country: CategoryModel;
       this.serverService.HTTPPost(api, trReq).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === ResponseStatus.Y) {
-          this.modal.close( {close: BTN_ROLES.SAVE});
+          this.modal.close( {close: ButtonRole.save});
         }
       });
     }
@@ -107,7 +107,7 @@ private isValid(): boolean {
 }
 
   close() {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
   onClickBtnMainCategoryName() {

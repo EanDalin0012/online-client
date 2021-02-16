@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BTN_ROLES, ResponseStatus } from '../../share/constants/common.const';
+import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { CategoryModel } from '../../share/model/model/category';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { RequestDataService } from '../../share/service/get-data.service';
@@ -81,7 +81,7 @@ export class RegiProEditComponent implements OnInit {
 
   // dear function
   close() {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
   onClickBtnMainCategoryName() {
@@ -198,7 +198,7 @@ edit() {
     this.serverService.HTTPPost(api, trReq).then(response => {
       const responseData = response as ResponseDataModel;
       if ( responseData && responseData.body.status === ResponseStatus.Y) {
-        this.modal.close( {close: BTN_ROLES.EDIT});
+        this.modal.close( {close: ButtonRole.edit});
       }
     });
   }

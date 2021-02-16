@@ -3,9 +3,8 @@ import { CategoryModel } from '../../share/model/model/category';
 import { TranslateService } from '@ngx-translate/core';
 import { ServerService } from '../../share/service/server.service';
 import { ModalService } from '../../share/service/modal.service';
-import { CategoryRequestModel } from '../../share/model/request/req-main-category';
 import { ResponseDataModel } from '../../share/model/response/res-data';
-import { ResponseStatus, BTN_ROLES } from '../../share/constants/common.const';
+import { ResponseStatus, ButtonRole } from '../../share/constants/common.const';
 
 @Component({
   selector: 'app-category-edit',
@@ -13,7 +12,6 @@ import { ResponseStatus, BTN_ROLES } from '../../share/constants/common.const';
   styleUrls: ['./category-edit.component.css']
 })
 export class CategoryEditComponent implements OnInit {
-
 
   modal;
   typeList: any[] = [];
@@ -42,15 +40,15 @@ export class CategoryEditComponent implements OnInit {
 
   register(): void {
     if ( this.isValid() === true) {
-      const categoryModel                   = new CategoryModel();
-      categoryModel.name               = this.categoryName;
-      categoryModel.description        = this.description;
-      categoryModel.id                 = this.id;
+      let category          = new CategoryModel();
+      category.name         = this.categoryName;
+      category.description  = this.description;
+      category.id           = this.id;
       const api = '/api/category/v1/update';
-      this.serverService.HTTPPost(api, categoryModel).then(response => {
+      this.serverService.HTTPPost(api, category).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === ResponseStatus.Y) {
-          this.modal.close( {close: BTN_ROLES.EDIT});
+          this.modal.close( {close: ButtonRole.edit});
         }
       });
     }
@@ -67,7 +65,7 @@ isValid(): boolean {
 }
 
   close(): void {
-    this.modal.close( {close: BTN_ROLES.CLOSE});
+    this.modal.close( {close: ButtonRole.close});
   }
 
   onClickButtonMainCategoryName(): void {
