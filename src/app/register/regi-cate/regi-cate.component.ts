@@ -21,40 +21,38 @@ import { ResponseDataModel } from '../../share/model/response/res-data';
   styleUrls: ['./regi-cate.component.css']
 })
 export class RegiCateComponent implements OnInit {
+
   // start declear grid
-  public info = true;
-  public buttonCount = 5;
-  public type: 'numeric' | 'input' = 'numeric';
-  public previousNext = false;
-  public pageSizes: any[] = [10, 20, 30, 50, 100];
-  public group: any[] = [{
+  info = true;
+  buttonCount = 5;
+  type: 'numeric' | 'input' = 'numeric';
+  previousNext = false;
+  pageSizes: any[] = [10, 20, 30, 50, 100];
+  group: any[] = [{
     field: ''
   }];
-  public multiple = false;
-  public allowUnsort = true;
-  public height = 'auto';
+  multiple = false;
+  allowUnsort = true;
+  height = 'auto';
   search: string;
-  public sort: SortDescriptor[] = [{
+  sort: SortDescriptor[] = [{
     field: 'id',
     dir: 'asc'
   }];
-  public gridView: GridDataResult;
-  public gridData: any[];
-  public checkboxOnly = false;
-  public mode = 'multiple';
+  gridView: GridDataResult;
+  gridData: any[];
+  checkboxOnly = false;
+  mode = 'multiple';
   gridheight = screen.height * 0.5;
-  public selectedCallback = (args) => args.dataItem;
-  public selectableSettings: SelectableSettings;
-  public skip = 0;
-  public pageSize = 10;
-  public mySelection: any[] = [];
+  selectedCallback = (args) => args.dataItem;
+  selectableSettings: SelectableSettings;
+  skip = 0;
+  pageSize = 10;
+  mySelection: any[] = [];
 // end declear grid
 
-  // tslint:disable-next-line:member-ordering
   totalRecord = 0;
-  // tslint:disable-next-line:member-ordering
   categorylist = new Array<CategoryModel>();
-  // tslint:disable-next-line:member-ordering
   obj_Id_model_list = [];
   public data  = Array<CategoryModel>();
   menu = '';
@@ -76,7 +74,6 @@ export class RegiCateComponent implements OnInit {
   }
 
   inquiry(){
-    const trReq = new RequestDataModel();
     const api = '/api/category/v1/list';
     this.service.HTTPGet(api).then(resp => {
       const response   = resp as CategoryReponseModel;

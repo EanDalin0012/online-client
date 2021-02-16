@@ -1,0 +1,15 @@
+-------------------- Auto-Git Log --------------------
+		Tue Feb 16 2021 23:04:06 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/register/regi-cate/regi-cate.component.ts
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:
