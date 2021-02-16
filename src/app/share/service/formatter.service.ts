@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Utils } from '../utils/utils.static';
 import { DatePipe } from '@angular/common';
-import { LOCAL_STORAGE } from '../constants/common.const';
+import { LocalStorage } from '../constants/common.const';
 import * as moment from 'moment';
 import { DateFormat } from '../common/common.type';
 
@@ -33,7 +33,7 @@ export class FormatterService {
   }
 
   formateDate(val: string): string {
-    const language = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
+    const language = Utils.getSecureStorage(LocalStorage.I18N);
     const date = String(val.replace(/([0-9]{4})([0-9]{2})([0-9]{2})/, '$1-$2-$3'));
     if ( language === 'en' || language === 'km') {
       const date = String(val.replace(/([0-9]{4})([0-9]{2})([0-9]{2})/, '$1-$2-$3'));

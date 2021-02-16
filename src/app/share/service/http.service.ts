@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CryptoService } from './crypto.service';
 import { environment } from '../../../environments/environment.prod';
 import { Utils } from '../utils/utils.static';
-import { LOCAL_STORAGE, AES_INFO } from '../constants/common.const';
+import { LocalStorage, AES_INFO } from '../constants/common.const';
 import * as $ from 'jquery';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class HttpService {
 
   public Post(api, TrClass: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      const aesInfo: any = Utils.getSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME) || {};
+      const aesInfo: any = Utils.getSecureStorage(LocalStorage.LAST_EVENT_TIME) || {};
       console.log(aesInfo.timestamp);
       if (aesInfo && new Date().getTime() - aesInfo.timestamp > environment.autoLogoutTime) {
 
@@ -49,8 +49,8 @@ export class HttpService {
             'Thank you for using.',
           callback: () => {
             $('kendo-dialog').remove();
-            Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
-            Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
+            Utils.removeSecureStorage(LocalStorage.USER_INFO);
+            Utils.removeSecureStorage(LocalStorage.Authorization);
             this.router.navigate(['/login']);
           }
         });
@@ -59,7 +59,7 @@ export class HttpService {
         $('div.loading').removeClass('none');
         $('body').removeClass('loaded');
 
-        const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+        const authorization = Utils.getSecureStorage(LocalStorage.Authorization);
         const access_token = authorization.access_token;
         if (!access_token) {
           this.modalService.alert({
@@ -67,8 +67,8 @@ export class HttpService {
             modalClass: ['open-alert'],
             btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
             callback: res => {
-              Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
-              Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
+              Utils.removeSecureStorage(LocalStorage.Authorization);
+              Utils.removeSecureStorage(LocalStorage.USER_INFO);
               this.router.navigate(['/login']);
             }
           });
@@ -80,8 +80,8 @@ export class HttpService {
           Authorization: 'Bearer ' + access_token
         };
 
-        const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
-        const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
+        const userInfo = Utils.getSecureStorage(LocalStorage.USER_INFO);
+        const lang = Utils.getSecureStorage(LocalStorage.I18N);
         const uri = this.url + api + '?userId=' + userInfo.id + '&lang=' + lang;
 
         const dataBody = JSON.stringify(TrClass);
@@ -126,11 +126,11 @@ export class HttpService {
 
       $('div.loading').removeClass('none');
       $('body').removeClass('loaded');
-      const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+      const userInfo = Utils.getSecureStorage(LocalStorage.USER_INFO);
       const lang = Utils.getSecureStorage(localStorage.I18N);
       const uri = this.url + api + '?userId=' + userInfo.id + '&lang=' + lang;
 
-      const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      const authorization = Utils.getSecureStorage(LocalStorage.Authorization);
 
       const access_token = authorization.access_token;
 

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpEventType, HttpResponse, HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Utils } from '../../share/utils/utils.static';
-import { LOCAL_STORAGE, LOGO_FILE_EXT } from '../../share/constants/common.const';
+import { LocalStorage, LOGO_FILE_EXT } from '../../share/constants/common.const';
 import { FileRequestModel } from '../../share/model/request/req-file';
 import { ServerService } from '../../share/service/server.service';
 import { environment } from '../../../environments/environment.prod';
@@ -16,7 +16,7 @@ import { FileRestrictions, SelectEvent, RemoveEvent, UploadEvent } from '@progre
   styleUrls: ['./home1100.component.css']
 })
 export class Home1100Component implements OnInit {
-  
+
   imageSrc: string;
 
   file_name: string;
@@ -42,10 +42,10 @@ export class Home1100Component implements OnInit {
   message = '';
 
   fileInfos: Observable<any>;
-  
+
   constructor(private uploadService: UploadService,private http: HttpClient,
     private serverService: ServerService) { }
-  
+
   ngOnInit(): void {
   }
 
@@ -76,12 +76,12 @@ export class Home1100Component implements OnInit {
   submit(){
 
     console.log(this.myForm.value);
-    
-    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+
+    let authorization = Utils.getSecureStorage(LocalStorage.Authorization);
     const access_token = authorization.access_token;
 
     const httpOptionsObj = {
-      'Authorization': 'Bearer '+access_token
+      Authorization: 'Bearer ' + access_token
     };
 
     console.log(this.myForm.value.fileSource);
@@ -106,15 +106,15 @@ export class Home1100Component implements OnInit {
 
 
 
-  uploadFiles(event) {  
+  uploadFiles(event) {
     const file = event.target.files[0];
     console.log("file", file);
-    const formData = new FormData();  
-    formData.append('file', event.target.files[0]);  
-    file.inProgress = true;  
+    const formData = new FormData();
+    formData.append('file', event.target.files[0]);
+    file.inProgress = true;
     // this.uploadService.upload(event.target.files[0]).then( res=>{
     //   console.log('rest', res);
-    // });  
+    // });
   }
 
   selectFile(event): void {
@@ -123,10 +123,10 @@ export class Home1100Component implements OnInit {
 
   upload(): void {
     this.progress = 0;
-  
+
     this.currentFile = this.selectedFiles.item(0);
     console.log(this.currentFile);
-    
+
     this.uploadService.upload1(this.currentFile).subscribe(
       event => {
         if (event.type === HttpEventType.UploadProgress) {
@@ -166,13 +166,13 @@ export class Home1100Component implements OnInit {
   }
 
 
-  // kendo 
+  // kendo
 
   public imagePreviews: any[] = [];
   public uploadRestrictions: FileRestrictions = {
     allowedExtensions: LOGO_FILE_EXT
   };
-  
+
   public selectEventHandler(e: SelectEvent): void {
     const that = this;
 
@@ -195,8 +195,8 @@ export class Home1100Component implements OnInit {
         this.file_size =  file.size;
         this.file_type = file.rawFile.type;
         console.log(this.file_size, this.file_name, this.file_type);
-        
-        reader.readAsDataURL(file.rawFile); 
+
+        reader.readAsDataURL(file.rawFile);
       }
     });
   }
@@ -219,7 +219,7 @@ export class Home1100Component implements OnInit {
     console.log(val);
   }
 
-  
+
   uploadEventHandler(e: UploadEvent) {
     // this.doRequestFile(e.files[0].rawFile);
   }

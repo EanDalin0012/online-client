@@ -1,11 +1,11 @@
 
-import { LOCAL_STORAGE } from '../constants/common.const';
+import { LocalStorage } from '../constants/common.const';
 import { UserModel } from '../model/model/user-model';
 
 export abstract class Utils {
 
     public static getUserInfo(): UserModel {
-      return  JSON.parse(window.localStorage.getItem(LOCAL_STORAGE.USER_INFO)) as UserModel;
+      return  JSON.parse(window.localStorage.getItem(LocalStorage.USER_INFO)) as UserModel;
     }
 
     public static setSecureStorage( sKey: string, oValue: any ) {

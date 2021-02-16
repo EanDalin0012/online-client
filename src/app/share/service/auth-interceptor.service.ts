@@ -10,10 +10,9 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/timeout';
-import * as $ from 'jquery';
 import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { LOCAL_STORAGE, AES_INFO } from '../constants/common.const';
+import { LocalStorage } from '../constants/common.const';
 import { ModalService } from './modal.service';
 import { Utils } from '../utils/utils.static';
 
@@ -48,7 +47,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    Utils.setSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME, String(new Date().getTime()));
+    Utils.setSecureStorage(LocalStorage.LAST_EVENT_TIME, String(new Date().getTime()));
     // tslint:disable-next-line: prefer-for-of
     for ( let idx = 0 ; idx < this.longtimeApis.length ; idx++ ) {
       if ( req.url.indexOf(this.longtimeApis[idx]) > 0 ){

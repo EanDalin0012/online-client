@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { LANGUAGE, LOCAL_STORAGE, deviceInfo } from './share/constants/common.const';
+import { LANGUAGE, LocalStorage, deviceInfo } from './share/constants/common.const';
 import { Utils } from './share/utils/utils.static';
 import { JsonipService } from './share/service/jsonip.service';
 import { DeviceDetectorInfoService } from './share/service/device-detector-info.service';
@@ -39,9 +39,9 @@ export class AppComponent implements OnInit{
 
   // tslint:disable-next-line:typedef
   setInitialAppLanguage() {
-    const i18n = Utils.getSecureStorage( LOCAL_STORAGE.I18N );
+    const i18n = Utils.getSecureStorage(LocalStorage.I18N );
     if ( !i18n ) {
-      Utils.setSecureStorage(LOCAL_STORAGE.I18N, LANGUAGE.I18N_EN.toString());
+      Utils.setSecureStorage(LocalStorage.I18N, LANGUAGE.I18N_EN.toString());
       this.translate.setDefaultLang( LANGUAGE.I18N_EN.toString() );
       this.translate.use( LANGUAGE.I18N_EN.toString() );
     } else {

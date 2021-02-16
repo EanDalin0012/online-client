@@ -3,7 +3,7 @@ import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../environments/environment.prod';
-import { LOCAL_STORAGE, Reponse_Status } from '../constants/common.const';
+import { LocalStorage, Reponse_Status } from '../constants/common.const';
 import { Base64WriteImage } from '../model/model/base64';
 import { Base64WriteImageRequestAdd } from '../model/request/base64-req';
 import { Utils } from '../utils/utils.static';
@@ -63,7 +63,7 @@ export class UploadService {
 
   upload1(file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
-    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+    let authorization = Utils.getSecureStorage(LocalStorage.Authorization);
     const access_token = authorization.access_token;
 
     const httpOptionsObj = {
@@ -84,11 +84,11 @@ export class UploadService {
 
   getFile(source_id: string):Promise<string> {
     return new Promise(resolve =>{
-      const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+      const userInfo = Utils.getSecureStorage(LocalStorage.USER_INFO);
       const lang = Utils.getSecureStorage(localStorage.I18N);
-      const api = '/api/file/resource1/'+source_id;
-      const uri = environment.bizMOBServer + api ;// + '?userId='+userInfo.id +'&lang='+lang;
-      let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      const api = '/api/file/resource1/' + source_id;
+      const uri = environment.bizMOBServer + api ; // + '?userId='+userInfo.id +'&lang='+lang;
+      let authorization = Utils.getSecureStorage(LocalStorage.Authorization);
       const access_token = authorization.access_token;
       const headers = {
         'Authorization': 'Bearer ' + access_token
@@ -108,11 +108,11 @@ export class UploadService {
 
   async getFile1(source_id: string) {
 
-    const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+    const userInfo = Utils.getSecureStorage(LocalStorage.USER_INFO);
     const lang = Utils.getSecureStorage(localStorage.I18N);
-    const api = '/api/file/resource1/'+source_id;
-    const uri = environment.bizMOBServer + api ;// + '?userId='+userInfo.id +'&lang='+lang;
-    let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+    const api = '/api/file/resource1/' + source_id;
+    const uri = environment.bizMOBServer + api ; // + '?userId='+userInfo.id +'&lang='+lang;
+    let authorization = Utils.getSecureStorage(LocalStorage.Authorization);
     const access_token = authorization.access_token;
     const headers = {
       'Authorization': 'Bearer ' + access_token

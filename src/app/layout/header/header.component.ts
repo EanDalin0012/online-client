@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from 'src/app/share/utils/utils.static';
-import { LOCAL_STORAGE, Reponse_Status } from '../../share/constants/common.const';
+import { LocalStorage, Reponse_Status } from '../../share/constants/common.const';
 import { Router } from '@angular/router';
 import { AuthentcatiionService } from '../../share/service/authentication.service';
 
@@ -33,20 +33,20 @@ export class HeaderComponent implements OnInit {
   onChangeLanguage(code: string) {
     this.langCode = code;
     console.log(this.langCode, localStorage.I18N, code);
-    Utils.setSecureStorage(LOCAL_STORAGE.I18N, this.langCode );
+    Utils.setSecureStorage(LocalStorage.I18N, this.langCode );
     this.translate.use( this.langCode );
   }
 
   Logout() {
     this.authentcatiionService.revokeToken().then(resp=>{
       if(resp.body.status === Reponse_Status.Y) {
-        Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
-        Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
+        Utils.removeSecureStorage(LocalStorage.USER_INFO);
+        Utils.removeSecureStorage(LocalStorage.Authorization);
         this.router.navigate(['/login']);
       }
     });
   }
-  
+
   Profile() {
 
   }
