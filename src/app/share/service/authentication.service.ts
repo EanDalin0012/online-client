@@ -10,12 +10,13 @@ import { Utils } from '../utils/utils.static';
 import { Router } from '@angular/router';
 import { HttpService } from './http.service';
 import { CacheInfo } from '../cache/cache-info';
+import { LoadUserInfo } from '../model/model/load-user-info';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthentcatiionService {
-  private bizserverUrl: string;
+  private baseUrl: string;
 
 
   constructor(
@@ -26,7 +27,7 @@ export class AuthentcatiionService {
     private cryptoService: CryptoService,
     private httpService: HttpService
   ) {
-    this.bizserverUrl = environment.bizMOBServer;
+    this.baseUrl = environment.bizMOBServer;
   }
 
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth) {
@@ -59,7 +60,7 @@ export class AuthentcatiionService {
       const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
       const lang = Utils.getSecureStorage(localStorage.I18N);
       const api  = "/api/user/oauth/revoke-token";
-      const uri = this.bizserverUrl + api + '?userId=' + userInfo.id + '&lang=' + lang;
+      const uri = this.baseUrl + api + '?userId=' + userInfo.id + '&lang=' + lang;
       let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
       const access_token = authorization.access_token;
       const headers = {
@@ -104,7 +105,7 @@ export class AuthentcatiionService {
       }
 
       const api = '/oauth/token';
-      const uri = this.bizserverUrl + api;
+      const uri = this.baseUrl + api;
       const btoa =
         'Basic ' +
         window.btoa(credentail.User_name + ':' + credentail.password);
@@ -131,34 +132,73 @@ export class AuthentcatiionService {
   }
 
   private loadUserByUserName(userName: string): Promise<any> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
 
+      let loadUserInfo = new LoadUserInfo();
       const device = CacheInfo.deviceinfo;
       const networkIp = CacheInfo.networkIP;
-      const deviceInfo = JSON.stringify(device);
-      const lang = Utils.getSecureStorage(localStorage.I18N);
-      const api = '/api/user/v1/load_user';
-      const uri = this.bizserverUrl + api + '?userName=' + userName + '&lang=' + lang  + '&networkIp=' + networkIp + '&deviceInfo='+deviceInfo.toString();
-      const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-      const access_token = authorization.access_token;
+      loadUserInfo.deviceInfo = device;
+      loadUserInfo.networkIP  = networkIp;
+      loadUserInfo.userName = userName;
 
-      const headers = {
-        Authorization: 'Bearer ' + access_token,
+      const authorize = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      const accessToken = authorize.access_token;
+      if (!accessToken) {
+        this.modalService.alert({
+          content: '',
+          modalClass: ['open-alert'],
+          btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
+          callback: res => {
+            Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
+            Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
+            this.router.navigate(['/login']);
+          }
+        });
+        return;
+      }
+
+      const dataBody = JSON.stringify(loadUserInfo);
+      const encryptionData = this.cryptoService.encrypt(dataBody);
+      const requestData = {
+        body: encryptionData.toString()
       };
+      const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
+      const httpOptionsObj = {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + accessToken
+      };
+      const uri = this.baseUrl + '/api/user/v1/load/user?lang=' + lang;
 
       $('div.loading').removeClass('none');
+      $('body').removeClass('loaded');
 
-      this.httpClient.get(uri, { headers }).subscribe(rest => {
-        $('body').addClass('loaded');
-        $('div.loading').addClass('none');
-        const bodyData = rest as any;
 
-        const responseData = JSON.parse(bodyData);
-        const rawData = responseData.body;
-        const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+      this.httpClient.post(uri, JSON.stringify(requestData), {
+        headers: new HttpHeaders(httpOptionsObj)
+      }).subscribe( res => {
+          $('body').addClass('loaded');
+          $('div.loading').addClass('none');
+          const result = res as any;
+          console.log('result', result);
+          if (result) {
+            const responseData = JSON.parse(result);
+            const rawData = responseData.body;
+            const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+            console.log('decryptData', decryptData);
 
-        resolve(decryptData);
+            if (decryptData.error != null) {
+              reject();
+              this.message(result.error.message);
+            } else {
+              resolve(decryptData);
+            }
+          } else {
+            reject();
+          }
+      }, error => {
+        console.log(error);
       });
+
     });
   }
 
