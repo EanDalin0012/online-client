@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ServerService } from '../../share/service/server.service';
 import { ModalService } from '../../share/service/modal.service';
 import { ButtonRole, ResponseStatus } from '../../share/constants/common.const';
 import { ResponseDataModel } from '../../share/model/response/res-data';
 import { CategoryModel } from '../../share/model/model/category';
+import { HttpService } from '../../share/service/http.service';
 
 @Component({
   selector: 'app-category-add',
@@ -12,7 +12,6 @@ import { CategoryModel } from '../../share/model/model/category';
   styleUrls: ['./category-add.component.css']
 })
 export class CategoryAddComponent implements OnInit {
-
 
   modal;
   typeList: any[] = [];
@@ -23,7 +22,7 @@ export class CategoryAddComponent implements OnInit {
   translateTxt: any;
   constructor(
     private translate: TranslateService,
-    private serverService: ServerService,
+    private httpService: HttpService,
     private modalService: ModalService
   ) { }
 
@@ -39,7 +38,7 @@ export class CategoryAddComponent implements OnInit {
       category.name               = this.categoryName;
       category.description        = this.description;
       const api = '/api/category/v1/save';
-      this.serverService.HTTPPost(api, category).then(response => {
+      this.httpService.Post(api, category).then(response => {
         const responseData = response as ResponseDataModel;
         if ( responseData && responseData.body.status === ResponseStatus.Y) {
           this.modal.close( {close: ButtonRole.save});

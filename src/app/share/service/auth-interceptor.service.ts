@@ -96,7 +96,7 @@ export class AuthInterceptor implements HttpInterceptor {
     ).catch((error) => {
       console.log('error', error);
       if ( Number(error.status) === 401) {
-        this.router.navigate(['/login']);
+        // this.router.navigate(['/login']);
         this.modalService.alert({
           title: error.error.error,
           content:  '<p>' + error.error.error_description + '</p>',

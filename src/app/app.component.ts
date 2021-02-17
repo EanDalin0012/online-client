@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { LANGUAGE, LocalStorage, deviceInfo } from './share/constants/common.const';
 import { Utils } from './share/utils/utils.static';
@@ -23,22 +22,16 @@ export class AppComponent implements OnInit{
     this.setInitialAppLanguage();
   }
 
-  ngOnInit() {
-
-    this.jsonipService.jsonIp().then( response =>{
-      console.log('jsonipService', response);
+  ngOnInit(): void {
+    this.jsonipService.jsonIp().then( response => {
       CacheInfo.networkIP = response;
     });
-
     const deviceDetectorInfo = this.deviceDetectorInfoService.deviceDetectorInfo();
     CacheInfo.deviceinfo = deviceDetectorInfo;
-
-    console.log('deviceDetectorInfo', deviceDetectorInfo);
-
   }
 
   // tslint:disable-next-line:typedef
-  setInitialAppLanguage() {
+  setInitialAppLanguage(): void {
     const i18n = Utils.getSecureStorage(LocalStorage.I18N );
     if ( !i18n ) {
       Utils.setSecureStorage(LocalStorage.I18N, LANGUAGE.I18N_EN.toString());

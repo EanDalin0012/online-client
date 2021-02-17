@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.password = 'admin1234';
     $('body').addClass('hold-transition login-page');
     $(() => {
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       });
     });
     this.remember_me = Utils.getSecureStorage('remember_me');
-    if(this.remember_me === true) {
+    if (this.remember_me === true) {
       this.user_name = Utils.getSecureStorage('user_id');
     }
     console.log('remember_me', this.remember_me);
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
       element.focus();
     }
   }
-  
+
   clickRememberMe() {
     if(this.user_name !== '') {
       Utils.setSecureStorage('remember_me', this.remember_me);

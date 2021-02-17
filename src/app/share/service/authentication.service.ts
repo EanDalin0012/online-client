@@ -42,6 +42,7 @@ export class AuthentcatiionService {
           Utils.setSecureStorage(LocalStorage.LAST_EVENT_TIME, String(new Date().getTime()));
           Utils.setSecureStorage(LocalStorage.Authorization, decryptData);
           this.loadUserByUserName(auth.user_name).then(userResponse => {
+          console.log(userResponse);
 
             if (userResponse) {
               Utils.setSecureStorage(LocalStorage.USER_INFO, userResponse);

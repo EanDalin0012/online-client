@@ -19,12 +19,12 @@ export abstract class Utils {
     }
 
     public static getSecureStorage( sKey: string ): any {
-      let data = window.localStorage.getItem(sKey);
-      data = this.parsejson(data);
-      return data;
+      let language = window.localStorage.getItem(sKey);
+      language = this.parsejson(language);
+      return language;
     }
 
-    static parsejson(data) {
+    static parsejson(data): any {
       let retValue;
       if ( data !== undefined && data !== '') {
         retValue = JSON.parse(data);

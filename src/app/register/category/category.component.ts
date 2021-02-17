@@ -13,6 +13,7 @@ import { ObjIdDeleteRequest } from '../../share/model/request/req-obj-delete';
 import { ResponseDataModel } from '../../share/model/response/res-data';
 import { CategoryAddComponent } from '../category-add/category-add.component';
 import { CategoryEditComponent } from '../category-edit/category-edit.component';
+import { HttpService } from '../../share/service/http.service';
 
 @Component({
   selector: 'app-category',
@@ -57,7 +58,7 @@ export class CategoryComponent implements OnInit {
   menu = '';
 
   constructor(
-    private service: ServerService,
+    private httpService: HttpService,
     private modalService: ModalService,
     private dataService: DataService,
     private titleService: Title
@@ -74,7 +75,7 @@ export class CategoryComponent implements OnInit {
 
   inquiry(): void {
     const api = '/api/category/v1/list';
-    this.service.HTTPGet(api).then(resp => {
+    this.httpService.Get(api).then(resp => {
       const response   = resp as CategoryReponseModel;
       if (response) {
 
@@ -94,7 +95,7 @@ export class CategoryComponent implements OnInit {
     };
   }
 
-  loadingData(data): void {
+  loadingData(data: any): void {
     if (data) {
       this.gridView = {
         data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
@@ -227,7 +228,7 @@ export class CategoryComponent implements OnInit {
         lBtn: {btnText: 'Close'},
         rBtn: {btnText: 'Confirm'},
         modalClass: ['pop-confirm-btn dialog-confirm'],
-        callback: response =>{
+        callback: response => {
           console.log('response', response);
           if (response.text === 'Confirm') {
             this.doDelete();
@@ -259,7 +260,7 @@ export class CategoryComponent implements OnInit {
     trReq.body = this.obj_Id_model_list;
     console.log(trReq);
     const api = '/api/category/v1/delete';
-    this.service.HTTPPost(api, trReq).then(resp => {
+    this.httpService.Post(api, trReq).then(resp => {
       const response   = resp as ResponseDataModel;
       if (response.body.status === ResponseStatus.Y) {
        this.inquiry();
