@@ -5,6 +5,7 @@ import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { DataService } from 'src/app/share/service/data.service';
 import { Country, CountryData, products } from './data';
 import { CryptoJS } from 'crypto-js';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home1000',
@@ -40,10 +41,19 @@ export class Home1000Component implements OnInit {
   defaultCountry = { id: '', name: 'Select', countryCode: '', isEnabled: '' };
 
   gridData: any[] = products;
+  sltLanguageList = false;
+  langCode          = this.translate.currentLang;
+  langData          = {
+    en: { class: "eng", text: "English"},
+    kh: { class: "khmer", text: "ខ្មែរ"},
+    ch: { class: "china", text: "中文"},
+  };
 
   constructor(
+    private translate: TranslateService,
     private dataService: DataService,
     private serverService: ServerService,
+
   ) { }
 
   ngOnInit() {
@@ -61,33 +71,5 @@ export class Home1000Component implements OnInit {
   countryClass() {
 
   }
-
-
-
-  btnRegister() {
-    const  body = {
-      name: "data",
-      a: 'd',
-      b:'a',
-      d:'d',
-      data: {
-        v1: 'v1',
-        v2: 'v2',
-        v3: 'v2',
-        v4: [
-          {
-            g: 'g',
-            g1: 'g1'
-          }
-          ]
-      }
-    }
-    const api = '/api/decrypt/v1/index';
-    this.serverService.HTTPPost(api, body).then(response => {
-      console.log('responseresponseresponserespo nseresponse', response);
-        alert(JSON.stringify(response));
-    });
-
-}
 
 }

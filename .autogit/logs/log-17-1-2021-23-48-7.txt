@@ -1,0 +1,21 @@
+-------------------- Auto-Git Log --------------------
+		Wed Feb 17 2021 23:48:07 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/home/home1000/data.ts
+* src/app/home/home1000/home1000.component.ts
+* src/app/register/category/category.component.html
+* src/app/share/service/auth-interceptor.service.ts
+* src/app/share/service/http.service.ts
+* src/environments/environment.prod.ts
+
+
+Created files:
+* .autogit/logs/log-17-1-2021-23-17-44.txt
+
+
+Deleted files:
+
+
+Renamed files:

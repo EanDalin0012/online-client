@@ -14,11 +14,9 @@
             <h1><span>Product Management</span></h1>
         </div>
     </div>
-    <div class="container01">
 
-        <button class="test k-button">Testing</button>
 
-        <div class="tableWrap" id="grid_list">
+        <div class="tableWrap col-lg-6">
             <kendo-chart [categoryAxis]="{categories: categories }">
                 <kendo-chart-title text="Gross domestic product growth /GDP annual %/"></kendo-chart-title>
                 <kendo-chart-legend position="bottom" orientation="horizontal"></kendo-chart-legend>
@@ -30,37 +28,88 @@
             </kendo-chart>
         </div>
 
-        <div class="add-btn btn-css">
-            <span>Add New</span>
+
+        <div class="tableWrap col-lg-12">
+          <kendo-grid [data]="gridData" [height]="410">
+            <kendo-grid-column field="ProductID" title="ID" width="40">
+            </kendo-grid-column>
+            <kendo-grid-column field="ProductName" title="Name" width="250">
+            </kendo-grid-column>
+            <kendo-grid-column field="Category.CategoryName" title="Category">
+            </kendo-grid-column>
+            <kendo-grid-column field="UnitPrice" title="Price" width="80">
+            </kendo-grid-column>
+            <kendo-grid-column field="UnitsInStock" title="In stock" width="80">
+            </kendo-grid-column>
+            <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+                </ng-template>
+            </kendo-grid-column>
+
+            <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <div class="change_lang ui_dropdown" [ngClass]="{ 'ui_drop_open': sltLanguageList }" (click)="$event.stopPropagation();sltLanguageList = !sltLanguageList">
+                  <div class="cur font-khmer-cursive" [ngClass]="langData[langCode].class">
+                      <strong style="color: white;">{{ langData[langCode].text }}</strong>
+                      <i class="fa" [ngClass]="{'fa-chevron-up': sltLanguageList, 'fa-chevron-down': !sltLanguageList}" aria-hidden="true" style="margin-left: 8px;color: white;"></i>
+                  </div>
+                  <div class="lang_list ui_drop_cont">
+                      <ul>
+                          <li class="font-khmer-cursive"><label class=""><input type="radio" tabindex="-1"  value="en" name="lang" /><span>English</span></label></li>
+                          <li class="font-khmer-cursive"><label class=""><input type="radio" tabindex="-1"  value="km" name="lang" /><span>ខ្មែរ</span></label></li>
+                          <li class="font-khmer-cursive"><label class=""><input type="radio" tabindex="-1"  value="zh" name="lang" /><span>中文</span></label></li>
+                      </ul>
+                  </div>
+                  <!-- //language list -->
+              </div>
+              </ng-template>
+          </kendo-grid-column>
+
+          </kendo-grid>
         </div>
 
-        <div class="btn-css test">
+
+        <div class="tableWrap col-lg-6">
+
+          <div class="add-btn btn-css">
             <span>Add New</span>
-        </div>
-        <div class="iam-btn-container mbr_introContent">
+          </div>
+
+          <div class="btn-css test">
+            <span>Add New</span>
+          </div>
+
+          <div class="iam-btn-container mbr_introContent">
             <button class="iam-button">{{'COMMON.LABEL.SORT' | translate}}</button>
+          </div>
+
+          <button class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+            <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
+            <span class="margin-top-5px margin-left-5px">{{'COMMON.BUTTON.SAVE' | translate}}</span>
+          </button>
+
+          <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="value" required>
+          </kendo-datepicker>
+
+          <kendo-dropdownlist [data]="countryList" [filterable]="true" [textField]="'name'" [valueField]="'countryCode'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="country" [ngModelOptions]="{standalone:
+          true}" [defaultItem]="defaultCountry" (valueChange)="setBankName(country)" (click)="countryClass()">
+              <ng-template kendoDropDownListValueTemplate let-dataItem>
+                  <span class="template">{{ dataItem.name}}</span>
+              </ng-template>
+              <ng-template kendoDropDownListItemTemplate let-dataItem>
+                  <span class="template">{{ dataItem.name}}</span>
+              </ng-template>
+          </kendo-dropdownlist>
+
         </div>
 
-        <button  (click)="btnRegister()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
-          <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
-          <span class="margin-top-5px margin-left-5px">{{'COMMON.BUTTON.SAVE' | translate}}</span>
-        </button>
+        <div class="tableWrap col-lg-6">
 
-        <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="value" required>
-        </kendo-datepicker>
-
-        <kendo-dropdownlist [data]="countryList" [filterable]="true" [textField]="'name'" [valueField]="'countryCode'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="country" [ngModelOptions]="{standalone:
-        true}" [defaultItem]="defaultCountry" (valueChange)="setBankName(country)" (click)="countryClass()">
-            <ng-template kendoDropDownListValueTemplate let-dataItem>
-                <span class="template">{{ dataItem.name}}</span>
-            </ng-template>
-            <ng-template kendoDropDownListItemTemplate let-dataItem>
-                <span class="template">{{ dataItem.name}}</span>
-            </ng-template>
-        </kendo-dropdownlist>
+        </div>
 
 
     </div>
-</div>
+
 
 
