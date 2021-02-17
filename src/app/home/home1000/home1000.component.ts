@@ -3,7 +3,7 @@ import { ResponseDataModel } from './../../share/model/response/res-data';
 import { Component, OnInit } from '@angular/core';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { DataService } from 'src/app/share/service/data.service';
-import { Country, CountryData } from './data';
+import { Country, CountryData, products } from './data';
 import { CryptoJS } from 'crypto-js';
 
 @Component({
@@ -38,6 +38,8 @@ export class Home1000Component implements OnInit {
   };
 
   defaultCountry = { id: '', name: 'Select', countryCode: '', isEnabled: '' };
+
+  gridData: any[] = products;
 
   constructor(
     private dataService: DataService,

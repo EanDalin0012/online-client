@@ -27,11 +27,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
  constructor(
     private translate: TranslateService,
-    private router: Router,
-    private zone: NgZone,
     private modal: ModalService,
-    private modalService: ModalService,
-    private cryptoService: CryptoService
+    private modalService: ModalService
   ) {
 
   }

@@ -1,0 +1,22 @@
+-------------------- Auto-Git Log --------------------
+		Wed Feb 17 2021 23:17:44 GMT+0700 (Indochina Time)
+------------------------------------------------------
+
+Modified files:
+* src/app/app.component.ts
+* src/app/login/login/login.component.ts
+* src/app/register/category-add/category-add.component.ts
+* src/app/register/category/category.component.ts
+* src/app/share/service/auth-interceptor.service.ts
+* src/app/share/service/authentication.service.ts
+* src/app/share/service/http.service.ts
+* src/app/share/utils/utils.static.ts
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:
